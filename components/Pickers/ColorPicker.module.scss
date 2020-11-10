@@ -1,0 +1,46 @@
+@import 'vars.scss';
+
+.container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: spacing(2) 0;
+	.colorContainer {
+		margin-right: spacing(2);
+		padding: spacing(0.5);
+		border-radius: $border-radius-small;
+		border-width: 2px;
+		border-style: solid;
+		.color {
+			height: 24px;
+			width: 24px;
+		}
+	}
+	.dropdown {
+		transform: translate(0, 100%);
+		width: 100%;
+		position: absolute;
+		bottom: spacing(-1);
+		left: 0;
+		z-index: 1;
+		padding: spacing(1) spacing(0.5);
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		border-radius: $border-radius-input;
+		background: $color-white;
+		box-shadow: $shadow-soft;
+	}
+	.arrowIcon {
+		transition: $transition;
+		&.active,
+		&:hover {
+			transform: rotate(180deg);
+			path {
+				stroke: $color-primary;
+			}
+		}
+	}
+}

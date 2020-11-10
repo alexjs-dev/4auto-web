@@ -1,0 +1,45 @@
+@import 'vars.scss';
+
+.container {
+  background: $color-white;
+  padding: spacing(2);
+  margin-top: spacing(4);
+  h4 {
+    margin-bottom: spacing(4);
+  }
+  @media (min-width: $tablet) {
+    max-width: $tablet;
+    padding: 0 spacing(10);
+    margin: spacing(4) auto;
+  }
+}
+
+.link {
+  margin-bottom: spacing(2);
+  font-family: $font-family;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-span;
+  color: $color-primary;
+  display: flex;
+  justify-content: flex-end;
+  &:hover {
+    text-decoration: underline;
+  }
+  @media (min-width: $tablet) {
+    font-size: $font-size-p;
+  }
+}
+
+.spacer {
+  margin: spacing(2) 0;
+}
+
+.google {
+  margin: spacing(2) 0;
+  span {
+    color: $color-white;
+    font-size: $font-size-p;
+    line-height: $line-height-p;
+    font-family: $font-family;
+  }
+}

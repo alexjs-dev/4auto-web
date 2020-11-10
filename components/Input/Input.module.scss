@@ -1,0 +1,80 @@
+@import 'vars.scss';
+
+.input {
+  border: $border-thick-light-gray;
+  border-radius: $border-radius-input;
+  padding: spacing(1.5);
+  min-height: 44px;
+  min-width: 120px;
+  font-size: $font-size-p;
+  line-height: $line-height-p;
+  color: $color-black;
+  width: 100%;
+  &::placeholder {
+    color: $color-light-gray;
+    font-family: $font-family-secondary;
+    font-size: $font-size-p;
+    line-height: $line-height-p;
+  }
+  &:focus {
+    border: $border-thick-primary;
+    outline: $border-thick-primary;
+  }
+}
+
+.textarea {
+  min-height: 144px;
+  @extend .input;
+}
+
+.container {
+  display: block;
+  margin-bottom: spacing(2);
+}
+
+.labelError {
+  display: block;
+  margin-top: spacing(0.5);
+  font-size: $font-size-p;
+  line-height: $line-height-p;
+  color: $color-red;
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-light;
+}
+
+.inputLabelContainer {
+  margin-bottom: spacing(1);
+  display: inline-block;
+  span {
+    font-size: $font-size-p;
+    font-family: $font-family;
+    line-height: $line-height-p;
+    font-weight: $font-weight-bold;
+  }
+  .required {
+    color: $color-red;
+  }
+}
+
+.passwordToggleButton {
+  position: absolute;
+  top: 25%;
+  right: spacing(2);
+  background: transparent;
+  border: none;
+  outline: none;
+  svg {
+    font-size: $font-size-h4;
+    color: $color-primary;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.invalid {
+  border: $border-thick-red;
+}

@@ -1,0 +1,61 @@
+@import 'vars.scss';
+
+.container {
+  position: relative;
+}
+
+.drawer {
+  position: absolute;
+  bottom: spacing(-2);
+  left: 100%;
+  transform: translate(-100%, 100%);
+  background: $color-dark;
+  padding: spacing(2) 0;
+  border-radius: $border-radius-input;
+  display: flex;
+  flex-direction: column;
+  .option {
+    display: flex;
+    padding: 0 spacing(2);
+    justify-content: center;
+    align-items: center;
+    // grid-template-columns: 24px 1fr;
+    // grid-gap: spacing(1);
+    // align-items: center;
+    svg {
+      margin-right: spacing(1);
+      color: $color-white;
+    }
+    span {
+      color: $color-white;
+      white-space: nowrap;
+      text-align: left;
+      width: 100%;
+    }
+    &:hover {
+      opacity: 1;
+      background: $color-white;
+      span {
+        color: $color-dark;
+      }
+      svg {
+        color: $color-dark;
+      }
+    }
+    ::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: $border-drawer-triangle;
+      right: 10px;
+      top: -9px;
+    }
+  }
+  .option:not(:last-child) {
+    margin-bottom: spacing(2);
+  }
+}

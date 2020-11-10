@@ -1,0 +1,9 @@
+<svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="russia" fill-rule="nonzero">
+            <circle id="Oval" fill="#F0F0F0" cx="17" cy="17" r="17"></circle>
+            <path d="M32.9426133,22.9130117 C33.626,21.0713672 34,19.0794453 34,17 C34,14.9205547 33.626,12.9286328 32.9426133,11.0869883 L1.05738672,11.0869883 C0.374066406,12.9286328 0,14.9205547 0,17 C0,19.0794453 0.374066406,21.0713672 1.05738672,22.9130117 L17,24.3912812 L32.9426133,22.9130117 Z" id="Path" fill="#0052B4"></path>
+            <path d="M17,34 C24.3094023,34 30.5406328,29.386625 32.9426133,22.9130117 L1.05738672,22.9130117 C3.45936719,29.386625 9.69059766,34 17,34 Z" id="Path" fill="#D80027"></path>
+        </g>
+    </g>
+</svg>

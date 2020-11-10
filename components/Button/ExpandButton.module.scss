@@ -1,0 +1,38 @@
+@import 'vars.scss';
+
+.container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	svg {
+		margin-left: spacing(0.5);
+		transform: rotate(0deg);
+		transition: $transition;
+	}
+	span {
+		min-width: 90px;
+		text-align: left;
+		font-size: $font-size-p;
+		font-family: $font-family;
+		line-height: $line-height-p;
+		font-weight: $font-weight-bold;
+	}
+	&:hover {
+		span {
+			text-decoration: underline;
+		}
+		svg {
+			path {
+				stroke: $color-primary;
+			}
+		}
+	}
+	&.open {
+		svg {
+			transform: rotate(180deg);
+			path {
+				stroke: $color-primary;
+			}
+		}
+	}
+}

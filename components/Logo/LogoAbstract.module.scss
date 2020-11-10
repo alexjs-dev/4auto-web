@@ -1,0 +1,74 @@
+@import 'vars.scss';
+
+.container {
+	min-height: 50vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: $yellow-gradient;
+	@media (min-width: $tablet) {
+		min-height: 100vh;
+	}
+}
+
+.logo {
+	background-size: contain;
+	background-image: url("/static/icons/guy.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100vw;
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 spacing(2);
+	@media (min-width: $tablet) {
+		margin: 0;
+		height: 100vh;
+	}
+}
+
+.moto {
+	padding: spacing(2) 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: $color-yellow-light;
+	width: 100%;
+	svg {
+		margin-bottom: spacing(2);
+	}
+	@media (min-width: $tablet) {
+		padding: spacing(6) 0 0 0;
+		svg {
+			display: none;
+		}
+	}
+	p,
+	span {
+		text-align: center;
+		font-size: $font-size-h6;
+		font-family: $font-family;
+		color: $color-black;
+		font-weight: $font-weight-normal;
+		text-transform: uppercase;
+		@media (min-width: $tablet) {
+			font-size: $font-size-h4;
+		}
+	}
+	p:not(:last-child),
+	span:not(:last-child) {
+		margin-bottom: spacing(1);
+		@media (min-width: $tablet) {
+			margin-bottom: spacing(2);
+		}
+	}
+	.bold {
+		font-weight: $font-weight-bold;
+	}
+	.primary {
+		color: $color-primary;
+	}
+}

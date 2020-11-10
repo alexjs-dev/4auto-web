@@ -1,0 +1,56 @@
+@import 'vars.scss';
+
+@keyframes slideInDown {
+	0% {
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+		visibility: visible;
+	}
+	to {
+		-webkit-transform: translate(0, 100%, 0);
+		transform: translate(0, 100%, 0);
+	}
+}
+
+.container {
+	position: relative;
+	.drawer {
+		animation: slideInDown .3s ease-in-out;
+		animation-fill-mode: forwards;
+		position: absolute;
+		bottom: - spacing(2);
+		transform: translate(0, 100%);
+		left: -100%;
+		min-height: 44px;
+		padding: spacing(1) 0;
+		min-width: 80px;
+		background-color: $color-dark;
+		border-radius: $border-radius-input;
+		.option {
+			display: flex;
+			width: 100%;
+			transition: all 0.3s ease;
+			padding: spacing(0.5) 0;
+			align-items: center;
+			justify-content: center;
+			&:hover {
+				opacity: 1;
+				background: $color-primary;
+			}
+		}
+		.option:not(:last-child) {
+			margin-bottom: spacing(2);
+		}
+	}
+}
+
+.check {
+	min-width: 15px;
+	transform: scale(1.5);
+	margin-right: spacing(1);
+	svg {
+		path {
+			fill: $color-white;
+		}
+	}
+}

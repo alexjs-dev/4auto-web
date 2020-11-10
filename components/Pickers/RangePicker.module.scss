@@ -1,0 +1,15 @@
+@import 'vars.scss';
+
+.container {
+	display: flex;
+	.divider {
+		margin-top: spacing(6);
+		padding: 0 spacing(0.5);
+		.line {
+			width: 100%;
+			min-width: 56px;
+			height: 2px;
+			background: $color-light-gray;
+		}
+	}
+}

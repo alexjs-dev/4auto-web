@@ -1,0 +1,28 @@
+@import 'vars.scss';
+
+.container {
+  position: relative;
+  .bullets {
+    position: absolute;
+    left: 50%;
+    bottom: spacing(2);
+    width: 100%;
+    transform: translate(-50%, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    .bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $color-white;
+      transition: $transition;
+      margin-right: spacing(0.5);
+      &.active {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}

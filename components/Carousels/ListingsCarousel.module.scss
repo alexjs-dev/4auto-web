@@ -1,0 +1,19 @@
+@import 'vars.scss';
+
+.container {
+  position: relative;
+  margin: spacing(2) 0;
+  h1 {
+    margin-bottom: spacing(2);
+  }
+}
+
+.wrapper {
+  @media (min-width: $tablet) {
+    padding: 0 spacing(8);
+  }
+}
+
+.carousel {
+  // padding-left: spacing(0.5) !important;
+}

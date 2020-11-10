@@ -1,0 +1,70 @@
+@import 'vars.scss';
+
+.ribbons {
+  position: absolute;
+  top: spacing(0.5);
+  left: spacing(0.5);
+  display: flex;
+  flex-direction: column;
+  :root {
+    --color-background: $color-blue;
+  }
+  .ribbon {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size-s;
+    border-radius: 50%;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    margin-bottom: spacing(0.5);
+    color: $color-white;
+    text-transform: uppercase;
+    background: var(--color-background);
+    @media (min-width: $tablet) {
+      justify-content: flex-start;
+      border-radius: unset;
+      width: auto;
+      width: fit-content;
+      padding: 0 spacing(1);
+      margin-bottom: spacing(0.5);
+      left: spacing(-1);
+      &::after {
+        border-top: 4px solid var(--color-background);
+        top: 100%;
+        opacity: 0.5;
+        left: 0;
+        border-left: 4px solid transparent;
+        width: 0;
+        height: 0;
+        content: '';
+        position: absolute;
+      }
+      &::before {
+        border-left: 9px solid var(--color-background);
+        top: 0;
+        left: 100%;
+        border-top: 9px solid transparent;
+        border-bottom: 9px solid transparent;
+        width: 0;
+        height: 0;
+        content: '';
+        position: absolute;
+      }
+    }
+  }
+}
+
+.featured {
+  --color-background: #{$color-blue};
+}
+
+.urgent {
+  --color-background: #{$color-red};
+}
+
+.recommended {
+  --color-background: #{$color-primary};
+}

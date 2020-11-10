@@ -1,0 +1,67 @@
+@import 'vars.scss';
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  .logo {
+    margin-bottom: spacing(4);
+  }
+  .option {
+    display: grid;
+    padding: 0 spacing(2);
+    grid-template-columns: 36px 1fr;
+    grid-gap: spacing(2);
+    margin-bottom: spacing(2);
+    align-items: center;
+    min-width: 50vw;
+    justify-items: flex-end;
+    margin-left: auto;
+    svg {
+      color: $color-white;
+    }
+    span {
+      color: $color-white;
+      white-space: nowrap;
+      text-align: left;
+      font-size: $font-size-h6;
+    }
+    &:hover {
+      opacity: 0.6;
+      background: $color-dark;
+      span {
+        color: $color-white;
+      }
+      svg {
+        color: $color-white;
+      }
+    }
+    ::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: $border-drawer-triangle;
+      right: 10px;
+      top: -9px;
+    }
+  }
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.languageOption {
+  padding: spacing(1);
+  border-radius: 50%;
+  &.active {
+    background: $color-primary;
+  }
+}

@@ -1,0 +1,218 @@
+@import './vars.scss';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+
+@function spacing($amount) {
+  @return ($amount * 8) + px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: $font-family;
+  font-size: $font-size-h1;
+  line-height: $line-height-h1;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+h2 {
+  font-family: $font-family;
+  font-size: $font-size-h2;
+  line-height: $line-height-h2;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+h3 {
+  font-family: $font-family;
+  font-size: $font-size-h3;
+  line-height: $line-height-h3;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+h4 {
+  font-family: $font-family;
+  font-size: $font-size-h4;
+  line-height: $line-height-h4;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+h5 {
+  font-family: $font-family;
+  font-size: $font-size-h5;
+  line-height: $line-height-h5;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+h6 {
+  font-family: $font-family;
+  font-size: $font-size-h6;
+  line-height: $line-height-h6;
+  font-weight: $font-weight-bold;
+  color: $color-black;
+}
+p {
+  font-family: $font-family-secondary;
+  font-size: $font-size-p;
+  line-height: $line-height-p;
+  font-weight: $font-weight-normal;
+  color: $color-black;
+}
+span {
+  font-family: $font-family-secondary;
+  font-size: $font-size-span;
+  line-height: $line-height-span;
+  font-weight: $font-weight-normal;
+  color: $color-black;
+}
+
+button,
+a {
+  color: $color-black;
+  transition: all 0.3s ease;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
+  font-family: $font-family-secondary;
+}
+
+input,
+textarea {
+  outline: none !important;
+  transition: all 0.3s ease;
+}
+
+.loader {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  &::after {
+    content: ' ';
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    border-radius: 50%;
+    border: 4px solid $color-primary;
+    border-color: $color-primary transparent $color-primary transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+}
+
+.invertLoader {
+  &::after {
+    border: 4px solid $color-white;
+    border-color: $color-white transparent $color-white transparent;
+  }
+}
+.centeredLoader {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.fullScreenLoader {
+  min-height: 100vh;
+}
+
+.Toastify__toast--success {
+  background: $color-primary !important;
+}
+
+.Toastify__toast--error {
+  background: $color-red !important;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bounce-up-exit-active {
+  transition: transform 0.1s scale 0.3s;
+  transform: translateY(0) scale(1);
+}
+.bounce-up-exit {
+  transition: transform 0.1s scale 0.3s;
+  transform: translateY(0) scale(0.8);
+}
+.bounce-up-enter {
+  transform: translateY(-50%);
+}
+.bounce-up-enter-done {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateY(-50%) scale(1.2);
+}
+
+.bounce-down-exit-active {
+  transition: transform 0.1s scale 0.3s;
+  transform: translateY(0) scale(1);
+}
+.bounce-down-exit {
+  transition: transform 0.1s scale 0.3s;
+  transform: translateY(0) scale(0.8);
+}
+.bounce-down-enter {
+  transform: translateY(50%);
+}
+.bounce-down-enter-done {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateY(50%) scale(1.2);
+}
+
+.slide-right-exit-active {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateX(0) scale(0);
+}
+.slide-right-enter {
+  transform: translateX(0) scale(0);
+}
+.slide-right-enter-done {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateX(30px) scale(0.6);
+}
+
+.slide-left-exit-active {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateX(0) scale(0);
+}
+.slide-left-enter {
+  transform: translateX(0) scale(0);
+}
+.slide-left-enter-done {
+  transition: transform 0.3s scale 0.5s;
+  transform: translateX(-30px) scale(0.6);
+}
+
+.react-multi-carousel-dot-list {
+  .react-multi-carousel-dot {
+    button {
+      background: $color-white;
+      transition: $transition;
+      border: none;
+    }
+    &.react-multi-carousel-dot--active {
+      button {
+        background: $color-primary;
+        transform: scale(1.3);
+      }
+    }
+  }
+}

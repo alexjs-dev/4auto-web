@@ -1,0 +1,11 @@
+{
+  "button": {
+    "signIn": "Sisse"
+  },
+  "moto": {
+    "buyingAndSelling": "Muuk and Ost",
+    "cars": "Autod",
+    "made": "tehtud",
+    "easy": "lihtne"
+  }
+}

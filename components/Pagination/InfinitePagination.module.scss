@@ -1,0 +1,25 @@
+@import 'vars.scss';
+
+.container {
+  h1 {
+    margin-bottom: spacing(2);
+  }
+}
+.carousel {
+  padding: 0 spacing(0.5);
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    > div {
+      margin-bottom: spacing(2);
+    }
+    @media (min-width: $tablet) {
+      padding: 0 spacing(8);
+      justify-content: space-around;
+      > div {
+        margin-bottom: spacing(4);
+      }
+    }
+  }
+}

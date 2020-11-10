@@ -1,0 +1,80 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  cursor: pointer;
+  .disabled {
+    cursor: not-allowed;
+  }
+}
+
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-span;
+  line-height: $line-height-span;
+  font-weight: $font-weight-normal;
+  padding: spacing(1) spacing(2);
+  min-height: 34px;
+
+  @media (min-width: $tablet) {
+    // min-height: 50px;
+    // font-size: $font-size-h6;
+    // line-height: $line-height-h6;
+    // padding: spacing(2);
+  }
+}
+
+.primary {
+  background: $color-primary;
+  color: $color-white;
+  border: $border-primary;
+  border-radius: $border-radius-input;
+}
+
+.loading {
+  padding: 0 spacing(2);
+  max-height: 34px;
+  @media (min-width: $tablet) {
+    // max-height: 50px;
+    // padding: spacing(1) spacing(2);
+  }
+}
+
+.fluid {
+  width: 100%;
+}
+
+.ghost {
+  border: $border-primary;
+  color: $color-primary;
+  background: transparent;
+  border-radius: $border-radius-input;
+  &.white {
+    color: $color-white;
+    border: $border-white;
+  }
+}
+
+.iconOnly {
+  width: 38px;
+  height: 38px;
+  padding: spacing(1.5);
+
+  &:hover {
+    svg > path {
+      fill: $color-white;
+    }
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: spacing(0.5); // WHEN LINK
+}

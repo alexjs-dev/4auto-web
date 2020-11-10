@@ -1,0 +1,105 @@
+{
+  "errors": {
+    "blank": "😡 Cannot be empty",
+    "invalid_credentials": "🔑 Invalid credentials",
+    "invalid_email": "📧 Invalid e-mail format",
+    "weak_password": "🤖 Weak password",
+    "oops": "🐞Oops! Something happened"
+  },
+  "snackbar": {
+    "welcome": "👋 Welcome"
+  },
+  "labels": {
+    "featured": "Featured",
+    "recommended": "Recommended",
+    "urgent": "Urgent"
+  },
+  "navigation": {
+    "myProfile": "My profile",
+    "myListings": "My listings",
+    "myFavorites": "My favorites",
+    "legalAndFaq": "Legal & FAQ"
+  },
+  "vehicle": {
+    "sedan": "Sedan",
+    "vehicle": "Vehicle",
+    "hatchback": "Hatchback",
+    "touring": "Touring",
+    "minivan": "Minivan",
+    "coupe": "Coupe",
+    "cabriolet": "Cabriolet",
+    "pickup": "Pickup",
+    "limousine": "Limousine",
+    "truck": "Truck",
+    "motorbike": "Motorbike",
+    "trailer": "Trailer",
+    "semiAutomatic": "Semi-automatic",
+    "automatic": "Automatic",
+    "manual": "Manual",
+    "petrol": "Petrol",
+    "gasLng": "Gas (lng)",
+    "gasLpg": "Gas (lpg)",
+    "gasCng": "Gas (cng)",
+    "diesel": "Diesel",
+    "hybrid": "Hybrid",
+    "electric": "Electric",
+    "ethanol": "Ethanol",
+    "other": "Other"
+  },
+  "label": {
+    "or": "OR",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "model": "Model",
+    "fuel": "Fuel",
+    "bodyType": "Body type",
+    "remember": "Remember",
+    "gearbox": "Gearbox",
+    "km": "Km",
+    "k": "K",
+    "kw": "kW",
+    "l": "L",
+    "priceMin": "Price (min)",
+    "priceMax": "Price (max)",
+    "yearMin": "Year (min)",
+    "yearMax": "Year (max)",
+    "make": "Make"
+  },
+  "placeholder": {
+    "password": "P@$$w0rd",
+    "email": "john@doe.com",
+    "firstName": "Aleksei",
+    "make": "eg. Audi",
+    "yearMin": "eg. 1960",
+    "yearMax": "eg. 2020",
+    "priceMin": "eg. 500",
+    "priceMax": "eg. 1000",
+    "gearbox": "eg. Manual",
+    "bodyType": "eg. Sedan",
+    "model": "eg. A6",
+    "fuel": "eg. Diesel",
+    "lastName": "Dmitrijev"
+  },
+  "button": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "reset": "Reset",
+    "search": "Search",
+    "share": "Share",
+    "contact": "Contact",
+    "advancedSearch": "Advanced search",
+    "logOut": "Log out",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "forgotPassword": "Forgot password",
+    "addListing": "Add listing"
+  },
+  "moto": {
+    "buyingAndSelling": "Buying and selling",
+    "cars": "Cars",
+    "made": "made",
+    "easy": "easy"
+  }
+}

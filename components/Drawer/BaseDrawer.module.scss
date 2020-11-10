@@ -1,0 +1,65 @@
+@import 'vars.scss';
+
+@keyframes slideInRight {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	z-index: 100;
+	background: $color-dark-semi-transparent;
+	height: 100vh;
+	transition: all 0.3s ease-in-out;
+	opacity: 0;
+	pointer-events: none;
+	display: block;
+	&.visible {
+		opacity: 1;
+		pointer-events: unset;
+	}
+	&.unmounted {
+		display: none;
+	}
+}
+
+.drawer {
+	background: $color-dark;
+	width: 80vw;
+	height: calc(100vh - env(safe-area-inset-bottom, 50px) - env(safe-area-inset-top, 50px));
+	animation: slideInRight 0.3s ease-in-out;
+	animation-fill-mode: forwards;
+	padding: spacing(4) spacing(2);
+	overflow-y: auto;
+	position: absolute;
+	box-shadow: $box-shadow-drawer;
+	transition: $transition-linear;
+	border-left: $border-primary;
+	top: 0;
+	right: -80vw;
+	&.visible {
+		transition: $transition-linear;
+		transform: translateX(-100%);
+	}
+	&::before {
+		content: '';
+		width: spacing(2);
+		opacity: 0.6;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: $dark-primary-gradient;
+	}
+	@include for-ios-only {
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: spacing(10);
+	}
+}

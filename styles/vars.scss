@@ -1,0 +1,92 @@
+$font-family: 'Roboto', sans-serif;
+$font-family-secondary: 'Open Sans', sans-serif;
+$font-weight-medium: 600;
+$font-weight-bold: 500;
+$font-weight-normal: 400;
+$font-weight-light: 300;
+
+$font-size-h1: 30px;
+$font-size-h2: 28px;
+$font-size-h3: 26px;
+$font-size-h4: 24px;
+$font-size-h5: 20px;
+$font-size-h6: 18px;
+$font-size-p: 16px;
+$font-size-span: 14px;
+
+$font-size-m: 12px;
+$font-size-s: 10px;
+$font-size-xs: 8px;
+
+$font-size-icon-small: 13px;
+
+$line-height-h1: 30px;
+$line-height-h2: 28px;
+$line-height-h3: 26px;
+$line-height-h4: 24px;
+$line-height-h5: 20px;
+$line-height-h6: 18px;
+$line-height-p: 18px;
+$line-height-span: 16px;
+
+$line-height-s: 14px;
+
+$color-primary: #71a95a;
+$color-complimentary: #2e7d32;
+$color-black: #211d1e;
+$color-white: #fff;
+$color-dark: #292f4c;
+$color-dark-semi-transparent-heavy: rgba(41, 47, 76, 0.8);
+$color-dark-semi-transparent: rgba(41, 47, 76, 0.6);
+$color-dark-gray: #d1d1d6;
+$color-darker-gray: #aaa;
+$color-gray: #c7c7cc;
+$color-light-gray: #e5e5ea;
+$color-red: #d54b4f;
+$color-blue: #5781db;
+$color-yellow-light: #fef0cd;
+
+$yellow-gradient: linear-gradient(0deg, #fff 16%, #fef0cd 100%);
+$dark-primary-gradient: linear-gradient(270deg, #292f4c 4%, #96de78 100%);
+
+$border-thick-darker-gray: 2px solid $color-darker-gray;
+$border-thick-dark-gray: 2px solid $color-dark-gray;
+$border-thick-light-gray: 2px solid $color-light-gray;
+$border-thick-red: 2px solid $color-red;
+$border-thick-primary: 2px solid $color-primary;
+$border-dark-gray: 1px solid $color-darker-gray;
+$border-light-gray: 1px solid $color-light-gray;
+$border-primary: 1px solid $color-primary;
+$border-white: 1px solid $color-white;
+$border-drawer-triangle: 9px solid $color-dark;
+
+$box-shadow-drawer: -6px 3px 9px rgba(0, 0, 0, 0.15);
+$shadow-soft: 0 2px 4px 0 $color-darker-gray;
+$box-shadow-search: 0 1px 3px 1px $color-complimentary;
+
+$border-radius-input: 8px;
+$border-radius-small: 4px;
+$border-mobile-app-footer: 6px 6px 0 0;
+
+$transition: all 0.3s ease;
+$transition-linear: all 0.3s linear;
+
+@function spacing($amount) {
+  @return ($amount * 8) + px;
+}
+
+@mixin for-safari-only {
+  @supports (-webkit-hyphens: none) {
+    @content;
+  }
+}
+
+@mixin for-ios-only {
+  @supports (-webkit-touch-callout: none) {
+    @content;
+  }
+}
+
+$tablet: 768px;
+$tablet-large: 990px;
+$desktop: 1280px;
