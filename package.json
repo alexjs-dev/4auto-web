@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "node importBuilder.js && next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $PORT",
+    "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb"
   },
   "dependencies": {
     "@feathersjs/authentication-client": "^4.5.8",
