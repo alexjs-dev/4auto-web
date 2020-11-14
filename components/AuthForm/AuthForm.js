@@ -13,7 +13,7 @@ import {
 import { Input } from '~components'
 import AuthCreators from '~store/auth/creators'
 import SignInForm from './parts/SignInForm'
-import SignupForm from './parts/SignupForm'
+import SignupForm from './parts/SignUpForm'
 import ForgotForm from './parts/ForgotForm'
 
 export const types = {
@@ -25,7 +25,7 @@ export const types = {
 const AuthForm = ({ type }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const onSubmit = async values => {
+  const onSubmit = async (values) => {
     switch (type) {
       case types.SIGNIN:
         await validateFormData(values, [fieldTypes.email, fieldTypes.password])
