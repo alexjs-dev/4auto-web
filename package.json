@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "node importBuilder.js && next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p 80",
     "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb"
   },
   "dependencies": {
