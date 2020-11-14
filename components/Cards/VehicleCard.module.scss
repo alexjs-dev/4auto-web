@@ -8,11 +8,12 @@
   box-shadow: $shadow-soft;
   position: relative;
   margin-bottom: spacing(0.5);
-
+  margin-left: 0;
   @media (min-width: $tablet) {
     width: 272px;
     min-height: 340px;
     height: auto;
+    margin-left: spacing(0.5);
   }
   .likeButton {
     position: absolute;

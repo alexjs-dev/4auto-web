@@ -7,7 +7,7 @@ import { VehicleCard, TripleButtonGroup } from '~components'
 import { getVehicleCardProps } from '~utils/helpers'
 
 const ListingsCarousel = ({ listings, title }) => {
-  const { isMobile } = useViewport()
+  const { isMobile, isDesktop } = useViewport()
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1441 },
@@ -38,6 +38,7 @@ const ListingsCarousel = ({ listings, title }) => {
           arrows={!isMobile}
           renderButtonGroupOutside
           draggable
+          centerMode={isDesktop}
           swipeable
           autoPlay
           responsive={responsive}

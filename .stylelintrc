@@ -1,0 +1,11 @@
+{
+   "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-css-modules",
+      "stylelint-config-prettier"
+   ],
+   "rules": {
+      "at-rule-no-unknown": null,
+      "value-keyword-case": null
+   }
+}

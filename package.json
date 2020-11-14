@@ -1,7 +1,10 @@
 {
-  "name": "4auto-web-app",
+  "name": "4auto-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "dev": "node importBuilder.js && next dev",
     "build": "next build",
