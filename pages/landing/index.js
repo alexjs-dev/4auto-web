@@ -12,7 +12,6 @@ import {
   vehiclesPaginationSelector,
   listingsSelector,
 } from '~store/vehicles/selectors'
-import vehicles from './mock'
 import styles from './landing.module.scss'
 
 const LandingPage = () => {
