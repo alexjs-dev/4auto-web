@@ -9,6 +9,7 @@
     "dev": "node importBuilder.js && next dev",
     "build": "next build",
     "start": "next start -p $PORT",
+    "comp": "node tools/create/component.js",
     "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb"
   },
   "dependencies": {

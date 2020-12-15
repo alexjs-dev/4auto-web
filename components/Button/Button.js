@@ -84,7 +84,7 @@ Button.defaultProps = {
   visible: true,
   fluid: false, // 100% width
   type: 'primary',
-  color: '',
+  color: 'green',
   icon: '',
   loading: false,
   children: null,

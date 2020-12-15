@@ -1,7 +1,7 @@
 import React from 'react'
 import Carousel from 'react-multi-carousel'
 import { map } from 'lodash'
-import { AdBanner } from '~components'
+import AdBanner from '../Ads/AdBanner'
 import adsList from '~ads'
 import useViewport from '~hooks/useViewport'
 import styles from './AdCarousel.module.scss'

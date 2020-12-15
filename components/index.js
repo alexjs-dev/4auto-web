@@ -1,51 +1,53 @@
 import { AdBanner } from './Ads'
 import { BaseDrawer } from './Drawer'
+import { SearchForm } from './Forms'
+import { AuthForm } from './AuthForm'
 import { LanguageSwitch } from './LanguageSwitch'
+import { Spacer } from './Spacer'
 import { Loader } from './Loader'
 import { LogoAbstract } from './Logo'
-import { SearchForm } from './Forms'
-import { Spacer } from './Spacer'
-import { BasicHeader, Header } from './Header'
+import { VehicleCard } from './Cards'
 import { ListingsCarousel, AdCarousel, TripleButtonGroup } from './Carousels'
+import { BaseButton, Button, ExpandButton } from './Button'
 import { NavigationDropdown, NavigationDrawer, NavigationContent } from './Navigation'
 import { ArrowPagination, InfiniteBullets, InfinitePagination } from './Pagination'
 import { UserAvatar, UserUnreads } from './User'
-import { BaseButton, Button, ExpandButton } from './Button'
-import { VehicleCard } from './Cards'
-import { BaseInput, Input, Select, Checkbox } from './Input'
 import { ColorPicker, RangePicker } from './Pickers'
-import { AuthForm } from './AuthForm'
+import { BaseInput, Input, Select, Checkbox } from './Input'
+import { BasicHeader, Header } from './Header'
+import { VehicleOfTheDay } from './VehicleOfTheDay'
 
 export {
-	AuthForm,
 	AdBanner,
 	VehicleCard,
+	AuthForm,
 	BaseButton,
+	BaseDrawer,
 	BasicHeader,
 	SearchForm,
-	ListingsCarousel,
-	BaseDrawer,
 	BaseInput,
 	LanguageSwitch,
 	Loader,
+	NavigationDropdown,
 	LogoAbstract,
+	ColorPicker,
 	ArrowPagination,
 	Spacer,
-	ColorPicker,
-	UserAvatar,
-	NavigationDropdown,
-	AdCarousel,
 	Button,
 	Header,
+	AdCarousel,
 	Input,
 	NavigationDrawer,
-	InfiniteBullets,
 	RangePicker,
-	UserUnreads,
-	ExpandButton,
+	UserAvatar,
+	InfiniteBullets,
+	ListingsCarousel,
 	TripleButtonGroup,
-	Checkbox,
+	VehicleOfTheDay,
 	Select,
+	ExpandButton,
 	NavigationContent,
 	InfinitePagination,
+	Checkbox,
+	UserUnreads,
 }

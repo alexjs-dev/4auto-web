@@ -1,6 +1,8 @@
 const lineReader = require('line-reader')
 const fs = require('fs')
 const Promise = require('bluebird')
+const { promisify } = require('util')
+const writeFileAsync = promisify(fs.writeFile)
 
 const buildImports = () => {
   const path = `${__dirname}/components`
@@ -22,7 +24,10 @@ const buildImports = () => {
 
   const writeExports = () => {
     fs.appendFile(output, `\nexport {\n`, (err) => {
-      if (err) throw err
+      if (err) {
+        console.error(err)
+        throw err
+      }
     })
 
     dirs.forEach((directory, index) => {
@@ -69,8 +74,9 @@ const buildImports = () => {
           })
           if (index === dirs.length - 1) {
             setTimeout(() => {
+              console.log('writing exports')
               writeExports()
-            }, 200)
+            }, 500)
           }
         })
         .catch((err) => {
