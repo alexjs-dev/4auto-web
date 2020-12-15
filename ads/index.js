@@ -4,16 +4,16 @@ const ads = [
     subtitle: 'DRIVING LUXURY.',
     hrefTitle: 'SEE MORE',
     href: 'https://www.inchcape.ee/',
-    img: 'static/ads/bmw7.png',
-    backgroundImage: 'static/ads/city.jpg',
+    img: 'ads/bmw7.png',
+    backgroundImage: 'ads/city.jpg',
   },
   {
     title: 'MAZDA 2. 2020',
     subtitle: 'CHEAP, AFFORDABLE, AMAZING',
     hrefTitle: 'VIEW MORE',
     href: 'https://www.mazda.com',
-    img: 'static/ads/mazda2.png',
-    backgroundImage: 'static/ads/forrest.jpg',
+    img: 'ads/mazda2.png',
+    backgroundImage: 'ads/forrest.jpg',
   },
 ]
 

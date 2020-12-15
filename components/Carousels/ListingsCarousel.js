@@ -11,7 +11,7 @@ const ListingsCarousel = ({ listings, title }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1441 },
-      items: 5,
+      items: 3,
     },
     desktop: {
       breakpoint: { max: 1440, min: 1281 },
@@ -22,6 +22,7 @@ const ListingsCarousel = ({ listings, title }) => {
       items: 3,
     },
     mobile: {
+      centerMode: true,
       breakpoint: { max: 989, min: 0 },
       items: 2,
     },
@@ -38,9 +39,8 @@ const ListingsCarousel = ({ listings, title }) => {
           arrows={!isMobile}
           renderButtonGroupOutside
           draggable
-          centerMode={isDesktop}
           swipeable
-          autoPlay
+          autoPlay={false}
           responsive={responsive}
           autoPlaySpeed={5000}
           customButtonGroup={<TripleButtonGroup />}
