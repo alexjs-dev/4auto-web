@@ -16,7 +16,7 @@ const AdBanner = ({
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className={styles.image}>
-        <img src={img} alt={title} />
+        <img src={img} alt={title} draggable="false" />
       </div>
       <div className={styles.text}>
         <div>
