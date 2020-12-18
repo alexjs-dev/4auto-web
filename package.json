@@ -6,7 +6,8 @@
     "node": "12.x"
   },
   "scripts": {
-    "dev": "node importBuilder.js && next dev",
+    "dev": "next dev",
+    "rebuild": "node importBuilder",
     "build": "next build",
     "start": "next start -p $PORT",
     "comp": "node tools/create/component.js",

@@ -7,6 +7,8 @@ import {
   ListingsCarousel,
   AdCarousel,
   InfinitePagination,
+  VehicleOfTheDay,
+  Layout,
 } from '~components'
 import {
   vehiclesPaginationSelector,
@@ -20,7 +22,7 @@ const LandingPage = () => {
   const listings = useSelector(listingsSelector)
   useEffect(() => {
     dispatch(Creators.fetchListings())
-  }, [])
+  }, [dispatch, Creators])
 
   return (
     <div className={styles.container}>
@@ -28,13 +30,16 @@ const LandingPage = () => {
         <LogoAbstract />
         <SearchForm className={styles.searchForm} />
       </section>
-      <div className={styles.layout}>
+      <Layout>
         <ListingsCarousel listings={listings} title="Featured vehicles" />
-        <AdCarousel />
+      </Layout>
+      <AdCarousel />
+      <Layout>
+        <VehicleOfTheDay />
         <ListingsCarousel listings={listings} title="Recommended vehicles" />
         <ListingsCarousel listings={listings} title="Latest vehicles" />
         <InfinitePagination pagination={pagination} items={listings} />
-      </div>
+      </Layout>
     </div>
   )
 }

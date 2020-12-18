@@ -51,6 +51,7 @@ $dark-primary-gradient: linear-gradient(270deg, #292f4c 4%, #96de78 100%);
 
 $border-thick-darker-gray: 2px solid $color-darker-gray;
 $border-thick-dark-gray: 2px solid $color-dark-gray;
+$border-light-dark-gray: 1px solid $color-dark-gray;
 $border-thick-light-gray: 2px solid $color-light-gray;
 $border-thick-red: 2px solid $color-red;
 $border-thick-primary: 2px solid $color-primary;
@@ -90,3 +91,4 @@ $transition-linear: all 0.3s linear;
 $tablet: 768px;
 $tablet-large: 990px;
 $desktop: 1280px;
+$layout: 1440px;

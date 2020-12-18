@@ -1,0 +1,32 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  h6 {
+    color: $color-darker-gray;
+    font-size: $font-size-p;
+    margin-bottom: spacing(0.25);
+  }
+}
+
+.detail {
+  display: flex;
+  span {
+    text-align: left;
+    white-space: nowrap;
+    line-height: $line-height-s;
+    font-family: $font-family-secondary;
+    color: $color-black;
+    font-size: $font-size-s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: $font-weight-normal;
+  }
+  svg {
+    min-width: $font-size-icon-small;
+    margin-right: spacing(0.5);
+    color: $color-darker-gray;
+    font-size: $font-size-icon-small;
+  }
+}

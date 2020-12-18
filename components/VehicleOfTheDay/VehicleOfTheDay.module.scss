@@ -3,4 +3,70 @@
 .container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 550px;
+  margin: spacing(8) 0;
+  @media (min-width: $tablet) {
+    padding: 0 spacing(8);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: spacing(2);
+  }
+}
+
+.vehicleContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .imageContainer {
+    width: 20%;
+    @media (min-width: $tablet) {
+      width: 50%;
+    }
+    height: 100%;
+    .image {
+      width: 100%;
+      height: 100%;
+      background: grey;
+    }
+  }
+  .detailsContainer {
+    background-color: $color-white;
+    padding: spacing(1);
+    border-width: 1px;
+    border-style: solid;
+    border-right-color: $color-gray;
+    border-top-color: $color-gray;
+    border-bottom-color: $color-gray;
+    border-left-color: transparent;
+    width: 80%;
+    @media (min-width: $tablet) {
+      width: 50%;
+      padding: spacing(1) spacing(2);
+      border-top-right-radius: $border-radius-input;
+      border-bottom-right-radius: $border-radius-input;
+    }
+    .vehicleDetails {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-row-gap: spacing(1);
+      border-bottom: $border-light-gray;
+      padding-bottom: spacing(1);
+      > div:nth-child(even) {
+        justify-self: flex-end;
+        margin-left: auto;
+      }
+    }
+    .title {
+      h3 {
+        margin-bottom: spacing(1.5);
+        max-width: 582px;
+        svg {
+          margin-left: spacing(0.5);
+          color: $color-primary;
+        }
+      }
+    }
+  }
 }

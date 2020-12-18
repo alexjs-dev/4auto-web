@@ -10,7 +10,7 @@ import {
   FiHeart,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
-import { BaseButton, Button } from '~components'
+import { BaseButton, Button, VehicleDetail } from '~components'
 import {
   formatMillage,
   formatCapacity,
@@ -94,26 +94,19 @@ const VehicleCard = ({
       <div className={styles.content}>
         <h6>{vehicleTitle}</h6>
         <div className={styles.features}>
-          <div className={styles.feature}>
-            <GiCarWheel />
-            <span>{vehicleBodyYear}</span>
-          </div>
-          <div className={styles.feature}>
-            <FiMapPin />
-            <span>{`${city}, ${countryCode}`}</span>
-          </div>
-          <div className={styles.feature}>
-            <FiGitPullRequest />
-            <span>{t(`vehicle.${transmissionTypes[transmission]}`)}</span>
-          </div>
-          <div className={styles.feature}>
-            <FiDisc />
-            <span>{vehicleMileage}</span>
-          </div>
-          <div className={styles.feature}>
-            {fuel === fuelTypes.electric ? <GiElectric /> : <GiGasPump />}
-            <span>{t(`vehicle.${fuelTypes[fuel]}`)}</span>
-          </div>
+          <VehicleDetail icon={<GiCarWheel />}>{vehicleBodyYear}</VehicleDetail>
+          <VehicleDetail
+            icon={fuel === fuelTypes.electric ? <GiElectric /> : <GiGasPump />}
+          >
+            {t(`vehicle.${fuelTypes[fuel]}`)}
+          </VehicleDetail>
+          <VehicleDetail icon={<FiGitPullRequest />}>
+            {t(`vehicle.${transmissionTypes[transmission]}`)}
+          </VehicleDetail>
+          <VehicleDetail icon={<FiDisc />}>{vehicleMileage}</VehicleDetail>
+          <VehicleDetail
+            icon={<FiMapPin />}
+          >{`${city}, ${countryCode}`}</VehicleDetail>
         </div>
       </div>
       <div className={styles.footer}>

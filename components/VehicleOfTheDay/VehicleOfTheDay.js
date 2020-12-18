@@ -1,19 +1,41 @@
 import React from 'react'
-import { GiElectric } from 'react-icons/gi'
+import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
+import { FiLink2 } from 'react-icons/fi'
+import { toast } from 'react-toastify'
+import { VehicleDetail, BaseButton } from '~components'
 import styles from './VehicleOfTheDay.module.scss'
 
 const VehicleOfTheDay = () => {
   return (
     <div className={styles.container}>
-      <h2>Vehicle of the day</h2>
+      <h1>Vehicle of the day</h1>
       <div className={styles.vehicleContainer}>
         <div className={styles.imageContainer}>
-          <img src="ads/bmw7.png" alt="some bmw car" />
+          <div className={styles.image} />
         </div>
         <div className={styles.detailsContainer}>
           <div className={styles.title}>
-            <h3>Mercedes benz</h3>
-            <GiElectric />
+            <h3>
+              Mercedes-Benz GLK-320 180 kW Quattro S-LINE Quadro xDrive v2
+              <BaseButton
+                onClick={() =>
+                  toast.success('Link copied! 🙌', { autoClose: 1500 })
+                }
+              >
+                <FiLink2 size={20} />
+              </BaseButton>
+            </h3>
+          </div>
+          <div className={styles.vehicleDetails}>
+            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+              Sedan, 2020
+            </VehicleDetail>
+            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+              Sedan, 2020
+            </VehicleDetail>
+            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+              Sedan, 2020
+            </VehicleDetail>
           </div>
         </div>
       </div>
