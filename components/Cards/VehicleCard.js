@@ -9,6 +9,7 @@ import {
   FiDisc,
   FiHeart,
 } from 'react-icons/fi'
+import { FiShare2, FiDollarSign, FiMessageCircle } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
 import { BaseButton, Button, VehicleDetail } from '~components'
 import {
@@ -76,6 +77,8 @@ const VehicleCard = ({
             onClick={() => {}}
             className={styles.overlayButton}
           >
+            <FiMessageCircle />
+            &nbsp;
             {t('button.contact')}
           </Button>
           <Button
@@ -84,6 +87,18 @@ const VehicleCard = ({
             onClick={() => {}}
             className={styles.overlayButton}
           >
+            <FiDollarSign />
+            &nbsp;
+            {t('button.offer')}
+          </Button>
+          <Button
+            type={Button.types.GHOST}
+            fluid
+            onClick={() => {}}
+            className={styles.overlayButton}
+          >
+            <FiShare2 />
+            &nbsp;
             {t('button.share')}
           </Button>
         </div>

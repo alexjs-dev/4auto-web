@@ -1,9 +1,12 @@
 import React from 'react'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
 import { FiLink2 } from 'react-icons/fi'
+import sample from 'lodash/sample'
 import { toast } from 'react-toastify'
 import { VehicleDetail, BaseButton } from '~components'
 import styles from './VehicleOfTheDay.module.scss'
+
+const emojis = ['🤘', '🙌', '🙏', '🤑', '😍']
 
 const VehicleOfTheDay = () => {
   return (
@@ -19,7 +22,9 @@ const VehicleOfTheDay = () => {
               Mercedes-Benz GLK-320 180 kW Quattro S-LINE Quadro xDrive v2
               <BaseButton
                 onClick={() =>
-                  toast.success('Link copied! 🙌', { autoClose: 1500 })
+                  toast.success(`Link copied! ${sample(emojis)}`, {
+                    autoClose: 1800,
+                  })
                 }
               >
                 <FiLink2 size={20} />
