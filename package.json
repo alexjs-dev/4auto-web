@@ -36,7 +36,7 @@
     "react-i18next": "^11.7.3",
     "react-icons": "^3.11.0",
     "react-infinite-scroll-component": "^5.1.0",
-    "react-multi-carousel": "^2.5.5",
+    "react-multi-carousel": "2.6.1",
     "react-redux": "^7.2.1",
     "react-toastify": "^6.0.8",
     "react-transition-group": "^4.4.1",

@@ -4,11 +4,16 @@
   position: relative;
   margin: spacing(2) 0;
   h1 {
+    border-top: 1px solid $color-dark-gray;
+    padding-top: spacing(1);
     margin-bottom: spacing(2);
   }
 }
 
 .wrapper {
+  h1 {
+    text-align: center;
+  }
   @media (min-width: $tablet) {
     padding: 0 spacing(8);
   }

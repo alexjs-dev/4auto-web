@@ -49,7 +49,6 @@ function* handleFetchListings(action) {
 function* handleFetchMakes(action) {
   try {
     const { params } = action
-    yield delay(5000)
     const data = yield call(makesService.find, {
       query: {
         ...omit(params, 'resetPagination'),
@@ -68,7 +67,6 @@ function* handleFetchMakes(action) {
 function* handleFetchModels(action) {
   try {
     const { params } = action
-    yield delay(5000)
     const data = yield call(modelsService.find, {
       query: {
         ...omit(params, 'resetPagination'),

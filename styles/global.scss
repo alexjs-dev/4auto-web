@@ -216,3 +216,10 @@ textarea {
     }
   }
 }
+
+.react-multi-carousel-item,
+.react-multi-carousel-item--active {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
