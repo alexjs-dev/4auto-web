@@ -23,14 +23,14 @@
   display: flex;
   .imageContainer {
     width: 20%;
+    height: 100%;
     @media (min-width: $tablet) {
       width: 50%;
-    }
-    height: 100%;
-    .image {
-      width: 100%;
-      height: 100%;
-      background: grey;
+      > div {
+        border-top-left-radius: $border-radius-input;
+        border-bottom-left-radius: $border-radius-input;
+        border: 1px solid $color-gray;
+      }
     }
   }
   .detailsContainer {
@@ -70,5 +70,32 @@
         }
       }
     }
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+
+.swipeTutorial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  svg {
+    position: absolute;
+    animation: slideInRight 2s ease-in-out infinite;
+    animation-fill-mode: forwards;
   }
 }

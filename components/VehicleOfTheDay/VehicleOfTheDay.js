@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
+import { FaRegHandPointer } from 'react-icons/fa'
 import { FiLink2 } from 'react-icons/fi'
 import sample from 'lodash/sample'
+import useViewport from '~hooks/useViewport'
+import classNames from 'classnames'
 import { toast } from 'react-toastify'
-import { VehicleDetail, BaseButton } from '~components'
+import { VehicleDetail, BaseButton, ImageCarousel } from '~components'
 import styles from './VehicleOfTheDay.module.scss'
 
 const emojis = ['🤘', '🙌', '🙏', '🤑', '😍']
 
+const VehicleContent = () => (
+  <div className={styles.vehicleDetails}>
+    <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+      Sedan, 2020
+    </VehicleDetail>
+    <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+      Sedan, 2020
+    </VehicleDetail>
+    <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
+      Sedan, 2020
+    </VehicleDetail>
+  </div>
+)
+
+const SwipeTutorial = () => (
+  <div className={styles.swipeTutorial}>
+    <FaRegHandPointer size={64} />
+  </div>
+)
+
 const VehicleOfTheDay = () => {
+  const { isMobile } = useViewport()
+  const [isImageMaximized, setImageMaximized] = useState(false)
   return (
     <div className={styles.container}>
       <h1>Vehicle of the day</h1>
       <div className={styles.vehicleContainer}>
         <div className={styles.imageContainer}>
-          <div className={styles.image} />
+          <ImageCarousel />
         </div>
         <div className={styles.detailsContainer}>
           <div className={styles.title}>
@@ -31,17 +56,7 @@ const VehicleOfTheDay = () => {
               </BaseButton>
             </h3>
           </div>
-          <div className={styles.vehicleDetails}>
-            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
-              Sedan, 2020
-            </VehicleDetail>
-            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
-              Sedan, 2020
-            </VehicleDetail>
-            <VehicleDetail icon={<GiCarWheel />} title="Body type, year">
-              Sedan, 2020
-            </VehicleDetail>
-          </div>
+          {isMobile ? <SwipeTutorial /> : <VehicleContent />}
         </div>
       </div>
     </div>

@@ -26,12 +26,14 @@ import {
 import { BaseButton, Button, ExpandButton } from './Button'
 import { VehicleDetail } from './Vehicle'
 import { BaseInput, Input, Select, Checkbox } from './Input'
+import { ImageCarousel } from './Image'
 
 export {
   AuthForm,
   VehicleCard,
   AdBanner,
   BaseButton,
+  ImageCarousel,
   ListingsCarousel,
   BasicHeader,
   SearchForm,

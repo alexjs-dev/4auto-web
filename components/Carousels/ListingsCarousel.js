@@ -11,7 +11,7 @@ const ListingsCarousel = ({ listings, title }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1441 },
-      items: 3,
+      items: 4,
     },
     desktop: {
       breakpoint: { max: 1440, min: 1281 },

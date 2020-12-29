@@ -10,7 +10,7 @@
     "rebuild": "node importBuilder",
     "build": "next build",
     "start": "next start -p $PORT",
-    "comp": "node tools/create/component.js",
+    "component": "node tools/create/component.js",
     "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
