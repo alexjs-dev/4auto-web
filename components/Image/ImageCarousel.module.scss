@@ -12,27 +12,46 @@
     height: 100%;
     object-fit: cover;
   }
-  @media (min-width: $tablet) {
-  }
   .carousel {
     position: absolute;
-    top: spacing(1);
-    left: spacing(1);
+
     display: grid;
     grid-template-columns: auto;
     grid-gap: spacing(1);
     justify-items: center;
-    grid-template-rows: repeat(auto-fit, 64px);
-    svg {
-      margin-top: spacing(1);
-      width: 18px;
-      height: 18px;
+    grid-template-rows: repeat(auto-fit, 32px);
+    @media (min-width: $tablet) {
+      grid-template-rows: repeat(auto-fit, 64px);
+    }
+    top: spacing(0.5);
+    left: spacing(0.5);
+    @media (min-width: $tablet) {
+      top: spacing(1);
+      left: spacing(1);
+    }
+    .paginateButton {
+      svg {
+        margin-top: spacing(1);
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .expandButton {
+      svg {
+        width: 32px;
+        height: 32px;
+        color: white;
+      }
     }
     img {
       border-radius: $border-radius-medium;
       border: 1px solid $color-light-gray;
-      width: 64px;
-      height: 64px;
+      width: 32px;
+      height: 32px;
+      @media (min-width: $tablet) {
+        width: 64px;
+        height: 64px;
+      }
       object-fit: cover;
       &.active {
         border: 1px solid $color-primary;

@@ -13,10 +13,7 @@ const InfinitePagination = ({ pagination, items }) => {
   const hasMore = total > count
   const dispatch = useDispatch()
 
-  console.log('total', total)
-  console.log('count', count)
   const onPaginate = () => {
-    console.log('paginate')
     dispatch(Creators.fetchListings())
   }
   return (

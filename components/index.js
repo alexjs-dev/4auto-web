@@ -9,7 +9,7 @@ import { LogoAbstract } from './Logo'
 import { Layout } from './Layout'
 import { BasicHeader, Header } from './Header'
 import { ColorPicker, RangePicker } from './Pickers'
-import { UserAvatar, UserUnreads } from './User'
+import { UserAvatar, UserUnreads, Avatar } from './User'
 import { SearchForm } from './Forms'
 import { ListingsCarousel, AdCarousel, TripleButtonGroup } from './Carousels'
 import {
@@ -30,6 +30,7 @@ import { ImageCarousel } from './Image'
 
 export {
   AuthForm,
+  Avatar,
   VehicleCard,
   AdBanner,
   BaseButton,

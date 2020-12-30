@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { map, orderBy, get, slice } from 'lodash'
+import { map, orderBy, get } from 'lodash'
 import { BaseButton } from '~components'
 import useViewport from '~hooks/useViewport'
+import { FiMaximize } from 'react-icons/fi'
 import classNames from 'classnames'
 import ArrowDownIcon from '~public/icons/arrow-down.svg'
 import styles from './ImageCarousel.module.scss'
@@ -43,7 +44,6 @@ const ImageCarousel = () => {
   const orderedImages = orderBy(images, (image) => image.order)
   const [activeImage, setActiveImage] = useState(0)
   const { isMobile } = useViewport()
-  const imagesList = isMobile ? slice(orderedImages, 0, 3) : orderedImages
   const paginate = () => {
     const last = activeImage >= orderedImages.length - 1
     if (last) setActiveImage(0)
@@ -53,7 +53,7 @@ const ImageCarousel = () => {
     <div className={styles.container}>
       <img src={get(orderedImages, `${activeImage}.url`, '')} alt="Image" />
       <div className={styles.carousel}>
-        {map(imagesList, ({ url }, key) => (
+        {map(orderedImages, ({ url }, key) => (
           <img
             key={key}
             src={url}
@@ -63,9 +63,14 @@ const ImageCarousel = () => {
           />
         ))}
         {isMobile && (
-          <BaseButton onClick={paginate}>
-            <ArrowDownIcon />
-          </BaseButton>
+          <>
+            <BaseButton className={styles.expandButton}>
+              <FiMaximize />
+            </BaseButton>
+            <BaseButton onClick={paginate} className={styles.paginateButton}>
+              <ArrowDownIcon />
+            </BaseButton>
+          </>
         )}
       </div>
     </div>
