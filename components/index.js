@@ -27,9 +27,10 @@ import { BaseButton, Button, ExpandButton } from './Button'
 import { VehicleDetail } from './Vehicle'
 import { BaseInput, Input, Select, Checkbox } from './Input'
 import { ImageCarousel } from './Image'
-
+import { Modal } from './Modals'
 export {
   AuthForm,
+  Modal,
   Avatar,
   VehicleCard,
   AdBanner,

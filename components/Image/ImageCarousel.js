@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { map, orderBy, get } from 'lodash'
 import { BaseButton } from '~components'
+import { useDispatch } from 'react-redux'
 import useViewport from '~hooks/useViewport'
 import { FiMaximize } from 'react-icons/fi'
 import classNames from 'classnames'
+import ModalCreators from '~store/menu/creators'
 import ArrowDownIcon from '~public/icons/arrow-down.svg'
 import styles from './ImageCarousel.module.scss'
+import modalTypes from '~consts/modals'
 
 const images = [
   {
@@ -44,6 +47,8 @@ const ImageCarousel = () => {
   const orderedImages = orderBy(images, (image) => image.order)
   const [activeImage, setActiveImage] = useState(0)
   const { isMobile } = useViewport()
+  const dispatch = useDispatch()
+
   const paginate = () => {
     const last = activeImage >= orderedImages.length - 1
     if (last) setActiveImage(0)
@@ -51,12 +56,21 @@ const ImageCarousel = () => {
   }
   return (
     <div className={styles.container}>
-      <img src={get(orderedImages, `${activeImage}.url`, '')} alt="Image" />
-      {!isMobile && (
-        <BaseButton className={styles.expandButtonDesktop}>
-          <FiMaximize />
-        </BaseButton>
-      )}
+      <img
+        src={get(orderedImages, `${activeImage}.url`, '')}
+        alt="Image"
+        draggable="false"
+      />
+
+      <BaseButton
+        className={styles.expandButton}
+        onClick={() =>
+          dispatch(ModalCreators.openModal(modalTypes.IMAGE_LIST_MODAL))
+        }
+      >
+        <FiMaximize />
+      </BaseButton>
+
       <div className={styles.carousel}>
         {map(orderedImages, ({ url }, key) => (
           <img
@@ -64,14 +78,12 @@ const ImageCarousel = () => {
             src={url}
             className={classNames(activeImage === key && styles.active)}
             alt="Image"
+            draggable="false"
             onClick={() => setActiveImage(key)}
           />
         ))}
         {isMobile && (
           <>
-            <BaseButton className={styles.expandButton}>
-              <FiMaximize />
-            </BaseButton>
             <BaseButton onClick={paginate} className={styles.paginateButton}>
               <ArrowDownIcon />
             </BaseButton>

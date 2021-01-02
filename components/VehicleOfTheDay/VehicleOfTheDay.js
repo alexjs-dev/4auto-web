@@ -125,7 +125,6 @@ const VehicleContent = () => (
 )
 
 const Content = ({ tutorialVisible }) => {
-  console.log('tutorialVisible', tutorialVisible)
   if (tutorialVisible) {
     return <FaRegHandPointer size={64} className={styles.swipeTutorial} />
   }
@@ -135,8 +134,6 @@ const Content = ({ tutorialVisible }) => {
 const VehicleOfTheDay = () => {
   const { isMobile } = useViewport()
   const [isImageMaximized, setImageMaximized] = useState(isMobile)
-
-  console.log('isMobile', isMobile)
 
   const handlers = useSwipeable({
     onSwiped: () => setImageMaximized(false),

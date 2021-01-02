@@ -1,6 +1,6 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-import { Header, NavigationDrawer } from '~components'
+import { Header, NavigationDrawer, Modal } from '~components'
 import { Provider } from 'react-redux'
 import store from '~store'
 import '~i18n'
@@ -16,6 +16,7 @@ const MyApp = ({ Component, pageProps }) => (
       <Header />
       <NavigationDrawer />
       <ToastContainer />
+      <Modal />
       <Component {...pageProps} />
     </Provider>
   </>

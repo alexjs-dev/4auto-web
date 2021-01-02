@@ -1,0 +1,11 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 100vw;
+    height: calc(92vh - 34px);
+    object-fit: scale-down;
+  }
+}
