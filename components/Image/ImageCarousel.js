@@ -52,6 +52,11 @@ const ImageCarousel = () => {
   return (
     <div className={styles.container}>
       <img src={get(orderedImages, `${activeImage}.url`, '')} alt="Image" />
+      {!isMobile && (
+        <BaseButton className={styles.expandButtonDesktop}>
+          <FiMaximize />
+        </BaseButton>
+      )}
       <div className={styles.carousel}>
         {map(orderedImages, ({ url }, key) => (
           <img

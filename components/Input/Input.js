@@ -43,6 +43,7 @@ const InputComponent = (props) => {
     disabled,
     forwardedRef,
     isRequired,
+    small,
     ...rest
   } = props
   const { name } = input
@@ -55,7 +56,13 @@ const InputComponent = (props) => {
 
   return (
     <div className={styles.container}>
-      <InputLabel isRequired={isRequired} label={label} name={name} />
+      <InputLabel
+        isRequired={isRequired}
+        label={label}
+        active={active}
+        name={name}
+        small={small}
+      />
       <div className={styles.inputWrapper}>
         <BaseInput
           type={useType}
@@ -64,6 +71,7 @@ const InputComponent = (props) => {
           disabled={disabled}
           hasLabel={!!label}
           ref={forwardedRef}
+          small={small}
           {...input}
           {...rest}
         />
@@ -92,6 +100,7 @@ InputComponent.propTypes = {
     name: PropTypes.string,
   }).isRequired,
   disabled: PropTypes.bool,
+  small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
 }
 
@@ -102,6 +111,7 @@ InputComponent.defaultProps = {
   disabled: false,
   isRequired: false,
   forwardedRef: null,
+  small: false,
 }
 
 const Input = ({
@@ -125,6 +135,25 @@ const Input = ({
     }
   }, [])
   if (hidden) return null
+  // if (!name)
+  //   return (
+  //     <InputComponent
+  //       disabled={disabled}
+  //       label={label}
+  //       placeholder={placeholder}
+  //       forwardedRef={forwardedRef}
+  //       input={{
+  //         name: '',
+  //         onChange: null,
+  //       }}
+  //       meta={{
+  //         error: false,
+  //         invalid: false,
+  //         active: false,
+  //       }}
+  //       {...rest}
+  //     />
+  //   )
   return (
     <Field
       name={name}
@@ -155,6 +184,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
+  small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
 }
 
@@ -168,6 +198,7 @@ Input.defaultProps = {
   onChange: () => {},
   disabled: false,
   hidden: false,
+  small: false,
   forwardedRef: null,
 }
 

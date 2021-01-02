@@ -18,16 +18,17 @@ const BaseInput = forwardRef(
       maxValue,
       minValue,
       autocomplete,
+      small,
       ...rest
     },
     ref
   ) => {
-    const handleChange = event => {
+    const handleChange = (event) => {
       if (disabled) return
       onChange(event.target.value)
     }
 
-    const handleBlur = event => onBlur(event)
+    const handleBlur = (event) => onBlur(event)
 
     const isTextAreaInput = type === 'textarea'
 
@@ -46,14 +47,22 @@ const BaseInput = forwardRef(
     if (isTextAreaInput)
       return (
         <textarea
-          className={classNames(styles.textarea, invalid && styles.invalid)}
+          className={classNames(
+            styles.textarea,
+            invalid && styles.invalid,
+            small && styles.small
+          )}
           autoComplete={autocomplete}
           {...inputProps}
         />
       )
     return (
       <input
-        className={classNames(styles.input, invalid && styles.invalid)}
+        className={classNames(
+          styles.input,
+          invalid && styles.invalid,
+          true && styles.small
+        )}
         autoComplete={autocomplete}
         {...inputProps}
       />
@@ -70,6 +79,7 @@ BaseInput.propTypes = {
   onBlur: PropTypes.func,
   hasLabel: PropTypes.bool,
   type: PropTypes.string,
+  small: PropTypes.bool,
   maxValue: PropTypes.number,
   minValue: PropTypes.number,
   autocomplete: PropTypes.string,
@@ -82,6 +92,7 @@ BaseInput.defaultProps = {
   className: '',
   invalid: false,
   maxValue: null,
+  small: false,
   minValue: null,
   hasLabel: false,
   type: '',

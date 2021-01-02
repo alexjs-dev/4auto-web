@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 550px;
+  height: 584px;
   overflow: hidden;
   margin: spacing(8) 0;
   @media (min-width: $tablet) {
@@ -26,6 +26,7 @@
     width: 20%;
     height: 100%;
     transition: $transition;
+    border: 1px solid transparent;
     &.maximized {
       width: 80%;
     }
@@ -34,7 +35,6 @@
       > div {
         border-top-left-radius: $border-radius-input;
         border-bottom-left-radius: $border-radius-input;
-        border: 1px solid $color-gray;
       }
     }
   }
@@ -42,6 +42,7 @@
     background-color: $color-white;
     padding: spacing(1);
     border-width: 1px;
+    position: relative;
     border-style: solid;
     border-right-color: $color-gray;
     border-top-color: $color-gray;
@@ -49,6 +50,10 @@
     border-left-color: transparent;
     width: 20%;
     transition: $transition;
+    box-shadow: $shadow-soft;
+    display: flex;
+    flex-direction: column;
+
     &.maximized {
       width: 80%;
     }
@@ -65,9 +70,21 @@
       border-bottom: $border-light-gray;
       padding-bottom: spacing(1);
       margin-bottom: spacing(1);
+
+      @media (max-width: $tablet) {
+        max-height: 118px;
+        overflow: auto;
+      }
+
       > div:nth-child(even) {
         justify-self: flex-end;
         margin-left: auto;
+        div {
+          justify-content: flex-end;
+        }
+        h6 {
+          text-align: right;
+        }
       }
     }
     .title {
@@ -85,29 +102,64 @@
 
 @keyframes slideInRight {
   0% {
-    transform: translateX(10%);
+    transform: translateX(-25%);
   }
   50% {
     transform: translateX(0);
   }
   75% {
-    transform: translateX(-10%);
+    transform: translateX(-20%);
   }
   100% {
-    transform: translateX(10%);
+    transform: translateX(-25%);
   }
 }
 
 .swipeTutorial {
+  animation: slideInRight 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+  fill: $color-complimentary;
+  position: absolute;
+  top: 50%;
+}
+
+.actions {
+  margin: spacing(1) 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: spacing(1);
+  button:last-child {
+    grid-column: 1/3;
+  }
+}
+
+.price {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-top: auto;
+  span {
+    font-family: $font-family-secondary;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    font-weight: $font-weight-bold;
+    color: $color-red;
+    text-decoration: none;
+  }
+  strong {
+    font-weight: $font-weight-normal;
+    color: $color-darker-gray;
+    text-decoration: line-through;
+  }
+}
+
+.offer {
+  display: grid;
+  grid-gap: spacing(1);
   align-items: center;
-  position: relative;
-  height: 100%;
-  svg {
-    position: absolute;
-    animation: slideInRight 2s ease-in-out infinite;
-    animation-fill-mode: forwards;
-    fill: $color-complimentary;
+  grid-template-columns: 1fr 2fr;
+  button {
+    height: 34px;
+    align-self: flex-end;
+    margin-bottom: spacing(2);
   }
 }

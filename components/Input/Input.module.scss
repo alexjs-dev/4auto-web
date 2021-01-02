@@ -10,6 +10,11 @@
   line-height: $line-height-p;
   color: $color-black;
   width: 100%;
+  &.small {
+    min-height: unset;
+    height: 34px;
+    padding: 0 spacing(1.5);
+  }
   &::placeholder {
     color: $color-light-gray;
     font-family: $font-family-secondary;
@@ -46,10 +51,23 @@
   margin-bottom: spacing(1);
   display: inline-block;
   span {
+    transition: $transition;
     font-size: $font-size-p;
     font-family: $font-family;
     line-height: $line-height-p;
     font-weight: $font-weight-bold;
+  }
+  &.active {
+    span {
+      color: $color-primary;
+    }
+  }
+  &.small {
+    margin-bottom: spacing(0.5);
+    span {
+      font-size: $font-size-s;
+      line-height: $line-height-s;
+    }
   }
   .required {
     color: $color-red;
