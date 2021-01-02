@@ -2,6 +2,11 @@
 
 .container {
   position: relative;
+  ul:first-child {
+    li {
+      padding: 0 spacing(0.5);
+    }
+  }
   .bullets {
     position: absolute;
     left: 50%;

@@ -139,6 +139,7 @@ table {
 button,
 input,
 select,
+input[type='text'],
 textarea {
   background-color: transparent;
   outline: none;
@@ -147,4 +148,7 @@ textarea {
   margin: 0;
   font: unset;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
