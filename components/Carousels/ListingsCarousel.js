@@ -7,24 +7,28 @@ import { VehicleCard, TripleButtonGroup } from '~components'
 import { getVehicleCardProps } from '~utils/helpers'
 
 const ListingsCarousel = ({ listings, title }) => {
-  const { isMobile, isDesktop } = useViewport()
+  const { isMobile } = useViewport()
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1441 },
       items: 4,
+      slidesToSlide: 4,
     },
     desktop: {
       breakpoint: { max: 1440, min: 1281 },
       items: 3,
+      slidesToSlide: 3,
     },
     tablet: {
       breakpoint: { max: 1280, min: 990 },
       items: 3,
+      slidesToSlide: 3,
     },
     mobile: {
       centerMode: true,
       breakpoint: { max: 989, min: 0 },
       items: 2,
+      slidesToSlide: 2,
     },
   }
 
