@@ -31,7 +31,7 @@
       width: 80%;
     }
     @media (min-width: $tablet) {
-      width: 50% !important;
+      width: 50%;
       > div {
         border-top-left-radius: $border-radius-input;
         border-bottom-left-radius: $border-radius-input;
@@ -58,7 +58,7 @@
       width: 80%;
     }
     @media (min-width: $tablet) {
-      width: 50% !important;
+      width: 50%;
       padding: spacing(1) spacing(2);
       border-top-right-radius: $border-radius-input;
       border-bottom-right-radius: $border-radius-input;
@@ -141,7 +141,7 @@
     font-family: $font-family-secondary;
     font-size: $font-size-h4;
     line-height: $line-height-h4;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-medium;
     color: $color-red;
     text-decoration: none;
   }
@@ -149,17 +149,5 @@
     font-weight: $font-weight-normal;
     color: $color-darker-gray;
     text-decoration: line-through;
-  }
-}
-
-.offer {
-  display: grid;
-  grid-gap: spacing(1);
-  align-items: center;
-  grid-template-columns: 1fr 2fr;
-  button {
-    height: 34px;
-    align-self: flex-end;
-    margin-bottom: spacing(2);
   }
 }

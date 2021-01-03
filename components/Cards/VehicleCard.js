@@ -17,6 +17,7 @@ import {
   formatCapacity,
   formatVehicleMainLabel,
 } from '~utils/helpers'
+import useModal from '~hooks/useModal'
 import useViewport from '~hooks/useViewport'
 import useOutsideClick from '~hooks/useOutsideClick'
 import { transmissionTypes, fuelTypes } from '~consts/vehicle'
@@ -46,6 +47,7 @@ const VehicleCard = ({
   images, // handle re-render
 }) => {
   const ref = useRef(null)
+  const [modalTypes, openModal] = useModal()
   const [overlayActive, setOverlayActive] = useState(false)
   const { isMobile } = useViewport()
   useOutsideClick({ ref, isOpen: overlayActive, setOpen: setOverlayActive })
@@ -84,7 +86,7 @@ const VehicleCard = ({
           <Button
             type={Button.types.GHOST}
             fluid
-            onClick={() => {}}
+            onClick={() => openModal(modalTypes.OFFER_MODAL)}
             className={styles.overlayButton}
           >
             <FiDollarSign />

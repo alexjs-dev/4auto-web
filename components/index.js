@@ -10,7 +10,7 @@ import { Layout } from './Layout'
 import { BasicHeader, Header } from './Header'
 import { ColorPicker, RangePicker } from './Pickers'
 import { UserAvatar, UserUnreads, Avatar } from './User'
-import { SearchForm } from './Forms'
+import { SearchForm, OfferForm } from './Forms'
 import { ListingsCarousel, AdCarousel, TripleButtonGroup } from './Carousels'
 import {
   NavigationDropdown,
@@ -39,6 +39,7 @@ export {
   ListingsCarousel,
   BasicHeader,
   SearchForm,
+  OfferForm,
   BaseDrawer,
   BaseInput,
   LanguageSwitch,

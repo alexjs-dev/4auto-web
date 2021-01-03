@@ -6,6 +6,8 @@ import { FiX as CloseIcon } from 'react-icons/fi'
 import { modalSelector } from '~store/menu/selectors'
 import styles from './BaseModal.module.scss'
 import ImageListModal from './ImageListModal'
+import OfferModal from './OfferModal'
+import SearchModal from './SearchModal'
 import types from '~consts/modals'
 
 const BaseModal = ({ children }) => {
@@ -33,7 +35,18 @@ const Modal = () => {
           <ImageListModal />
         </BaseModal>
       )
-
+    case types.OFFER_MODAL:
+      return (
+        <BaseModal>
+          <OfferModal />
+        </BaseModal>
+      )
+    case types.SEARCH_MODAL:
+      return (
+        <BaseModal>
+          <SearchModal />
+        </BaseModal>
+      )
     default:
       return null
   }

@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next'
 import {
   FiPlusCircle as AddIcon,
   FiSearch as SearchIcon,
-  FiGrid as MenuIcon,
+  FiMenu,
 } from 'react-icons/fi'
+import useModal from '~hooks/useModal'
 import Creators from '~store/menu/creators'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import { UserAvatar, UserUnreads, BaseButton } from '~components'
@@ -16,6 +17,7 @@ const MobileHeader = () => {
   const { t } = useTranslation()
   const loggedIn = useSelector(isLoggedInSelector)
   const dispatch = useDispatch()
+  const [modalTypes, openModal] = useModal()
   const toggleDrawerMenu = () => dispatch(Creators.toggleDrawerMenu())
 
   const LogoSection = () => {
@@ -53,7 +55,7 @@ const MobileHeader = () => {
     return (
       <section>
         <BaseButton onClick={() => toggleDrawerMenu()}>
-          <MenuIcon style={{ fontSize: 36 }} className={styles.icon} />
+          <FiMenu style={{ fontSize: 36 }} className={styles.icon} />
         </BaseButton>
       </section>
     )
@@ -61,7 +63,10 @@ const MobileHeader = () => {
 
   const SearchSection = () => (
     <div className={styles.baseSearchWrapper}>
-      <BaseButton className={styles.baseSearch}>
+      <BaseButton
+        className={styles.baseSearch}
+        onClick={() => openModal(modalTypes.SEARCH_MODAL)}
+      >
         <div className={styles.searchIcon}>
           <SearchIcon style={{ fontSize: 36 }} />
         </div>

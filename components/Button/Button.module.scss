@@ -35,6 +35,11 @@
   color: $color-white;
   border: $border-primary;
   border-radius: $border-radius-input;
+  &.red {
+    color: $color-white;
+    background: $color-red;
+    border: 1px solid $color-red;
+  }
 }
 
 .loading {
@@ -58,6 +63,10 @@
   &.white {
     color: $color-white;
     border: $border-white;
+  }
+  &.red {
+    color: $color-red;
+    border: 1px solid $color-red;
   }
 }
 

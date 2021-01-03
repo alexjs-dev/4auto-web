@@ -14,6 +14,7 @@ class Button extends React.PureComponent {
   static colors = {
     PRIMARY: 'green',
     WHITE: 'white',
+    RED: 'red',
   }
 
   styleIconButton = () => {
@@ -71,7 +72,7 @@ Button.propTypes = {
   className: PropTypes.string,
   visible: PropTypes.bool,
   type: PropTypes.oneOf(['primary', 'ghost']),
-  color: PropTypes.oneOf(['green', 'white']),
+  color: PropTypes.oneOf(['green', 'white', 'red']),
   icon: PropTypes.string,
   loading: PropTypes.bool,
   fluid: PropTypes.bool,

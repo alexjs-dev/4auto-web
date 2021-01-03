@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import {
   FiPlusCircle as AddIcon,
   FiSearch as SearchIcon,
-  FiGrid as MenuIcon,
+  FiMenu,
 } from 'react-icons/fi'
 import classNames from 'classnames'
+import useModal from '~hooks/useModal'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import {
   UserAvatar,
@@ -24,6 +25,7 @@ const DesktopHeader = () => {
   const isLoggedIn = useSelector(isLoggedInSelector)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [margin, setMargin] = useState(0)
+  const [modalTypes, openModal] = useModal()
   const ref = useRef(null)
   useEffect(() => {
     if (ref.current) {
@@ -41,7 +43,10 @@ const DesktopHeader = () => {
   const SearchSection = () => (
     <BaseButton className={styles.search}>
       <div className={styles.searchIcon}>
-        <SearchIcon style={{ fontSize: 48 }} />
+        <SearchIcon
+          style={{ fontSize: 48 }}
+          onClick={() => openModal(modalTypes.SEARCH_MODAL)}
+        />
       </div>
     </BaseButton>
   )
@@ -83,7 +88,7 @@ const DesktopHeader = () => {
             onClick={() => setDrawerOpen(!drawerOpen)}
             className={styles.center}
           >
-            <MenuIcon
+            <FiMenu
               style={{ fontSize: 36 }}
               className={classNames(
                 styles.icon,

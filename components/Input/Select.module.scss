@@ -108,6 +108,8 @@
   max-height: 220px;
   overflow: auto;
   .option {
+    display: flex;
+    justify-content: center;
     text-align: left;
     padding: spacing(2) spacing(1);
     &:focus {

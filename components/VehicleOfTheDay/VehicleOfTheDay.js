@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { GiCarWheel, GiGasPump, GiSpeedometer } from 'react-icons/gi'
-import { reduxForm } from 'redux-form'
 import { FiPhone, FiMail } from 'react-icons/fi'
 import { useSwipeable } from 'react-swipeable'
 import { FaRegHandPointer } from 'react-icons/fa'
@@ -15,40 +14,11 @@ import {
   ImageCarousel,
   Avatar,
   Button,
-  Input,
+  OfferForm,
 } from '~components'
 import styles from './VehicleOfTheDay.module.scss'
 
 const emojis = ['🤘', '🙌', '🙏', '🤑', '😍']
-
-const OfferForm = ({ handleSubmit }) => {
-  const onSubmit = (val) => {
-    console.log('values', val)
-  }
-  return (
-    <form
-      className={styles.offer}
-      onSubmit={(e) => {
-        e.preventDefault()
-        handleSubmit(onSubmit)
-      }}
-    >
-      <Input
-        name="offer"
-        label="YOUR OFFER"
-        placeholder="€"
-        type="number"
-        small
-        min={0}
-      />
-      <Button fluid label="Offer" onClick={handleSubmit(onSubmit)} />
-    </form>
-  )
-}
-
-const Offer = reduxForm({
-  form: 'offerForm',
-})(OfferForm)
 
 const Price = () => {
   return (
@@ -119,7 +89,7 @@ const VehicleContent = () => (
     </div>
     <Avatar />
     <Actions />
-    <Offer />
+    <OfferForm />
     <Price />
   </>
 )

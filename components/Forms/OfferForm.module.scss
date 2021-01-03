@@ -1,0 +1,13 @@
+@import 'vars.scss';
+
+.offer {
+  display: grid;
+  grid-gap: spacing(1);
+  align-items: center;
+  grid-template-columns: 1fr 2fr;
+  button {
+    height: 34px;
+    align-self: flex-end;
+    margin-bottom: spacing(2);
+  }
+}

@@ -39,7 +39,9 @@ export const formatCapacity = (capacity, t) =>
 
 export const formatVehicleMainLabel = (bodyType, regDate, t, shorten) => {
   const title = t(`vehicle.${bodyTypes[bodyType]}`)
-  return `${shorten ? title.substring(0, 3) : title}, ${regDate}`
+  return `${shorten ? title.substring(0, 3) : title}, ${moment(regDate).format(
+    'MM/YY'
+  )}`
 }
 
 export const formatPriceWithDiscount = (price, discount) => {

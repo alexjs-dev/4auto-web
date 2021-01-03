@@ -1,7 +1,7 @@
 import Component from './ImageListModal.js'
 
 export default {
-  title: ' Image List Modal',
+  title: 'Image List Modal',
   component: Component,
 }
 

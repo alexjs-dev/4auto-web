@@ -1,0 +1,11 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: $tablet;
+  margin: auto;
+  justify-self: center;
+  border-radius: $border-radius-small;
+  overflow: auto;
+}

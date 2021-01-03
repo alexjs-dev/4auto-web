@@ -168,6 +168,7 @@ const Input = ({
         label,
         placeholder,
         forwardedRef,
+        type,
         ...rest,
       }}
     />

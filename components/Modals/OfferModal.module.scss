@@ -1,0 +1,23 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  max-width: $tablet;
+  margin: auto;
+  justify-self: center;
+  border-radius: $border-radius-small;
+  padding: spacing(2);
+  h5 {
+    margin-bottom: spacing(1);
+  }
+  p {
+    font-family: $font-family-secondary;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    font-weight: $font-weight-medium;
+    color: $color-red;
+    margin-bottom: spacing(1);
+  }
+}
