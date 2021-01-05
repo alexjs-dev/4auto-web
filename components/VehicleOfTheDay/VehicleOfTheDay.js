@@ -45,6 +45,37 @@ const Actions = () => {
   )
 }
 
+const VehicleDetails = () => {
+  return (
+    <div className={styles.vehicleDetails}>
+      <VehicleDetail icon={<FiTag />} title={'Body type, year'}>
+        Sedan, 2020
+      </VehicleDetail>
+      <VehicleDetail icon={<FiMapPin />} title={'Location'}>
+        Tallinn, Estonia
+      </VehicleDetail>
+      <VehicleDetail icon={<FiGitPullRequest />} title={'Gearbox'}>
+        Semi-automatic
+      </VehicleDetail>
+      <VehicleDetail icon={<GiCarWheel />} title={'Mileage'}>
+        274 500
+      </VehicleDetail>
+      <VehicleDetail icon={<GiGasPump />} title={'Fuel'}>
+        Gasoline, Gas (LPG)
+      </VehicleDetail>
+      <VehicleDetail icon={<FiTag />} title={'Cons.(city)'}>
+        8L/100 Km
+      </VehicleDetail>
+      <VehicleDetail icon={<FiTag />} title={'Color'}>
+        Silver
+      </VehicleDetail>
+      <VehicleDetail icon={<GiSpeedometer />} title={'Speed (1-100)'}>
+        6.5s
+      </VehicleDetail>
+    </div>
+  )
+}
+
 const VehicleContent = () => (
   <>
     <div className={styles.title}>
@@ -61,32 +92,7 @@ const VehicleContent = () => (
         </BaseButton>
       </h3>
     </div>
-    <div className={styles.vehicleDetails}>
-      <VehicleDetail icon={<FiTag />} title="Body type, year">
-        Sedan, 2020
-      </VehicleDetail>
-      <VehicleDetail icon={<FiMapPin />} title="Location">
-        Tallinn, Estonia
-      </VehicleDetail>
-      <VehicleDetail icon={<FiGitPullRequest />} title="Gearbox">
-        Semi-automatic
-      </VehicleDetail>
-      <VehicleDetail icon={<GiCarWheel />} title="Mileage">
-        274 500
-      </VehicleDetail>
-      <VehicleDetail icon={<GiGasPump />} title="Fuel">
-        Gasoline, Gas (LPG)
-      </VehicleDetail>
-      <VehicleDetail icon={<FiTag />} title="Cons.(city)">
-        8L/100 Km
-      </VehicleDetail>
-      <VehicleDetail icon={<FiTag />} title="Color">
-        Silver
-      </VehicleDetail>
-      <VehicleDetail icon={<GiSpeedometer />} title="Speed (1-100)">
-        6.5s
-      </VehicleDetail>
-    </div>
+    <VehicleDetails />
     <Avatar />
     <Actions />
     <OfferForm />
@@ -94,26 +100,17 @@ const VehicleContent = () => (
   </>
 )
 
-const Content = ({ tutorialVisible }) => {
-  if (tutorialVisible) {
-    return <FaRegHandPointer size={64} className={styles.swipeTutorial} />
-  }
-  return <VehicleContent />
-}
-
 const VehicleOfTheDay = () => {
   const { isMobile } = useViewport()
   const [isImageMaximized, setImageMaximized] = useState(isMobile)
 
   const handlers = useSwipeable({
     onSwiped: () => setImageMaximized(false),
-    trackMouse: true,
+    trackMouse: isMobile,
   })
 
   useEffect(() => {
-    if (isMobile) {
-      setImageMaximized(true)
-    }
+    setImageMaximized(isMobile)
   }, [isMobile])
 
   return (
@@ -136,7 +133,11 @@ const VehicleOfTheDay = () => {
           )}
           {...handlers}
         >
-          <Content tutorialVisible={isMobile && isImageMaximized} />
+          {isMobile && isImageMaximized ? (
+            <FaRegHandPointer size={64} className={styles.swipeTutorial} />
+          ) : (
+            <VehicleContent />
+          )}
         </div>
       </div>
     </div>

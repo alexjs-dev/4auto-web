@@ -3,10 +3,15 @@
 .container {
   display: flex;
   flex-direction: column;
+  h5,
   h6 {
     color: $color-darker-gray;
     font-size: $font-size-p;
     margin-bottom: spacing(0.25);
+    transition: $transition;
+  }
+  h5 {
+    font-size: $font-size-span;
   }
 }
 

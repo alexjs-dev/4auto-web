@@ -8,4 +8,10 @@
   justify-self: center;
   border-radius: $border-radius-small;
   overflow: auto;
+  align-items: center;
+  max-width: 340px;
+  width: 100%;
+  @media (min-width: $tablet) {
+    width: 340px;
+  }
 }

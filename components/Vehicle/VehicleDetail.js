@@ -7,11 +7,11 @@ const VehicleDetail = ({ icon, title, children }) => {
     <div className={styles.container}>
       {title && <h6>{title}</h6>}
       <div className={styles.detail}>
-        {(icon && icon) || <FiTag />}
+        {icon ? icon : <FiTag />}
         <span>{children}</span>
       </div>
     </div>
   )
 }
 
-export default VehicleDetail
+export default React.memo(VehicleDetail)
