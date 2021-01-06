@@ -1,0 +1,12 @@
+@import 'vars.scss';
+
+.container {
+  background: $color-light-gray;
+  min-height: 100vh;
+  .layout {
+    padding: 0 spacing(0.5);
+    @media (min-width: $tablet) {
+      padding: 0 0 spacing(8) 0;
+    }
+  }
+}

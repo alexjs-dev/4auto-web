@@ -1,5 +1,10 @@
-import { reduce, get } from 'lodash'
 import moment from 'moment'
+import map from 'lodash/map'
+import reduce from 'lodash/reduce'
+import isString from 'lodash/isString'
+import isArray from 'lodash/isArray'
+import isObject from 'lodash/isObject'
+import get from 'lodash/get'
 import { bodyType as bodyTypes } from '~consts/vehicle'
 
 export const mapBaseOptions = (array, key = '_id', label = 'name') =>
@@ -98,4 +103,60 @@ export const getVehicleCardProps = (props) => {
     recommended: moment().isBefore(moment(recommendedUntil)),
     images,
   }
+}
+
+export const toQueryString = (values) => {
+  // replace URIEncode
+  // works the same way, but supports objects by combining root key + object key=value
+  const result = map(values, (value, key) => {
+    if (isString(value)) {
+      return `${key}=${value}`
+    }
+    if (isArray(value)) {
+      const array = value.join('%2C')
+      return `${key}=${array}`
+    }
+    if (isObject(value)) {
+      const object = reduce(
+        value,
+        (prev, curr, k) => {
+          if (!prev) return `${key}${k}=${curr}`
+          return `${key}${k}=${curr}&${prev}`
+        },
+        ''
+      )
+      return object
+    }
+  })
+    .join('&')
+    .replace(/^\$/, '')
+  return result
+}
+
+export const toQueryBasic = (values) => {
+  // basic submit for nextjs, only handle objects
+  return reduce(
+    values,
+    (prev, curr, key) => {
+      let object = null
+      if (!prev) prev = {}
+      if (isObject(curr) && !isArray(curr)) {
+        object = reduce(
+          curr,
+          (prev, curr, k) => {
+            return {
+              ...prev,
+              [`${key}${k}`]: curr,
+            }
+          },
+          {}
+        )
+      }
+      return {
+        ...prev,
+        ...((object && object) || { [key]: curr }),
+      }
+    },
+    {}
+  )
 }

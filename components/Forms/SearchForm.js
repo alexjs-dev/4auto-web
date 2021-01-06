@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { reduxForm, formValueSelector, change } from 'redux-form'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { fieldTypes } from '~utils/formValidators'
@@ -16,7 +17,11 @@ import {
 import { transmissionTypes, bodyType, fuelTypes } from '~consts/vehicle'
 import { Select, Checkbox, ExpandButton, Button } from '~components'
 import SearchFormExtras from './parts/SearchFormExtras'
-import { mapBaseOptions, mapVehicleTranslatableOptions } from '~utils/helpers'
+import {
+  mapBaseOptions,
+  mapVehicleTranslatableOptions,
+  toQueryBasic,
+} from '~utils/helpers'
 import styles from './SearchForm.module.scss'
 
 const form = 'searchForm'
@@ -32,9 +37,11 @@ const SearchFormComponent = ({ className, handleSubmit }) => {
   const makesOptions = mapBaseOptions(makes)
 
   const selectFormValue = formValueSelector(form)
-  const selectedMake = useSelector(state =>
+  const selectedMake = useSelector((state) =>
     selectFormValue(state, fieldTypes.make)
   )
+
+  const router = useRouter()
 
   useEffect(() => {
     dispatch(Creators.fetchModels())
@@ -52,8 +59,14 @@ const SearchFormComponent = ({ className, handleSubmit }) => {
 
   const [openExpand, setOpenExpand] = useState(false)
   const { t } = useTranslation()
-  const onSubmit = async values => {
-    console.log('values', values)
+  const onSubmit = async (values) => {
+    const query = toQueryBasic(values)
+    if (query) {
+      router.push({
+        pathname: '/search',
+        query,
+      })
+    }
   }
 
   const transmissions = mapVehicleTranslatableOptions(transmissionTypes, t)

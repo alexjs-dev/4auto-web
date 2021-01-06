@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Creators from '~store/vehicles/creators'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './InfinitePagination.module.scss'
-import { VehicleCard } from '~components'
+import { VehicleCard, Loader } from '~components'
 import { getVehicleCardProps } from '~utils/helpers'
 
 const InfinitePagination = ({ pagination, items }) => {
@@ -25,15 +25,8 @@ const InfinitePagination = ({ pagination, items }) => {
         next={onPaginate}
         hasMore={hasMore}
         loader={
-          <div
-            style={{
-              height: 500,
-              width: '100%',
-              background: 'grey',
-              color: 'white',
-            }}
-          >
-            Loading...
+          <div className={styles.loader}>
+            <Loader centered loading isBranded />
           </div>
         }
         endMessage={

@@ -26,3 +26,10 @@
     }
   }
 }
+
+.loader {
+  margin: spacing(4) 0 spacing(16) 0;
+  @media (min-width: $tablet) {
+    margin: none;
+  }
+}
