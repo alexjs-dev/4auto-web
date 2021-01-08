@@ -9,15 +9,14 @@ import {
   FiDisc,
   FiHeart,
 } from 'react-icons/fi'
-import { FiShare2, FiDollarSign, FiMessageCircle } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
-import { BaseButton, Button, VehicleDetail } from '~components'
+import { BaseButton, VehicleDetail } from '~components'
 import {
   formatMillage,
   formatCapacity,
   formatVehicleMainLabel,
 } from '~utils/helpers'
-import useModal from '~hooks/useModal'
+import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
 import useViewport from '~hooks/useViewport'
 import useOutsideClick from '~hooks/useOutsideClick'
 import { transmissionTypes, fuelTypes } from '~consts/vehicle'
@@ -47,7 +46,7 @@ const VehicleCard = ({
   images, // handle re-render
 }) => {
   const ref = useRef(null)
-  const [modalTypes, openModal] = useModal()
+
   const [overlayActive, setOverlayActive] = useState(false)
   const { isMobile } = useViewport()
   useOutsideClick({ ref, isOpen: overlayActive, setOpen: setOverlayActive })
@@ -72,38 +71,7 @@ const VehicleCard = ({
         visible={overlayActive}
         onClose={() => setOverlayActive(false)}
       >
-        <div className={styles.overlayContent}>
-          <Button
-            type={Button.types.GHOST}
-            fluid
-            onClick={() => {}}
-            className={styles.overlayButton}
-          >
-            <FiMessageCircle />
-            &nbsp;
-            {t('button.contact')}
-          </Button>
-          <Button
-            type={Button.types.GHOST}
-            fluid
-            onClick={() => openModal(modalTypes.OFFER_MODAL)}
-            className={styles.overlayButton}
-          >
-            <FiDollarSign />
-            &nbsp;
-            {t('button.offer')}
-          </Button>
-          <Button
-            type={Button.types.GHOST}
-            fluid
-            onClick={() => {}}
-            className={styles.overlayButton}
-          >
-            <FiShare2 />
-            &nbsp;
-            {t('button.share')}
-          </Button>
-        </div>
+        <VehicleCardScreen />
       </VehicleCardOverlay>
       <div className={styles.image}>
         <img src={image?.url || ''} alt={t('vehicle.vehicle')} />

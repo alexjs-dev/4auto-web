@@ -1,0 +1,20 @@
+@import 'vars.scss';
+
+.container {
+  display: none;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: spacing(2);
+  &.visible {
+    display: flex;
+  }
+  span {
+    color: white;
+  }
+  textarea {
+    color: white;
+  }
+}

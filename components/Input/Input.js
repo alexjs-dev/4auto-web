@@ -134,7 +134,7 @@ const Input = ({
       event.preventDefault()
     }
   }, [])
-  if (hidden) return null
+  if (hidden || !name) return null
   // if (!name)
   //   return (
   //     <InputComponent

@@ -21,6 +21,7 @@
 }
 
 .closeButton {
+  z-index: 1;
   position: absolute;
   bottom: spacing(0.7);
   right: spacing(0.7);
