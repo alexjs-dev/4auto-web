@@ -17,12 +17,11 @@
   }
   .likeButton {
     position: absolute;
-    right: spacing(1);
-    top: spacing(1);
+    right: spacing(4);
+    top: spacing(4);
+    transform: translate(50%, -50%);
     svg {
-      fill: $color-white;
-      font-size: $font-size-h4;
-      stroke: none;
+      pointer-events: none;
     }
   }
   .image {

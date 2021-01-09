@@ -20,6 +20,7 @@
     "@feathersjs/feathers": "^4.5.8",
     "@feathersjs/rest-client": "^4.5.8",
     "@feathersjs/socketio-client": "^4.5.8",
+    "@lottiefiles/react-lottie-player": "^2.2.2",
     "@material-ui/core": "^4.11.0",
     "axios": "^0.20.0",
     "body-scroll-lock": "^3.1.5",

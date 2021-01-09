@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { find } from 'lodash'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,7 @@ import {
   FiHeart,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
+import { Player } from '@lottiefiles/react-lottie-player'
 import { BaseButton, VehicleDetail } from '~components'
 import {
   formatMillage,
@@ -55,7 +56,24 @@ const VehicleCard = ({
   const vehicleBodyYear = formatVehicleMainLabel(bodyType, regDate, t, isMobile)
   const vehicleMileage = isMobile ? mileage : formatMillage(mileage, t)
   const vehicleL = formatCapacity(capacity, t)
+  const heartRef = useRef(null)
   const vehicleTitle = `${make} ${model} ${power} ${t('label.kw')} ${vehicleL}`
+
+  const onCompleteAnimation = () => {
+    if (heartRef.current) {
+      heartRef.current.setSeeker('100%')
+    }
+  }
+
+  useEffect(() => {
+    if (heartRef.current) {
+      //  heartRef.current.addEventListener('complete', onCompleteAnimation)
+    }
+    return () => {
+      // heartRef.current.removeEventListener('complete', onCompleteAnimation)
+    }
+  }, [heartRef])
+
   return (
     <div className={styles.container} ref={ref}>
       <VehicleCardRibbons
@@ -64,8 +82,18 @@ const VehicleCard = ({
         recommended={recommended}
         visible={!overlayActive}
       />
-      <BaseButton className={styles.likeButton}>
-        <FiHeart />
+      <BaseButton
+        className={styles.likeButton}
+        onClick={() => heartRef.current && heartRef.current.play()}
+      >
+        <Player
+          autoplay={false}
+          loop={false}
+          controls={false}
+          ref={heartRef}
+          src="https://assets4.lottiefiles.com/packages/lf20_OkXAMI.json"
+          style={{ height: '64px', width: '64px' }}
+        ></Player>
       </BaseButton>
       <VehicleCardOverlay
         visible={overlayActive}
