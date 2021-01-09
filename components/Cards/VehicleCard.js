@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { find } from 'lodash'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
@@ -7,10 +7,9 @@ import {
   FiMoreVertical,
   FiGitPullRequest,
   FiDisc,
-  FiHeart,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
-import { Player } from '@lottiefiles/react-lottie-player'
+import Lottie from 'lottie-react'
 import { BaseButton, VehicleDetail } from '~components'
 import {
   formatMillage,
@@ -18,6 +17,7 @@ import {
   formatVehicleMainLabel,
 } from '~utils/helpers'
 import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
+import HeartAnimation from '~public/animations/heart.json'
 import useViewport from '~hooks/useViewport'
 import useOutsideClick from '~hooks/useOutsideClick'
 import { transmissionTypes, fuelTypes } from '~consts/vehicle'
@@ -59,20 +59,30 @@ const VehicleCard = ({
   const heartRef = useRef(null)
   const vehicleTitle = `${make} ${model} ${power} ${t('label.kw')} ${vehicleL}`
 
-  const onCompleteAnimation = () => {
-    if (heartRef.current) {
-      heartRef.current.setSeeker('100%')
-    }
+  const isLiked = useRef(true)
+
+  const lottieAnimation = {
+    animationData: HeartAnimation, // dur: 60 frames
+    loop: false,
+    autoplay: false,
+    lottieRef: heartRef,
+    onDOMLoaded: () =>
+      isLiked.current &&
+      heartRef.current &&
+      heartRef.current.goToAndStop(60, true),
+    style: {
+      width: '32px',
+      height: '32px',
+    },
   }
 
-  useEffect(() => {
+  const setVehicleFavorite = () => {
+    isLiked.current = !isLiked.current
     if (heartRef.current) {
-      //  heartRef.current.addEventListener('complete', onCompleteAnimation)
+      heartRef.current.setDirection(isLiked.current ? 1 : -1)
+      heartRef.current.play()
     }
-    return () => {
-      // heartRef.current.removeEventListener('complete', onCompleteAnimation)
-    }
-  }, [heartRef])
+  }
 
   return (
     <div className={styles.container} ref={ref}>
@@ -84,16 +94,9 @@ const VehicleCard = ({
       />
       <BaseButton
         className={styles.likeButton}
-        onClick={() => heartRef.current && heartRef.current.play()}
+        onClick={() => setVehicleFavorite()}
       >
-        <Player
-          autoplay={false}
-          loop={false}
-          controls={false}
-          ref={heartRef}
-          src="https://assets4.lottiefiles.com/packages/lf20_OkXAMI.json"
-          style={{ height: '64px', width: '64px' }}
-        ></Player>
+        <Lottie {...lottieAnimation} />
       </BaseButton>
       <VehicleCardOverlay
         visible={overlayActive}
@@ -149,4 +152,4 @@ const VehicleCard = ({
   )
 }
 
-export default VehicleCard
+export default React.memo(VehicleCard)

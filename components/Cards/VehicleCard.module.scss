@@ -17,8 +17,11 @@
   }
   .likeButton {
     position: absolute;
-    right: spacing(4);
-    top: spacing(4);
+    right: spacing(2);
+    top: spacing(2);
+    background: white;
+    border-top-right-radius: $border-radius-input;
+    border-bottom-left-radius: $border-radius-input;
     transform: translate(50%, -50%);
     svg {
       pointer-events: none;

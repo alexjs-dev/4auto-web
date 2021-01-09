@@ -10,7 +10,6 @@ import {
   VehicleOfTheDay,
   Layout,
 } from '~components'
-import { Player } from '@lottiefiles/react-lottie-player'
 import {
   vehiclesPaginationSelector,
   listingsSelector,

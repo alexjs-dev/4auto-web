@@ -24,7 +24,7 @@
   .imageContainer {
     width: 20%;
     height: 588px;
-    // transition: $transition;
+    transition: $transition;
     border: 1px solid transparent;
     &.maximized {
       width: 80%;
@@ -48,7 +48,7 @@
     border-bottom-color: $color-gray;
     border-left-color: transparent;
     width: 20%;
-    // transition: $transition;
+    transition: $transition;
     box-shadow: $shadow-soft;
     display: flex;
     flex-direction: column;
@@ -90,11 +90,9 @@
 }
 
 .swipeTutorial {
-  animation: slideInRight 2s ease-in-out infinite;
-  animation-fill-mode: forwards;
-  fill: $color-complimentary;
   position: absolute;
   top: 50%;
+  left: 0;
 }
 
 .actions {
