@@ -23,7 +23,6 @@
   display: flex;
   .imageContainer {
     width: 20%;
-    height: 588px;
     transition: $transition;
     border: 1px solid transparent;
     &.maximized {
@@ -61,14 +60,13 @@
       border-top-right-radius: $border-radius-input;
       border-bottom-right-radius: $border-radius-input;
     }
-    .title {
-      h3 {
-        margin-bottom: spacing(1.5);
-        max-width: 582px;
-        svg {
-          margin-left: spacing(0.5);
-          color: $color-primary;
-        }
+
+    h3 {
+      margin-bottom: spacing(1.5);
+      max-width: 582px;
+      svg {
+        margin-left: spacing(0.5);
+        color: $color-primary;
       }
     }
   }
