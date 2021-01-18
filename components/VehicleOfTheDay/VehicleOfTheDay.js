@@ -164,8 +164,8 @@ const VehicleOfTheDay = () => {
           {...handlers}
         >
           {isMobile && isImageMaximized ? (
-            <div className={styles.swipeTutorial}>
-              <Lottie {...lottieAnimation} />
+            <div>
+              <Lottie {...lottieAnimation} className={styles.swipeTutorial} />
             </div>
           ) : (
             <VehicleContent />
