@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Creators from '~store/vehicles/creators'
+import Creators from '../../store/vehicles/creators'
 import {
   LogoAbstract,
   SearchForm,
@@ -9,11 +9,11 @@ import {
   InfinitePagination,
   VehicleOfTheDay,
   Layout,
-} from '~components'
+} from '../../components'
 import {
   vehiclesPaginationSelector,
   listingsSelector,
-} from '~store/vehicles/selectors'
+} from '../../store/vehicles/selectors'
 import styles from './landing.module.scss'
 
 const LandingPage = () => {

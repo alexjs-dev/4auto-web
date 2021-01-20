@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
-import { find } from 'lodash'
+import find from 'lodash/find'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
+import Image from 'next/image'
 import {
   FiMapPin,
   FiMoreVertical,
@@ -92,12 +93,12 @@ const VehicleCard = ({
         recommended={recommended}
         visible={!overlayActive}
       />
-      <BaseButton
+      <button
         className={styles.likeButton}
         onClick={() => setVehicleFavorite()}
       >
         <Lottie {...lottieAnimation} />
-      </BaseButton>
+      </button>
       <VehicleCardOverlay
         visible={overlayActive}
         onClose={() => setOverlayActive(false)}
@@ -105,7 +106,11 @@ const VehicleCard = ({
         <VehicleCardScreen />
       </VehicleCardOverlay>
       <div className={styles.image}>
-        <img src={image?.url || ''} alt={t('vehicle.vehicle')} />
+        <img
+          src={image?.url || ''}
+          draggable="false"
+          alt={t('vehicle.vehicle')}
+        />
       </div>
       <div className={styles.content}>
         <h6>{vehicleTitle}</h6>
@@ -141,12 +146,12 @@ const VehicleCard = ({
             {`${price}€`}
           </span>
         </div>
-        <BaseButton
+        <button
           className={styles.moreButton}
           onClick={() => setOverlayActive(true)}
         >
           <FiMoreVertical />
-        </BaseButton>
+        </button>
       </div>
     </div>
   )

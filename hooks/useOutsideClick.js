@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 const useOutsideClick = ({ ref, isOpen, setOpen }) =>
   useEffect(() => {
     if (!process.browser) return null
-    const handleClick = e => {
+
+    const handleClick = (e) => {
       if (
         ref.current &&
         e.target &&
@@ -21,6 +22,6 @@ const useOutsideClick = ({ ref, isOpen, setOpen }) =>
       document.removeEventListener('click', handleClick)
       document.removeEventListener('keyup', handleClick)
     }
-  }, [ref, isOpen])
+  }, [ref.current, isOpen])
 
 export default useOutsideClick

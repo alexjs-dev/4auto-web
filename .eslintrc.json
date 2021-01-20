@@ -4,6 +4,15 @@
     "es6": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "typescript": {},
+      "babel-plugin-root-import": {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "./"
+      }
+    }
+  },
   "parser": "babel-eslint",
   "extends": [
     "airbnb",

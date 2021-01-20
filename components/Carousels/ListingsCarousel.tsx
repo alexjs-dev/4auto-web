@@ -1,12 +1,21 @@
 import React from 'react'
-import { map } from 'lodash'
+import map from 'lodash/map'
 import Carousel from 'react-multi-carousel'
 import styles from './ListingsCarousel.module.scss'
-import useViewport from '~hooks/useViewport'
-import { VehicleCard, TripleButtonGroup } from '~components'
-import { getVehicleCardProps } from '~utils/helpers'
+import useViewport from '../../hooks/useViewport'
+import { VehicleCard, TripleButtonGroup } from '../'
+import ListingType from '../../types/listing'
+import { getVehicleCardProps } from '../../utils/helpers'
 
-const ListingsCarousel = ({ listings, title }) => {
+type Props = {
+  title: string
+  listings: ListingType
+}
+
+const ListingsCarousel: React.FunctionComponent<Props> = ({
+  listings,
+  title,
+}) => {
   const { isMobile } = useViewport()
   const responsive = {
     superLargeDesktop: {
