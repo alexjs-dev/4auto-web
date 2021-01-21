@@ -1,22 +1,28 @@
 @import 'vars.scss';
 
 .container {
-	padding: spacing(2) spacing(1);
-	background: $color-white;
-	.row {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-gap: spacing(2);
-		margin-bottom: spacing(2);
-	}
-	@media (min-width: $tablet) {
-		width: 340px;
-		border-radius: $border-radius-input;
-		box-shadow: $shadow-soft;
-		border: $border-dark-gray;
-	}
+  padding: spacing(2) spacing(1);
+  background: $color-white;
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: spacing(2);
+    margin-bottom: spacing(2);
+  }
+  @media (min-width: $tablet) {
+    width: 340px;
+    border-radius: $border-radius-input;
+    box-shadow: $shadow-soft;
+    border: $border-dark-gray;
+  }
+  &.fluid {
+    width: 100%;
+    @media (min-width: $tablet) {
+      width: 100%;
+    }
+  }
 }
 
 .marginBottom {
-	margin-bottom: spacing(2);
+  margin-bottom: spacing(2);
 }

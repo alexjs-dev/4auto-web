@@ -6,27 +6,37 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { fieldTypes } from '~utils/formValidators'
-import Creators from '~store/vehicles/creators'
+import { fieldTypes } from '../../utils/formValidators'
+import Creators from '../../store/vehicles/creators'
 import {
   modelsSelector,
   makesSelector,
   modelsLoadingSelector,
   makesLoadingSelector,
-} from '~store/vehicles/selectors'
-import { transmissionTypes, bodyType, fuelTypes } from '~consts/vehicle'
-import { Select, Checkbox, ExpandButton, Button } from '~components'
+} from '../../store/vehicles/selectors'
+import { transmissionTypes, bodyType, fuelTypes } from '../../consts/vehicle'
+import { Select, Checkbox, ExpandButton, Button } from '../'
 import SearchFormExtras from './parts/SearchFormExtras'
 import {
   mapBaseOptions,
   mapVehicleTranslatableOptions,
   toQueryBasic,
-} from '~utils/helpers'
+} from '../../utils/helpers'
 import styles from './SearchForm.module.scss'
 
 const form = 'searchForm'
 
-const SearchFormComponent = ({ className, handleSubmit }) => {
+type Props = {
+  className?: string | null
+  fluid?: boolean
+  handleSubmit: (fn: any) => void
+}
+
+const SearchFormComponent: React.FunctionComponent<Props> = ({
+  className,
+  fluid,
+  handleSubmit,
+}) => {
   const dispatch = useDispatch()
   const models = useSelector(modelsSelector)
   const makes = useSelector(makesSelector)
@@ -59,7 +69,7 @@ const SearchFormComponent = ({ className, handleSubmit }) => {
 
   const [openExpand, setOpenExpand] = useState(false)
   const { t } = useTranslation()
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: any) => {
     const query = toQueryBasic(values)
     if (query) {
       router.push({
@@ -75,8 +85,8 @@ const SearchFormComponent = ({ className, handleSubmit }) => {
 
   return (
     <form
-      className={classNames(styles.container, className)}
-      onSubmit={handleSubmit(onSubmit)}
+      className={classNames(styles.container, className, fluid && styles.fluid)}
+      onSubmit={() => handleSubmit(onSubmit)}
     >
       <div className={styles.row}>
         <Select
@@ -141,7 +151,7 @@ const SearchFormComponent = ({ className, handleSubmit }) => {
         type={Button.types.PRIMARY}
         fluid
         baseType="submit"
-        onClick={handleSubmit(onSubmit)}
+        onClick={() => handleSubmit(onSubmit)}
       >
         {t('button.search')}
       </Button>

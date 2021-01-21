@@ -27,22 +27,15 @@ const BaseButton = forwardRef(
     ref
   ) => {
     if (!visible) return null
-    const handleOnClick = e => {
+    const handleOnClick = (e) => {
       if (baseType === 'submit') e.preventDefault()
       onClick(e)
     }
 
     // make sure our buttons and links behave the same way, when using the keyboard
-    const handleKeyPress = e => {
+    const handleKeyPress = (e) => {
       const { key } = e
       if (key === 'Enter' || e.charCode === 13) handleOnClick(e)
-    }
-
-    const Children = () => {
-      if (loading) {
-        return <Loader loading invert={loadingInverted} />
-      }
-      return children
     }
 
     // Internal links need to be wrapped with next/Link
@@ -59,7 +52,7 @@ const BaseButton = forwardRef(
             ref={ref}
             {...rest}
           >
-            <Children />
+            {loading ? <Loader loading invert={loadingInverted} /> : children}
           </a>
         </Link>
       )
@@ -79,7 +72,7 @@ const BaseButton = forwardRef(
           ref={ref}
           {...rest}
         >
-          <Children />
+          {loading ? <Loader loading invert={loadingInverted} /> : children}
         </a>
       )
     }
@@ -93,7 +86,7 @@ const BaseButton = forwardRef(
         onKeyPress={handleKeyPress}
         ref={ref}
       >
-        <Children />
+        {loading ? <Loader loading invert={loadingInverted} /> : children}
       </button>
     )
   }

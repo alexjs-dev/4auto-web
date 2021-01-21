@@ -16,7 +16,7 @@ import {
 } from '../../store/vehicles/selectors'
 import styles from './landing.module.scss'
 
-const LandingPage = () => {
+const LandingPage: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const pagination = useSelector(vehiclesPaginationSelector)
   const listings = useSelector(listingsSelector)
