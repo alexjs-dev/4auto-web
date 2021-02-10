@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import LogoIcon from '~public/logo.svg'
+import GuyIcon from '~public/guy.svg'
 import styles from './LogoAbstract.module.scss'
 
 const LogoAbstract = () => {
@@ -17,7 +18,9 @@ const LogoAbstract = () => {
         </p>
       </div>
       <div className={styles.container}>
-        <div className={styles.logo} />
+        <div className={styles.logo}>
+          <GuyIcon />
+        </div>
       </div>
     </>
   )
