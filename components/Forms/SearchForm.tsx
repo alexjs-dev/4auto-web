@@ -89,6 +89,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
       onSubmit={() => handleSubmit(onSubmit)}
     >
       <div className={styles.row}>
+        {/* @ts-ignore */}
         <Select
           label={t('label.make')}
           fluid
@@ -97,6 +98,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
           name={fieldTypes.make}
           options={makesOptions}
         />
+        {/* @ts-ignore */}
         <Select
           label={t('label.model')}
           fluid
@@ -107,6 +109,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
         />
       </div>
       <div className={styles.row}>
+        {/* @ts-ignore */}
         <Select
           label={t('label.fuel')}
           fluid
@@ -114,6 +117,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
           name={fieldTypes.fuel}
           options={fuels}
         />
+        {/* @ts-ignore */}
         <Select
           label={t('label.gearbox')}
           fluid
@@ -122,6 +126,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
           options={transmissions}
         />
       </div>
+      {/* @ts-ignore */}
       <Select
         label={t('label.bodyType')}
         fluid
@@ -132,6 +137,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
         options={vehicleBodyTypes}
       />
       <div className={styles.row}>
+        {/* @ts-ignore */}
         <Checkbox name={fieldTypes.remember} label={t('label.remember')} />
         <div />
       </div>
