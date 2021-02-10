@@ -6,6 +6,7 @@
   left: spacing(0.5);
   display: flex;
   flex-direction: column;
+  z-index: 1;
   :root {
     --color-background: $color-blue;
   }

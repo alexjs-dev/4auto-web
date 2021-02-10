@@ -160,3 +160,10 @@ export const toQueryBasic = (values) => {
     {}
   )
 }
+
+export const getVehicleTitle = (vehicle, t) =>
+  (vehicle &&
+    `${vehicle.make} ${vehicle.model} ${vehicle.power} ${t(
+      'label.kw'
+    )} ${formatCapacity(vehicle.capacity, t)}`) ||
+  ''

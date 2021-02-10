@@ -5,11 +5,14 @@ import { useSwipeable } from 'react-swipeable'
 import Lottie from 'lottie-react'
 import { FiLink2, FiMapPin, FiGitPullRequest, FiTag } from 'react-icons/fi'
 import sample from 'lodash/sample'
-import useViewport from '~hooks/useViewport'
-import useTimeout from '~hooks/useTimeout'
+import useViewport from '../../hooks/useViewport'
 import classNames from 'classnames'
+import get from 'lodash/get'
+import { formatVehicleMainLabel, getVehicleTitle } from '../../utils/helpers'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import SwipeLeftAnim from '~public/animations/swipe-left.json'
+import { transmissionTypes, fuelTypes } from '../../consts/vehicle'
+import SwipeLeftAnim from '../../public/animations/swipe-left.json'
 import {
   VehicleDetail,
   BaseButton,
@@ -18,17 +21,33 @@ import {
   Button,
   OfferForm,
   Loader,
-} from '~components'
+} from '../'
+import ListingType from '../../types/listing'
 import styles from './VehicleOfTheDay.module.scss'
 
 const emojis = ['🤘', '🙌', '🙏', '🤑', '😍']
 
-const Price = () => {
+type PriceProps = {
+  price: number
+  discountedPrice: number
+}
+type VehicleOfTheDayProps = {
+  listing: ListingType
+}
+
+const Price: React.FunctionComponent<PriceProps> = ({
+  price,
+  discountedPrice,
+}) => {
   return (
     <div className={styles.price}>
       <span>
-        5899€&nbsp;
-        <strong>9000€</strong>
+        {discountedPrice > 0 && (
+          <>
+            {discountedPrice}&nbsp;<strong>{price}€</strong>
+          </>
+        )}
+        {discountedPrice === 0 && <>{price}€</>}
       </span>
     </div>
   )
@@ -48,42 +67,59 @@ const Actions = () => {
   )
 }
 
-const VehicleDetails = () => {
+const VehicleDetails: React.FunctionComponent<VehicleOfTheDayProps> = ({
+  listing,
+}) => {
+  const { t } = useTranslation()
+  const { isMobile } = useViewport()
+  const { vehicle } = listing
+  const vehicleBodyYear = formatVehicleMainLabel(
+    vehicle.bodyType,
+    vehicle.regDate,
+    t,
+    isMobile
+  )
   return (
     <div className={styles.vehicleDetails}>
-      <VehicleDetail icon={<FiTag />} title={'Body type, year'}>
-        Sedan, 2020
+      <VehicleDetail
+        icon={<FiTag />}
+        title={`${t('label.bodyType')} ${t('label.year')}`}
+      >
+        {vehicleBodyYear}
       </VehicleDetail>
-      <VehicleDetail icon={<FiMapPin />} title={'Location'}>
-        Tallinn, Estonia
+      <VehicleDetail icon={<FiMapPin />} title={t('label.location')}>
+        {`${listing.location.city} ${listing.location.countryCode}`}
       </VehicleDetail>
-      <VehicleDetail icon={<FiGitPullRequest />} title={'Gearbox'}>
-        Semi-automatic
+      <VehicleDetail icon={<FiGitPullRequest />} title={t('label.gearbox')}>
+        {t(`vehicle.${get(transmissionTypes, vehicle.transmission, '')}`)}
       </VehicleDetail>
-      <VehicleDetail icon={<GiCarWheel />} title={'Mileage'}>
-        274 500
+      <VehicleDetail icon={<GiCarWheel />} title={t('label.mileage')}>
+        {vehicle.mileage}
       </VehicleDetail>
-      <VehicleDetail icon={<GiGasPump />} title={'Fuel'}>
-        Gasoline, Gas (LPG)
+      <VehicleDetail icon={<GiGasPump />} title={t('label.fuel')}>
+        {t(`vehicle.${get(fuelTypes, vehicle.fuel, '')}`)}
       </VehicleDetail>
-      <VehicleDetail icon={<FiTag />} title={'Cons.(city)'}>
-        8L/100 Km
+      <VehicleDetail icon={<FiTag />} title={t('label.labelConsCity')}>
+        {vehicle.consumptionUrban}
       </VehicleDetail>
-      <VehicleDetail icon={<FiTag />} title={'Color'}>
-        Silver
+      <VehicleDetail icon={<FiTag />} title={t('label.color')}>
+        {vehicle.color}
       </VehicleDetail>
-      <VehicleDetail icon={<GiSpeedometer />} title={'Speed (1-100)'}>
-        6.5s
+      <VehicleDetail icon={<GiSpeedometer />} title={t('label.speedTo100')}>
+        {vehicle.accelerationZeroToHundred}
       </VehicleDetail>
     </div>
   )
 }
 
-const VehicleContent = () => {
+const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
+  listing,
+}) => {
   const { isMobile } = useViewport()
   const [visible, setVisible] = useState(!isMobile)
+  const { t } = useTranslation()
   useEffect(() => {
-    let timer
+    let timer: any
     if (!visible && isMobile) {
       timer = setTimeout(() => {
         setVisible(true)
@@ -99,10 +135,18 @@ const VehicleContent = () => {
     <>
       <div className={styles.title}>
         <h3>
-          Mercedes-Benz GLK-320 180 kW Quattro S-LINE Quadro xDrive v2
+          {getVehicleTitle(
+            {
+              make: listing.vehicle.model.make.name,
+              model: listing.vehicle.model.name,
+              power: listing.vehicle.power,
+            },
+            t
+          )}
+          {/* @ts-ignore */}
           <BaseButton
             onClick={() =>
-              toast.success(`Link copied! ${sample(emojis)}`, {
+              toast.success(`${t('snackbar.link_copied')} ${sample(emojis)}`, {
                 autoClose: 1800,
               })
             }
@@ -111,19 +155,28 @@ const VehicleContent = () => {
           </BaseButton>
         </h3>
       </div>
-      <VehicleDetails />
+      <VehicleDetails listing={listing} />
       <Avatar />
       <Actions />
       <OfferForm />
-      <Price />
+      <Price
+        price={listing.price}
+        discountedPrice={
+          (listing.discountPercentage &&
+            listing.price * listing.discountPercentage) ||
+          0
+        }
+      />
     </>
   )
 }
 
-const VehicleOfTheDay = () => {
+const VehicleOfTheDay: React.FunctionComponent<VehicleOfTheDayProps> = ({
+  listing,
+}) => {
   const { isMobile } = useViewport()
   const [isImageMaximized, setImageMaximized] = useState(isMobile)
-
+  const { t } = useTranslation()
   const handlers = useSwipeable({
     onSwiped: () => setImageMaximized(false),
     trackMouse: isMobile,
@@ -138,14 +191,13 @@ const VehicleOfTheDay = () => {
       height: '19vw',
     },
   }
-
   useEffect(() => {
     setImageMaximized(isMobile)
   }, [isMobile])
-
+  if (!listing) return null
   return (
     <div className={styles.container}>
-      <h1>Vehicle of the day</h1>
+      <h1>{t('titles.vehicle_of_the_day')}</h1>
       <div className={styles.vehicleContainer}>
         <div
           className={classNames(
@@ -154,7 +206,7 @@ const VehicleOfTheDay = () => {
           )}
           onClick={() => setImageMaximized(true)}
         >
-          <ImageCarousel />
+          <ImageCarousel images={listing.vehicle.images} />
         </div>
         <div
           className={classNames(
@@ -168,7 +220,7 @@ const VehicleOfTheDay = () => {
               <Lottie {...lottieAnimation} className={styles.swipeTutorial} />
             </div>
           ) : (
-            <VehicleContent />
+            <VehicleContent listing={listing} />
           )}
         </div>
       </div>

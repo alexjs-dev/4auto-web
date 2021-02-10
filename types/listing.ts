@@ -1,23 +1,22 @@
+import Address from './address'
+import Vehicle from './vehicle'
+
 type Listing = {
-  _id: string
-  model: string
-  make: string
-  regDate: string
-  power: number
-  capacity: number
-  mileage: number
-  bodyType: string
-  price: number
+  availableUntil: string
+  createdAt: string
   discountPercentage: number
-  fuel: string
-  transmission: string
-  city: string
-  countryCode: string
-  country: string
+  featuredUntil?: string
+  location: Address
+  locationId: string
+  price: number
+  recommendedUntil: string
+  updatedAt: string
   urgent: boolean
-  featured: boolean
-  recommended: boolean
-  images: any[]
+  userId: string
+  vehicle: Vehicle
+  vehicleId: string
+  __v?: number
+  _id: string
 }
 
 export default Listing

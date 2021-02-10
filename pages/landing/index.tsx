@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Creators from '../../store/vehicles/creators'
+import head from 'lodash/head'
+import values from 'lodash/values'
 import {
   LogoAbstract,
   SearchForm,
@@ -35,7 +37,7 @@ const LandingPage: React.FunctionComponent = () => {
       </Layout>
       <AdCarousel />
       <Layout>
-        <VehicleOfTheDay />
+        <VehicleOfTheDay listing={head(values(listings))} />
         <ListingsCarousel listings={listings} title="Recommended vehicles" />
         <ListingsCarousel listings={listings} title="Latest vehicles" />
         <InfinitePagination pagination={pagination} items={listings} />

@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel'
 import styles from './ListingsCarousel.module.scss'
 import useViewport from '../../hooks/useViewport'
 import { VehicleCard, TripleButtonGroup } from '../'
-import ListingType from '../../types/listing'
+import ListingType from '../../types/vehicle'
 import { getVehicleCardProps } from '../../utils/helpers'
 
 type Props = {

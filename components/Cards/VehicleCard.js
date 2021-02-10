@@ -14,7 +14,7 @@ import Lottie from 'lottie-react'
 import { BaseButton, VehicleDetail } from '~components'
 import {
   formatMillage,
-  formatCapacity,
+  getVehicleTitle,
   formatVehicleMainLabel,
 } from '~utils/helpers'
 import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
@@ -56,9 +56,8 @@ const VehicleCard = ({
   const { t } = useTranslation()
   const vehicleBodyYear = formatVehicleMainLabel(bodyType, regDate, t, isMobile)
   const vehicleMileage = isMobile ? mileage : formatMillage(mileage, t)
-  const vehicleL = formatCapacity(capacity, t)
   const heartRef = useRef(null)
-  const vehicleTitle = `${make} ${model} ${power} ${t('label.kw')} ${vehicleL}`
+  const vehicleTitle = getVehicleTitle({ make, model, power, capacity }, t)
 
   const isLiked = useRef(true)
 
@@ -106,14 +105,26 @@ const VehicleCard = ({
         <VehicleCardScreen />
       </VehicleCardOverlay>
       <div className={styles.image}>
-        <img
-          src={image?.url || ''}
-          draggable="false"
-          alt={t('vehicle.vehicle')}
-        />
+        <BaseButton
+          isInternalLink
+          href={`/vehicle/${_id}`}
+          className={styles.imageLink}
+        >
+          <img
+            src={image?.url || ''}
+            draggable="false"
+            alt={t('vehicle.vehicle')}
+          />
+        </BaseButton>
       </div>
       <div className={styles.content}>
-        <h6>{vehicleTitle}</h6>
+        <BaseButton
+          className={styles.title}
+          isInternalLink
+          href={`/vehicle/${_id}`}
+        >
+          {vehicleTitle}
+        </BaseButton>
         <div className={styles.features}>
           <VehicleDetail icon={<GiCarWheel />}>{vehicleBodyYear}</VehicleDetail>
           <VehicleDetail
