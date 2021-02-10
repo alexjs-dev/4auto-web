@@ -1,13 +1,9 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 import {
-  LogoAbstract,
   SearchForm,
   ListingsCarousel,
-  AdCarousel,
   InfinitePagination,
-  VehicleOfTheDay,
   Layout,
 } from '../../components'
 import {
@@ -17,7 +13,7 @@ import {
 import styles from './search.module.scss'
 
 const SearchPage: React.FunctionComponent = () => {
-  const { query } = useRouter()
+  // const { query } = useRouter()
   const pagination = useSelector(vehiclesPaginationSelector)
   const listings = useSelector(listingsSelector)
   return (
