@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react'
-import { reduxForm, formValueSelector, change } from 'redux-form'
+import { reduxForm, formValueSelector, change } from 'redux-form' // tslint:disable
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
