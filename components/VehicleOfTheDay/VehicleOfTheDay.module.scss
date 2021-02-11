@@ -133,6 +133,9 @@
     max-height: 118px;
     overflow: auto;
   }
+  span {
+    font-size: $font-size-m !important;
+  }
   > div:nth-child(even) {
     justify-self: flex-end;
     margin-left: auto;

@@ -11,7 +11,7 @@ import get from 'lodash/get'
 import { formatVehicleMainLabel, getVehicleTitle } from '../../utils/helpers'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { transmissionTypes, fuelTypes } from '../../consts/vehicle'
+import { transmissionTypes, fuelTypes, colorCodes } from '../../consts/vehicle'
 import SwipeLeftAnim from '../../public/animations/swipe-left.json'
 import {
   VehicleDetail,
@@ -54,13 +54,14 @@ const Price: React.FunctionComponent<PriceProps> = ({
 }
 
 const Actions = () => {
+  const { t } = useTranslation()
   return (
     <div className={styles.actions}>
       <Button fluid type={Button.types.GHOST}>
-        Call &nbsp; <FiPhone />
+        {t('button.call')} &nbsp; <FiPhone />
       </Button>
       <Button fluid type={Button.types.GHOST}>
-        Mail &nbsp; <FiMail />
+        {t('button.mail')} &nbsp; <FiMail />
       </Button>
       <Button fluid label="Message" />
     </div>
@@ -100,13 +101,23 @@ const VehicleDetails: React.FunctionComponent<VehicleOfTheDayProps> = ({
         {t(`vehicle.${get(fuelTypes, vehicle.fuel, '')}`)}
       </VehicleDetail>
       <VehicleDetail icon={<FiTag />} title={t('label.labelConsCity')}>
-        {vehicle.consumptionUrban}
+        {vehicle.consumptionUrban} {t('label.litersIn100Km')}
       </VehicleDetail>
       <VehicleDetail icon={<FiTag />} title={t('label.color')}>
-        {vehicle.color}
+        <div
+          style={{
+            width: 8,
+            display: 'inline-block',
+            height: 8,
+            borderRadius: '50%',
+            marginRight: 4,
+            background: vehicle.color && colorCodes[vehicle.color],
+          }}
+        />
+        {t(`colors.${vehicle.color}`)}
       </VehicleDetail>
       <VehicleDetail icon={<GiSpeedometer />} title={t('label.speedTo100')}>
-        {vehicle.accelerationZeroToHundred}
+        {vehicle.accelerationZeroToHundred} {t('label.seconds')}
       </VehicleDetail>
     </div>
   )
