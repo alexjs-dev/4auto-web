@@ -81,7 +81,7 @@ export const getVehicleCardProps = (props) => {
   const model = get(vehicle, 'model.name', '')
   const make = get(vehicle, 'model.make.name', '')
   return {
-    _id,
+    listingId: _id,
     ...rest,
     model,
     make,

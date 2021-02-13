@@ -10,6 +10,7 @@ import ModalCreators from '../../store/menu/creators'
 import ArrowDownIcon from '../../public/icons/arrow-down.svg'
 import styles from './ImageCarousel.module.scss'
 import modalTypes from '../../consts/modals'
+
 import ImageType from '../../types/image'
 
 type Props = {
@@ -20,6 +21,7 @@ const ImageCarousel: React.FunctionComponent<Props> = ({ images }) => {
   const orderedImages = orderBy(images, (image) => image.order)
   const [activeImage, setActiveImage] = useState(0)
   const { isMobile } = useViewport()
+
   const dispatch = useDispatch()
 
   const paginate = () => {
@@ -35,14 +37,16 @@ const ImageCarousel: React.FunctionComponent<Props> = ({ images }) => {
         draggable="false"
       />
       {/* @ts-ignore */}
-      <BaseButton
+      <button
         className={styles.expandButton}
-        onClick={() =>
-          dispatch(ModalCreators.openModal(modalTypes.IMAGE_LIST_MODAL))
-        }
+        onClick={() => {
+          dispatch(
+            ModalCreators.openModal(modalTypes.IMAGE_LIST_MODAL, { images })
+          )
+        }}
       >
         <FiMaximize />
-      </BaseButton>
+      </button>
 
       <div className={styles.carousel}>
         {map(orderedImages, ({ url }, key) => (

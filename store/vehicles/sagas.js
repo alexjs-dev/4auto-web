@@ -1,4 +1,4 @@
-import { takeLatest, select, put, delay, call } from 'redux-saga/effects'
+import { takeLatest, select, put, call } from 'redux-saga/effects'
 import { omit } from 'lodash'
 import ListingsService from '~services/listings'
 import ModelsService from '~services/models'
@@ -8,7 +8,6 @@ import { Types } from './creators'
 const listingsService = new ListingsService()
 const modelsService = new ModelsService()
 const makesService = new MakesService()
-const DAY_MS = 24 * 60 * 60 * 1000
 
 function* handleFetchListings(action) {
   try {

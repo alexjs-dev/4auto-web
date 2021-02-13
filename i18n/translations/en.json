@@ -11,7 +11,8 @@
     "link_copied": "Link copied!"
   },
   "titles": {
-    "vehicle_of_the_day": "Vehicle of the day"
+    "vehicle_of_the_day": "Vehicle of the day",
+    "allVehicles": "All vehicles"
   },
   "labels": {
     "featured": "Featured",
@@ -115,10 +116,15 @@
     "signUp": "Sign up",
     "reset": "Reset",
     "call": "Call",
+    "send": "Send",
     "mail": "Mail",
+    "back": "Back",
+    "message": "Message",
     "search": "Search",
     "share": "Share",
     "contact": "Contact",
+    "pullDownToRefresh": "Pull down to refresh",
+    "releaseToRefresh": "Release to refresh",
     "advancedSearch": "Advanced search",
     "logOut": "Log out",
     "showMore": "Show more",

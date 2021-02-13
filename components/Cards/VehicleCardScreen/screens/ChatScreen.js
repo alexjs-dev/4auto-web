@@ -28,9 +28,9 @@ const ChatScreen = ({ onChatCancel, onSubmit, visible }) => {
         'animated fadeIn'
       )}
     >
-      <Input label="Message" name="message" type="textarea" />
+      <Input label={t('button.message')} name="message" type="textarea" />
       <Button
-        label="Send"
+        label={t('button.send')}
         onClick={onChatCancel}
         fluid
         onClick={() => handleSubmit(onSubmit)}

@@ -1,0 +1,23 @@
+@import 'vars.scss';
+
+.container {
+  background: $color-light-gray;
+  min-height: 100vh;
+  .layout {
+    padding: 0 spacing(0.5);
+    @media (min-width: $tablet) {
+      padding: 0 0 spacing(8) 0;
+    }
+  }
+}
+
+.images {
+  height: 50vh;
+  img {
+    height: 50vh;
+    object-fit: cover;
+    @media (min-width: $tablet) {
+      object-fit: contain;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { createReducer } from 'reduxsauce'
-import { keyBy, get, isEmpty } from 'lodash'
+import { keyBy, get } from 'lodash'
 import { Types } from './creators'
 
 const INITIAL_STATE = {

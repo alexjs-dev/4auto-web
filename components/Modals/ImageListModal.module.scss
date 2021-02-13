@@ -6,6 +6,6 @@
   img {
     width: 100vw;
     height: calc(92vh - 34px);
-    object-fit: scale-down;
+    object-fit: contain;
   }
 }

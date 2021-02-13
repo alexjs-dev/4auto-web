@@ -18,7 +18,7 @@ const BaseModal = ({ children, isOutsideClickDisabled }) => {
   useOutsideClick({
     ref,
     isOpen: isModalOpen,
-    setOpen: isOutsideClickDisabled ? () => {} : closeModal,
+    // setOpen: isOutsideClickDisabled ? () => {} : closeModal,
   })
   return (
     <div className={styles.container}>
@@ -34,7 +34,7 @@ const BaseModal = ({ children, isOutsideClickDisabled }) => {
 
 const Modal = () => {
   const modal = useSelector(modalSelector)
-
+  console.log('modal', modal)
   switch (modal) {
     case types.IMAGE_LIST_MODAL:
       return (

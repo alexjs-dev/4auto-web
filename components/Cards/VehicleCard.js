@@ -27,7 +27,7 @@ import VehicleCardOverlay from './VehicleCardOverlay'
 import styles from './VehicleCard.module.scss'
 
 const VehicleCard = ({
-  _id,
+  listingId,
   model,
   make,
   regDate,
@@ -107,7 +107,7 @@ const VehicleCard = ({
       <div className={styles.image}>
         <BaseButton
           isInternalLink
-          href={`/vehicle/${_id}`}
+          href={`/listing/${listingId}`}
           className={styles.imageLink}
         >
           <img
@@ -121,7 +121,7 @@ const VehicleCard = ({
         <BaseButton
           className={styles.title}
           isInternalLink
-          href={`/vehicle/${_id}`}
+          href={`/listing/${listingId}`}
         >
           {vehicleTitle}
         </BaseButton>

@@ -63,7 +63,7 @@ const Actions = () => {
       <Button fluid type={Button.types.GHOST}>
         {t('button.mail')} &nbsp; <FiMail />
       </Button>
-      <Button fluid label="Message" />
+      <Button fluid label={t('button.message')} />
     </div>
   )
 }

@@ -9,6 +9,7 @@ import '~styles/global.scss'
 import '~styles/animate.min.scss'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const MyApp = ({ Component, pageProps }) => (
   <>
