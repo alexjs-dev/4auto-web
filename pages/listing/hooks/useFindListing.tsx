@@ -11,6 +11,7 @@ type Props = {
 
 const useFindListing = (props: Props) => {
   const { prefetchedListing, id } = props
+  if (!process.browser) return null
   const dispatch = useDispatch()
   useEffect(() => {
     if (id && isEmpty(prefetchedListing)) {
