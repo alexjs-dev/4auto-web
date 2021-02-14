@@ -26,6 +26,12 @@ import VehicleCardRibbons from './VehicleCardRibbons'
 import VehicleCardOverlay from './VehicleCardOverlay'
 import styles from './VehicleCard.module.scss'
 
+const isFavored = (id) =>
+  localStorage.getItem(`favorite-listing-${id}`) === true ||
+  localStorage.getItem(`favorite-listing-${id}`) === 'true'
+const setFavored = (id) => localStorage.setItem(`favorite-listing-${id}`, true)
+const unsetFavored = (id) => localStorage.removeItem(`favorite-listing-${id}`)
+
 const VehicleCard = ({
   listingId,
   model,
@@ -59,7 +65,7 @@ const VehicleCard = ({
   const heartRef = useRef(null)
   const vehicleTitle = getVehicleTitle({ make, model, power, capacity }, t)
 
-  const isLiked = useRef(true)
+  const isLiked = useRef(isFavored(listingId))
 
   const lottieAnimation = {
     animationData: HeartAnimation, // dur: 60 frames
@@ -78,6 +84,9 @@ const VehicleCard = ({
 
   const setVehicleFavorite = () => {
     isLiked.current = !isLiked.current
+    if (isLiked.current) setFavored(listingId)
+    else unsetFavored(listingId)
+
     if (heartRef.current) {
       heartRef.current.setDirection(isLiked.current ? 1 : -1)
       heartRef.current.play()

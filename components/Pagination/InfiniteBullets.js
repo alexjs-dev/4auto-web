@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 import styles from './InfiniteBullets.module.scss'
 
-const InfiniteBullets = ({ slideRightAnim, slideLeftAnim }) => {
+const InfiniteBullets = ({ slideRightAnim, slideLeftAnim, onNext, onPrev }) => {
   return (
     <div className={styles.container}>
       <CSSTransition
@@ -11,6 +11,7 @@ const InfiniteBullets = ({ slideRightAnim, slideLeftAnim }) => {
         in={slideRightAnim}
         timeout={{ appear: 0, enter: 0, exit: 300 }}
         classNames="slide-right"
+        onClick={onPrev}
         appear
       >
         <div className={styles.dot} />
@@ -31,6 +32,7 @@ const InfiniteBullets = ({ slideRightAnim, slideLeftAnim }) => {
         timeout={{ appear: 0, enter: 0, exit: 300 }}
         classNames="slide-left"
         appear
+        onClick={onNext}
       >
         <div className={styles.dot} />
       </CSSTransition>

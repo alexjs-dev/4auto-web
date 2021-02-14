@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import Creators from '../../store/listing/creators'
 import { useTranslation } from 'react-i18next'
-import { Carousel } from 'react-responsive-carousel'
 import isEmpty from 'lodash/isEmpty'
-import map from 'lodash/map'
-import { Loader, Layout } from '../../components'
+import { Loader, Layout, OfferForm, ListingsCarousel } from '../../components'
 import ListingsService from '../../services/listings'
 import {
   currentListingSelector,
@@ -15,13 +12,21 @@ import {
 import ListingType from '../../types/listing'
 import styles from './listing.module.scss'
 import { getVehicleTitle } from '~/utils/helpers'
+import Images from './components/Images'
+import Price from './components/Price'
+import Description from './components/Description'
+import Avatar from '../../components/User/Avatar'
+import VotdActions from '../../components/VehicleOfTheDay/components/VotdActions'
+import VehicleDetails from '../../components/VehicleOfTheDay/components/VehicleDetails'
+import useFindListing from './hooks/useFindListing'
+import { listingsSelector } from '../../store/vehicles/selectors'
+import useFindFeaturedListingsOnMount from './hooks/useFindFeaturedListingsOnMount'
 
 type Props = {
-  prefetchedListing?: ListingType[]
+  prefetchedListing?: ListingType
 }
 
 const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
   const currentListing = useSelector(currentListingSelector)
   const loading = useSelector(currentListingLoadingSelector)
@@ -30,11 +35,12 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
   const listing: ListingType = !isEmpty(prefetchedListing)
     ? prefetchedListing
     : currentListing
-  useEffect(() => {
-    if (id && isEmpty(prefetchedListing)) {
-      dispatch(Creators.fetchListingById(id))
-    }
-  }, [dispatch, Creators, id])
+
+  useFindListing({ id, prefetchedListing })
+  useFindFeaturedListingsOnMount()
+
+  const featuredListings = useSelector(listingsSelector) // TO-DO: make separate listings selector for featured vehicles
+
   if ((loading && isEmpty(prefetchedListing)) || isEmpty(listing)) {
     return (
       <div className={styles.container}>
@@ -56,29 +62,28 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
 
   return (
     <div className={styles.container}>
-      <Carousel
-        showThumbs={false}
-        infiniteLoop
-        emulateTouch
-        swipeable
-        useKeyboardArrows
-        showIndicators
-        showStatus={false}
-        showArrows
-        className={styles.images}
-      >
-        {map(listing.vehicle.images, (image) => (
-          <div key={image.order}>
-            <img
-              src={image.url}
-              alt={image.order.toString()}
-              draggable="false"
-            />
-          </div>
-        ))}
-      </Carousel>
-      <Layout>
-        <h1>{vehicleTitle}</h1>
+      <Images listing={listing} />
+      <Layout className={styles.layout} background="white">
+        <h2>{vehicleTitle}</h2>
+        <Price
+          price={listing.price}
+          discountPercentage={listing.discountPercentage}
+        />
+        <Description />
+        <Avatar />
+        <VotdActions
+          userId={listing.userId}
+          email="test@account.com"
+          phone="37258587389"
+        />
+        <h6 className={styles.subtitle}>{t('label.baseDetails')}</h6>
+        <VehicleDetails listing={listing} fullHeight />
+        <OfferForm />
+        <div className={styles.spacer} />
+        <ListingsCarousel
+          listings={featuredListings}
+          title={t('titles.featuredVehicles')}
+        />
       </Layout>
     </div>
   )

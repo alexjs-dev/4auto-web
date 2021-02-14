@@ -6,12 +6,14 @@ type Props = {
   children: ReactChild | ReactChildren | JSX.Element[]
   background?: 'gray' | 'white'
   fullscreen?: boolean
+  className?: string
 }
 
 const Layout: React.FunctionComponent<Props> = ({
   children,
   background,
   fullscreen,
+  className,
 }) => {
   const getBackground = () => {
     const color = (background && background) || 'white'
@@ -28,7 +30,8 @@ const Layout: React.FunctionComponent<Props> = ({
       className={classNames(
         styles.container,
         getBackground(),
-        fullscreen && styles.fullscreen
+        fullscreen && styles.fullscreen,
+        className
       )}
     >
       {children}

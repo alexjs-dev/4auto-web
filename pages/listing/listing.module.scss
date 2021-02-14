@@ -1,18 +1,28 @@
 @import 'vars.scss';
 
 .container {
-  background: $color-light-gray;
   min-height: 100vh;
-  .layout {
-    padding: 0 spacing(0.5);
-    @media (min-width: $tablet) {
-      padding: 0 0 spacing(8) 0;
-    }
+  h2 {
+    margin-bottom: spacing(0.5);
+  }
+  padding-bottom: spacing(12);
+}
+
+.layout {
+  .subtitle {
+    text-transform: uppercase;
+    padding-top: spacing(1);
+    margin-bottom: spacing(1);
+  }
+  padding: 0 spacing(0.5);
+  @media (min-width: $tablet) {
+    padding: 0 0 spacing(8) 0;
   }
 }
 
 .images {
   height: 50vh;
+  margin-bottom: spacing(1);
   img {
     height: 50vh;
     object-fit: cover;
@@ -20,4 +30,34 @@
       object-fit: contain;
     }
   }
+}
+
+.prices {
+  display: flex;
+  margin-bottom: spacing(0.5);
+  span {
+    text-decoration: none;
+    font-size: $font-size-p;
+    line-height: $line-height-p;
+    color: $color-red;
+    font-weight: $font-weight-medium;
+    strong {
+      font-weight: $font-weight-normal;
+      color: $color-darker-gray;
+      text-decoration: line-through;
+    }
+  }
+}
+
+.description {
+  margin-bottom: spacing(2);
+  button {
+    font-size: $font-size-p;
+    line-height: $line-height-p;
+    color: $color-primary;
+  }
+}
+
+.spacer {
+  margin-bottom: spacing(14);
 }
