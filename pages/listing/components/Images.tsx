@@ -5,10 +5,11 @@ import ListingType from '../../../types/listing'
 import styles from '../listing.module.scss'
 
 type Props = {
-  listing: ListingType
+  listing?: ListingType
 }
 
 const Images: React.FunctionComponent<Props> = ({ listing }) => {
+  if (!listing) return null
   return (
     <Carousel
       showThumbs={false}
