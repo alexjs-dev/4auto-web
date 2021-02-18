@@ -28,6 +28,7 @@ const Detail: React.FunctionComponent<DetailProps> = ({
     return (
       <VehicleDetail
         title={title}
+        /* @ts-ignore */
         icon={<Checkbox small input={{ value: content }} />}
       >
         {t(`base.${content ? 'yes' : 'no'}`)}
