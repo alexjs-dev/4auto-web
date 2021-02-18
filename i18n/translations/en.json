@@ -100,6 +100,10 @@
     "type": "Type",
     "make": "Make"
   },
+  "base": {
+    "yes": "Yes",
+    "no": "No"
+  },
   "placeholder": {
     "password": "P@$$w0rd",
     "email": "john@doe.com",

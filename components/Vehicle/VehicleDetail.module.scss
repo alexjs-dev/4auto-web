@@ -17,6 +17,7 @@
 
 .detail {
   display: flex;
+  align-items: center;
   span {
     text-align: left;
     white-space: nowrap;
@@ -28,7 +29,7 @@
     text-overflow: ellipsis;
     font-weight: $font-weight-normal;
   }
-  svg {
+  > svg {
     min-width: $font-size-icon-small;
     margin-right: spacing(0.5);
     color: $color-darker-gray;

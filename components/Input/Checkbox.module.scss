@@ -1,63 +1,73 @@
 @import 'vars.scss';
 
 .container {
-	display: inline-flex;
-	align-items: center;
-	position: relative;
-	padding: spacing(0.5);
-	outline: 0 !important;
-	.fluid {
-		width: 100%;
-	}
-	input[type='checkbox'] {
-		border: 0;
-		opacity: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		white-space: nowrap;
-	}
-	.checkbox {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 22px;
-		height: 22px;
-		border-radius: 0;
-		border: $border-thick-dark-gray;
-		transition: $transition;
-		svg {
-			display: none;
-		}
-		&.checked {
-			background: $color-primary;
-			border: $border-thick-primary;
-			svg {
-				display: block;
-			}
-		}
-		&.disabled {
-			border: $border-thick-dark-gray;
-			background: $color-light-gray;
-			cursor: not-allowed;
-		}
-		&.fluid {
-			width: 100%;
-		}
-		&.error {
-			border: $border-thick-red;
-		}
-	}
-	&:focus,
-	&:hover {
-		.checkbox {
-			border: $border-thick-primary;
-		}
-	}
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: spacing(0.5);
+  outline: 0 !important;
+  &.fluid {
+    width: 100%;
+  }
+  &.small {
+    padding: spacing(0.25) spacing(0.5) spacing(0.25) 0;
+  }
+  input[type='checkbox'] {
+    border: 0;
+    opacity: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    white-space: nowrap;
+  }
+  .checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 0;
+    border: $border-thick-dark-gray;
+    transition: $transition;
+    svg {
+      display: none;
+    }
+    &.checked {
+      background: $color-primary;
+      border: $border-thick-primary;
+      svg {
+        display: block;
+      }
+    }
+    &.small {
+      width: 12px;
+      height: 12px;
+      svg {
+        transform: scale(0.8);
+      }
+    }
+    &.disabled {
+      border: $border-thick-dark-gray;
+      background: $color-light-gray;
+      cursor: not-allowed;
+    }
+    &.fluid {
+      width: 100%;
+    }
+    &.error {
+      border: $border-thick-red;
+    }
+  }
+  &:focus,
+  &:hover {
+    .checkbox {
+      border: $border-thick-primary;
+    }
+  }
 }
 
 .label {
-	margin-bottom: 0;
-	margin-left: spacing(1);
+  margin-bottom: 0;
+  margin-left: spacing(1);
 }

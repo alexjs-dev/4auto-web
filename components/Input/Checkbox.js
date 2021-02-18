@@ -15,6 +15,7 @@ const CheckboxComponent = ({
   name,
   disabled,
   meta,
+  small,
   fluid,
   className,
   isRequired,
@@ -23,12 +24,12 @@ const CheckboxComponent = ({
   const { error, invalid, active } = meta
   const errorState =
     !active && (invalid || (error && error.trim().length !== 0))
-  const handleOnChange = e => {
+  const handleOnChange = (e) => {
     if (disabled) return
     if (input.onChange) input.onChange(e.target.checked)
     if (onChange) onChange(e.target.checked)
   }
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     if (e.charCode === 13) {
       if (input.onChange) input.onChange(!input.value)
     }
@@ -36,7 +37,11 @@ const CheckboxComponent = ({
   return (
     <>
       <div
-        className={classNames(styles.container, fluid && styles.fluid)}
+        className={classNames(
+          styles.container,
+          fluid && styles.fluid,
+          small && styles.small
+        )}
         tabIndex="0"
         onKeyPress={handleKeyPress}
       >
@@ -48,6 +53,7 @@ const CheckboxComponent = ({
             disabled && styles.disabled,
             fluid && styles.fluid,
             errorState && styles.error,
+            small && styles.small,
             className
           )}
         >
@@ -73,6 +79,7 @@ CheckboxComponent.propTypes = {
   fluid: PropTypes.bool,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
+  small: PropTypes.bool,
   input: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     onChange: PropTypes.func,
@@ -94,6 +101,7 @@ CheckboxComponent.defaultProps = {
     error: null,
     active: false,
   },
+  small: false,
   className: null,
   fluid: false,
   name: null,
@@ -104,6 +112,8 @@ CheckboxComponent.defaultProps = {
 
 const Checkbox = ({ visible, name, validate, normalize, ...rest }) => {
   if (!visible) return null
+  if (!name)
+    return <CheckboxComponent validate={null} normalize={null} {...rest} />
   return (
     <Field
       name={name}
@@ -121,6 +131,7 @@ Checkbox.propTypes = {
   name: PropTypes.string,
   validate: PropTypes.func,
   normalize: PropTypes.func,
+  small: PropTypes.bool,
 }
 
 Checkbox.defaultProps = {
@@ -128,6 +139,7 @@ Checkbox.defaultProps = {
   name: null,
   validate: null,
   normalize: null,
+  small: false,
 }
 
 export default Checkbox

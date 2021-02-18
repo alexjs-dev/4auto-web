@@ -24,7 +24,7 @@ import {
   InfinitePagination,
 } from './Pagination'
 import { BaseButton, Button, ExpandButton } from './Button'
-import { VehicleDetail } from './Vehicle'
+import { VehicleDetail, VehicleAdvDetails } from './Vehicle'
 import { BaseInput, Input, Select, Checkbox } from './Input'
 import { ImageCarousel } from './Image'
 import { Modal } from './Modals'
@@ -60,6 +60,7 @@ export {
   InfiniteBullets,
   RangePicker,
   VehicleDetail,
+  VehicleAdvDetails,
   ExpandButton,
   UserUnreads,
   Select,

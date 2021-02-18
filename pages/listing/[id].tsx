@@ -3,7 +3,13 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import isEmpty from 'lodash/isEmpty'
-import { Loader, Layout, OfferForm, ListingsCarousel } from '../../components'
+import {
+  Loader,
+  Layout,
+  OfferForm,
+  ListingsCarousel,
+  VehicleAdvDetails,
+} from '../../components'
 import ListingsService from '../../services/listings'
 import {
   currentListingSelector,
@@ -78,7 +84,12 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
         />
         <h6 className={styles.subtitle}>{t('label.baseDetails')}</h6>
         <VehicleDetails listing={listing} fullHeight />
+        <Price
+          price={listing.price}
+          discountPercentage={listing.discountPercentage}
+        />
         <OfferForm />
+        <VehicleAdvDetails vehicle={listing.vehicle} />
         <div className={styles.spacer} />
         <ListingsCarousel
           listings={featuredListings}

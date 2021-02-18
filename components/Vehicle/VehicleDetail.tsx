@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { ReactChildren, ReactChild } from 'react'
 import { FiTag } from 'react-icons/fi'
+import { IconType } from 'react-icons/lib'
 import styles from './VehicleDetail.module.scss'
 
-const VehicleDetail = ({ icon, title, children }) => {
+type Props = {
+  icon?: IconType | ReactChild | ReactChildren
+  title?: string | number
+  children?: any
+}
+
+const VehicleDetail: React.FunctionComponent<Props> = ({
+  icon,
+  title,
+  children,
+}) => {
   return (
     <div className={styles.container}>
       {title && <h6>{title}</h6>}

@@ -1,0 +1,31 @@
+@import 'vars.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailContainer {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .details {
+    width: 100%;
+    max-width: 300px;
+    h5 {
+      text-transform: uppercase;
+      margin-bottom: spacing(1);
+    }
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+      > div {
+        margin-bottom: spacing(1);
+      }
+      > div:not(:last-child) {
+        margin-right: spacing(1);
+      }
+    }
+  }
+}
