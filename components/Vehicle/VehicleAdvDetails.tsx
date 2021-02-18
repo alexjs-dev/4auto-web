@@ -82,7 +82,6 @@ const VehicleAdvDetails: React.FunctionComponent<Props> = ({ vehicle }) => {
           <Detail title="Crashed" content={vehicle.crashed} hideOnEmpty />
         </div>
       </div>
-
       <div className={styles.details}>
         <h5>Comfort</h5>
         <div className={styles.list}>
