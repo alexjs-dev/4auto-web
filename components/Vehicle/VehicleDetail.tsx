@@ -5,7 +5,7 @@ import styles from './VehicleDetail.module.scss'
 
 type Props = {
   icon?: IconType | ReactChild | ReactChildren
-  title?: string | number
+  title?: any
   children?: any
 }
 
