@@ -9,23 +9,27 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-
+  justify-content: center;
   .details {
     width: 100%;
     max-width: 300px;
+    margin: spacing(1);
     h5 {
       text-transform: uppercase;
       margin-bottom: spacing(1);
     }
     .list {
-      display: flex;
-      flex-wrap: wrap;
-      > div {
-        margin-bottom: spacing(1);
-      }
-      > div:not(:last-child) {
-        margin-right: spacing(1);
+      display: grid;
+      justify-content: space-between;
+      grid-gap: spacing(1);
+      grid-template-columns: repeat(auto-fill, 142px);
+      > div:nth-child(even) {
+        align-items: flex-end;
       }
     }
   }
+}
+
+.detail {
+  // width: 45%;
 }
