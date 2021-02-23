@@ -24,7 +24,11 @@ const Images: React.FunctionComponent<Props> = ({ listing }) => {
     >
       {map(listing.vehicle.images, (image) => (
         <div key={image.order}>
-          <img src={image.url} alt={image.order.toString()} draggable="false" />
+          <img
+            src={image.url}
+            alt={(image.order && image.order.toString()) || ''}
+            draggable="false"
+          />
         </div>
       ))}
     </Carousel>
