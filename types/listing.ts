@@ -1,5 +1,6 @@
 import Address from './address'
 import Vehicle from './vehicle'
+import User from './user'
 
 type Listing = {
   availableUntil: string
@@ -13,6 +14,7 @@ type Listing = {
   updatedAt: string
   urgent: boolean
   userId: string
+  user: User
   vehicle: Vehicle
   vehicleId: string
   __v?: number

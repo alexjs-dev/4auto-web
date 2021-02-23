@@ -76,7 +76,14 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
           discountPercentage={listing.discountPercentage}
         />
         <Description />
-        <Avatar />
+        <Avatar
+          title={t('market.seller')}
+          userId={listing.userId}
+          avatarSrc={listing.user.profile?.image?.url}
+          username={
+            listing.user.profile?.username || listing.user.profile?.firstName
+          }
+        />
         <VotdActions
           userId={listing.userId}
           email="test@account.com"

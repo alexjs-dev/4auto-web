@@ -9,11 +9,15 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   .details {
     width: 100%;
-    max-width: 300px;
-    margin: spacing(1);
+
+    margin: spacing(1) 0;
+    @media (min-width: $tablet) {
+      margin: spacing(1);
+      max-width: 300px;
+    }
     h5 {
       text-transform: uppercase;
       margin-bottom: spacing(1);
@@ -22,7 +26,10 @@
       display: grid;
       justify-content: space-between;
       grid-gap: spacing(1);
-      grid-template-columns: repeat(auto-fill, 142px);
+      grid-template-columns: repeat(auto-fill, 45vw);
+      @media (min-width: $tablet) {
+        grid-template-columns: repeat(auto-fill, 142px);
+      }
       > div:nth-child(even) {
         align-items: flex-end;
       }

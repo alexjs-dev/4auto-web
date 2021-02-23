@@ -84,6 +84,9 @@
     "km": "Km",
     "litersIn100Km": "L/100 Km",
     "k": "K",
+    "EURO": "EURO",
+    "centimeter": "cm",
+    "inch": "Inch",
     "color": "Color",
     "speedTo100": "Speed (1-100)",
     "mileage": "Mileage",
@@ -113,8 +116,9 @@
     "cdPlayer": "CD player",
     "climateControl": "Climate Control",
     "cruiseControl": "Cruise Control",
-    "ElectricAdjSeats": "Electric Adj Seats",
+    "electricAdjSeats": "Electric Adj Seats",
     "electricWindows": "Electric Windows",
+    "fuelTankCapacity": "Tank capacity",
     "handsFree": "Hands free",
     "memorySeats": "Memory Seats",
     "memoryWheel": "Memory Wheel",
@@ -153,6 +157,9 @@
   "base": {
     "yes": "Yes",
     "no": "No"
+  },
+  "market": {
+    "seller": "Seller"
   },
   "placeholder": {
     "password": "P@$$w0rd",

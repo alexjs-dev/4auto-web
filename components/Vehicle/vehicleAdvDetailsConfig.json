@@ -1,0 +1,187 @@
+{
+  "data": [
+    {
+      "key": "safety",
+      "list": [
+        {
+          "key": "alarm"
+        },
+        {
+          "key": "centralLocking"
+        },
+        {
+          "key": "disabilityEquipment"
+        },
+        {
+          "key": "immobilizer"
+        },
+        {
+          "key": "parkingAid"
+        },
+        {
+          "key": "parkingCamera"
+        },
+        {
+          "key": "abs"
+        },
+        {
+          "key": "crashed",
+          "hideOnEmpty": true
+        }
+      ]
+    },
+    {
+      "key": "comfort",
+      "list": [
+        {
+          "key": "interiorColor"
+        },
+        {
+          "key": "bluetooth"
+        },
+        {
+          "key": "cdPlayer"
+        },
+        {
+          "key": "climateControl"
+        },
+        {
+          "key": "cruiseControl"
+        },
+        {
+          "key": "electricAdjSeats"
+        },
+        {
+          "key": "electricWindows"
+        },
+        {
+          "key": "handsFree"
+        },
+        {
+          "key": "memorySeats"
+        },
+        {
+          "key": "memoryWheel"
+        },
+        {
+          "key": "mirrorHeating"
+        },
+        {
+          "key": "mirrorLink"
+        },
+        {
+          "key": "navSystem"
+        },
+        {
+          "key": "panoramaRoof"
+        },
+        {
+          "key": "rainSensor"
+        },
+        {
+          "key": "seatHeating"
+        },
+        {
+          "key": "selfDriving"
+        },
+        {
+          "key": "startStop"
+        },
+        {
+          "key": "startStop"
+        },
+        {
+          "key": "sunRoof"
+        },
+        {
+          "key": "seatType"
+        }
+      ]
+    },
+
+    {
+      "key": "other",
+      "list": [
+        {
+          "key": "vin"
+        },
+        {
+          "key": "regNumber"
+        },
+        {
+          "key": "warrantyBook"
+        },
+        {
+          "key": "consumptionCombined",
+          "unit": "label.litersIn100Km"
+        },
+        {
+          "key": "consumptionHighway",
+          "unit": "label.litersIn100Km"
+        },
+        {
+          "key": "consumptionUrban",
+          "unit": "label.litersIn100Km"
+        }
+      ]
+    },
+    {
+      "key": "technical",
+      "list": [
+        {
+          "key": "emissionStandard",
+          "unit": "label.EURO"
+        },
+        {
+          "key": "fuelTankCapacity",
+          "unit": "label.l"
+        },
+        {
+          "key": "height",
+          "unit": "label.centimeter"
+        },
+        {
+          "key": "weight",
+          "unit": "label.centimeter"
+        },
+        {
+          "key": "tireSize",
+          "unit": "label.inch"
+        },
+        {
+          "key": "rightHandDrive"
+        },
+        {
+          "key": "capacity",
+          "unit": "label.l"
+        }
+      ]
+    },
+    {
+      "key": "lights",
+      "list": [
+        {
+          "key": "lights"
+        }
+      ]
+    },
+    {
+      "key": "exterior",
+      "list": [
+        {
+          "key": "towbar"
+        },
+        {
+          "key": "doors",
+          "hideOnEmpty": true
+        },
+        {
+          "key": "color"
+        },
+        {
+          "key": "metallicColor"
+        }
+      ]
+    }
+  ]
+}

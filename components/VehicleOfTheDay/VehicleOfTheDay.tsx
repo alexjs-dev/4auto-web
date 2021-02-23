@@ -87,7 +87,13 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
         </h3>
       </div>
       <VehicleDetails listing={listing} />
-      <Avatar />
+      <Avatar
+        userId={listing.userId}
+        avatarSrc={listing.user.profile?.image?.url}
+        username={
+          listing.user.profile?.username || listing.user.profile?.firstName
+        }
+      />
       <VotdActions email="bill@gates.com" phone="37258587389" userId="123" />
       <OfferForm />
       <Price
