@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactChildren } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import styles from './Layout.module.scss'
 
