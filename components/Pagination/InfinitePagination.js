@@ -52,7 +52,11 @@ const InfinitePagination = ({ pagination, items }) => {
       >
         <div className={styles.list}>
           {map(items, (item, key) => (
-            <VehicleCard key={key} {...getVehicleCardProps(item)} />
+            <VehicleCard
+              key={key}
+              {...getVehicleCardProps(item)}
+              listingId={item._id}
+            />
           ))}
         </div>
       </InfiniteScroll>

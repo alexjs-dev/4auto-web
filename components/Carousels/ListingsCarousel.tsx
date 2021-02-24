@@ -69,7 +69,11 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
             customButtonGroup={<TripleButtonGroup />}
           >
             {map(listings, (listing, i) => (
-              <VehicleCard key={i} {...getVehicleCardProps(listing)} />
+              <VehicleCard
+                key={i}
+                {...getVehicleCardProps(listing)}
+                listingId={listing._id}
+              />
             ))}
           </Carousel>
         )}
