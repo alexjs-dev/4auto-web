@@ -27,7 +27,7 @@ InputLabel.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   small: PropTypes.bool,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 }
 
 InputLabel.defaultProps = {

@@ -15,6 +15,7 @@ const Images: React.FunctionComponent<Props> = ({ listing }) => {
       showThumbs={false}
       infiniteLoop
       emulateTouch
+      autoPlay={false}
       swipeable
       useKeyboardArrows
       showIndicators

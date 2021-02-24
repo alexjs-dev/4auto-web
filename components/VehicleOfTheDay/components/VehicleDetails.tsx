@@ -3,6 +3,7 @@ import { GiCarWheel, GiGasPump, GiSpeedometer } from 'react-icons/gi'
 import { FiMapPin, FiGitPullRequest, FiTag } from 'react-icons/fi'
 import useViewport from '../../../hooks/useViewport'
 import get from 'lodash/get'
+import isNil from 'lodash/isNil'
 import classNames from 'classnames'
 import { formatVehicleMainLabel } from '../../../utils/helpers'
 import { useTranslation } from 'react-i18next'
@@ -61,22 +62,27 @@ const VehicleDetails: React.FunctionComponent<Props> = ({
       <VehicleDetail icon={<FiTag />} title={t('label.labelConsCity')}>
         {vehicle.consumptionUrban} {t('label.litersIn100Km')}
       </VehicleDetail>
-      <VehicleDetail icon={<FiTag />} title={t('label.color')}>
-        <div
-          style={{
-            width: 8,
-            display: 'inline-block',
-            height: 8,
-            borderRadius: '50%',
-            marginRight: 4,
-            background: vehicle.color && colorCodes[vehicle.color],
-          }}
-        />
-        {t(`colors.${vehicle.color}`)}
-      </VehicleDetail>
-      <VehicleDetail icon={<GiSpeedometer />} title={t('label.speedTo100')}>
-        {vehicle.accelerationZeroToHundred} {t('label.seconds')}
-      </VehicleDetail>
+      {vehicle.color && (
+        <VehicleDetail icon={<FiTag />} title={t('label.color')}>
+          <div
+            style={{
+              width: 8,
+              display: 'inline-block',
+              height: 8,
+              borderRadius: '50%',
+              marginRight: 4,
+              background: vehicle.color && colorCodes[vehicle.color],
+            }}
+          />
+          {t(`colors.${vehicle.color}`)}
+        </VehicleDetail>
+      )}
+      {!isNil(vehicle.accelerationZeroToHundred) &&
+        vehicle.accelerationZeroToHundred > 0 && (
+          <VehicleDetail icon={<GiSpeedometer />} title={t('label.speedTo100')}>
+            {vehicle.accelerationZeroToHundred} {t('label.seconds')}
+          </VehicleDetail>
+        )}
     </div>
   )
 }

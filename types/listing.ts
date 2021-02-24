@@ -17,6 +17,8 @@ type Listing = {
   user: User
   vehicle: Vehicle
   vehicleId: string
+  contactEmail?: string
+  contactPhone?: string
   __v?: number
   _id: string
 }

@@ -9,6 +9,7 @@ type UserProfile = {
   birthDate?: string
   onlineAt?: string
   username?: string
+  gender?: 'male' | 'female'
   imageId?: string
   createdAt?: string
   updatedAt?: string

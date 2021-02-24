@@ -86,8 +86,8 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
         />
         <VotdActions
           userId={listing.userId}
-          email="test@account.com"
-          phone="37258587389"
+          email={listing.contactEmail}
+          phone={listing.contactPhone}
         />
         <h6 className={styles.subtitle}>{t('label.baseDetails')}</h6>
         <VehicleDetails listing={listing} fullHeight />

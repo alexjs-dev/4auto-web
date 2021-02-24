@@ -132,6 +132,16 @@
   border-bottom: $border-light-gray;
   padding-bottom: spacing(1);
   margin-bottom: spacing(2);
+  h6 {
+    font-size: $font-size-h6 !important;
+    margin-bottom: spacing(1) !important;
+    @media (max-width: $tablet) {
+      font-size: $font-size-p !important;
+    }
+  }
+  span {
+    font-size: $font-size-span !important;
+  }
   @media (max-width: $tablet) {
     max-height: 118px;
     overflow: auto;

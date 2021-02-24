@@ -95,8 +95,8 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
         }
       />
       <VotdActions
-        email="bill@gates.com"
-        phone="37258587389"
+        email={listing.contactEmail}
+        phone={listing.contactPhone}
         userId={listing.userId}
       />
       <OfferForm />

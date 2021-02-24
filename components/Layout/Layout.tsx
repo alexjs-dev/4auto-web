@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './Layout.module.scss'
 
 type Props = {
-  children: ReactChild | ReactChildren | JSX.Element[]
+  children: any
   background?: 'gray' | 'white'
   fullscreen?: boolean
   className?: string

@@ -46,6 +46,7 @@ $color-light-gray: #e5e5ea;
 $color-red: #d54b4f;
 $color-blue: #5781db;
 $color-yellow-light: #fef0cd;
+$color-orange: #f7cb5c;
 
 $yellow-gradient: linear-gradient(0deg, #fff 16%, #fef0cd 100%);
 $dark-primary-gradient: linear-gradient(270deg, #292f4c 4%, #96de78 100%);
@@ -91,6 +92,7 @@ $transition-linear: all 0.3s linear;
 }
 
 $tablet: 768px;
+$small: 458px;
 $tablet-large: 990px;
 $desktop: 1280px;
 $layout: 1440px;
