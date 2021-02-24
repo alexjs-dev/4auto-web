@@ -122,7 +122,6 @@ const VehicleOfTheDay: React.FunctionComponent<VehicleOfTheDayProps> = ({
     onSwiped: () => setImageMaximized(false),
     trackMouse: isMobile,
   })
-
   const lottieAnimation = {
     animationData: SwipeLeftAnim, // dur: 60 frames
     loop: true,
