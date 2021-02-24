@@ -94,7 +94,11 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
           listing.user.profile?.username || listing.user.profile?.firstName
         }
       />
-      <VotdActions email="bill@gates.com" phone="37258587389" userId="123" />
+      <VotdActions
+        email="bill@gates.com"
+        phone="37258587389"
+        userId={listing.userId}
+      />
       <OfferForm />
       <Price
         price={listing.price}

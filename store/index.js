@@ -9,10 +9,12 @@ import auth from '~store/auth/reducer'
 import menu from '~store/menu/reducer'
 import vehicles from '~store/vehicles/reducer'
 import listing from '~store/listing/reducer'
+import user from '~store/user/reducer'
 // import sagas
 import authSaga from '~store/auth/sagas'
 import vehiclesSaga from '~store/vehicles/sagas'
 import listingSaga from '~store/listing/sagas'
+import userSaga from '~store/user/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -21,6 +23,7 @@ const RootReducer = combineReducers({
   menu,
   vehicles,
   listing,
+  user,
   form: formReducer,
 })
 
@@ -30,7 +33,7 @@ const store = createStore(
 )
 
 const RootSagas = function* root() {
-  yield all([...authSaga, ...vehiclesSaga, ...listingSaga])
+  yield all([...authSaga, ...vehiclesSaga, ...listingSaga, ...userSaga])
 }
 
 sagaMiddleware.run(RootSagas)

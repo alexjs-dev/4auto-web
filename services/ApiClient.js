@@ -4,7 +4,6 @@ const app = new FeathersClient()
 
 class ApiClient {
   constructor(namespace) {
-    console.log('ApiClient init', namespace)
     this.namespace = namespace
     this.service = app.service(namespace)
     this.app = app
