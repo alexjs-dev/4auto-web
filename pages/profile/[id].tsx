@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { useTranslation } from 'react-i18next'
 import isEmpty from 'lodash/isEmpty'
 import { Loader, Layout } from '../../components'
 import UsersService from '../../services/users'
@@ -18,8 +17,6 @@ type Props = {
 }
 
 const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
-  console.log('Profile page')
-  const { t } = useTranslation()
   const currentUser = useSelector(currentUserSelector)
   const loading = useSelector(currentUserLoadingSelector)
   const router = useRouter()
