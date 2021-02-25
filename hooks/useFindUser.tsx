@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
-import UserType from '../../../types/user'
-import Creators from '../../../store/user/creators'
+import UserType from '../types/user'
+import Creators from '../store/user/creators'
 
 type Props = {
   prefetchedUser?: UserType

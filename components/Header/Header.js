@@ -5,12 +5,14 @@ import useViewport from '~hooks/useViewport'
 import BasicHeader from './BasicHeader'
 import MobileHeader from './MobileHeader'
 import DesktopHeader from './DesktopHeader'
+import useFetchSelf from '../../hooks/useFetchSelf'
 
 const authPaths = ['/sign-up', '/sign-in', '/forgot-password']
 const Header = () => {
   const { pathname } = useRouter()
   const [mobile, setMobile] = useState(false)
   const { isMobile } = useViewport()
+  useFetchSelf()
   useEffect(() => {
     setMobile(isMobile)
   }, [isMobile])

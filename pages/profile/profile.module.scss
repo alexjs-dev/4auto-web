@@ -2,7 +2,7 @@
 
 .container {
   min-height: 100vh;
-  padding: spacing(4) spacing(0.5);
+  padding: spacing(8) spacing(0.5);
   @media (min-width: $tablet) {
     padding: spacing(6) spacing(6) spacing(8) spacing(6);
   }
@@ -38,22 +38,24 @@
   }
 }
 
-.mobileItem {
+.descriptionMobile {
   display: block;
+  font-weight: $font-weight-light;
   @media (min-width: $tablet) {
     display: none;
   }
 }
 
-.onlineMobile {
+.onlineStatusMobile {
   display: flex;
   top: spacing(1);
   @media (min-width: $tablet) {
     display: none;
   }
 }
-.desktopItem {
+.descriptionDesktop {
   display: none;
+  font-weight: $font-weight-light;
   @media (min-width: $tablet) {
     display: block;
   }
@@ -105,4 +107,8 @@
     object-fit: cover;
     margin: 0px;
   }
+}
+
+.messageButton {
+  margin: spacing(2) 0;
 }

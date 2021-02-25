@@ -37,12 +37,12 @@
   margin-bottom: spacing(0.5);
   span {
     text-decoration: none;
-    font-size: $font-size-p;
-    line-height: $line-height-p;
+    font-size: $font-size-h5;
+    line-height: $line-height-h5;
     color: $color-red;
     font-weight: $font-weight-medium;
     strong {
-      font-weight: $font-weight-normal;
+      font-weight: $font-weight-light;
       color: $color-darker-gray;
       text-decoration: line-through;
     }
@@ -51,6 +51,8 @@
 
 .description {
   margin-bottom: spacing(2);
+  font-weight: $font-weight-light;
+
   button {
     font-size: $font-size-p;
     line-height: $line-height-p;

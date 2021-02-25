@@ -14,8 +14,10 @@ import {
 } from '../../store/user/selectors'
 import UserType from '../../types/user'
 import styles from './profile.module.scss'
-import useFindUser from './hooks/useFindUser'
+import useFindUser from '../../hooks/useFindUser'
+
 import ProfileAvatar from './components/ProfileAvatar'
+import useFindFeaturedListingsOnMount from '~/hooks/useFindFeaturedListingsOnMount'
 
 type Props = {
   prefetchedUser?: UserType
@@ -28,6 +30,7 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
   const { id } = router.query
   const user: UserType = !isEmpty(prefetchedUser) ? prefetchedUser : currentUser
   useFindUser({ id, prefetchedUser })
+  useFindFeaturedListingsOnMount()
   if ((loading && isEmpty(prefetchedUser)) || isEmpty(user)) {
     return (
       <div className={styles.container}>
@@ -39,7 +42,7 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
     user.profile?.username || user.profile?.firstName || 'Username'
   const featuredListings = useSelector(listingsSelector) // TO-DO: make separate listings selector for featured vehicles
   const onlineDate = moment(user.profile?.onlineAt)
-  const onlineHours = onlineDate.diff(moment(), 'hours')
+  const onlineHours = Math.abs(onlineDate.diff(moment(), 'hours'))
   const lastOnline =
     onlineHours > 24 ? onlineDate.format('DD.MM.YYYY') : onlineDate.fromNow()
 
@@ -60,7 +63,9 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
               </h6>
             )}
             {user.profile?.description && (
-              <p className={styles.desktopItem}>{user.profile?.description}</p>
+              <p className={styles.descriptionDesktop}>
+                {user.profile?.description}
+              </p>
             )}
 
             {user.profile?.onlineAt && (
@@ -81,13 +86,15 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
           </div>
         </div>
         {user.profile?.description && (
-          <p className={styles.mobileItem}>{user.profile?.description}</p>
+          <p className={styles.descriptionMobile}>
+            {user.profile?.description}
+          </p>
         )}
         {user.profile?.onlineAt && (
           <div
             className={classNames(
               styles.online,
-              styles.onlineMobile,
+              styles.onlineStatusMobile,
               onlineHours < 1
                 ? styles.online
                 : onlineHours < 8
@@ -99,7 +106,12 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
             <GiDiamonds />
           </div>
         )}
-        <Button label="Send a message" fluid type={Button.types.GHOST} />
+        <Button
+          label="Send a message"
+          fluid
+          type={Button.types.GHOST}
+          className={styles.messageButton}
+        />
 
         <ListingsCarousel
           listings={featuredListings}

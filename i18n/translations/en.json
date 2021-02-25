@@ -3,8 +3,11 @@
     "blank": "😡 Cannot be empty",
     "invalid_credentials": "🔑 Invalid credentials",
     "invalid_email": "📧 Invalid e-mail format",
+    "required_field": "😡 Field is required",
+    "emailExists": "📧  Email already exist",
     "weak_password": "🤖 Weak password",
-    "oops": "🐞Oops! Something happened"
+    "oops": "🐞 Oops! Something happened",
+    "invalidUsername": "😡 Invalid username"
   },
   "snackbar": {
     "welcome": "👋 Welcome",
@@ -75,6 +78,7 @@
     "baseDetails": "Base details",
     "password": "Password",
     "firstName": "First name",
+    "username": "Username",
     "lastName": "Last name",
     "model": "Model",
     "fuel": "Fuel",
@@ -167,6 +171,7 @@
     "firstName": "Aleksei",
     "make": "eg. Audi",
     "yearMin": "eg. 1960",
+    "username": "eg. GreenCat01",
     "yearMax": "eg. 2020",
     "priceMin": "eg. 500",
     "priceMax": "eg. 1000",

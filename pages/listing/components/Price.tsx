@@ -18,7 +18,7 @@ const Price: React.FunctionComponent<Props> = ({
       {discountedPrice <= 0 && <span>{price}€</span>}
       {discountedPrice > 0 && (
         <span>
-          {discountedPrice.toFixed(2)}€&nbsp;<strong>{price}€</strong>
+          {discountedPrice.toFixed(0)}€&nbsp;<strong>{price}€</strong>
         </span>
       )}
     </div>

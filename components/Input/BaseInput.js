@@ -61,7 +61,7 @@ const BaseInput = forwardRef(
         className={classNames(
           styles.input,
           invalid && styles.invalid,
-          true && styles.small
+          small && styles.small
         )}
         autoComplete={autocomplete}
         {...inputProps}

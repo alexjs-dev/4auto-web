@@ -24,9 +24,9 @@ import Description from './components/Description'
 import Avatar from '../../components/User/Avatar'
 import VotdActions from '../../components/VehicleOfTheDay/components/VotdActions'
 import VehicleDetails from '../../components/VehicleOfTheDay/components/VehicleDetails'
-import useFindListing from './hooks/useFindListing'
+import useFindListing from '../../hooks/useFindListing'
 import { listingsSelector } from '../../store/vehicles/selectors'
-import useFindFeaturedListingsOnMount from './hooks/useFindFeaturedListingsOnMount'
+import useFindFeaturedListingsOnMount from '../../hooks/useFindFeaturedListingsOnMount'
 
 type Props = {
   prefetchedListing?: ListingType
@@ -38,10 +38,9 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
   const loading = useSelector(currentListingLoadingSelector)
   const router = useRouter()
   const { id } = router.query
-  const listing: ListingType = !isEmpty(prefetchedListing)
+  const listing: ListingType = isEmpty(currentListing)
     ? prefetchedListing
     : currentListing
-
   useFindListing({ id, prefetchedListing })
   useFindFeaturedListingsOnMount()
 
@@ -123,7 +122,7 @@ export async function getStaticPaths() {
     listings.map((listing) => ({
       params: { id: listing._id },
     }))
-  return { paths, fallback: true }
+  return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }: any) {

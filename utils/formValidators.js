@@ -18,6 +18,7 @@ export const fieldTypes = {
   make: 'make',
   model: 'model',
   color: 'color',
+  username: 'username',
   fuel: 'fuel',
   gearbox: 'transmission',
   bodyType: 'bodyType',
@@ -28,23 +29,24 @@ export const fieldTypes = {
 
 export const autoCompleteFields = {
   [fieldTypes.password]: 'current-password',
+  [fieldTypes.username]: 'username',
   [fieldTypes.firstName]: 'given-name',
   [fieldTypes.lastName]: 'family-name',
 }
 
-const emailIsCorrect = email =>
+const emailIsCorrect = (email) =>
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   )
 
-const isPasswordComplex = password => size(password) >= 6
+const isPasswordComplex = (password) => size(password) >= 6
 
-export const emailValidator = value =>
+export const emailValidator = (value) =>
   emailIsCorrect(value) || size(value) === 0
     ? undefined
     : 'errors.invalid_email'
 
-export const passwordValidator = value =>
+export const passwordValidator = (value) =>
   isPasswordComplex(value) || size(value) === 0
     ? undefined
     : 'errors.weak_password'
@@ -74,7 +76,7 @@ export const validators = {
 export const findEmptyFields = (data, requiredFields) =>
   filter(
     requiredFields,
-    field => isEmpty(data[field]) || !toString(data[field]).trim().length
+    (field) => isEmpty(data[field]) || !toString(data[field]).trim().length
   )
 
 export const validateFormData = (values, requiredFields) => {
@@ -89,12 +91,12 @@ export const validateFormData = (values, requiredFields) => {
     },
     {}
   )
-  forEach(data, field => {
+  forEach(data, (field) => {
     const type = fieldTypes[field]
     const value = values[field]
     if (type && requiredFields.includes(type)) {
       const validatorsList = validators[type]
-      forEach(validatorsList, validator => {
+      forEach(validatorsList, (validator) => {
         const result = validator && validator(value, values)
         if (result) {
           errors[field] = result

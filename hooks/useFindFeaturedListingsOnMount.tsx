@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import Creators from '../../../store/vehicles/creators'
+import Creators from '../store/vehicles/creators'
 
 const useFindFeaturedListingsOnMount = () => {
   if (!process.browser) return null

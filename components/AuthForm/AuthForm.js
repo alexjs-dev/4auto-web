@@ -31,6 +31,13 @@ const AuthForm = ({ type }) => {
         await validateFormData(values, [fieldTypes.email, fieldTypes.password])
         dispatch(AuthCreators.logIn(values))
         break
+      case types.SIGNUP:
+        await validateFormData(values, [
+          fieldTypes.email,
+          fieldTypes.password,
+          fieldTypes.username,
+        ])
+        dispatch(AuthCreators.signUp(values))
       default:
         break
     }
@@ -45,6 +52,7 @@ const AuthForm = ({ type }) => {
   const DefaultFields = () => (
     <Input
       key={fieldTypes.email}
+      isRequired
       placeholder={t('placeholder.email')}
       label={t('label.email')}
       autocomplete={fieldTypes.email}
@@ -56,6 +64,7 @@ const AuthForm = ({ type }) => {
   const AuthFields = () => (
     <Input
       key={fieldTypes.password}
+      isRequired
       placeholder={t('placeholder.password')}
       name={fieldTypes.password}
       type={fieldTypes.password}
@@ -67,6 +76,13 @@ const AuthForm = ({ type }) => {
 
   const RegistrationFields = () => (
     <>
+      <Input
+        placeholder={t('placeholder.username')}
+        label={t('label.username')}
+        autocomplete={autoCompleteFields[fieldTypes.username]}
+        name={fieldTypes.username}
+        isRequired
+      />
       <Input
         placeholder={t('placeholder.firstName')}
         label={t('label.firstName')}

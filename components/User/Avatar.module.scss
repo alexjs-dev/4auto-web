@@ -7,8 +7,8 @@
     display: flex;
     align-items: center;
     img {
-      width: 34px;
-      height: 34px;
+      width: 44px;
+      height: 44px;
       object-fit: cover;
       border-radius: 50%;
       margin-right: spacing(1);
@@ -16,13 +16,13 @@
   }
   a {
     color: $color-primary;
-    font-size: $font-size-span;
+    font-size: $font-size-p;
     font-family: $font-family-secondary;
   }
   p {
     font-family: $font-family;
     font-weight: $font-weight-bold;
-    font-size: $font-size-p;
+    font-size: $font-size-h6;
     color: $color-dark;
     margin-bottom: spacing(0.5);
   }
