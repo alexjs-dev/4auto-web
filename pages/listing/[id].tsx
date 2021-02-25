@@ -107,22 +107,20 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
 }
 
 export async function getStaticPaths() {
-  const listingsService = new ListingsService()
-  const listingQuery = await listingsService.find({
-    query: {
-      $limit: 50,
-      $sort: {
-        createdAt: -1,
-      },
-    },
-  })
-  const listings: ListingType[] = listingQuery.data
-  const paths =
-    listings &&
-    listings.map((listing) => ({
-      params: { id: listing._id },
-    }))
-  return { paths, fallback: false }
+  try {
+    const listingsService = new ListingsService()
+    const listingQuery = await listingsService.find()
+    const listings: ListingType[] = listingQuery.data
+    const paths =
+      listings &&
+      listings.map((listing) => ({
+        params: { id: listing._id },
+      }))
+    return { paths, fallback: true }
+  } catch (e) {
+    console.error(e)
+    return { paths: [], fallback: false }
+  }
 }
 
 export async function getStaticProps({ params }: any) {
