@@ -3,6 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 import { reducer as formReducer } from 'redux-form'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 // import reducers
 import auth from '~store/auth/reducer'
@@ -18,7 +20,7 @@ import userSaga from '~store/user/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
-const RootReducer = combineReducers({
+const reducer = combineReducers({
   auth,
   menu,
   vehicles,
@@ -26,6 +28,14 @@ const RootReducer = combineReducers({
   user,
   form: formReducer,
 })
+
+const persistConfig = {
+  key: 'root',
+  whitelist: ['auth'],
+  storage,
+}
+
+const RootReducer = persistReducer(persistConfig, reducer)
 
 const store = createStore(
   RootReducer,
@@ -37,5 +47,7 @@ const RootSagas = function* root() {
 }
 
 sagaMiddleware.run(RootSagas)
+
+export const persistor = persistStore(store)
 
 export default store

@@ -1,12 +1,12 @@
 import FeathersClient from '~lib/FeathersClient'
 
-const app = new FeathersClient()
+const feathersClient = new FeathersClient()
 
 class ApiClient {
   constructor(namespace) {
     this.namespace = namespace
-    this.service = app.service(namespace)
-    this.app = app
+    this.service = feathersClient.service(namespace)
+    this.app = feathersClient
   }
 
   find = (params) => {
@@ -33,5 +33,7 @@ class ApiClient {
     return this.service.remove(id, params)
   }
 }
+
+export { feathersClient }
 
 export default ApiClient

@@ -56,7 +56,10 @@ const DesktopHeader = () => {
       return (
         <section>
           <BaseButton className={styles.add}>
-            <AddIcon className={styles.icon} style={{ fontSize: 40 }} />
+            <AddIcon
+              className={styles.addListingIcon}
+              style={{ fontSize: 40 }}
+            />
             <span>{t('button.addListing')}</span>
           </BaseButton>
           <LanguageSwitch />
@@ -77,7 +80,7 @@ const DesktopHeader = () => {
         <LanguageSwitch />
         <Button
           isInternalLink
-          href="sign-in"
+          href="/sign-in"
           type={Button.types.PRIMARY}
           className={classNames(styles.spacingLarge, styles.actionButton)}
         >

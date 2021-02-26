@@ -127,9 +127,9 @@ export async function getStaticProps({ params }: any) {
   try {
     const listingsService = new ListingsService()
     const listing: ListingType[] = await listingsService.get(params.id)
-    return { props: { prefetchedListing: listing } }
+    return { props: { prefetchedListing: listing }, revalidate: 6000 }
   } catch (e) {
-    return { props: { prefetchedListing: null } }
+    return { props: { prefetchedListing: null }, revalidate: 6000 }
   }
 }
 

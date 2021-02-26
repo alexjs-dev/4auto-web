@@ -1,9 +1,10 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
+import { PersistGate } from 'redux-persist/integration/react'
 import { Header, NavigationDrawer, Modal } from '~components'
 import { Provider } from 'react-redux'
 import { useRouter } from 'next/router'
-import store from '~store'
+import store, { persistor } from '~store'
 import '~i18n'
 import '~styles/reset.scss'
 import '~styles/global.scss'
@@ -17,11 +18,13 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Provider store={store}>
-        <Header />
-        <NavigationDrawer />
-        <ToastContainer />
-        <Modal />
-        <Component {...pageProps} key={router.asPath} />
+        <PersistGate loading={null} persistor={persistor}>
+          <Header />
+          <NavigationDrawer />
+          <ToastContainer />
+          <Modal />
+          <Component {...pageProps} key={router.asPath} />
+        </PersistGate>
       </Provider>
     </>
   )

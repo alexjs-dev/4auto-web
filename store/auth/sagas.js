@@ -2,14 +2,13 @@ import { takeLatest, select, put, call } from 'redux-saga/effects'
 import Router from 'next/router'
 import { get } from 'lodash'
 import { toast } from 'react-toastify'
-import { stopSubmit, updateSyncErrors } from 'redux-form'
+import { stopSubmit } from 'redux-form'
 import i18n from '~i18n'
 import UsersService from '~services/users'
-import FeathersClient from '~lib/FeathersClient'
+import { feathersClient } from '~services/ApiClient'
 import { fieldTypes } from '~utils/formValidators'
 import { Types } from './creators'
 
-const app = new FeathersClient()
 const usersService = new UsersService()
 
 const snackbarConfig = {
@@ -22,7 +21,7 @@ const snackbarConfig = {
 
 function* handleLogIn({ params }) {
   try {
-    const response = yield call(app.authenticate, {
+    const response = yield call(feathersClient.authenticate, {
       strategy: 'local',
       ...params,
     })
@@ -54,22 +53,20 @@ function* handleLogIn({ params }) {
     )
     console.error(e)
     yield put({ type: Types.LOG_IN_FAILURE, error: e })
-    return null
+    return {}
   }
 }
 
 function* handleSignUp({ params }) {
   try {
-    const user = yield call(usersService.create, params)
-    if (user) {
-      yield call(handleLogIn, {
-        params: {
-          email: params.email,
-          password: params.password,
-        },
-      })
-      yield put({ type: Types.SIGN_UP_SUCCESS })
-    }
+    yield call(usersService.create, params)
+    yield call(handleLogIn, {
+      params: {
+        email: params.email,
+        password: params.password,
+      },
+    })
+    yield put({ type: Types.SIGN_UP_SUCCESS })
   } catch (e) {
     console.error(e)
     if (get(e, 'errors.username')) {
@@ -91,12 +88,11 @@ function* handleSignUp({ params }) {
 
 function* handleFetchSelf() {
   try {
+    yield call(feathersClient.reAuthenticate)
     const state = yield select()
     const userId = get(state, 'auth.currentUser._id')
-    let data
-    if (userId) {
-      data = yield call(usersService.get, userId)
-    }
+    if (!userId) throw new Error('Missing user id')
+    const data = yield call(usersService.get, userId)
     yield put({ type: Types.FETCH_SELF_SUCCESS, data })
   } catch (e) {
     yield put({ type: Types.FETCH_SELF_FAILURE, error: e })
@@ -105,10 +101,12 @@ function* handleFetchSelf() {
 
 function* handleLogOut() {
   try {
-    app.logout.removeAccessToken(true)
-    yield call(app.logout)
+    yield call(feathersClient.logout)
+    localStorage.removeItem('feathers-jwt')
+    yield put({ type: Types.LOG_OUT_SUCCESS, data })
   } catch (e) {
     console.error(e)
+    yield put({ type: Types.LOG_OUT_FAILURE })
   }
 }
 
