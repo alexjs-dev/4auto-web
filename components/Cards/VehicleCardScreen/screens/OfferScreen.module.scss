@@ -1,0 +1,22 @@
+@import 'vars.scss';
+
+.container {
+  padding: spacing(2);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  h5,
+  span {
+    color: $color-white;
+    margin-bottom: spacing(1);
+  }
+  p {
+    color: $color-red;
+    font-weight: $font-weight-medium;
+    margin-bottom: spacing(1);
+  }
+  input {
+    color: $color-white;
+  }
+}

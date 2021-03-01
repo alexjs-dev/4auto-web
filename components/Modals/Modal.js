@@ -34,7 +34,6 @@ const BaseModal = ({ children, isOutsideClickDisabled }) => {
 
 const Modal = () => {
   const modal = useSelector(modalSelector)
-  console.log('modal', modal)
   switch (modal) {
     case types.IMAGE_LIST_MODAL:
       return (

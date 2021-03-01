@@ -30,7 +30,7 @@ const MobileHeader = () => {
       Content.push(
         <BaseButton
           key="create"
-          href="/create-listing"
+          href="/create-listing?step=1"
           isInternalLink
           className={styles.spacing}
         >

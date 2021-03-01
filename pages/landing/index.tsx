@@ -28,8 +28,6 @@ const LandingPage: React.FunctionComponent = () => {
     dispatch(Creators.fetchListings())
   }, [dispatch, Creators])
 
-  console.log('listings', listings)
-
   return (
     <div className={styles.container}>
       <section className={styles.searchSection}>

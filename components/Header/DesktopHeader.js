@@ -55,7 +55,11 @@ const DesktopHeader = () => {
     if (isLoggedIn) {
       return (
         <section>
-          <BaseButton className={styles.add}>
+          <BaseButton
+            className={styles.add}
+            isInternalLink
+            href="/create-listing?step=1"
+          >
             <AddIcon
               className={styles.addListingIcon}
               style={{ fontSize: 40 }}

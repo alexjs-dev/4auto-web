@@ -3,12 +3,10 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { FiLink2, FiDollarSign, FiSend } from 'react-icons/fi'
 import { Button } from '~components'
-import useModal from '~hooks/useModal'
 import { toast } from 'react-toastify'
 import styles from './BaseScreen.module.scss'
 
-const BaseScreen = ({ onChatScreenOpen, visible }) => {
-  const [modalTypes, openModal] = useModal()
+const BaseScreen = ({ onChatScreenOpen, onOfferScreenOpen, visible }) => {
   const { t } = useTranslation()
   return (
     <div
@@ -22,12 +20,12 @@ const BaseScreen = ({ onChatScreenOpen, visible }) => {
       >
         <FiSend />
         &nbsp;
-        {t('button.contact')}
+        {t('button.message')}
       </Button>
       <Button
         type={Button.types.GHOST}
         fluid
-        onClick={() => openModal(modalTypes.OFFER_MODAL)}
+        onClick={onOfferScreenOpen}
         className={styles.overlayButton}
       >
         <FiDollarSign />

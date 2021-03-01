@@ -21,8 +21,8 @@ const SearchPage: React.FunctionComponent = () => {
       <div className={styles.search}>
         <SearchForm fluid />
       </div>
-      <InfinitePagination pagination={pagination} items={listings} />
       <ListingsCarousel listings={listings} title="Featured vehicles" />
+      <InfinitePagination pagination={pagination} items={listings} />
     </Layout>
   )
 }

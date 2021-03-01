@@ -16,6 +16,7 @@ import {
   formatMillage,
   getVehicleTitle,
   formatVehicleMainLabel,
+  formatPriceWithDiscount,
 } from '~utils/helpers'
 import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
 import HeartAnimation from '~public/animations/heart.json'
@@ -93,6 +94,8 @@ const VehicleCard = ({
     }
   }
 
+  const finalPrice = formatPriceWithDiscount(price, discountPercentage)
+
   return (
     <div className={styles.container} ref={ref}>
       <VehicleCardRibbons
@@ -111,7 +114,7 @@ const VehicleCard = ({
         visible={overlayActive}
         onClose={() => setOverlayActive(false)}
       >
-        <VehicleCardScreen />
+        <VehicleCardScreen price={finalPrice} title={vehicleTitle} />
       </VehicleCardOverlay>
       <div className={styles.image}>
         <BaseButton
@@ -153,9 +156,7 @@ const VehicleCard = ({
       <div className={styles.footer}>
         <div className={styles.prices}>
           {discountPercentage && (
-            <span className={styles.price}>{`${
-              price * discountPercentage
-            }€`}</span>
+            <span className={styles.price}>{`${finalPrice}€`}</span>
           )}
           <span
             className={classNames(

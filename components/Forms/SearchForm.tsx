@@ -69,7 +69,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
 
   const [openExpand, setOpenExpand] = useState(false)
   const { t } = useTranslation()
-  const onSubmit = async (values: any) => {
+  const onSubmit = (values: any) => {
     const query = toQueryBasic(values)
     if (query) {
       router.push({
@@ -157,7 +157,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
         type={Button.types.PRIMARY}
         fluid
         baseType="submit"
-        onClick={() => handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSubmit)}
       >
         {t('button.search')}
       </Button>
@@ -176,7 +176,7 @@ SearchFormComponent.defaultProps = {
 
 const SearchForm = reduxForm({
   form,
-  enableReinitialize: true,
+  enableReinitialize: false,
 })(SearchFormComponent)
 
 export default SearchForm
