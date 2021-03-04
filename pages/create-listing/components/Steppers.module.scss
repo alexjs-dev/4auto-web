@@ -1,5 +1,47 @@
 @import 'vars.scss';
 
 .container {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+    &.active {
+      svg {
+        color: $color-white;
+      }
+      button {
+        background: $color-primary;
+      }
+      hr {
+        background-color: $color-primary;
+        height: 1px;
+        border: 0;
+      }
+    }
+    hr {
+      width: 100%;
+    }
+    button {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-darker-gray;
+      svg {
+        color: $color-light-gray;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  .step:last-child {
+    width: 32px;
+  }
 }

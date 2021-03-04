@@ -1,19 +1,56 @@
 import React from 'react'
-import { MdLooksOne, MdLooksTwo, MdLooks3, MdLooks4, MdLooks5, MdLooks6 } from 'react-icons/md'
-import styles from 'Steppers.module.scss'
+import {
+  MdLooksOne,
+  MdLooksTwo,
+  MdLooks3,
+  MdLooks4,
+  MdLooks5,
+  MdLooks6,
+} from 'react-icons/md'
+import classNames from 'classnames'
+import times from 'lodash/times'
+import styles from './Steppers.module.scss'
 
-// type Steps 
-// type Props = {
-//     steps
-// }
+type Step = 1 | 2 | 3 | 4 | 5 | 6
 
-const Steppers = () => {
+type IconProp = Record<any, any>
+const Icons: IconProp = {
+  1: <MdLooksOne />,
+  2: <MdLooksTwo />,
+  3: <MdLooks3 />,
+  4: <MdLooks4 />,
+  5: <MdLooks5 />,
+  6: <MdLooks6 />,
+}
 
-    return (
-        <div className={styles.container}>
+type Props = {
+  steps: Step
+  currentStep?: 0 | Step
+}
 
-        </div>
-    )
+const Steppers: React.FunctionComponent<Props> = ({ steps, currentStep }) => {
+  // 3 - 45%
+  // 100% / (3-1) = 50 - 5
+  return (
+    <div className={styles.container}>
+      {times(steps, (step): any => {
+        const lastItem = step + 1 === steps
+        return (
+          <div
+            key={step}
+            className={classNames(
+              styles.step,
+              currentStep === step + 1 && styles.active
+            )}
+            style={!lastItem ? { width: `${100 / (steps - 1) - 5}%` } : {}}
+          >
+            <button>{Icons[step + 1]}</button>
+            {!lastItem && <hr />}
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default Steppers
