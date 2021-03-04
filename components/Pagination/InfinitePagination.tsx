@@ -2,13 +2,23 @@ import React from 'react'
 import { map, size } from 'lodash'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import Creators from '~store/vehicles/creators'
+import Creators from '../../store/vehicles/creators'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './InfinitePagination.module.scss'
-import { VehicleCard, Loader } from '~components'
-import { getVehicleCardProps } from '~utils/helpers'
+import { VehicleCard, Loader } from '../../components'
+import { getVehicleCardProps } from '../../utils/helpers'
 
-const InfinitePagination = ({ pagination, items }) => {
+type Pagination = {
+  total?: number
+}
+
+type Props = {
+  title?: string
+  items: any[]
+  pagination: Pagination
+}
+
+const InfinitePagination:React.FunctionComponent<Props> = ({ pagination, items, title }) => {
   const total = pagination?.total || 0
   const count = size(items)
   const hasMore = total > count
@@ -19,7 +29,7 @@ const InfinitePagination = ({ pagination, items }) => {
   }
   return (
     <div className={styles.container}>
-      <h1>{t('titles.allVehicles')}</h1>
+      <h1>{title ? title : t('titles.allVehicles')}</h1>
       <InfiniteScroll
         className={styles.carousel}
         dataLength={total} //This is important field to render the next data

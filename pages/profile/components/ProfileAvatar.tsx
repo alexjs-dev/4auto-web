@@ -10,7 +10,7 @@ const ProfileAvatar: React.FunctionComponent<Props> = ({ src, username }) => {
   return (
     <div className={styles.avatar}>
       {src && <img src={src} alt={username} />}
-      {!src && <UserAvatar firstName={username} />}
+      {!src && <UserAvatar fullScreen username={username} />}
     </div>
   )
 }

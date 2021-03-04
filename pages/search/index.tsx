@@ -17,12 +17,12 @@ const SearchPage: React.FunctionComponent = () => {
   const pagination = useSelector(vehiclesPaginationSelector)
   const listings = useSelector(listingsSelector)
   return (
-    <Layout background="gray" fullscreen>
+    <Layout background="white" fullscreen>
       <div className={styles.search}>
         <SearchForm fluid />
       </div>
       <ListingsCarousel listings={listings} title="Featured vehicles" />
-      <InfinitePagination pagination={pagination} items={listings} />
+      <InfinitePagination title="Search results (20)" pagination={pagination} items={listings} />
     </Layout>
   )
 }
