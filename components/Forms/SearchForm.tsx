@@ -8,20 +8,10 @@ import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { fieldTypes } from '../../utils/formValidators'
 import Creators from '../../store/vehicles/creators'
-import {
-  modelsSelector,
-  makesSelector,
-  modelsLoadingSelector,
-  makesLoadingSelector,
-} from '../../store/vehicles/selectors'
-import { transmissionTypes, bodyType, fuelTypes } from '../../consts/vehicle'
-import { Select, Checkbox, ExpandButton, Button } from '../'
+import { Checkbox, ExpandButton, Button } from '../'
 import SearchFormExtras from './parts/SearchFormExtras'
-import {
-  mapBaseOptions,
-  mapVehicleTranslatableOptions,
-  toQueryBasic,
-} from '../../utils/helpers'
+import BaseVehicleFields from './parts/BaseVehicleFields'
+import { toQueryBasic } from '../../utils/helpers'
 import styles from './SearchForm.module.scss'
 
 const form = 'searchForm'
@@ -38,13 +28,6 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
   handleSubmit,
 }) => {
   const dispatch = useDispatch()
-  const models = useSelector(modelsSelector)
-  const makes = useSelector(makesSelector)
-  const loadingModels = useSelector(modelsLoadingSelector)
-  const loadingMakes = useSelector(makesLoadingSelector)
-
-  const modelsOptions = mapBaseOptions(models)
-  const makesOptions = mapBaseOptions(makes)
 
   const selectFormValue = formValueSelector(form)
   const selectedMake = useSelector((state) =>
@@ -79,63 +62,12 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
     }
   }
 
-  const transmissions = mapVehicleTranslatableOptions(transmissionTypes, t)
-  const vehicleBodyTypes = mapVehicleTranslatableOptions(bodyType, t)
-  const fuels = mapVehicleTranslatableOptions(fuelTypes, t)
-
   return (
     <form
       className={classNames(styles.container, className, fluid && styles.fluid)}
       onSubmit={() => handleSubmit(onSubmit)}
     >
-      <div className={styles.row}>
-        {/* @ts-ignore */}
-        <Select
-          label={t('label.make')}
-          fluid
-          loading={loadingMakes}
-          placeholder={t('placeholder.make')}
-          name={fieldTypes.make}
-          options={makesOptions}
-        />
-        {/* @ts-ignore */}
-        <Select
-          label={t('label.model')}
-          fluid
-          loading={loadingModels}
-          placeholder={t('placeholder.model')}
-          name={fieldTypes.model}
-          options={modelsOptions}
-        />
-      </div>
-      <div className={styles.row}>
-        {/* @ts-ignore */}
-        <Select
-          label={t('label.fuel')}
-          fluid
-          placeholder={t('placeholder.fuel')}
-          name={fieldTypes.fuel}
-          options={fuels}
-        />
-        {/* @ts-ignore */}
-        <Select
-          label={t('label.gearbox')}
-          fluid
-          placeholder={t('placeholder.gearbox')}
-          name={fieldTypes.gearbox}
-          options={transmissions}
-        />
-      </div>
-      {/* @ts-ignore */}
-      <Select
-        label={t('label.bodyType')}
-        fluid
-        multiple
-        placeholder={t('placeholder.bodyType')}
-        name={fieldTypes.bodyType}
-        className={styles.marginBottom}
-        options={vehicleBodyTypes}
-      />
+      <BaseVehicleFields />
       <div className={styles.row}>
         {/* @ts-ignore */}
         <Checkbox name={fieldTypes.remember} label={t('label.remember')} />

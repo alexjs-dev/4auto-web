@@ -17,7 +17,9 @@
     "vehicle_of_the_day": "Vehicle of the day",
     "featuredVehicles": "Featured vehicles",
     "recommendedVehicles": "Recommended vehicles",
+    "createListing": "Create listing",
     "latestVehicles": "Latest vehicles",
+    "generalDetails": "General details",
     "allVehicles": "All vehicles"
   },
   "labels": {
@@ -87,6 +89,7 @@
     "gearbox": "Gearbox",
     "km": "Km",
     "litersIn100Km": "L/100 Km",
+    "VIN": "Vin Code",
     "k": "K",
     "EURO": "EURO",
     "centimeter": "cm",
@@ -185,6 +188,7 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "reset": "Reset",
+    "continue": "Continue",
     "call": "Call",
     "send": "Send",
     "mail": "Mail",

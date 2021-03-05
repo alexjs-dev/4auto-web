@@ -1,0 +1,10 @@
+@import 'vars.scss';
+
+.container {
+  input {
+    text-transform: uppercase;
+  }
+  button {
+    margin-top: spacing(4);
+  }
+}

@@ -1,14 +1,29 @@
 import React from 'react'
+import get from 'lodash/get'
+import toNumber from 'lodash/toNumber'
 import { Layout } from '~/components'
 import Steppers from './components/Steppers'
+import { useRouter } from 'next/router'
+import CreateListingForm from './components/form/CreateListingForm'
+
 import styles from './create.module.scss'
 
 const CreateListingPage: React.FunctionComponent = () => {
+  const router = useRouter()
+
+  const { query } = router
+  const step = toNumber(get(query, 'step')) || 1
+  const onSetStep = (n: number) => {
+    router.push({
+      pathname: '/create-listing',
+      query: { step: n.toString() },
+    })
+  }
   return (
     <div className={styles.container}>
-      <Layout>
-        <Steppers steps={3} currentStep={1} />
-        <h1>Create listing </h1>
+      <Layout background="white">
+        <Steppers steps={3} currentStep={step} setStep={onSetStep} />
+        <CreateListingForm step={step} setStep={onSetStep} />
       </Layout>
     </div>
   )

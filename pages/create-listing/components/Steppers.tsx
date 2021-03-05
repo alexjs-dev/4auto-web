@@ -11,7 +11,7 @@ import classNames from 'classnames'
 import times from 'lodash/times'
 import styles from './Steppers.module.scss'
 
-type Step = 1 | 2 | 3 | 4 | 5 | 6
+type Step = number
 
 type IconProp = Record<any, any>
 const Icons: IconProp = {
@@ -26,9 +26,14 @@ const Icons: IconProp = {
 type Props = {
   steps: Step
   currentStep?: 0 | Step
+  setStep: (n: number) => void
 }
 
-const Steppers: React.FunctionComponent<Props> = ({ steps, currentStep }) => {
+const Steppers: React.FunctionComponent<Props> = ({
+  steps,
+  currentStep,
+  setStep,
+}) => {
   // 3 - 45%
   // 100% / (3-1) = 50 - 5
   return (
@@ -44,7 +49,7 @@ const Steppers: React.FunctionComponent<Props> = ({ steps, currentStep }) => {
             )}
             style={!lastItem ? { width: `${100 / (steps - 1) - 5}%` } : {}}
           >
-            <button>{Icons[step + 1]}</button>
+            <button onClick={() => setStep(step + 1)}>{Icons[step + 1]}</button>
             {!lastItem && <hr />}
           </div>
         )

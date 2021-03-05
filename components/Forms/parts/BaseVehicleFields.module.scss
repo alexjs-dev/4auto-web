@@ -1,0 +1,8 @@
+@import 'vars.scss';
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: spacing(2);
+  margin-bottom: spacing(2);
+}

@@ -25,6 +25,8 @@ export const fieldTypes = {
   price: 'price',
   year: 'year',
   remember: 'remember',
+  regNumber: 'regNumber',
+  VIN: 'VIN',
 }
 
 export const autoCompleteFields = {
