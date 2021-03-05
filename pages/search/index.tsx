@@ -19,10 +19,15 @@ const SearchPage: React.FunctionComponent = () => {
   return (
     <Layout background="white" fullscreen>
       <div className={styles.search}>
+        <h1>Found: 20</h1>
         <SearchForm fluid />
       </div>
       <ListingsCarousel listings={listings} title="Featured vehicles" />
-      <InfinitePagination title="Search results (20)" pagination={pagination} items={listings} />
+      <InfinitePagination
+        title="Search results (20)"
+        pagination={pagination}
+        items={listings}
+      />
     </Layout>
   )
 }
