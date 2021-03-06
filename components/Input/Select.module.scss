@@ -114,7 +114,10 @@
     text-align: left;
     padding: spacing(2) spacing(1);
     &:focus {
-      background: $color-light-gray;
+      background: $color-complimentary-transparent-heavy;
+      span {
+        color: $color-white;
+      }
     }
     span {
       font-family: $font-family-secondary;
@@ -127,7 +130,10 @@
       width: 100%;
     }
     &:hover {
-      background: $color-light-gray;
+      background: $color-complimentary-transparent-heavy;
+      span {
+        color: $color-white;
+      }
     }
   }
   .active {

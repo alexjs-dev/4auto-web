@@ -1,13 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from 'react'
-import { reduxForm, formValueSelector, change } from 'redux-form' // tslint:disable
+import React, { useState } from 'react'
+import { reduxForm } from 'redux-form' // tslint:disable
 import classNames from 'classnames'
-import { useDispatch, useSelector } from 'react-redux'
+import useFetchVehicleModels from '../../hooks/useFetchVehicleModels'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { fieldTypes } from '../../utils/formValidators'
-import Creators from '../../store/vehicles/creators'
 import { Checkbox, ExpandButton, Button } from '../'
 import SearchFormExtras from './parts/SearchFormExtras'
 import BaseVehicleFields from './parts/BaseVehicleFields'
@@ -27,29 +26,8 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
   fluid,
   handleSubmit,
 }) => {
-  const dispatch = useDispatch()
-
-  const selectFormValue = formValueSelector(form)
-  const selectedMake = useSelector((state) =>
-    selectFormValue(state, fieldTypes.make)
-  )
-
   const router = useRouter()
-
-  useEffect(() => {
-    dispatch(Creators.fetchModels())
-    dispatch(Creators.fetchMakes())
-  }, [])
-
-  useEffect(() => {
-    if (selectedMake) {
-      dispatch(change(form, fieldTypes.model, null))
-      dispatch(
-        Creators.fetchModels({ resetPagination: true, makeId: selectedMake })
-      )
-    }
-  }, [selectedMake])
-
+  useFetchVehicleModels(form)
   const [openExpand, setOpenExpand] = useState(false)
   const { t } = useTranslation()
   const onSubmit = (values: any) => {

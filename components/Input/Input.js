@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { Field } from 'redux-form'
 import {
@@ -44,6 +45,7 @@ const InputComponent = (props) => {
     forwardedRef,
     isRequired,
     small,
+    className,
     ...rest
   } = props
   const { name } = input
@@ -55,7 +57,7 @@ const InputComponent = (props) => {
   }, [type, useType])
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       <InputLabel
         isRequired={isRequired}
         label={label}
@@ -102,6 +104,7 @@ InputComponent.propTypes = {
   disabled: PropTypes.bool,
   small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
+  className: PropTypes.string,
 }
 
 InputComponent.defaultProps = {
@@ -112,6 +115,7 @@ InputComponent.defaultProps = {
   isRequired: false,
   forwardedRef: null,
   small: false,
+  className: null,
 }
 
 const Input = ({
@@ -187,6 +191,7 @@ Input.propTypes = {
   hidden: PropTypes.bool,
   small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
+  className: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -201,6 +206,7 @@ Input.defaultProps = {
   hidden: false,
   small: false,
   forwardedRef: null,
+  className: null,
 }
 
 const WrappedComponent = React.forwardRef((props, ref) => {

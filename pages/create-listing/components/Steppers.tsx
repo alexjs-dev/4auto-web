@@ -25,7 +25,7 @@ const Icons: IconProp = {
 
 type Props = {
   steps: Step
-  currentStep?: 0 | Step
+  currentStep: number
   setStep: (n: number) => void
 }
 
@@ -45,7 +45,7 @@ const Steppers: React.FunctionComponent<Props> = ({
             key={step}
             className={classNames(
               styles.step,
-              currentStep === step + 1 && styles.active
+              currentStep >= step + 1 && styles.active
             )}
             style={!lastItem ? { width: `${100 / (steps - 1) - 5}%` } : {}}
           >

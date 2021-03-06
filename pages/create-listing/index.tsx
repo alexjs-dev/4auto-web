@@ -4,13 +4,14 @@ import toNumber from 'lodash/toNumber'
 import { Layout } from '~/components'
 import Steppers from './components/Steppers'
 import { useRouter } from 'next/router'
+import useFetchVehicleModels from '../../hooks/useFetchVehicleModels'
 import CreateListingForm from './components/form/CreateListingForm'
 
 import styles from './create.module.scss'
 
 const CreateListingPage: React.FunctionComponent = () => {
   const router = useRouter()
-
+  useFetchVehicleModels('createListingGeneralForm')
   const { query } = router
   const step = toNumber(get(query, 'step')) || 1
   const onSetStep = (n: number) => {

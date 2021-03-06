@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import get from 'lodash/get'
-import { reduxForm, getFormValues, change } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import { useTranslation } from 'react-i18next'
-import { Button, Input } from '../../../../../components'
+import { Button } from '../../../../../components'
 import {
   fieldTypes,
   validateFormData,
 } from '../../../../../utils/formValidators'
 import styles from './CreateListingGeneralForm.module.scss'
 import BaseVehicleFields from '~/components/Forms/parts/BaseVehicleFields'
+import AdvVehicleFields from '~/components/Forms/parts/AdvVehicleFields'
 
 type Props = any
 
@@ -17,14 +18,14 @@ const form = 'createListingGeneralForm'
 
 const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
   handleSubmit,
+  setStep,
 }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const baseFormValues = useSelector(getFormValues('createListingBaseForm'))
   const regNumber = get(baseFormValues, fieldTypes.regNumber)
   useEffect(() => {
-    if (regNumber) {
-      dispatch(change(form, fieldTypes.regNumber, regNumber))
+    if (!regNumber) {
+      setStep(1)
     }
   }, [baseFormValues])
 
@@ -40,15 +41,8 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
       }}
     >
       <h1>{t('titles.generalDetails')}</h1>
-      <Input
-        /* @ts-ignore */
-        name={fieldTypes.regNumber}
-        label={t('label.regNumber')}
-        placeholder="123ABC"
-        disabled
-        isRequired
-      />
       <BaseVehicleFields singleVehicleBodySelect />
+      <AdvVehicleFields />
       <Button
         fluid
         label={t('button.continue')}

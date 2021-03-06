@@ -3,21 +3,23 @@ import { map, slice, find } from 'lodash'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
+import { FiXCircle as DisabledIcon } from 'react-icons/fi'
 import ArrowDownIcon from '~public/icons/arrow-down.svg'
 import useOutsideClick from '~hooks/useOutsideClick'
 import { BaseButton } from '~components'
 import { colorTypes, colorCodes } from '~consts/vehicle'
+import InputLabel from '../Input/parts/InputLabel'
 import styles from './ColorPicker.module.scss'
 
-const colors = map(colorTypes, color => ({
+const colors = map(colorTypes, (color) => ({
   key: color,
   color: colorCodes[color],
 }))
 
-const BaseColorPicker = ({ input, visibleColors }) => {
+const BaseColorPicker = ({ input, label, visibleColors, allowEmpty }) => {
   const ref = useRef(null)
 
-  const setActive = key => {
+  const setActive = (key) => {
     if (input.onChange) input.onChange(key)
   }
 
@@ -50,38 +52,51 @@ const BaseColorPicker = ({ input, visibleColors }) => {
     value: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   }
-
   return (
-    <div className={styles.container} ref={ref}>
-      {map(baseColors, ({ key, ...rest }) => (
-        <ColorSwatch key={key} value={key} {...rest} />
-      ))}
-      {activeSecondary && (
-        <div
-          style={{
-            borderColor: activeSecondary.color,
-          }}
-          className={styles.colorContainer}
-        >
+    <div className={styles.container}>
+      {label && <InputLabel label={label} name={name} />}
+      <div className={styles.swatch} ref={ref}>
+        {allowEmpty && (
+          <BaseButton
+            onClick={() => setActive(null)}
+            className={classNames(
+              styles.emptyButton,
+              !input.value && styles.activeEmpty
+            )}
+          >
+            <DisabledIcon size="24px" />
+          </BaseButton>
+        )}
+        {map(baseColors, ({ key, ...rest }) => (
+          <ColorSwatch key={key} value={key} {...rest} />
+        ))}
+        {activeSecondary && (
           <div
-            className={styles.color}
-            style={{ backgroundColor: activeSecondary.color }}
-          />
-        </div>
-      )}
-      <BaseButton
-        onClick={() => setOpen(!open)}
-        className={classNames(styles.arrowIcon, open && styles.active)}
-      >
-        <ArrowDownIcon />
-      </BaseButton>
-      {open && (
-        <div className={styles.dropdown}>
-          {map(extraColors, ({ key, ...rest }) => (
-            <ColorSwatch key={key} value={key} {...rest} />
-          ))}
-        </div>
-      )}
+            style={{
+              borderColor: activeSecondary.color,
+            }}
+            className={styles.colorContainer}
+          >
+            <div
+              className={styles.color}
+              style={{ backgroundColor: activeSecondary.color }}
+            />
+          </div>
+        )}
+        <BaseButton
+          onClick={() => setOpen(!open)}
+          className={classNames(styles.arrowIcon, open && styles.active)}
+        >
+          <ArrowDownIcon />
+        </BaseButton>
+        {open && (
+          <div className={styles.dropdown}>
+            {map(extraColors, ({ key, ...rest }) => (
+              <ColorSwatch key={key} value={key} {...rest} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -92,9 +107,11 @@ BaseColorPicker.propTypes = {
     value: PropTypes.string,
   }).isRequired,
   visibleColors: PropTypes.number.isRequired,
+  allowEmpty: PropTypes.bool,
+  label: PropTypes.string,
 }
 
-const ColorPicker = ({ name, visibleColors }) => {
+const ColorPicker = ({ name, visibleColors, allowEmpty, label }) => {
   if (!name) return null
   return (
     <Field
@@ -103,6 +120,8 @@ const ColorPicker = ({ name, visibleColors }) => {
       props={{
         name,
         visibleColors,
+        allowEmpty,
+        label,
       }}
     />
   )
@@ -110,11 +129,15 @@ const ColorPicker = ({ name, visibleColors }) => {
 
 ColorPicker.propTypes = {
   name: PropTypes.string.isRequired,
+  allowEmpty: PropTypes.bool,
   visibleColors: PropTypes.number,
+  label: PropTypes.string,
 }
 
 ColorPicker.defaultProps = {
   visibleColors: 3,
+  allowEmpty: false,
+  label: null,
 }
 
 export default ColorPicker
