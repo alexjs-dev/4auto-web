@@ -36,6 +36,9 @@
 .container {
   display: block;
   margin-bottom: spacing(2);
+  &.fluid {
+    width: 100%;
+  }
 }
 
 .labelError {

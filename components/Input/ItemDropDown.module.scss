@@ -1,0 +1,57 @@
+@import 'vars.scss';
+
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-80%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: spacing(2);
+  svg {
+    margin-left: spacing(1);
+  }
+  .arrowIcon {
+    transition: $transition;
+    &.active {
+      transform: rotate(180deg);
+      path {
+        stroke: $color-primary;
+      }
+    }
+  }
+
+  &:hover {
+    .arrowIcon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.content {
+  display: none;
+  animation-fill-mode: forwards;
+  &.visible {
+    animation: slideInTop 0.4s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: spacing(2) 0;
+  padding-bottom: spacing(2);
+  border-bottom: $border-light-gray;
+}

@@ -1,11 +1,72 @@
 import React from 'react'
 import map from 'lodash/map'
 import { useTranslation } from 'react-i18next'
-import { ColorPicker, Input, Select } from '~/components'
+import {
+  ColorPicker,
+  Input,
+  Select,
+  ItemDropDown,
+  Checkbox,
+} from '~/components'
 import { fieldTypes } from '~/utils/formValidators'
 import styles from './BaseVehicleFields.module.scss'
+import config from '../../../components/Vehicle/vehicleAdvDetailsConfig.json'
 
-const AdvVehicleFields = () => {
+type Props = {
+  item: {
+    key: string
+    type: string
+    hideOnEmpty?: boolean
+    hideOnEdit?: boolean
+    list?: string[]
+  }
+}
+
+const Detail: React.FunctionComponent<Props> = ({ item }) => {
+  const { key, type } = item
+  const { t } = useTranslation()
+  if (item.hideOnEdit) return null
+  switch (type) {
+    case 'boolean':
+      return (
+        /* @ts-ignore */
+        <Checkbox
+          name={key}
+          label={t(`label.${key}`)}
+          className={styles.checkbox}
+        />
+      )
+    case 'enum':
+      return (
+        /* @ts-ignore */
+        <Select
+          fluid
+          label={t(`label.${key}`)}
+          name={key}
+          className={styles.spacing}
+          options={map(item.list, (option) => ({
+            value: option,
+            label: t(`label.${option}`),
+          }))}
+        />
+      )
+    case 'string':
+    case 'number':
+      return (
+        <Input
+          /* @ts-ignore */
+          fluid
+          name={key}
+          label={t(`label.${key}`)}
+          type={type === 'string' ? 'text' : 'number'}
+        />
+      )
+    default:
+      return null
+  }
+}
+
+const AdvVehicleFields: React.FunctionComponent = () => {
   const { t } = useTranslation()
   return (
     <>
@@ -13,6 +74,12 @@ const AdvVehicleFields = () => {
         name={fieldTypes.color}
         allowEmpty
         label={t('label.color')}
+      />
+      {/*@ts-ignore */}
+      <Checkbox
+        name="metallicColor"
+        label={t('label.metallicColor')}
+        className={styles.checkbox}
       />
       <Input
         /* @ts-ignore */
@@ -61,7 +128,7 @@ const AdvVehicleFields = () => {
       <div className={styles.row}>
         <Input
           /* @ts-ignore */
-          name={fieldTypes.mileage}
+          name={fieldTypes.power}
           label={t('label.power')}
           placeholder="110"
           isRequired
@@ -76,9 +143,7 @@ const AdvVehicleFields = () => {
           type="number"
         />
       </div>
-
       <h4 className={styles.spacing}>{t('titles.consumptionDetails')}</h4>
-
       <div className={styles.row}>
         <Input
           /* @ts-ignore */
@@ -115,6 +180,15 @@ const AdvVehicleFields = () => {
           type="number"
         />
       </div>
+      {config?.data &&
+        config.data.map(({ key, list }) => (
+          <ItemDropDown title={t(`label.${key}`)}>
+            {map(list, (item) => (
+              /* @ts-ignore */
+              <Detail key={item.key} item={item} />
+            ))}
+          </ItemDropDown>
+        ))}
     </>
   )
 }

@@ -46,6 +46,7 @@ const InputComponent = (props) => {
     isRequired,
     small,
     className,
+    fluid,
     ...rest
   } = props
   const { name } = input
@@ -57,7 +58,9 @@ const InputComponent = (props) => {
   }, [type, useType])
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div
+      className={classNames(styles.container, className, fluid && styles.fluid)}
+    >
       <InputLabel
         isRequired={isRequired}
         label={label}
@@ -105,6 +108,7 @@ InputComponent.propTypes = {
   small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
   className: PropTypes.string,
+  fluid: PropTypes.bool,
 }
 
 InputComponent.defaultProps = {
@@ -115,6 +119,7 @@ InputComponent.defaultProps = {
   isRequired: false,
   forwardedRef: null,
   small: false,
+  fluid: false,
   className: null,
 }
 
@@ -189,6 +194,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
+  fluid: PropTypes.bool,
   small: PropTypes.bool,
   forwardedRef: PropTypes.shape(),
   className: PropTypes.string,
@@ -205,6 +211,7 @@ Input.defaultProps = {
   disabled: false,
   hidden: false,
   small: false,
+  fluid: false,
   forwardedRef: null,
   className: null,
 }

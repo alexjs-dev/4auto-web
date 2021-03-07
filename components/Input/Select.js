@@ -99,7 +99,10 @@ const SelectComponent = ({
   }
 
   return (
-    <div ref={ref} className={classNames(styles.root, className)}>
+    <div
+      ref={ref}
+      className={classNames(styles.root, fluid && styles.fluid, className)}
+    >
       <div
         className={classNames(styles.container, fluid && styles.fluid)}
         onClick={handleOpen}

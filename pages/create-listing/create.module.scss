@@ -6,7 +6,7 @@
     margin: spacing(2) 0;
   }
 
-  padding: spacing(4) spacing(0.5);
+  padding: spacing(4) spacing(0.5) spacing(20) spacing(0.5);
   @media (min-width: $tablet) {
     padding: spacing(8) spacing(2);
   }

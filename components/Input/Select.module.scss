@@ -6,6 +6,10 @@
 
 .root {
   // overflow: hidden;
+  &.fluid {
+    width: 100%;
+    max-width: unset;
+  }
 }
 
 .container {

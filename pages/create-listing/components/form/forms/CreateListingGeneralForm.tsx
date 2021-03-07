@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import get from 'lodash/get'
-import { reduxForm, getFormValues } from 'redux-form'
+import React from 'react'
+import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
 import { Button } from '../../../../../components'
 import {
@@ -21,16 +19,10 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
   setStep,
 }) => {
   const { t } = useTranslation()
-  const baseFormValues = useSelector(getFormValues('createListingBaseForm'))
-  const regNumber = get(baseFormValues, fieldTypes.regNumber)
-  useEffect(() => {
-    if (!regNumber) {
-      setStep(1)
-    }
-  }, [baseFormValues])
 
   const onSubmit = async (values: any) => {
-    await validateFormData(values, [fieldTypes.regNumber])
+    await validateFormData(values, [fieldTypes.make])
+    setStep(3)
   }
   return (
     <form

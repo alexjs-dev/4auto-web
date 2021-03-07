@@ -1,0 +1,12 @@
+@import 'vars.scss';
+
+.container {
+  input {
+    text-transform: uppercase;
+  }
+}
+
+.checkbox {
+  width: 100%;
+  margin-bottom: spacing(2);
+}

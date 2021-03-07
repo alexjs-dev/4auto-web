@@ -40,7 +40,8 @@ const CheckboxComponent = ({
         className={classNames(
           styles.container,
           fluid && styles.fluid,
-          small && styles.small
+          small && styles.small,
+          className
         )}
         tabIndex="0"
         onKeyPress={handleKeyPress}
@@ -53,8 +54,7 @@ const CheckboxComponent = ({
             disabled && styles.disabled,
             fluid && styles.fluid,
             errorState && styles.error,
-            small && styles.small,
-            className
+            small && styles.small
           )}
         >
           <CheckIcon />

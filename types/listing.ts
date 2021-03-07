@@ -2,6 +2,8 @@ import Address from './address'
 import Vehicle from './vehicle'
 import User from './user'
 
+// to-do add description
+
 type Listing = {
   availableUntil: string
   createdAt: string

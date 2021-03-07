@@ -4,28 +4,36 @@
       "key": "safety",
       "list": [
         {
-          "key": "alarm"
+          "key": "alarm",
+          "type": "boolean"
         },
         {
-          "key": "centralLocking"
+          "key": "centralLocking",
+          "type": "boolean"
         },
         {
-          "key": "disabilityEquipment"
+          "key": "disabilityEquipment",
+          "type": "boolean"
         },
         {
-          "key": "immobilizer"
+          "key": "immobilizer",
+          "type": "boolean"
         },
         {
-          "key": "parkingAid"
+          "key": "parkingAid",
+          "type": "boolean"
         },
         {
-          "key": "parkingCamera"
+          "key": "parkingCamera",
+          "type": "boolean"
         },
         {
-          "key": "abs"
+          "key": "abs",
+          "type": "boolean"
         },
         {
           "key": "crashed",
+          "type": "boolean",
           "hideOnEmpty": true
         }
       ]
@@ -34,64 +42,86 @@
       "key": "comfort",
       "list": [
         {
-          "key": "interiorColor"
+          "key": "interiorColor",
+          "type": "enum",
+          "list": ["light", "dark"]
         },
         {
-          "key": "bluetooth"
+          "key": "bluetooth",
+          "type": "boolean"
         },
         {
-          "key": "cdPlayer"
+          "key": "cdPlayer",
+          "type": "boolean"
         },
         {
-          "key": "climateControl"
+          "key": "climateControl",
+          "type": "boolean"
         },
         {
-          "key": "cruiseControl"
+          "key": "cruiseControl",
+          "type": "boolean"
         },
         {
-          "key": "electricAdjSeats"
+          "key": "electricAdjSeats",
+          "type": "boolean"
         },
         {
-          "key": "electricWindows"
+          "key": "electricWindows",
+          "type": "boolean"
         },
         {
-          "key": "handsFree"
+          "key": "handsFree",
+          "type": "boolean"
         },
         {
-          "key": "memorySeats"
+          "key": "memorySeats",
+          "type": "boolean"
         },
         {
-          "key": "memoryWheel"
+          "key": "memoryWheel",
+          "type": "boolean"
         },
         {
-          "key": "mirrorHeating"
+          "key": "mirrorHeating",
+          "type": "boolean"
         },
         {
-          "key": "mirrorLink"
+          "key": "mirrorLink",
+          "type": "boolean"
         },
         {
-          "key": "navSystem"
+          "key": "navSystem",
+          "type": "boolean"
         },
         {
-          "key": "panoramaRoof"
+          "key": "panoramaRoof",
+          "type": "boolean"
         },
         {
-          "key": "rainSensor"
+          "key": "rainSensor",
+          "type": "boolean"
         },
         {
-          "key": "seatHeating"
+          "key": "seatHeating",
+          "type": "boolean"
         },
         {
-          "key": "selfDriving"
+          "key": "selfDriving",
+          "type": "boolean"
         },
         {
-          "key": "startStop"
+          "key": "startStop",
+          "type": "boolean"
         },
         {
-          "key": "sunRoof"
+          "key": "sunRoof",
+          "type": "boolean"
         },
         {
-          "key": "seatType"
+          "key": "seatType",
+          "type": "enum",
+          "list": ["sports", "standard"]
         }
       ]
     },
@@ -100,25 +130,36 @@
       "key": "other",
       "list": [
         {
-          "key": "vin"
+          "key": "vin",
+          "hideOnEdit": true,
+          "type": "string"
         },
         {
-          "key": "regNumber"
+          "key": "regNumber",
+          "hideOnEdit": true,
+          "type": "string"
         },
         {
-          "key": "warrantyBook"
+          "key": "warrantyBook",
+          "type": "boolean"
         },
         {
           "key": "consumptionCombined",
-          "unit": "label.litersIn100Km"
+          "hideOnEdit": true,
+          "unit": "label.litersIn100Km",
+          "type": "string"
         },
         {
           "key": "consumptionHighway",
-          "unit": "label.litersIn100Km"
+          "hideOnEdit": true,
+          "unit": "label.litersIn100Km",
+          "type": "string"
         },
         {
           "key": "consumptionUrban",
-          "unit": "label.litersIn100Km"
+          "hideOnEdit": true,
+          "unit": "label.litersIn100Km",
+          "type": "string"
         }
       ]
     },
@@ -127,30 +168,38 @@
       "list": [
         {
           "key": "emissionStandard",
-          "unit": "label.EURO"
+          "unit": "label.EURO",
+          "type": "enum",
+          "list": ["1", "2", "3", "4", "5", "6"]
         },
         {
           "key": "fuelTankCapacity",
-          "unit": "label.l"
+          "unit": "label.l",
+          "type": "string"
         },
         {
           "key": "height",
-          "unit": "label.centimeter"
+          "unit": "label.centimeter",
+          "type": "number"
         },
         {
           "key": "weight",
-          "unit": "label.centimeter"
+          "unit": "label.centimeter",
+          "type": "number"
         },
         {
           "key": "tireSize",
-          "unit": "label.inch"
+          "unit": "label.inch",
+          "type": "number"
         },
         {
-          "key": "rightHandDrive"
+          "key": "rightHandDrive",
+          "type": "boolean"
         },
         {
           "key": "capacity",
-          "unit": "label.l"
+          "unit": "label.l",
+          "type": "number"
         }
       ]
     },
@@ -158,7 +207,9 @@
       "key": "lights",
       "list": [
         {
-          "key": "lights"
+          "key": "lights",
+          "type": "enum",
+          "list": ["xenon", "halogen", "other"]
         }
       ]
     },
@@ -166,17 +217,39 @@
       "key": "exterior",
       "list": [
         {
-          "key": "towbar"
+          "key": "towbar",
+          "type": "boolean"
         },
         {
           "key": "doors",
+          "type": "enum",
+          "list": ["2", "4", "6"],
           "hideOnEmpty": true
         },
         {
-          "key": "color"
+          "key": "color",
+          "type": "enum",
+          "hideOnEdit": true,
+          "list": [
+            "white",
+            "silver",
+            "black",
+            "gold",
+            "blue",
+            "red",
+            "purple",
+            "yellow",
+            "pink",
+            "green",
+            "orange",
+            "gray",
+            "brown"
+          ]
         },
         {
-          "key": "metallicColor"
+          "key": "metallicColor",
+          "hideOnEdit": true,
+          "type": "boolean"
         }
       ]
     }

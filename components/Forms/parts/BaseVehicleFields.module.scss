@@ -10,3 +10,8 @@
 .spacing {
   margin-bottom: spacing(2);
 }
+
+.checkbox {
+  @extend .spacing;
+  min-width: 50%;
+}

@@ -25,7 +25,7 @@ import {
 } from './Pagination'
 import { BaseButton, Button, ExpandButton } from './Button'
 import { VehicleDetail, VehicleAdvDetails } from './Vehicle'
-import { BaseInput, Input, Select, Checkbox } from './Input'
+import { BaseInput, Input, Select, Checkbox, ItemDropDown } from './Input'
 import { ImageCarousel } from './Image'
 import { Modal } from './Modals'
 export {
@@ -34,6 +34,7 @@ export {
   Avatar,
   VehicleCard,
   AdBanner,
+  ItemDropDown,
   BaseButton,
   ImageCarousel,
   ListingsCarousel,
