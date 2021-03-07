@@ -12,10 +12,11 @@ import {
 } from '../../store/vehicles/selectors'
 import styles from './search.module.scss'
 
+
 const SearchPage: React.FunctionComponent = () => {
   // const { query } = useRouter()
   const pagination = useSelector(vehiclesPaginationSelector)
-  const listings = useSelector(listingsSelector)
+  const listings = useSelector he(listingsSelector)
   return (
     <Layout background="white" fullscreen>
       <div className={styles.search}>
