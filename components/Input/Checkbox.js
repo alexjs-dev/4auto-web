@@ -16,6 +16,7 @@ const CheckboxComponent = ({
   disabled,
   meta,
   small,
+  tooltip,
   fluid,
   className,
   isRequired,
@@ -63,6 +64,7 @@ const CheckboxComponent = ({
           label={label}
           name={name}
           isRequired={isRequired}
+          tooltip={tooltip}
           className={styles.label}
         />
       </div>
@@ -78,6 +80,7 @@ CheckboxComponent.propTypes = {
   onChange: PropTypes.func,
   fluid: PropTypes.bool,
   label: PropTypes.string,
+  tooltip: PropTypes.string,
   isRequired: PropTypes.bool,
   small: PropTypes.bool,
   input: PropTypes.shape({
@@ -108,6 +111,7 @@ CheckboxComponent.defaultProps = {
   disabled: false,
   isRequired: false,
   onChange: null,
+  tooltip: null,
 }
 
 const Checkbox = ({ visible, name, validate, normalize, ...rest }) => {
@@ -132,6 +136,7 @@ Checkbox.propTypes = {
   validate: PropTypes.func,
   normalize: PropTypes.func,
   small: PropTypes.bool,
+  tooltip: PropTypes.string,
 }
 
 Checkbox.defaultProps = {
@@ -140,6 +145,7 @@ Checkbox.defaultProps = {
   validate: null,
   normalize: null,
   small: false,
+  tooltip: null,
 }
 
 export default Checkbox

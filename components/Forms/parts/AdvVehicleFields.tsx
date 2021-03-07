@@ -139,6 +139,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           name={fieldTypes.capacity}
           label={t('label.capacity')}
           placeholder="2.5"
+          step="0.1"
           isRequired
           type="number"
         />
@@ -150,6 +151,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           name={fieldTypes.consumptionCombined}
           label={t('label.consumptionCombined')}
           placeholder="8.5"
+          step="0.1"
           isRequired
           type="number"
         />
@@ -168,6 +170,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           name={fieldTypes.consumptionUrban}
           label={t('label.consumptionUrban')}
           placeholder="11"
+          step="0.1"
           isRequired
           type="number"
         />
@@ -176,7 +179,6 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           name={fieldTypes.fuelTankCapacity}
           label={t('label.fuelTankCapacity')}
           placeholder="60"
-          isRequired
           type="number"
         />
       </div>

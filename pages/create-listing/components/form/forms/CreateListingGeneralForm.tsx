@@ -33,7 +33,16 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
       }}
     >
       <h1>{t('titles.generalDetails')}</h1>
-      <BaseVehicleFields singleVehicleBodySelect />
+      <BaseVehicleFields
+        singleVehicleBodySelect
+        requiredFields={[
+          fieldTypes.make,
+          fieldTypes.model,
+          fieldTypes.fuel,
+          fieldTypes.gearbox,
+          fieldTypes.bodyType,
+        ]}
+      />
       <AdvVehicleFields />
       <Button
         fluid

@@ -1,12 +1,26 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useRef } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { FcQuestions } from 'react-icons/fc'
+import useOutsideClick from '~hooks/useOutsideClick'
 import styles from '../Input.module.scss'
 
-const InputLabel = ({ label, isRequired, name, active, small, className }) => {
+const InputLabel = ({
+  label,
+  isRequired,
+  name,
+  active,
+  small,
+  tooltip,
+  className,
+}) => {
+  const [tooltipActive, setTooltipActive] = useState(false)
+  const ref = useRef(null)
+  useOutsideClick({ ref, isOpen: tooltipActive, setOpen: setTooltipActive })
   if (!label) return null
   return (
     <div
+      ref={ref}
       className={classNames(
         styles.inputLabelContainer,
         className,
@@ -18,6 +32,17 @@ const InputLabel = ({ label, isRequired, name, active, small, className }) => {
         <span>{label}</span>
         {isRequired && <span className={styles.required}>&nbsp;*</span>}
       </label>
+      {tooltip && (
+        <button
+          className={styles.tooltipButton}
+          onClick={() => setTooltipActive(!tooltipActive)}
+        >
+          <FcQuestions size="20px" />
+        </button>
+      )}
+      {tooltipActive && tooltip && (
+        <span className={styles.tooltip}>{tooltip}</span>
+      )}
     </div>
   )
 }
@@ -28,12 +53,14 @@ InputLabel.propTypes = {
   isRequired: PropTypes.bool,
   small: PropTypes.bool,
   name: PropTypes.string,
+  tooltip: PropTypes.string,
 }
 
 InputLabel.defaultProps = {
   label: null,
   small: false,
   className: null,
+  tooltip: null,
   isRequired: false,
 }
 

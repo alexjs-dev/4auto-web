@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import includes from 'lodash/includes'
 import {
   modelsSelector,
   makesSelector,
@@ -18,10 +19,12 @@ import styles from './BaseVehicleFields.module.scss'
 
 type Props = {
   singleVehicleBodySelect?: boolean
+  requiredFields?: string[]
 }
 
 const BaseVehicleFields: React.FunctionComponent<Props> = ({
   singleVehicleBodySelect,
+  requiredFields,
 }) => {
   const { t } = useTranslation()
   const models = useSelector(modelsSelector)
@@ -45,6 +48,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
           fluid
           loading={loadingMakes}
           placeholder={t('placeholder.make')}
+          isRequired={includes(requiredFields, fieldTypes.make)}
           name={fieldTypes.make}
           options={makesOptions}
         />
@@ -55,6 +59,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
           loading={loadingModels}
           placeholder={t('placeholder.model')}
           name={fieldTypes.model}
+          isRequired={includes(requiredFields, fieldTypes.model)}
           options={modelsOptions}
         />
       </div>
@@ -65,6 +70,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
           fluid
           placeholder={t('placeholder.fuel')}
           name={fieldTypes.fuel}
+          isRequired={includes(requiredFields, fieldTypes.fuel)}
           options={fuels}
         />
         {/* @ts-ignore */}
@@ -73,6 +79,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
           fluid
           placeholder={t('placeholder.gearbox')}
           name={fieldTypes.gearbox}
+          isRequired={includes(requiredFields, fieldTypes.gearbox)}
           options={transmissions}
         />
       </div>
@@ -81,6 +88,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
         label={t('label.bodyType')}
         fluid
         multiple={!singleVehicleBodySelect}
+        isRequired={includes(requiredFields, fieldTypes.bodyType)}
         placeholder={t('placeholder.bodyType')}
         name={fieldTypes.bodyType}
         className={styles.marginBottom}

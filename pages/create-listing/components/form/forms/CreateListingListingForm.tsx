@@ -38,12 +38,14 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
       <Checkbox
         name={fieldTypes.urgent}
         label={t('label.urgent')}
+        tooltip="Listing will only last only 2 weeks (default 1 month), but will be marked as urgent"
         className={styles.checkbox}
       />
       {/*@ts-ignore */}
       <Checkbox
         name={fieldTypes.featured}
-        label={t('label.featured')}
+        label={`${t('label.featured')} (1 EUR)`}
+        tooltip="Paid feature to get promoted for 1 month"
         className={styles.checkbox}
       />
       <Input
