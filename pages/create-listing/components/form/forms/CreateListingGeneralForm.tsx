@@ -46,6 +46,7 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
       <AdvVehicleFields />
       <Button
         fluid
+        haptic
         label={t('button.continue')}
         onClick={handleSubmit(onSubmit)}
       />

@@ -43,6 +43,7 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
       />
       <Button
         fluid
+        haptic
         label={t('button.continue')}
         onClick={handleSubmit(onSubmit)}
       />

@@ -22,6 +22,7 @@ const BaseButton = forwardRef(
       baseType,
       loadingInverted,
       visible,
+      haptic,
       ...rest
     },
     ref
@@ -29,6 +30,7 @@ const BaseButton = forwardRef(
     if (!visible) return null
     const handleOnClick = (e) => {
       if (baseType === 'submit') e.preventDefault()
+      if (haptic && window) window.navigator.vibrate(100)
       onClick(e)
     }
 
@@ -36,6 +38,7 @@ const BaseButton = forwardRef(
     const handleKeyPress = (e) => {
       const { key } = e
       if (key === 'Enter' || e.charCode === 13) handleOnClick(e)
+      if (haptic && window) window.navigator.vibrate(100)
     }
 
     // Internal links need to be wrapped with next/Link
@@ -106,6 +109,7 @@ BaseButton.propTypes = {
   disabled: PropTypes.bool,
   loadingInverted: PropTypes.bool, // invert color
   className: PropTypes.string,
+  haptic: PropTypes.bool,
 }
 
 BaseButton.defaultProps = {
@@ -122,6 +126,7 @@ BaseButton.defaultProps = {
   loading: false,
   visible: true,
   internalLinkProps: null,
+  haptic: false,
 }
 
 export default BaseButton

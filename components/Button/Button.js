@@ -76,6 +76,7 @@ Button.propTypes = {
   icon: PropTypes.string,
   loading: PropTypes.bool,
   fluid: PropTypes.bool,
+  haptic: PropTypes.bool,
   children: PropTypes.node,
 }
 
@@ -87,6 +88,7 @@ Button.defaultProps = {
   type: 'primary',
   color: 'green',
   icon: '',
+  haptic: false, // add vibration to mobiles on click
   loading: false,
   children: null,
 }
