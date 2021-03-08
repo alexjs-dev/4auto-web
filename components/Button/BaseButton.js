@@ -30,15 +30,15 @@ const BaseButton = forwardRef(
     if (!visible) return null
     const handleOnClick = (e) => {
       if (baseType === 'submit') e.preventDefault()
-      if (haptic && window) window.navigator.vibrate(100)
       onClick(e)
+      if (haptic && window) window?.navigator?.vibrate(100)
     }
 
     // make sure our buttons and links behave the same way, when using the keyboard
     const handleKeyPress = (e) => {
       const { key } = e
       if (key === 'Enter' || e.charCode === 13) handleOnClick(e)
-      if (haptic && window) window.navigator.vibrate(100)
+      if (haptic && window) window?.navigator?.vibrate(100)
     }
 
     // Internal links need to be wrapped with next/Link
