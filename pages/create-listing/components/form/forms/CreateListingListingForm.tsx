@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
-import { Button, Input, Checkbox } from '../../../../../components'
+import { Button, Input, Checkbox, ImageUpload } from '../../../../../components'
 import { fieldTypes } from '../../../../../utils/formValidators'
 import styles from './CreateListingListingForm.module.scss'
 
@@ -48,6 +48,7 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         tooltip="Paid feature to get promoted for 1 month"
         className={styles.checkbox}
       />
+      <ImageUpload name="upload" label="Images" />
       <Input
         /* @ts-ignore */
         name={fieldTypes.description}
