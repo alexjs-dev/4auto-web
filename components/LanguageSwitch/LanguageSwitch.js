@@ -28,32 +28,35 @@ const languages = {
   },
 }
 
+const Drawer = React.memo(() => {
+  const { i18n } = useTranslation()
+  const { language = 'en' } = i18n
+  return (
+    <div className={styles.drawer}>
+      {map(languages, (lang, key) => {
+        const active = key === language
+        return (
+          <BaseButton
+            key={key}
+            className={styles.option}
+            onClick={() => i18n.changeLanguage(key)}
+          >
+            <div className={styles.check}>{active && <CheckIcon />}</div>
+            {lang.icon}
+          </BaseButton>
+        )
+      })}
+    </div>
+  )
+})
+
 const LanguageSwitch = ({ className }) => {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const { i18n } = useTranslation()
   const { language = 'en' } = i18n
   useOutsideClick({ ref, isOpen: open, setOpen })
-  const Drawer = () => {
-    if (!open) return null
-    return (
-      <div className={styles.drawer}>
-        {map(languages, (lang, key) => {
-          const active = key === language
-          return (
-            <BaseButton
-              key={key}
-              className={styles.option}
-              onClick={() => i18n.changeLanguage(key)}
-            >
-              <div className={styles.check}>{active && <CheckIcon />}</div>
-              {lang.icon}
-            </BaseButton>
-          )
-        })}
-      </div>
-    )
-  }
+  if (!open) return null
   return (
     <div className={classNames(styles.container, className)} ref={ref}>
       <BaseButton onClick={() => setOpen(!open)}>

@@ -48,7 +48,7 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         tooltip="Paid feature to get promoted for 1 month"
         className={styles.checkbox}
       />
-      <ImageUpload name="upload" label="Images" />
+      <ImageUpload name="upload" label="Images" isRequired />
       <Input
         /* @ts-ignore */
         name={fieldTypes.description}

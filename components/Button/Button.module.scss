@@ -68,6 +68,15 @@
     color: $color-red;
     border: 1px solid $color-red;
   }
+  &:hover {
+    opacity: 1;
+    color: $color-white;
+    background: $color-primary;
+
+    &.red {
+      background: $color-red;
+    }
+  }
 }
 
 .iconOnly {

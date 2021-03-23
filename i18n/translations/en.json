@@ -11,6 +11,7 @@
   },
   "snackbar": {
     "welcome": "👋 Welcome",
+    "deleteSuccessful": "🗑️ Delete successful!",
     "link_copied": "Link copied!"
   },
   "titles": {
@@ -214,6 +215,7 @@
     "message": "Message",
     "search": "Search",
     "share": "Share",
+    "pressToUploadImages": "Press to upload images",
     "contact": "Contact",
     "pullDownToRefresh": "Pull down to refresh",
     "releaseToRefresh": "Release to refresh",
