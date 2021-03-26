@@ -1,6 +1,8 @@
 import React from 'react'
 import map from 'lodash/map'
+import toString from 'lodash/toString'
 import { useTranslation } from 'react-i18next'
+import includes from 'lodash/includes'
 import {
   ColorPicker,
   Input,
@@ -66,7 +68,13 @@ const Detail: React.FunctionComponent<Props> = ({ item }) => {
   }
 }
 
-const AdvVehicleFields: React.FunctionComponent = () => {
+type FormProps = {
+  requiredFields?: string[]
+}
+
+const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
+  requiredFields,
+}) => {
   const { t } = useTranslation()
   return (
     <>
@@ -83,20 +91,20 @@ const AdvVehicleFields: React.FunctionComponent = () => {
       />
       <Input
         /* @ts-ignore */
-        name="year"
+        name={fieldTypes.year}
         label={t('label.year')}
         placeholder="2020"
-        isRequired
-        type="number"
+        isRequired={includes(requiredFields, fieldTypes.year)}
+        type={fieldTypes.year}
       />
       {/* @ts-ignore */}
       <Select
         label={t('label.month')}
         fluid
-        isRequired
+        isRequired={includes(requiredFields, fieldTypes.month)}
         className={styles.spacing}
         placeholder={t('label.january')}
-        name="month"
+        name={fieldTypes.month}
         options={map(
           [
             'january',
@@ -112,7 +120,10 @@ const AdvVehicleFields: React.FunctionComponent = () => {
             'november',
             'december',
           ],
-          (label, index) => ({ value: index, label: t(`label.${label}`) })
+          (label, index) => ({
+            value: toString(index),
+            label: t(`label.${label}`),
+          })
         )}
       />
       <Input
@@ -120,7 +131,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
         name={fieldTypes.mileage}
         label={t('label.mileage')}
         placeholder="0"
-        isRequired
+        isRequired={includes(requiredFields, fieldTypes.mileage)}
         type="number"
         className={styles.spacing}
       />
@@ -131,7 +142,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           name={fieldTypes.power}
           label={t('label.power')}
           placeholder="110"
-          isRequired
+          isRequired={includes(requiredFields, fieldTypes.power)}
           type="number"
         />
         <Input
@@ -140,7 +151,7 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           label={t('label.capacity')}
           placeholder="2.5"
           step="0.1"
-          isRequired
+          isRequired={includes(requiredFields, fieldTypes.capacity)}
           type="number"
         />
       </div>
@@ -152,15 +163,15 @@ const AdvVehicleFields: React.FunctionComponent = () => {
           label={t('label.consumptionCombined')}
           placeholder="8.5"
           step="0.1"
-          isRequired
+          isRequired={includes(requiredFields, fieldTypes.consumptionCombined)}
           type="number"
         />
         <Input
           /* @ts-ignore */
           name={fieldTypes.consumptionHighway}
+          isRequired={includes(requiredFields, fieldTypes.consumptionHighway)}
           label={t('label.consumptionHighway')}
           placeholder="6.5"
-          isRequired
           type="number"
         />
       </div>
@@ -168,10 +179,10 @@ const AdvVehicleFields: React.FunctionComponent = () => {
         <Input
           /* @ts-ignore */
           name={fieldTypes.consumptionUrban}
+          isRequired={includes(requiredFields, fieldTypes.consumptionUrban)}
           label={t('label.consumptionUrban')}
           placeholder="11"
           step="0.1"
-          isRequired
           type="number"
         />
         <Input

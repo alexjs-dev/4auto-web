@@ -101,6 +101,7 @@ const SelectComponent = ({
   return (
     <div
       ref={ref}
+      id={`field-${name}`}
       className={classNames(styles.root, fluid && styles.fluid, className)}
     >
       <div
@@ -114,7 +115,8 @@ const SelectComponent = ({
             styles.select,
             isEmpty(value) && styles.placeholder,
             open && styles.active,
-            disabled && styles.disabled
+            disabled && styles.disabled,
+            !active && error && !open && styles.error
           )}
           tabIndex="0"
         >

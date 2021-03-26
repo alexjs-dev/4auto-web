@@ -7,6 +7,7 @@ import {
   filter,
   reduce,
   keys,
+  isNumber,
 } from 'lodash'
 import { SubmissionError } from 'redux-form'
 
@@ -24,6 +25,9 @@ export const fieldTypes = {
   featured: 'featured', // custom field
   fuel: 'fuel',
   mileage: 'mileage',
+  images: 'images',
+  year: 'year',
+  month: 'month',
   power: 'power',
   capacity: 'capacity',
   gearbox: 'transmission',
@@ -85,13 +89,15 @@ export const validators = {
   [fieldTypes.email]: [emailValidator],
 }
 
-export const findEmptyFields = (data, requiredFields) =>
-  filter(
-    requiredFields,
-    (field) => isEmpty(data[field]) || !toString(data[field]).trim().length
-  )
+export const findEmptyFields = (values, requiredFields) =>
+  filter(requiredFields, (field) => {
+    const value = values[field]
+    return (
+      (isEmpty(value) && !isNumber(value)) || !toString(value).trim().length
+    )
+  })
 
-export const validateFormData = (values, requiredFields) => {
+export const validateFormData = (values, requiredFields, options) => {
   const data = keys(values)
   const errors = {}
   const missing = findEmptyFields(values, requiredFields)
@@ -103,6 +109,7 @@ export const validateFormData = (values, requiredFields) => {
     },
     {}
   )
+
   forEach(data, (field) => {
     const type = fieldTypes[field]
     const value = values[field]
@@ -116,6 +123,22 @@ export const validateFormData = (values, requiredFields) => {
       })
     }
   })
-  if (!isEmpty(errors)) throw new SubmissionError(errors)
-  else return true
+  if (!isEmpty(errors)) {
+    if (get(options, 'scrollToError')) {
+      const key = Object.keys(errors)[0]
+      const element = document.getElementById(`field-${key}`)
+      const headerOffset = 90
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition - headerOffset
+
+      if (element && window) {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        })
+      }
+    }
+
+    throw new SubmissionError(errors)
+  } else return true
 }

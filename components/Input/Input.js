@@ -60,6 +60,7 @@ const InputComponent = (props) => {
   return (
     <div
       className={classNames(styles.container, className, fluid && styles.fluid)}
+      id={`field-${name}`}
     >
       <InputLabel
         isRequired={isRequired}

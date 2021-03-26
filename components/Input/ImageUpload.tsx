@@ -105,7 +105,7 @@ const ImageUpload: React.FunctionComponent<Props> = ({
   })
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id={`field-${name}`}>
       {/* @ts-ignore */}
       <InputLabel
         isRequired={isRequired}

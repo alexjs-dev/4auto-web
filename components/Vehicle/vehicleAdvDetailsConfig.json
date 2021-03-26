@@ -195,11 +195,6 @@
         {
           "key": "rightHandDrive",
           "type": "boolean"
-        },
-        {
-          "key": "capacity",
-          "unit": "label.l",
-          "type": "number"
         }
       ]
     },

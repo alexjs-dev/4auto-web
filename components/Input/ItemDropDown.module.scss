@@ -40,7 +40,7 @@
   display: none;
   animation-fill-mode: forwards;
   &.visible {
-    animation: slideInTop 0.4s ease-in-out;
+    // animation: slideInTop 0.4s ease-in-out;
     display: flex;
     justify-content: space-between;
     align-items: center;

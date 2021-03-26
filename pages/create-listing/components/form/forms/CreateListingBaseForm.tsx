@@ -16,7 +16,10 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
 }) => {
   const { t } = useTranslation()
   const onSubmit = async (values: any) => {
-    await validateFormData(values, [fieldTypes.regNumber])
+    await validateFormData(values, [fieldTypes.regNumber], {
+      scrollToError: true,
+    })
+
     setStep(2)
   }
   return (

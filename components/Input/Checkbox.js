@@ -45,6 +45,7 @@ const CheckboxComponent = ({
           className
         )}
         tabIndex="0"
+        id={`field-${name}`}
         onKeyPress={handleKeyPress}
       >
         <input type="checkbox" {...input} onChange={handleOnChange} />

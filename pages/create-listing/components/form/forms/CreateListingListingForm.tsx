@@ -2,7 +2,10 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
 import { Button, Input, Checkbox, ImageUpload } from '../../../../../components'
-import { fieldTypes } from '../../../../../utils/formValidators'
+import {
+  fieldTypes,
+  validateFormData,
+} from '../../../../../utils/formValidators'
 import styles from './CreateListingListingForm.module.scss'
 
 type Props = any
@@ -12,7 +15,13 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
   setStep,
 }) => {
   const { t } = useTranslation()
+
+  const requiredFields = [fieldTypes.price, fieldTypes.images]
+
   const onSubmit = async (values: any) => {
+    await validateFormData(values, requiredFields, {
+      scrollToError: true,
+    })
     console.log('values', values)
     setStep(3)
   }
@@ -48,7 +57,7 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         tooltip="Paid feature to get promoted for 1 month"
         className={styles.checkbox}
       />
-      <ImageUpload name="upload" label="Images" isRequired />
+      <ImageUpload name={fieldTypes.images} label="Images" isRequired />
       <Input
         /* @ts-ignore */
         name={fieldTypes.description}

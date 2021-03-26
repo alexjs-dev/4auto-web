@@ -20,8 +20,29 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
 }) => {
   const { t } = useTranslation()
 
+  const requiredFields = [
+    fieldTypes.make,
+    fieldTypes.model,
+    fieldTypes.fuel,
+    fieldTypes.gearbox,
+    fieldTypes.bodyType,
+  ]
+
+  const advRequiredFields = [
+    fieldTypes.year,
+    fieldTypes.month,
+    fieldTypes.mileage,
+    fieldTypes.power,
+    fieldTypes.capacity,
+    fieldTypes.consumptionCombined,
+    fieldTypes.consumptionHighway,
+    fieldTypes.consumptionUrban,
+  ]
+
   const onSubmit = async (values: any) => {
-    await validateFormData(values, [fieldTypes.make])
+    await validateFormData(values, [...requiredFields, ...advRequiredFields], {
+      scrollToError: true,
+    })
     setStep(3)
   }
   return (
@@ -35,15 +56,9 @@ const CreateListingGeneralForm: React.FunctionComponent<Props> = ({
       <h1>{t('titles.generalDetails')}</h1>
       <BaseVehicleFields
         singleVehicleBodySelect
-        requiredFields={[
-          fieldTypes.make,
-          fieldTypes.model,
-          fieldTypes.fuel,
-          fieldTypes.gearbox,
-          fieldTypes.bodyType,
-        ]}
+        requiredFields={requiredFields}
       />
-      <AdvVehicleFields />
+      <AdvVehicleFields requiredFields={advRequiredFields} />
       <Button
         fluid
         haptic
