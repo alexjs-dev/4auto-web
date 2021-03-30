@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
   FiPlusCircle as AddIcon,
-  FiSearch as SearchIcon,
+  FiSearch,
   FiMenu,
+  FiArrowRight,
+  FiCheckCircle,
 } from 'react-icons/fi'
 import classNames from 'classnames'
 import useModal from '~hooks/useModal'
@@ -18,6 +20,7 @@ import {
   NavigationDropdown,
 } from '~components'
 import LogoIcon from '~public/logo.svg'
+import SearchIcon from './SearchIcon'
 import styles from './DesktopHeader.module.scss'
 
 const DesktopHeader = () => {
@@ -40,11 +43,12 @@ const DesktopHeader = () => {
       </BaseButton>
     </section>
   )
+  const searchIconStyle = { fontSize: 48 }
   const SearchSection = () => (
     <BaseButton className={styles.search}>
       <div className={styles.searchIcon}>
         <SearchIcon
-          style={{ fontSize: 48 }}
+          style={searchIconStyle}
           onClick={() => openModal(modalTypes.SEARCH_MODAL)}
         />
       </div>

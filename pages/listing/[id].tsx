@@ -25,7 +25,7 @@ import Avatar from '../../components/User/Avatar'
 import VotdActions from '../../components/VehicleOfTheDay/components/VotdActions'
 import VehicleDetails from '../../components/VehicleOfTheDay/components/VehicleDetails'
 import useFindListing from '../../hooks/useFindListing'
-import { listingsSelector } from '../../store/vehicles/selectors'
+import { listingsSelector } from '../../store/listing/selectors'
 import useFindFeaturedListingsOnMount from '../../hooks/useFindFeaturedListingsOnMount'
 
 type Props = {

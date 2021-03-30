@@ -91,7 +91,7 @@ export const validators = {
 
 export const findEmptyFields = (values, requiredFields) =>
   filter(requiredFields, (field) => {
-    const value = values[field]
+    const value = get(values, field)
     return (
       (isEmpty(value) && !isNumber(value)) || !toString(value).trim().length
     )

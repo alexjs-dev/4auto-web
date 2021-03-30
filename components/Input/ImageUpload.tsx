@@ -32,6 +32,7 @@ type Props = {
   name: string
   isRequired?: boolean
   input: Input
+  meta: any
 }
 
 type ProgressBarProps = {
@@ -56,11 +57,14 @@ const ImageUpload: React.FunctionComponent<Props> = ({
   name,
   isRequired,
   input,
+  meta,
 }) => {
   // const [images, setImages] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
   const [percent, setPercent] = useState(0)
   const { t } = useTranslation()
+
+  const { error, invalid } = meta
 
   const images = isArray(input.value) ? input.value : []
   const limit = 6
@@ -104,6 +108,8 @@ const ImageUpload: React.FunctionComponent<Props> = ({
     baseHeaders,
   })
 
+  const errorState = error || invalid
+
   return (
     <div className={styles.container} id={`field-${name}`}>
       {/* @ts-ignore */}
@@ -112,7 +118,13 @@ const ImageUpload: React.FunctionComponent<Props> = ({
         label={`${label} (${limit})`}
         name={name}
       />
-      <div className={classNames(styles.input, disabled && styles.disabled)}>
+      <div
+        className={classNames(
+          styles.input,
+          disabled && styles.disabled,
+          errorState && styles.error
+        )}
+      >
         {loading ? (
           <div className={styles.loaders}>
             <ProgressBar percent={percent} />

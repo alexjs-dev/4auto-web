@@ -1,16 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import {
-  FiPlusCircle as AddIcon,
-  FiSearch as SearchIcon,
-  FiMenu,
-} from 'react-icons/fi'
+import { FiPlusCircle as AddIcon, FiMenu } from 'react-icons/fi'
 import useModal from '~hooks/useModal'
 import Creators from '~store/menu/creators'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import { UserAvatar, UserUnreads, BaseButton } from '~components'
 import LogoMiniIcon from '~public/logo-mini.svg'
+import SearchIcon from './SearchIcon'
 import styles from './MobileHeader.module.scss'
 
 const MobileHeader = () => {
@@ -68,7 +65,10 @@ const MobileHeader = () => {
         onClick={() => openModal(modalTypes.SEARCH_MODAL)}
       >
         <div className={styles.searchIcon}>
-          <SearchIcon style={{ fontSize: 36 }} />
+          <SearchIcon
+            style={{ fontSize: 36 }}
+            onClick={() => openModal(modalTypes.SEARCH_MODAL)}
+          />
         </div>
       </BaseButton>
     </div>

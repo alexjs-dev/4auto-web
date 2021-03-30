@@ -48,7 +48,11 @@ const VehicleDetails: React.FunctionComponent<Props> = ({
         {vehicleBodyYear}
       </VehicleDetail>
       <VehicleDetail icon={<FiMapPin />} title={t('label.location')}>
-        {`${listing.location.city} ${listing.location.countryCode}`}
+        {`${get(listing, 'location.city', '')} ${get(
+          listing.location,
+          'countryCode',
+          ''
+        )}`}
       </VehicleDetail>
       <VehicleDetail icon={<FiGitPullRequest />} title={t('label.gearbox')}>
         {t(`vehicle.${get(transmissionTypes, vehicle.transmission, '')}`)}

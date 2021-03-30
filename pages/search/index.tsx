@@ -7,14 +7,14 @@ import {
   Layout,
 } from '../../components'
 import {
-  vehiclesPaginationSelector,
+  listingPaginationSelector,
   listingsSelector,
-} from '../../store/vehicles/selectors'
+} from '../../store/listing/selectors'
 import styles from './search.module.scss'
 
 const SearchPage: React.FunctionComponent = () => {
   // const { query } = useRouter()
-  const pagination = useSelector(vehiclesPaginationSelector)
+  const pagination = useSelector(listingPaginationSelector)
   const listings = useSelector(listingsSelector)
   return (
     <Layout background="white" fullscreen>

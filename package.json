@@ -6,10 +6,11 @@
     "node": "12.x"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && npm run open",
     "rebuild": "node importBuilder",
     "build": "next build",
     "start": "next start -p $PORT",
+    "open": "concurrently \"http-server -a localhost -p 3000\" \"open http://localhost:3000\"",
     "component": "node tools/create/component.js",
     "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb",
     "storybook": "start-storybook -p 6006",
@@ -73,6 +74,7 @@
     "babel-plugin-root-import": "^6.6.0",
     "babel-plugin-styled-components": "^1.11.1",
     "chromatic": "^5.5.0",
+    "concurrently": "^6.0.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",

@@ -7,7 +7,7 @@ import moment from 'moment'
 import { GiFemale, GiMale, GiDiamonds } from 'react-icons/gi'
 import { Loader, Layout, ListingsCarousel, Button } from '../../components'
 import UsersService from '../../services/users'
-import { listingsSelector } from '../../store/vehicles/selectors'
+import { listingsSelector } from '../../store/listing/selectors'
 import {
   currentUserSelector,
   currentUserLoadingSelector,

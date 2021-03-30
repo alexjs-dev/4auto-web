@@ -1,49 +1,11 @@
-import { takeLatest, select, put, call } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
 import { omit } from 'lodash'
-import ListingsService from '~services/listings'
 import ModelsService from '~services/models'
 import MakesService from '~services/makes'
 import { Types } from './creators'
 
-const listingsService = new ListingsService()
 const modelsService = new ModelsService()
 const makesService = new MakesService()
-
-function* handleFetchListings(action) {
-  try {
-    const { params } = action
-    const prevPagination = yield select((state) => state.vehicles.pagination)
-    const { limit = 10, skip = 0, total = 0 } = prevPagination
-
-    if (skip + limit < total || total === 0) {
-      const response = yield call(listingsService.find, {
-        query: {
-          $limit: limit,
-          ...(skip > 0 ? { $skip: skip } : {}),
-          // availableUntil: {
-          //   $gt: new Date().getTime() - DAY_MS,
-          // }, // TODO: remove in prod
-          ...params,
-        },
-      })
-      const { data, ...pagination } = response
-      yield put({
-        type: Types.FETCH_LISTINGS_SUCCESS,
-        data,
-        pagination,
-      })
-    } else {
-      yield put({
-        type: Types.FETCH_LISTINGS_SUCCESS,
-        data: {},
-        pagination: prevPagination,
-      })
-    }
-  } catch (error) {
-    console.error(error)
-    yield put({ type: Types.FETCH_LISTINGS_FAILURE })
-  }
-}
 
 function* handleFetchMakes(action) {
   try {
@@ -82,7 +44,6 @@ function* handleFetchModels(action) {
 }
 
 const sagas = [
-  takeLatest(Types.FETCH_LISTINGS, handleFetchListings),
   takeLatest(Types.FETCH_MAKES, handleFetchMakes),
   takeLatest(Types.FETCH_MODELS, handleFetchModels),
 ]

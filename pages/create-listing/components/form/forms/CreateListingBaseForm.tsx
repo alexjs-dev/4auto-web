@@ -6,9 +6,12 @@ import {
   fieldTypes,
   validateFormData,
 } from '../../../../../utils/formValidators'
+import { FORMS, requiredFields } from '../util'
 import styles from './CreateListingBaseForm.module.scss'
 
 type Props = any
+
+const step = 1
 
 const CreateListingBaseForm: React.FunctionComponent<Props> = ({
   handleSubmit,
@@ -16,7 +19,7 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
 }) => {
   const { t } = useTranslation()
   const onSubmit = async (values: any) => {
-    await validateFormData(values, [fieldTypes.regNumber], {
+    await validateFormData(values, requiredFields[step], {
       scrollToError: true,
     })
 
@@ -47,6 +50,7 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
       <Button
         fluid
         haptic
+        id="create-listing-button-1"
         label={t('button.continue')}
         onClick={handleSubmit(onSubmit)}
       />
@@ -55,7 +59,7 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
 }
 
 const Form = reduxForm({
-  form: 'createListingBaseForm',
+  form: FORMS[step],
   destroyOnUnmount: false,
 })(CreateListingBaseForm)
 

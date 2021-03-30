@@ -3,39 +3,11 @@ import { keyBy, get } from 'lodash'
 import { Types } from './creators'
 
 const INITIAL_STATE = {
-  listings: {},
   makes: {},
   models: {},
-  pagination: {},
-  loading: false,
   loadingModels: false,
   loadingMakes: false,
 }
-
-const fetchListings = (state, { params }) => ({
-  ...state,
-  listings: get(params, 'resetPagination') ? {} : state.listings,
-  pagination: get(params, 'resetPagination') ? {} : state.pagination,
-  loading: true,
-})
-
-const fetchListingsSuccess = (state, { data, pagination }) => ({
-  ...state,
-  listings: {
-    ...state.listings,
-    ...keyBy(data, '_id'),
-  },
-  loading: false,
-  pagination: {
-    ...pagination,
-    skip: pagination?.skip || 0 + pagination?.limit || 10,
-  },
-})
-
-const fetchListingsFailure = (state) => ({
-  ...state,
-  loading: false,
-})
 
 const fetchModels = (state, { params }) => ({
   ...state,
@@ -77,9 +49,6 @@ const fetchMakesFailure = (state) => ({
 })
 
 export default createReducer(INITIAL_STATE, {
-  [Types.FETCH_LISTINGS]: fetchListings,
-  [Types.FETCH_LISTINGS_SUCCESS]: fetchListingsSuccess,
-  [Types.FETCH_LISTINGS_FAILURE]: fetchListingsFailure,
   [Types.FETCH_MODELS]: fetchModels,
   [Types.FETCH_MODELS_SUCCESS]: fetchModelsSuccess,
   [Types.FETCH_MODELS_FAILURE]: fetchModelsFailure,

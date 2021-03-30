@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Creators from '../../store/vehicles/creators'
+import Creators from '../../store/listing/creators'
 import head from 'lodash/head'
 import values from 'lodash/values'
 import { useTranslation } from 'react-i18next'
@@ -14,14 +14,14 @@ import {
   Layout,
 } from '../../components'
 import {
-  vehiclesPaginationSelector,
+  listingPaginationSelector,
   listingsSelector,
-} from '../../store/vehicles/selectors'
+} from '../../store/listing/selectors'
 import styles from './landing.module.scss'
 
 const LandingPage: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  const pagination = useSelector(vehiclesPaginationSelector)
+  const pagination = useSelector(listingPaginationSelector)
   const listings = useSelector(listingsSelector)
   const { t } = useTranslation()
   useEffect(() => {

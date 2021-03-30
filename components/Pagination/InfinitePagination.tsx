@@ -2,7 +2,7 @@ import React from 'react'
 import { map, size } from 'lodash'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import Creators from '../../store/vehicles/creators'
+import Creators from '../../store/listing/creators'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './InfinitePagination.module.scss'
 import { VehicleCard, Loader } from '../../components'
@@ -18,7 +18,11 @@ type Props = {
   pagination: Pagination
 }
 
-const InfinitePagination:React.FunctionComponent<Props> = ({ pagination, items, title }) => {
+const InfinitePagination: React.FunctionComponent<Props> = ({
+  pagination,
+  items,
+  title,
+}) => {
   const total = pagination?.total || 0
   const count = size(items)
   const hasMore = total > count
