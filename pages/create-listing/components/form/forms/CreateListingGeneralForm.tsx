@@ -6,7 +6,7 @@ import { validateFormData } from '../../../../../utils/formValidators'
 import styles from './CreateListingGeneralForm.module.scss'
 import BaseVehicleFields from '~/components/Forms/parts/BaseVehicleFields'
 import AdvVehicleFields from '~/components/Forms/parts/AdvVehicleFields'
-import { FORMS, requiredFields } from '../util'
+import { FORMS, requiredFields } from '../../../../../utils/util'
 
 type Props = any
 

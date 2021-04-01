@@ -2,9 +2,6 @@ import { createActions } from 'reduxsauce'
 
 export const { Types, Creators } = createActions(
   {
-    fetchListings: ['params'],
-    fetchListingsSuccess: ['data'],
-    fetchListingsFailure: [],
     fetchMakes: ['params'],
     fetchMakesSuccess: ['data'],
     fetchMakesFailure: [],

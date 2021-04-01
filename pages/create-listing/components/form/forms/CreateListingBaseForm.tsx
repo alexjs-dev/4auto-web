@@ -6,8 +6,9 @@ import {
   fieldTypes,
   validateFormData,
 } from '../../../../../utils/formValidators'
-import { FORMS, requiredFields } from '../util'
+import { FORMS, requiredFields } from '../../../../../utils/util'
 import styles from './CreateListingBaseForm.module.scss'
+import LocationInput from '~/components/Input/LocationInput'
 
 type Props = any
 
@@ -41,6 +42,7 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
         placeholder="123ABC"
         isRequired
       />
+      <LocationInput name="location" label="Location" />
       <Input
         /* @ts-ignore */
         name={fieldTypes.VIN}

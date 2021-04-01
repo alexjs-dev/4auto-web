@@ -7,12 +7,13 @@ import {
   validateFormData,
   findEmptyFields,
 } from '../../../../../utils/formValidators'
-import { FORMS, requiredFields } from '../util'
+import { FORMS, requiredFields } from '../../../../../utils/util'
 import Creators from '../../../../../store/listing/creators'
 import styles from './CreateListingListingForm.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFormValues } from 'redux-form'
 import isEmpty from 'lodash/isEmpty'
+import LocationInput from '~/components/Input/LocationInput'
 
 type Props = any
 
@@ -90,6 +91,7 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         className={styles.checkbox}
       />
       <ImageUpload name={fieldTypes.images} label="Images" isRequired />
+      <LocationInput name="location" />
       <Input
         /* @ts-ignore */
         name={fieldTypes.description}
