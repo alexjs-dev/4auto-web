@@ -80,6 +80,7 @@ const SelectComponent = ({
     } else {
       handleOnChange(key)
     }
+    if (!multiple) setOpen(false)
   }
 
   const handleOpen = () => {

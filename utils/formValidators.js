@@ -24,6 +24,7 @@ export const fieldTypes = {
   description: 'description',
   featured: 'featured', // custom field
   fuel: 'fuel',
+  locationId: 'locationId',
   mileage: 'mileage',
   images: 'images',
   year: 'year',
@@ -128,10 +129,10 @@ export const validateFormData = (values, requiredFields, options) => {
       const key = Object.keys(errors)[0]
       const element = document.getElementById(`field-${key}`)
       const headerOffset = 90
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition - headerOffset
 
       if (element && window) {
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition - headerOffset
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth',

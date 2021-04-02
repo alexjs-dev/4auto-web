@@ -1,5 +1,10 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
 import { get } from 'lodash'
+import i18n from '~i18n'
+import { reset } from 'redux-form'
+import Router from 'next/router'
+import { FORMS } from '../../utils/util'
+import { toast } from 'react-toastify'
 import ListingsService from '~services/listings'
 import VehiclesService from '~services/vehicles'
 
@@ -32,9 +37,12 @@ function* handleCreateListing(action) {
     const data = yield call(listingsService.create, {
       ...action.data,
       vehicleId: vehicle._id,
-      locationId: '60355ec4ea656b04fe5e0a2d',
     })
-
+    toast.success(i18n.t('snackbar.listingCreated'))
+    Router.push('/')
+    yield put(reset(FORMS[0]))
+    yield put(reset(FORMS[1]))
+    yield put(reset(FORMS[2]))
     yield put({
       type: Types.CREATE_LISTING_SUCCESS,
       data,

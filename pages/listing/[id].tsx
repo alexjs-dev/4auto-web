@@ -74,7 +74,7 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
           price={listing.price}
           discountPercentage={listing.discountPercentage}
         />
-        <Description />
+        <Description description={listing.description} />
         <Avatar
           title={t('market.seller')}
           userId={listing.userId}

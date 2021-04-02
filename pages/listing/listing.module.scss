@@ -52,11 +52,14 @@
 .description {
   margin-bottom: spacing(2);
   font-weight: $font-weight-light;
+  white-space: pre;
 
   button {
+    margin: spacing(2) 0;
     font-size: $font-size-p;
     line-height: $line-height-p;
     color: $color-primary;
+    display: block;
   }
 }
 

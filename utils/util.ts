@@ -23,5 +23,5 @@ export const requiredFields = {
     fieldTypes.consumptionHighway,
     fieldTypes.consumptionUrban,
   ],
-  3: [fieldTypes.price, fieldTypes.images],
+  3: [fieldTypes.price, fieldTypes.images, fieldTypes.locationId],
 }

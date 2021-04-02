@@ -17,6 +17,7 @@ type Listing = {
   urgent: boolean
   userId: string
   user: User
+  description?: string
   vehicle: Vehicle
   vehicleId: string
   contactEmail?: string

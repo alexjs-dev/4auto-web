@@ -12,6 +12,7 @@
   "snackbar": {
     "welcome": "👋 Welcome",
     "deleteSuccessful": "🗑️ Delete successful!",
+    "listingCreated": "🙌 Listing created",
     "link_copied": "Link copied!"
   },
   "titles": {
@@ -101,6 +102,7 @@
     "centimeter": "cm",
     "inch": "Inch",
     "color": "Color",
+    "images": "Images",
     "speedTo100": "Speed (1-100)",
     "mileage": "Mileage",
     "labelConsCity": "Cons.(city)",

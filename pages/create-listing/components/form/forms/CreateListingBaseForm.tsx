@@ -42,7 +42,6 @@ const CreateListingBaseForm: React.FunctionComponent<Props> = ({
         placeholder="123ABC"
         isRequired
       />
-      <LocationInput name="location" label="Location" />
       <Input
         /* @ts-ignore */
         name={fieldTypes.VIN}
