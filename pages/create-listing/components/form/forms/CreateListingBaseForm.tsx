@@ -8,7 +8,6 @@ import {
 } from '../../../../../utils/formValidators'
 import { FORMS, requiredFields } from '../../../../../utils/util'
 import styles from './CreateListingBaseForm.module.scss'
-import LocationInput from '~/components/Input/LocationInput'
 
 type Props = any
 
