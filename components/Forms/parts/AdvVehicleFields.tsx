@@ -1,5 +1,6 @@
 import React from 'react'
 import map from 'lodash/map'
+import numberRange from 'lodash/range'
 import toString from 'lodash/toString'
 import { useTranslation } from 'react-i18next'
 import includes from 'lodash/includes'
@@ -13,6 +14,12 @@ import {
 import { fieldTypes } from '~/utils/formValidators'
 import styles from './BaseVehicleFields.module.scss'
 import config from '../../../components/Vehicle/vehicleAdvDetailsConfig.json'
+
+const getYearRange = (range = 70) => {
+  const max = new Date().getUTCFullYear()
+  const min = max - range
+  return numberRange(min, max + 1)
+}
 
 type Props = {
   item: {
@@ -82,6 +89,7 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
         name={fieldTypes.color}
         allowEmpty
         label={t('label.color')}
+        visibleColors={6}
       />
       {/*@ts-ignore */}
       <Checkbox
@@ -89,14 +97,21 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
         label={t('label.metallicColor')}
         className={styles.checkbox}
       />
-      <Input
-        /* @ts-ignore */
-        name={fieldTypes.year}
+      {/* @ts-ignore */}
+      <Select
         label={t('label.year')}
-        placeholder="2020"
+        fluid
         isRequired={includes(requiredFields, fieldTypes.year)}
-        type={fieldTypes.year}
+        className={styles.spacing}
+        placeholder="2021"
+        name={fieldTypes.year}
+        isCustom
+        options={map(getYearRange(), (label) => ({
+          value: label,
+          label,
+        }))}
       />
+
       {/* @ts-ignore */}
       <Select
         label={t('label.month')}
@@ -131,6 +146,8 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
         name={fieldTypes.mileage}
         label={t('label.mileage')}
         placeholder="0"
+        min={0}
+        max={10000000}
         isRequired={includes(requiredFields, fieldTypes.mileage)}
         type="number"
         className={styles.spacing}
@@ -142,6 +159,8 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           name={fieldTypes.power}
           label={t('label.power')}
           placeholder="110"
+          min={1}
+          max={1000}
           isRequired={includes(requiredFields, fieldTypes.power)}
           type="number"
         />
@@ -151,6 +170,8 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           label={t('label.capacity')}
           placeholder="2.5"
           step="0.1"
+          min={0.1}
+          max={20}
           isRequired={includes(requiredFields, fieldTypes.capacity)}
           type="number"
         />
@@ -163,6 +184,8 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           label={t('label.consumptionCombined')}
           placeholder="8.5"
           step="0.1"
+          min={1}
+          max={40}
           isRequired={includes(requiredFields, fieldTypes.consumptionCombined)}
           type="number"
         />
@@ -172,6 +195,9 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           isRequired={includes(requiredFields, fieldTypes.consumptionHighway)}
           label={t('label.consumptionHighway')}
           placeholder="6.5"
+          step="0.1"
+          min={1}
+          max={40}
           type="number"
         />
       </div>
@@ -183,6 +209,8 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           label={t('label.consumptionUrban')}
           placeholder="11"
           step="0.1"
+          min={1}
+          max={40}
           type="number"
         />
         <Input
@@ -190,6 +218,9 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
           name={fieldTypes.fuelTankCapacity}
           label={t('label.fuelTankCapacity')}
           placeholder="60"
+          step="0.1"
+          min={1}
+          max={300}
           type="number"
         />
       </div>

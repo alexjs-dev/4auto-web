@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { memo, forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import toNumber from 'lodash/toNumber'
 import classNames from 'classnames'
 import styles from './Input.module.scss'
 
@@ -15,8 +16,9 @@ const BaseInput = forwardRef(
       name,
       hasLabel,
       type,
-      maxValue,
-      minValue,
+      max,
+      value,
+      min,
       autocomplete,
       small,
       ...rest
@@ -28,7 +30,17 @@ const BaseInput = forwardRef(
       onChange(event.target.value)
     }
 
-    const handleBlur = (event) => onBlur(event)
+    const handleBlur = (event) => {
+      if (type === 'number' && min && toNumber(value) < toNumber(min)) {
+        event.target.value = min
+        onChange(min)
+      }
+      if (type === 'number' && max && toNumber(value) > toNumber(max)) {
+        event.target.value = max
+        onChange(max)
+      }
+      onBlur(event)
+    }
 
     const isTextAreaInput = type === 'textarea'
 
@@ -37,8 +49,8 @@ const BaseInput = forwardRef(
       id: hasLabel ? name : null,
       disabled,
       type,
-      ...(minValue && type === 'number' ? { min: minValue } : {}),
-      ...(maxValue && type === 'number' ? { max: maxValue } : {}),
+      ...(min && type === 'number' ? { min } : {}),
+      ...(max && type === 'number' ? { max } : {}),
       onChange: handleChange,
       onBlur: handleBlur,
       ref,
@@ -52,6 +64,7 @@ const BaseInput = forwardRef(
             invalid && styles.invalid,
             small && styles.small
           )}
+          value={value}
           autoComplete={autocomplete}
           {...inputProps}
         />
@@ -63,6 +76,7 @@ const BaseInput = forwardRef(
           invalid && styles.invalid,
           small && styles.small
         )}
+        value={value}
         autoComplete={autocomplete}
         {...inputProps}
       />
@@ -80,8 +94,9 @@ BaseInput.propTypes = {
   hasLabel: PropTypes.bool,
   type: PropTypes.string,
   small: PropTypes.bool,
-  maxValue: PropTypes.number,
-  minValue: PropTypes.number,
+  max: PropTypes.number,
+  min: PropTypes.number,
+  value: PropTypes.any,
   autocomplete: PropTypes.string,
 }
 
@@ -91,9 +106,10 @@ BaseInput.defaultProps = {
   disabled: false,
   className: '',
   invalid: false,
-  maxValue: null,
+  max: null,
+  value: '',
   small: false,
-  minValue: null,
+  min: null,
   hasLabel: false,
   type: '',
   autocomplete: '',

@@ -20,7 +20,7 @@ import {
   NavigationDropdown,
 } from '~components'
 import LogoIcon from '~public/logo.svg'
-import SearchIcon from './SearchIcon'
+import HeaderActionIcon from './HeaderActionIcon'
 import styles from './DesktopHeader.module.scss'
 
 const DesktopHeader = () => {
@@ -47,7 +47,7 @@ const DesktopHeader = () => {
   const SearchSection = () => (
     <BaseButton className={styles.search}>
       <div className={styles.searchIcon}>
-        <SearchIcon
+        <HeaderActionIcon
           style={searchIconStyle}
           onClick={() => openModal(modalTypes.SEARCH_MODAL)}
         />

@@ -19,9 +19,9 @@ export const requiredFields = {
     fieldTypes.mileage,
     fieldTypes.power,
     fieldTypes.capacity,
-    fieldTypes.consumptionCombined,
-    fieldTypes.consumptionHighway,
-    fieldTypes.consumptionUrban,
+    // fieldTypes.consumptionCombined,
+    // fieldTypes.consumptionHighway,
+    // fieldTypes.consumptionUrban,
   ],
   3: [fieldTypes.price, fieldTypes.images, fieldTypes.locationId],
 }

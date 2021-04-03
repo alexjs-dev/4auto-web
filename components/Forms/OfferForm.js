@@ -21,7 +21,7 @@ const OfferForm = ({ handleSubmit }) => {
         placeholder="€"
         type="number"
         small
-        min={0}
+        min={1}
       />
       <Button fluid label="Offer" onClick={handleSubmit(onSubmit)} />
     </form>

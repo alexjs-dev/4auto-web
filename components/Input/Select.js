@@ -8,6 +8,7 @@ import {
   get,
   uniq,
   filter,
+  find,
   isNil,
   isEmpty as lodashEmpty,
   includes,
@@ -35,6 +36,7 @@ const SelectComponent = ({
   meta,
   placeholder,
   multiple,
+  isCustom,
 }) => {
   const { value } = input
   const { error, active } = meta
@@ -48,10 +50,14 @@ const SelectComponent = ({
   }
 
   const Title = () => {
-    const title = get(options, `${value}.label`, placeholder)
+    const title =
+      get(
+        find(options, (o) => o.value === value),
+        'label'
+      ) || placeholder
     if (!multiple) return <span>{title}</span>
     if (!isEmpty(value)) {
-      return map(options, ({ label: l }, key) => {
+      return map(options, ({ label: l, value: key }) => {
         if (includes(value, key)) {
           return (
             <BaseButton
@@ -111,34 +117,57 @@ const SelectComponent = ({
         onKeyPress={handleKeyPress}
       >
         <InputLabel isRequired={isRequired} label={label} name={name} />
-        <div
-          className={classNames(
-            styles.select,
-            isEmpty(value) && styles.placeholder,
-            open && styles.active,
-            disabled && styles.disabled,
-            !active && error && !open && styles.error
-          )}
-          tabIndex="0"
-        >
-          <Content />
-          <ArrowDownIcon
-            className={classNames(styles.arrowIcon, open && styles.active)}
-          />
-        </div>
+        {isCustom ? (
+          <select
+            name={name}
+            className={classNames(
+              styles.select,
+              isEmpty(value) && styles.placeholder,
+              open && styles.active,
+              disabled && styles.disabled,
+              !active && error && !open && styles.error
+            )}
+            value={value}
+            onChange={(e) => handleOptionClick(e.target.value)}
+            tabIndex="0"
+          >
+            {map(options, (option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <div
+            className={classNames(
+              styles.select,
+              isEmpty(value) && styles.placeholder,
+              open && styles.active,
+              disabled && styles.disabled,
+              !active && error && !open && styles.error
+            )}
+            tabIndex="0"
+          >
+            <Content />
+            <ArrowDownIcon
+              className={classNames(styles.arrowIcon, open && styles.active)}
+            />
+          </div>
+        )}
+
         <InputErrorText error={active ? null : error} />
       </div>
       <div className={styles.wrapper}>
-        {open && (
+        {open && !isCustom && (
           <div className={styles.options}>
-            {map(options, (option, key) => (
+            {map(options, (option, index) => (
               <BaseButton
-                key={key}
+                key={index}
                 className={classNames(
                   styles.option,
-                  isActive(key) && styles.active
+                  isActive(option.value) && styles.active
                 )}
-                onClick={() => handleOptionClick(key)}
+                onClick={() => handleOptionClick(option.value)}
               >
                 <span>{option.label}</span>
               </BaseButton>
@@ -169,6 +198,7 @@ SelectComponent.propTypes = {
     error: PropTypes.string,
     active: PropTypes.bool,
   }),
+  isCustom: PropTypes.bool,
   placeholder: PropTypes.string,
 }
 
@@ -183,6 +213,7 @@ SelectComponent.defaultProps = {
     error: null,
     active: false,
   },
+  isCustom: false,
   className: null,
   fluid: false,
   loading: false,
@@ -208,6 +239,7 @@ const Select = ({
   isRequired,
   multiple,
   loading,
+  isCustom,
   ...dropdownProps
 }) => {
   if (!visible) return null
@@ -229,6 +261,7 @@ const Select = ({
         onChange,
         multiple,
         loading,
+        isCustom,
         ...dropdownProps,
       }}
     />
@@ -251,6 +284,7 @@ Select.propTypes = {
   multiple: PropTypes.bool,
   loading: PropTypes.bool,
   isRequired: PropTypes.bool,
+  isCustom: PropTypes.bool, // use HTML5 option select instead
 }
 
 Select.defaultProps = {
@@ -267,4 +301,5 @@ Select.defaultProps = {
   normalize: null,
   multiple: false,
   isRequired: false,
+  isCustom: false,
 }

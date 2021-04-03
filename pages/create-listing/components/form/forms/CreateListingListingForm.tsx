@@ -67,6 +67,7 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         disabled={loading}
         label={t('label.price')}
         isRequired
+        min={1}
         placeholder={t('placeholder.priceMax')}
       />
       {/*@ts-ignore */}

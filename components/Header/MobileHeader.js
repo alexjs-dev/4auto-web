@@ -7,7 +7,7 @@ import Creators from '~store/menu/creators'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import { UserAvatar, UserUnreads, BaseButton } from '~components'
 import LogoMiniIcon from '~public/logo-mini.svg'
-import SearchIcon from './SearchIcon'
+import HeaderActionIcon from './HeaderActionIcon'
 import styles from './MobileHeader.module.scss'
 
 const MobileHeader = () => {
@@ -60,12 +60,9 @@ const MobileHeader = () => {
 
   const SearchSection = () => (
     <div className={styles.baseSearchWrapper}>
-      <BaseButton
-        className={styles.baseSearch}
-        onClick={() => openModal(modalTypes.SEARCH_MODAL)}
-      >
+      <BaseButton className={styles.baseSearch}>
         <div className={styles.searchIcon}>
-          <SearchIcon
+          <HeaderActionIcon
             style={{ fontSize: 36 }}
             onClick={() => openModal(modalTypes.SEARCH_MODAL)}
           />

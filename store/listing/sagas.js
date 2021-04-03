@@ -31,6 +31,9 @@ function* handleCreateListing(action) {
   try {
     const vehicle = yield call(vehiclesService.create, {
       ...action.data,
+      vehicleExtras: {
+        ...action.data,
+      },
       modelId: get(action.data, 'model'),
       makeId: get(action.data, 'make'),
     })
@@ -39,7 +42,6 @@ function* handleCreateListing(action) {
       vehicleId: vehicle._id,
     })
     toast.success(i18n.t('snackbar.listingCreated'))
-    Router.push('/')
     yield put(reset(FORMS[0]))
     yield put(reset(FORMS[1]))
     yield put(reset(FORMS[2]))
@@ -47,6 +49,9 @@ function* handleCreateListing(action) {
       type: Types.CREATE_LISTING_SUCCESS,
       data,
     })
+    setTimeout(() => {
+      Router.push('/')
+    }, 300)
   } catch (error) {
     console.error(error)
     yield put({ type: Types.CREATE_LISTING_FAILURE })
