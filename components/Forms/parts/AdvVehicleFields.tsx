@@ -109,7 +109,7 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
         options={map(getYearRange(), (label) => ({
           value: label,
           label,
-        }))}
+        })).reverse()}
       />
 
       {/* @ts-ignore */}

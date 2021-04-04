@@ -1,5 +1,5 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
-import { get } from 'lodash'
+import { get, toNumber } from 'lodash'
 import i18n from '~i18n'
 import { reset } from 'redux-form'
 import Router from 'next/router'
@@ -29,25 +29,28 @@ function* handleFetchListingById(action) {
 
 function* handleCreateListing(action) {
   try {
+    const { data } = action
+    const { month, year } = data
     const vehicle = yield call(vehiclesService.create, {
-      ...action.data,
+      ...data,
+      regDate: new Date(toNumber(year), toNumber(month)),
       vehicleExtras: {
-        ...action.data,
+        ...data,
       },
-      modelId: get(action.data, 'model'),
-      makeId: get(action.data, 'make'),
+      modelId: get(data, 'model'),
+      makeId: get(data, 'make'),
     })
-    const data = yield call(listingsService.create, {
-      ...action.data,
+    const result = yield call(listingsService.create, {
+      ...data,
       vehicleId: vehicle._id,
     })
     toast.success(i18n.t('snackbar.listingCreated'))
-    yield put(reset(FORMS[0]))
     yield put(reset(FORMS[1]))
     yield put(reset(FORMS[2]))
+    yield put(reset(FORMS[3]))
     yield put({
       type: Types.CREATE_LISTING_SUCCESS,
-      data,
+      result,
     })
     setTimeout(() => {
       Router.push('/')

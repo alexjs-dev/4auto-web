@@ -131,6 +131,7 @@ const SelectComponent = ({
             onChange={(e) => handleOptionClick(e.target.value)}
             tabIndex="0"
           >
+          <option value="">---</option>
             {map(options, (option, index) => (
               <option key={index} value={option.value}>
                 {option.label}

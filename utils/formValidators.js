@@ -20,6 +20,8 @@ export const fieldTypes = {
   model: 'model',
   color: 'color',
   username: 'username',
+  contactEmail: 'contactEmail',
+  contactPhone: 'contactPhone',
   urgent: 'urgent',
   description: 'description',
   featured: 'featured', // custom field

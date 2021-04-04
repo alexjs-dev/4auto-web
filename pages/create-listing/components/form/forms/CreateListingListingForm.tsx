@@ -103,6 +103,24 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
         loading={loading}
         label={t('label.description')}
       />
+      <Input
+        /* @ts-ignore */
+        name={fieldTypes.contactPhone}
+        type="number"
+        fluid
+        autocomplete="tel"
+        loading={loading}
+        label={t('label.phone')}
+      />
+      <Input
+        /* @ts-ignore */
+        name={fieldTypes.contactEmail}
+        fluid
+        type="email"
+        autocomplete="email"
+        loading={loading}
+        label={t('label.email')}
+      />
       <Button
         fluid
         loading={loading}

@@ -37,7 +37,7 @@ const NavigationContent = ({ logoutCallback, className, fontSize }) => {
     {
       icon: <HeartIcon style={{ fontSize }} />,
       label: 'navigation.myFavorites',
-      href: '/my-favorites',
+      href: '/favorites',
     },
     {
       icon: <ListIcon style={{ fontSize }} />,
@@ -73,7 +73,7 @@ const NavigationContent = ({ logoutCallback, className, fontSize }) => {
     {
       icon: <HeartIcon style={{ fontSize }} />,
       label: 'navigation.myFavorites',
-      href: '/my-favorites',
+      href: '/favorites',
     },
     {
       icon: <InfoIcon style={{ fontSize }} />,
