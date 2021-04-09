@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import map from 'lodash/map'
 import isEmpty from 'lodash/isEmpty'
 
@@ -8,18 +8,71 @@ import styles from './ListingsCarousel.module.scss'
 import useViewport from '../../hooks/useViewport'
 import { VehicleCard, TripleButtonGroup } from '../'
 import ListingType from '../../types/vehicle'
+import Creators from '~/store/listing/creators'
 import { getVehicleCardProps } from '../../utils/helpers'
+import {
+  listingsSelector,
+  recommendedListingSelector,
+  featuredListingSelector,
+  listingsLoadingSelector,
+  recommendedListingLoadingSelector,
+  featuredListingLoadingSelector,
+} from '~/store/listing/selectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   title: string
-  listings: ListingType
+  type?: 'FEATURED' | 'RECOMMENDED' | 'DEFAULT' | 'CUSTOM'
+  loading?: boolean
+  listings?: ListingType[]
 }
 
 const ListingsCarousel: React.FunctionComponent<Props> = ({
-  listings,
   title,
+  type,
+  loading,
+  listings,
 }) => {
   const { isMobile } = useViewport()
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const selectedListings: ListingType[] = useSelector(
+    type === 'FEATURED'
+      ? featuredListingSelector
+      : type === 'RECOMMENDED'
+      ? recommendedListingSelector
+      : listingsSelector
+  )
+
+  const currentListings = listings || selectedListings
+
+  const selectedLoading: boolean = useSelector(
+    type === 'FEATURED'
+      ? featuredListingLoadingSelector
+      : type === 'RECOMMENDED'
+      ? recommendedListingLoadingSelector
+      : listingsLoadingSelector
+  )
+
+  const currentLoading = loading || selectedLoading
+
+  useEffect(() => {
+    if (
+      type !== 'CUSTOM' &&
+      !loading &&
+      isEmpty(currentListings) &&
+      !listings
+    ) {
+      dispatch(
+        type === 'FEATURED'
+          ? Creators.fetchFeaturedListings()
+          : type === 'RECOMMENDED'
+          ? Creators.fetchRecommendedListings()
+          : Creators.fetchListings()
+      )
+    }
+  }, [dispatch, Creators, loading, type, currentListings, listings])
 
   const responsive = {
     superLargeDesktop: {
@@ -49,12 +102,15 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <h1>{title}</h1>
-        {isEmpty(listings) && (
+        {isEmpty(currentListings) && currentLoading && (
           <div>
             <Loader centered loading isBranded={false} />
           </div>
         )}
-        {!isEmpty(listings) && (
+        {isEmpty(currentListings) && !currentLoading && (
+          <h6 style={{ textAlign: 'center' }}>{t('errors.nothingFound')}</h6>
+        )}
+        {!isEmpty(currentListings) && (
           <Carousel
             ssr
             infinite
@@ -68,7 +124,7 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
             autoPlaySpeed={5000}
             customButtonGroup={<TripleButtonGroup />}
           >
-            {map(listings, (listing, i) => (
+            {map(currentListings, (listing, i) => (
               <VehicleCard
                 key={i}
                 {...getVehicleCardProps(listing)}

@@ -1,9 +1,11 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import { useTranslation } from 'react-i18next'
 import { Button, Input } from '~components'
 import styles from './OfferForm.module.scss'
 
-const OfferForm = ({ handleSubmit }) => {
+const OfferForm = ({ handleSubmit, disabled }) => {
+  const { t } = useTranslation()
   const onSubmit = (val) => {
     console.log('values', val)
   }
@@ -17,13 +19,19 @@ const OfferForm = ({ handleSubmit }) => {
     >
       <Input
         name="offer"
-        label="YOUR OFFER"
+        label={t('label.yourOffer')}
         placeholder="€"
         type="number"
+        disabled={disabled}
         small
         min={1}
       />
-      <Button fluid label="Offer" onClick={handleSubmit(onSubmit)} />
+      <Button
+        fluid
+        label="Offer"
+        disabled={disabled}
+        onClick={handleSubmit(onSubmit)}
+      />
     </form>
   )
 }

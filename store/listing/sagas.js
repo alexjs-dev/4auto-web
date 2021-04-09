@@ -61,11 +61,31 @@ function* handleCreateListing(action) {
   }
 }
 
-function* handleFetchListings(action) {
+const DAY_MS = 86400000 // 24 * 60 * 60 * 1000
+
+function* handleFetchListingsCompose(action, type = 'DEFAULT') {
+  const successType =
+    type === 'FEATURED'
+      ? Types.FETCH_FEATURED_LISTINGS_SUCCESS
+      : type === 'RECOMMENDED'
+      ? Types.FETCH_RECOMMENDED_LISTINGS_SUCCESS
+      : Types.FETCH_LISTINGS_SUCCESS
+  const failureType =
+    type === 'FEATURED'
+      ? Types.FETCH_FEATURED_LISTINGS_FAILURE
+      : type === 'RECOMMENDED'
+      ? Types.FETCH_RECOMMENDED_LISTINGS_FAILURE
+      : Types.FETCH_LISTINGS_FAILURE
   try {
     const { params } = action
-    const prevPagination = yield select((state) => state.listing.pagination)
-    const { limit = 10, skip = 0, total = 0 } = prevPagination
+    const prevPagination = yield select((state) =>
+      type === 'FEATURED'
+        ? state.listing.featuredPagination
+        : type === 'RECOMMENDED'
+        ? state.listing.recommendedPagination
+        : state.listing.pagination
+    )
+    const { limit = 10, skip = 0, total = 0 } = prevPagination // limit > 10 is too slow!
 
     if (skip + limit < total || total === 0) {
       const response = yield call(listingsService.find, {
@@ -73,34 +93,108 @@ function* handleFetchListings(action) {
           $limit: limit,
           $sort: { createdAt: -1 },
           ...(skip > 0 ? { $skip: skip } : {}),
-          // availableUntil: {
-          //   $gt: new Date().getTime() - DAY_MS,
-          // }, // TODO: remove in prod
+          availableUntil: {
+            $gt: new Date().getTime() - DAY_MS,
+          },
+          ...(type === 'FEATURED'
+            ? {
+                featuredUntil: {
+                  $gt: new Date().getTime() - DAY_MS,
+                },
+              }
+            : {}),
+          ...(type === 'RECOMMENDED'
+            ? {
+                recommendedUntil: {
+                  $gt: new Date().getTime() - DAY_MS,
+                },
+              }
+            : {}),
           ...params,
         },
       })
       const { data, ...pagination } = response
       yield put({
-        type: Types.FETCH_LISTINGS_SUCCESS,
+        type: successType,
         data,
         pagination,
       })
     } else {
       yield put({
-        type: Types.FETCH_LISTINGS_SUCCESS,
+        type: successType,
         data: {},
         pagination: prevPagination,
       })
     }
   } catch (error) {
     console.error(error)
-    yield put({ type: Types.FETCH_LISTINGS_FAILURE })
+    yield put({ type: failureType })
+  }
+}
+
+function* handleFetchUserListingsCompose(action, type = 'SOLD') {
+  const successType =
+    type === 'AVAILABLE'
+      ? Types.FETCH_USER_AVAILABLE_LISTINGS_SUCCESS
+      : Types.FETCH_USER_SOLD_LISTINGS_SUCCESS
+  const failureType =
+    type === 'AVAILABLE'
+      ? Types.FETCH_USER_AVAILABLE_LISTINGS_FAILURE
+      : Types.FETCH_USER_SOLD_LISTINGS_FAILURE
+  try {
+    const { params, userId } = action
+    const prevPagination = yield select((state) =>
+      type === 'AVAILABLE'
+        ? state.listing.userAvailableListingsPagination
+        : state.listing.userSoldListingsPagination
+    )
+    const { limit = 10, skip = 0, total = 0 } = prevPagination
+
+    if (skip + limit < total || total === 0) {
+      const response = yield call(listingsService.find, {
+        query: {
+          $limit: limit,
+          userId,
+          $sort: { createdAt: -1 },
+          ...(skip > 0 ? { $skip: skip } : {}),
+          userFilter: type === 'AVAILABLE' ? 'available' : 'sold',
+          ...params,
+        },
+      })
+      const { data, ...pagination } = response
+      yield put({
+        type: successType,
+        data,
+        pagination,
+      })
+    } else {
+      yield put({
+        type: successType,
+        data: {},
+        pagination: prevPagination,
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    yield put({ type: failureType })
   }
 }
 
 const sagas = [
   takeLatest(Types.FETCH_LISTING_BY_ID, handleFetchListingById),
-  takeLatest(Types.FETCH_LISTINGS, handleFetchListings),
+  takeLatest(Types.FETCH_LISTINGS, handleFetchListingsCompose),
+  takeLatest(Types.FETCH_RECOMMENDED_LISTINGS, (action) =>
+    handleFetchListingsCompose(action, 'RECOMMENDED')
+  ),
+  takeLatest(Types.FETCH_FEATURED_LISTINGS, (action) =>
+    handleFetchListingsCompose(action, 'FEATURED')
+  ),
+  takeLatest(Types.FETCH_USER_AVAILABLE_LISTINGS, (action) =>
+    handleFetchUserListingsCompose(action, 'AVAILABLE')
+  ),
+  takeLatest(Types.FETCH_USER_SOLD_LISTINGS, (action) =>
+    handleFetchUserListingsCompose(action, 'SOLD')
+  ),
   takeLatest(Types.CREATE_LISTING, handleCreateListing),
 ]
 

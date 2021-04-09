@@ -1,13 +1,6 @@
 import FeathersClient from '~lib/FeathersClient'
 
 const feathersClient = new FeathersClient()
-// try {
-//   this.app.reAuthenticate()
-// } catch (e) {
-//   console.error('FeathersClient constructor error', e)
-//   window.localStorage.removeItem('feathers-jwt')
-//   this.app.logout()
-// }
 class ApiClient {
   constructor(namespace) {
     this.namespace = namespace

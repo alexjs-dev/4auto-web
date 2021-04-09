@@ -14,6 +14,7 @@ type Listing = {
   price: number
   recommendedUntil: string
   updatedAt: string
+  soldAt: string | Date
   urgent: boolean
   userId: string
   user: User

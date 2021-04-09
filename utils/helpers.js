@@ -66,11 +66,13 @@ export const getVehicleCardProps = (props) => {
     recommendedUntil,
     featuredUntil,
   } = props
+
+  console.log('getting props', props)
   const city = get(location, 'city')
   const countryCode = get(location, 'countryCode')
   const country = get(location, 'country')
+  const regDate = get(vehicle, 'regDate', new Date())
   const {
-    regDate,
     power,
     capacity,
     mileage,

@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Creators from '../../store/listing/creators'
-import head from 'lodash/head'
-import values from 'lodash/values'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
   LogoAbstract,
@@ -20,13 +17,9 @@ import {
 import styles from './landing.module.scss'
 
 const LandingPage: React.FunctionComponent = () => {
-  const dispatch = useDispatch()
   const pagination = useSelector(listingPaginationSelector)
   const listings = useSelector(listingsSelector)
   const { t } = useTranslation()
-  useEffect(() => {
-    dispatch(Creators.fetchListings())
-  }, [dispatch, Creators])
 
   return (
     <div className={styles.container}>
@@ -36,21 +29,18 @@ const LandingPage: React.FunctionComponent = () => {
       </section>
       <Layout>
         <ListingsCarousel
-          listings={listings}
+          type="FEATURED"
           title={t('titles.featuredVehicles')}
         />
       </Layout>
       <AdCarousel />
       <Layout>
-        <VehicleOfTheDay listing={head(values(listings))} />
+        <VehicleOfTheDay />
         <ListingsCarousel
-          listings={listings}
+          type="RECOMMENDED"
           title={t('titles.recommendedVehicles')}
         />
-        <ListingsCarousel
-          listings={listings}
-          title={t('titles.latestVehicles')}
-        />
+        <ListingsCarousel type="DEFAULT" title={t('titles.latestVehicles')} />
         <InfinitePagination pagination={pagination} items={listings} />
       </Layout>
     </div>

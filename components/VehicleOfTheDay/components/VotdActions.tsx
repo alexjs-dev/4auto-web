@@ -5,8 +5,8 @@ import { Button } from '../..'
 import styles from '../VehicleOfTheDay.module.scss'
 
 type Props = {
-  phone?: string
-  email?: string
+  phone?: string | null
+  email?: string | null
   userId: string
 }
 

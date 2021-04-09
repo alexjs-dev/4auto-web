@@ -1,13 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 import isEmpty from 'lodash/isEmpty'
 import classNames from 'classnames'
 import moment from 'moment'
 import { GiFemale, GiMale, GiDiamonds } from 'react-icons/gi'
 import { Loader, Layout, ListingsCarousel, Button } from '../../components'
 import UsersService from '../../services/users'
-import { listingsSelector } from '../../store/listing/selectors'
+import {
+  userAvailableListingsSelector,
+  userSoldListingsSelector,
+  loadingUserSoldListingsSelector,
+  loadingUserAvailableListingsSelector,
+} from '../../store/listing/selectors'
+import Creators from '../../store/listing/creators'
 import {
   currentUserSelector,
   currentUserLoadingSelector,
@@ -27,7 +34,9 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
   const currentUser = useSelector(currentUserSelector)
   const loading = useSelector(currentUserLoadingSelector)
   const router = useRouter()
+  const dispatch = useDispatch()
   const { id } = router.query
+  const { t } = useTranslation()
   const user: UserType = !isEmpty(prefetchedUser) ? prefetchedUser : currentUser
   useFindUser({ id, prefetchedUser })
   useFindFeaturedListingsOnMount()
@@ -40,7 +49,20 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
   }
   const username =
     user.profile?.username || user.profile?.firstName || 'Username'
-  const featuredListings = useSelector(listingsSelector) // TO-DO: make separate listings selector for featured vehicles
+
+  useEffect(() => {
+    if (user._id) {
+      dispatch(Creators.fetchUserAvailableListings(user._id))
+      dispatch(Creators.fetchUserSoldListings(user._id))
+    }
+  }, [user])
+  const availableListings = useSelector(userAvailableListingsSelector)
+  const availableListingsLoading = useSelector(
+    loadingUserAvailableListingsSelector
+  )
+  const soldListings = useSelector(userSoldListingsSelector)
+  const soldListingsLoading = useSelector(loadingUserSoldListingsSelector)
+
   const onlineDate = moment(user.profile?.onlineAt)
   const onlineHours = Math.abs(onlineDate.diff(moment(), 'hours'))
   const lastOnline =
@@ -79,7 +101,7 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
                     : styles.offline
                 )}
               >
-                <span>{`Last seen ${lastOnline}`}</span>
+                <span>{`${t('label.registered')} ${lastOnline}`}</span>
                 <GiDiamonds />
               </div>
             )}
@@ -102,22 +124,29 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
                 : styles.offline
             )}
           >
-            <span>{`Last seen ${lastOnline}`}</span>
+            <span>{`${t('label.registered')} ${lastOnline}`}</span>
             <GiDiamonds />
           </div>
         )}
         <Button
-          label="Send a message"
+          label={t('button.message')}
           fluid
           type={Button.types.GHOST}
           className={styles.messageButton}
         />
 
         <ListingsCarousel
-          listings={featuredListings}
-          title="Vehicles for sale"
+          type="CUSTOM"
+          listings={availableListings}
+          loading={availableListingsLoading}
+          title={t('titles.availableVehicles')}
         />
-        <ListingsCarousel listings={featuredListings} title="Vehicles sold" />
+        <ListingsCarousel
+          type="CUSTOM"
+          listings={soldListings}
+          loading={soldListingsLoading}
+          title={t('titles.soldVehicles')}
+        />
       </Layout>
     </div>
   )

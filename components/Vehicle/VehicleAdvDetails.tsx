@@ -59,7 +59,7 @@ const VehicleAdvDetails: React.FunctionComponent<Props> = ({ vehicle }) => {
             <h5>{t(`label.${key}`)}</h5>
             <div className={styles.list}>
               {/* @ts-ignore */}
-              {list.map((item) => (
+              {list.map((item, index) => (
                 <Detail
                   key={item.key}
                   title={t(`label.${item.key}`)}

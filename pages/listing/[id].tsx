@@ -25,11 +25,24 @@ import Avatar from '../../components/User/Avatar'
 import VotdActions from '../../components/VehicleOfTheDay/components/VotdActions'
 import VehicleDetails from '../../components/VehicleOfTheDay/components/VehicleDetails'
 import useFindListing from '../../hooks/useFindListing'
-import { listingsSelector } from '../../store/listing/selectors'
 import useFindFeaturedListingsOnMount from '../../hooks/useFindFeaturedListingsOnMount'
 
 type Props = {
   prefetchedListing?: ListingType
+}
+
+type SoldDisclaimerProps = {
+  title?: string
+}
+const SoldDisclaimer: React.FunctionComponent<SoldDisclaimerProps> = ({
+  title,
+}) => {
+  if (!title) return null
+  return (
+    <div className={styles.soldDisclaimerContainer}>
+      <span>{title}</span>
+    </div>
+  )
 }
 
 const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
@@ -43,8 +56,6 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
     : currentListing
   useFindListing({ id, prefetchedListing })
   useFindFeaturedListingsOnMount()
-
-  const featuredListings = useSelector(listingsSelector) // TO-DO: make separate listings selector for featured vehicles
 
   if ((loading && isEmpty(prefetchedListing)) || isEmpty(listing)) {
     return (
@@ -65,6 +76,8 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
     t
   )
 
+  const isSold = !!listing.soldAt
+
   return (
     <div className={styles.container}>
       <Images listing={listing} />
@@ -74,6 +87,7 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
           price={listing.price}
           discountPercentage={listing.discountPercentage}
         />
+        {isSold && <SoldDisclaimer title={t('label.listingHasBeenSold')} />}
         <Description description={listing.description} />
         <Avatar
           title={t('market.seller')}
@@ -85,20 +99,23 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
         />
         <VotdActions
           userId={listing.userId}
-          email={listing.contactEmail}
-          phone={listing.contactPhone}
+          email={isSold ? null : listing.contactEmail}
+          phone={isSold ? null : listing.contactPhone}
         />
         <h6 className={styles.subtitle}>{t('label.baseDetails')}</h6>
         <VehicleDetails listing={listing} fullHeight />
-        <Price
-          price={listing.price}
-          discountPercentage={listing.discountPercentage}
-        />
-        <OfferForm />
+        {!isSold && (
+          <Price
+            price={listing.price}
+            discountPercentage={listing.discountPercentage}
+          />
+        )}
+        {/* @ts-ignore */}
+        {!isSold && <OfferForm disabled={isSold} />}
         <VehicleAdvDetails vehicle={listing.vehicle} />
         <div className={styles.spacer} />
         <ListingsCarousel
-          listings={featuredListings}
+          type="FEATURED"
           title={t('titles.featuredVehicles')}
         />
       </Layout>

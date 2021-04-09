@@ -22,7 +22,7 @@ type PriceProps = {
   discountedPrice: number
 }
 type VehicleOfTheDayProps = {
-  listing: ListingType
+  listing?: ListingType
 }
 
 const Price: React.FunctionComponent<PriceProps> = ({
@@ -51,7 +51,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
   const { t } = useTranslation()
   useEffect(() => {
     let timer: any
-    if (!visible && isMobile) {
+    if (!visible && isMobile && listing) {
       timer = setTimeout(() => {
         setVisible(true)
       }, 1000)
@@ -61,7 +61,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
     }
   }, [visible, isMobile])
 
-  if (!visible) return <Loader loading centered isBranded />
+  if (!visible || !listing) return <Loader loading centered isBranded />
   return (
     <>
       <div className={styles.title}>

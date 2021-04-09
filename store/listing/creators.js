@@ -11,6 +11,18 @@ export const { Types, Creators } = createActions(
     fetchListings: ['params'],
     fetchListingsSuccess: ['data'],
     fetchListingsFailure: [],
+    fetchFeaturedListings: ['params'],
+    fetchFeaturedListingsSuccess: ['data'],
+    fetchFeaturedListingsFailure: [],
+    fetchRecommendedListings: ['params'],
+    fetchRecommendedListingsSuccess: ['data'],
+    fetchRecommendedListingsFailure: [],
+    fetchUserAvailableListings: ['userId', 'params'],
+    fetchUserAvailableListingsSuccess: ['data'],
+    fetchUserAvailableListingsFailure: [],
+    fetchUserSoldListings: ['userId', 'params'],
+    fetchUserSoldListingsSuccess: ['data'],
+    fetchUserSoldListingsFailure: [],
   },
   {}
 )

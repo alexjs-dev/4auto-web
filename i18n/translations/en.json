@@ -5,6 +5,7 @@
     "invalid_email": "📧 Invalid e-mail format",
     "required_field": "😡 Field is required",
     "emailExists": "📧  Email already exist",
+    "nothingFound": "Nothing found",
     "weak_password": "🤖 Weak password",
     "oops": "🐞 Oops! Something happened",
     "invalidUsername": "😡 Invalid username"
@@ -24,6 +25,8 @@
     "latestVehicles": "Latest vehicles",
     "generalDetails": "General details",
     "consumptionDetails": "Consumption details",
+    "soldVehicles": "Sold vehicles",
+    "availableVehicles": "Available vehicles",
     "listingDetails": "Listing details",
     "vehicleDetails": "Vehicle details",
     "allVehicles": "All vehicles"
@@ -77,9 +80,12 @@
   },
   "label": {
     "or": "OR",
+    "yourOffer": "Your offer",
     "email": "Email",
+    "listingHasBeenSold": "Listing has been sold",
     "baseDetails": "Base details",
     "description": "Description",
+    "registered": "Registered",
     "password": "Password",
     "featured": "Featured",
     "recommended": "Recommended",

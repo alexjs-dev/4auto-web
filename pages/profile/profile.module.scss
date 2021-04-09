@@ -40,6 +40,7 @@
 
 .descriptionMobile {
   display: block;
+  text-align: center;
   font-weight: $font-weight-light;
   @media (min-width: $tablet) {
     display: none;
@@ -80,6 +81,9 @@
     h1 {
       text-align: center;
       text-transform: capitalize;
+    }
+    h6 {
+      text-align: center;
     }
     @media (min-width: $small) {
       h1 {

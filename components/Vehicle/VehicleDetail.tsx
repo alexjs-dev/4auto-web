@@ -15,7 +15,7 @@ const VehicleDetail: React.FunctionComponent<Props> = ({
   icon,
   title,
   children,
-  className
+  className,
 }) => {
   return (
     <div className={classNames(styles.container, className)}>

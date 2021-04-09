@@ -39,6 +39,10 @@
       }
       > div:nth-child(even) {
         align-items: flex-end;
+        h6 {
+          text-align: right;
+          font-size: 1em;
+        }
       }
     }
   }
