@@ -53,10 +53,7 @@ const fetchListingsSuccess = (state, { data, pagination }) => ({
     ...keyBy(data, '_id'),
   },
   loading: false,
-  pagination: {
-    ...pagination,
-    skip: pagination?.skip || 0 + pagination?.limit || 10,
-  },
+  pagination,
 })
 
 const fetchListingsFailure = (state) => ({
@@ -101,10 +98,7 @@ const fetchFeaturedListingsSuccess = (state, { data, pagination }) => ({
     ...keyBy(data, '_id'),
   },
   loadingFeatured: false,
-  featuredPagination: {
-    ...pagination,
-    skip: pagination?.skip || 0 + pagination?.limit || 10,
-  },
+  featuredPagination: pagination,
 })
 
 const fetchFeaturedListingsFailure = (state) => ({
@@ -130,10 +124,7 @@ const fetchRecommendedListingsSuccess = (state, { data, pagination }) => ({
     ...keyBy(data, '_id'),
   },
   loadingRecommended: false,
-  recommendedPagination: {
-    ...pagination,
-    skip: pagination?.skip || 0 + pagination?.limit || 10,
-  },
+  recommendedPagination: pagination,
 })
 
 const fetchRecommendedListingsFailure = (state) => ({

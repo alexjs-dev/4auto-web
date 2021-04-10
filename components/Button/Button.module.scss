@@ -55,6 +55,12 @@
   width: 100%;
 }
 
+.disabled {
+  background: $color-gray;
+  cursor: not-allowed;
+  border: 1px solid $color-dark-gray;
+}
+
 .ghost {
   border: $border-primary;
   color: $color-primary;

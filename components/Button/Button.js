@@ -37,7 +37,7 @@ class Button extends React.PureComponent {
   }
 
   generateButtonStyle = () => {
-    const { className, type, loading, fluid, color } = this.props
+    const { className, type, loading, fluid, color, disabled } = this.props
     return classNames(
       styles.base,
       className,
@@ -45,6 +45,7 @@ class Button extends React.PureComponent {
       styles[color],
       loading && styles.loading,
       fluid && styles.fluid,
+      disabled && styles.disabled,
       this.styleIconButton()
     )
   }
@@ -74,6 +75,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['primary', 'ghost']),
   color: PropTypes.oneOf(['green', 'white', 'red']),
   icon: PropTypes.string,
+  disabled: PropTypes.bool,
   loading: PropTypes.bool,
   fluid: PropTypes.bool,
   haptic: PropTypes.bool,
@@ -84,6 +86,7 @@ Button.defaultProps = {
   label: '',
   className: '',
   visible: true,
+  disabled: false,
   fluid: false, // 100% width
   type: 'primary',
   color: 'green',

@@ -3,6 +3,10 @@
 .container {
   background: $color-light-gray;
   min-height: 100vh;
+  padding-bottom: spacing(11);
+  @media (min-width: $tablet) {
+    padding-bottom: 0;
+  }
   .layout {
     padding: 0 spacing(0.5);
     @media (min-width: $tablet) {

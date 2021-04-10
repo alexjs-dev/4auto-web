@@ -117,7 +117,10 @@ function* handleFetchListingsCompose(action, type = 'DEFAULT') {
       yield put({
         type: successType,
         data,
-        pagination,
+        pagination: {
+          ...pagination,
+          skip: pagination.skip + pagination?.limit || 10,
+        },
       })
     } else {
       yield put({

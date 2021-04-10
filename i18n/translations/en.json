@@ -26,6 +26,7 @@
     "generalDetails": "General details",
     "consumptionDetails": "Consumption details",
     "soldVehicles": "Sold vehicles",
+    "thatsAll": "That's all",
     "availableVehicles": "Available vehicles",
     "listingDetails": "Listing details",
     "vehicleDetails": "Vehicle details",
@@ -214,6 +215,7 @@
   },
   "button": {
     "signIn": "Sign in",
+    "findMore": "Find more",
     "signUp": "Sign up",
     "reset": "Reset",
     "continue": "Continue",

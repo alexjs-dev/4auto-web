@@ -1,11 +1,11 @@
 import React from 'react'
 import { map, size } from 'lodash'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import Creators from '../../store/listing/creators'
-import InfiniteScroll from 'react-infinite-scroll-component'
+import { listingsLoadingSelector } from '../../store/listing/selectors'
 import styles from './InfinitePagination.module.scss'
-import { VehicleCard, Loader } from '../../components'
+import { VehicleCard, Button } from '../../components'
 import { getVehicleCardProps } from '../../utils/helpers'
 
 type Pagination = {
@@ -26,44 +26,18 @@ const InfinitePagination: React.FunctionComponent<Props> = ({
   const total = pagination?.total || 0
   const count = size(items)
   const hasMore = total > count
+  const loading = useSelector(listingsLoadingSelector)
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const onPaginate = () => {
-    dispatch(Creators.fetchListings())
+    if (!loading && hasMore) {
+      dispatch(Creators.fetchListings())
+    }
   }
   return (
     <div className={styles.container}>
       <h1>{title ? title : t('titles.allVehicles')}</h1>
-      <InfiniteScroll
-        className={styles.carousel}
-        dataLength={total} //This is important field to render the next data
-        next={onPaginate}
-        hasMore={hasMore}
-        loader={
-          <div className={styles.loader}>
-            <Loader centered loading isBranded />
-          </div>
-        }
-        endMessage={
-          <div className={styles.loader}>
-            <Loader centered loading isBranded={false} />
-          </div>
-        }
-        // below props only if you need pull down functionality
-        refreshFunction={() => console.log('refresh')}
-        pullDownToRefresh
-        pullDownToRefreshThreshold={50}
-        pullDownToRefreshContent={
-          <h3 style={{ textAlign: 'center' }}>
-            &#8595; {t('button.pullDownToRefresh')}
-          </h3>
-        }
-        releaseToRefreshContent={
-          <h3 style={{ textAlign: 'center' }}>
-            &#8593; {t('button.releaseToRefresh')}
-          </h3>
-        }
-      >
+      <div className={styles.carousel}>
         <div className={styles.list}>
           {map(items, (item, key) => (
             <VehicleCard
@@ -73,7 +47,16 @@ const InfinitePagination: React.FunctionComponent<Props> = ({
             />
           ))}
         </div>
-      </InfiniteScroll>
+      </div>
+      <div className={styles.extra}>
+        <Button
+          label={t('button.findMore')}
+          fluid
+          disabled={!hasMore}
+          onClick={onPaginate}
+          loading={loading}
+        />
+      </div>
     </div>
   )
 }

@@ -29,6 +29,7 @@ const BaseButton = forwardRef(
   ) => {
     if (!visible) return null
     const handleOnClick = (e) => {
+      if (disabled) return
       if (baseType === 'submit') e.preventDefault()
       onClick(e)
       if (haptic && window) window?.navigator?.vibrate(100)
@@ -36,6 +37,7 @@ const BaseButton = forwardRef(
 
     // make sure our buttons and links behave the same way, when using the keyboard
     const handleKeyPress = (e) => {
+      if (disabled) return
       const { key } = e
       if (key === 'Enter' || e.charCode === 13) handleOnClick(e)
       if (haptic && window) window?.navigator?.vibrate(100)
