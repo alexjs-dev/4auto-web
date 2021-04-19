@@ -72,7 +72,7 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
           : Creators.fetchListings()
       )
     }
-  }, [dispatch, Creators, loading, type, currentListings, listings])
+  }, [dispatch, Creators, loading, type])
 
   const responsive = {
     superLargeDesktop: {
