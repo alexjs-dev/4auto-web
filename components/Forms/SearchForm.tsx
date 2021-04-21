@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import useFetchVehicleModels from '../../hooks/useFetchVehicleModels'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import useModal from '~hooks/useModal'
 import { useTranslation } from 'react-i18next'
 import { fieldTypes } from '../../utils/formValidators'
 import { Checkbox, ExpandButton, Button } from '../'
@@ -18,26 +19,31 @@ const form = 'searchForm'
 type Props = {
   className?: string | null
   fluid?: boolean
+  cb?: () => void
   handleSubmit: (fn: any) => void
 }
 
 const SearchFormComponent: React.FunctionComponent<Props> = ({
   className,
   fluid,
+  cb,
   handleSubmit,
 }) => {
   const router = useRouter()
   useFetchVehicleModels(form)
   const [openExpand, setOpenExpand] = useState(false)
+  const [_, __, closeModal] = useModal()
   const { t } = useTranslation()
   const onSubmit = (values: any) => {
     const query = toQueryBasic(values)
+    closeModal();
     if (query) {
       router.push({
         pathname: '/search',
         query,
       })
     }
+    if (cb) cb();
   }
 
   return (
@@ -86,7 +92,8 @@ SearchFormComponent.defaultProps = {
 
 const SearchForm = reduxForm({
   form,
-  enableReinitialize: false,
+  enableReinitialize: true,
+  destroyOnUnmount: false,
 })(SearchFormComponent)
 
 export default SearchForm

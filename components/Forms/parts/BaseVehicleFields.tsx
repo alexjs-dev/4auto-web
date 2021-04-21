@@ -83,6 +83,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
           options={transmissions}
         />
       </div>
+      <div className={styles.spacing}>
       {/* @ts-ignore */}
       <Select
         label={t('label.bodyType')}
@@ -94,6 +95,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
         className={styles.marginBottom}
         options={vehicleBodyTypes}
       />
+      </div>
     </>
   )
 }

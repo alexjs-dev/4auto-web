@@ -21,6 +21,8 @@ const LandingPage: React.FunctionComponent = () => {
   const listings = useSelector(listingsSelector)
   const { t } = useTranslation()
 
+  console.log('listings', listings)
+
   return (
     <div className={styles.container}>
       <section className={styles.searchSection}>
@@ -35,7 +37,7 @@ const LandingPage: React.FunctionComponent = () => {
       </Layout>
       <AdCarousel />
       <Layout>
-        <VehicleOfTheDay />
+        <VehicleOfTheDay listing={listings && Object.values(listings)[0]} />
         <ListingsCarousel
           type="RECOMMENDED"
           title={t('titles.recommendedVehicles')}

@@ -1,5 +1,5 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
-import { get, toNumber } from 'lodash'
+import { get, toNumber, omit } from 'lodash'
 import i18n from '~i18n'
 import { reset } from 'redux-form'
 import Router from 'next/router'
@@ -110,7 +110,7 @@ function* handleFetchListingsCompose(action, type = 'DEFAULT') {
                 },
               }
             : {}),
-          ...params,
+          ...omit(params, ['resetPagination']),
         },
       })
       const { data, ...pagination } = response

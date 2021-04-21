@@ -40,7 +40,7 @@ const NavigationDrawer = ({ children, className }) => {
   useOutsideClick({ ref, isOpen: drawerOpen, setOpen: toggleDrawerMenu })
   if (!drawerOpenDebounced && !drawerOpen) return null
   return (
-    <div
+    <aside
       className={classNames(
         styles.container,
         drawerOpen && styles.visible,
@@ -53,7 +53,7 @@ const NavigationDrawer = ({ children, className }) => {
       >
         {children}
       </div>
-    </div>
+    </aside>
   )
 }
 

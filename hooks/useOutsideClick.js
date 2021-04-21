@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import useDebounce from './useDebounce'
 
 const useOutsideClick = ({ ref, isOpen, setOpen }) =>
   useEffect(() => {
@@ -11,7 +12,10 @@ const useOutsideClick = ({ ref, isOpen, setOpen }) =>
         !ref.current.contains(e.target) &&
         isOpen
       ) {
-        if (setOpen) setOpen(false)
+        if (setOpen) {
+          console.log('Closing...')
+          setOpen(false)
+        }
       }
     }
     if (ref.current) {

@@ -3,10 +3,14 @@
 .container {
   position: relative;
   margin: spacing(2) 0;
+  min-height: 10vh;
   h1 {
     border-top: 1px solid $color-dark-gray;
     padding-top: spacing(1);
     margin-bottom: spacing(2);
+  }
+  @media (min-width: $tablet) {
+    min-height: 30vh;
   }
 }
 

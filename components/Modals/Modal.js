@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import classNames from 'classnames'
 import Creators from '~store/menu/creators'
 import { BaseButton } from '~components'
 import { FiX as CloseIcon } from 'react-icons/fi'
@@ -14,21 +15,22 @@ import types from '~consts/modals'
 
 const BaseModal = ({ children, isOutsideClickDisabled }) => {
   const ref = useRef(null)
-  const [_, __, closeModal, isModalOpen] = useModal()
+  const [_, __, closeModal, isModalOpen, isModalOpenDebounced] = useModal()
   useOutsideClick({
     ref,
     isOpen: isModalOpen,
-    // setOpen: isOutsideClickDisabled ? () => {} : closeModal,
+    // setOpen: closeModal,
   })
+  if (!isModalOpenDebounced && !isModalOpen) return null
   return (
-    <div className={styles.container}>
-      <BaseButton onClick={() => closeModal()} className={styles.closeButton}>
+    <aside className={classNames(styles.container, isModalOpen && styles.visible)}>
+      <BaseButton onClick={closeModal} className={styles.closeButton}>
         <CloseIcon size={34} />
       </BaseButton>
-      <div ref={ref} className={styles.wrapper}>
+      <div ref={ref} className={classNames(styles.wrapper)}>
         {children}
       </div>
-    </div>
+    </aside>
   )
 }
 
@@ -49,7 +51,7 @@ const Modal = () => {
       )
     case types.SEARCH_MODAL:
       return (
-        <BaseModal isOutsideClickDisabled>
+        <BaseModal>
           <SearchModal />
         </BaseModal>
       )
