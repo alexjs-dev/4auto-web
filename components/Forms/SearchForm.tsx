@@ -32,6 +32,7 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
   const router = useRouter()
   useFetchVehicleModels(form)
   const [openExpand, setOpenExpand] = useState(false)
+  /* @ts-ignore */
   const [_, __, closeModal] = useModal()
   const { t } = useTranslation()
   const onSubmit = (values: any) => {
