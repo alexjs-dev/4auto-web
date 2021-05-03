@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { reduxForm } from 'redux-form' // tslint:disable
 import classNames from 'classnames'
 import useFetchVehicleModels from '../../hooks/useFetchVehicleModels'
@@ -20,6 +20,7 @@ type Props = {
   className?: string | null
   fluid?: boolean
   cb?: () => void
+  defaultExpanded?: boolean
   handleSubmit: (fn: any) => void
 }
 
@@ -27,24 +28,30 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
   className,
   fluid,
   cb,
+  defaultExpanded,
   handleSubmit,
 }) => {
   const router = useRouter()
   useFetchVehicleModels(form)
-  const [openExpand, setOpenExpand] = useState(false)
+  const [openExpand, setOpenExpand] = useState(defaultExpanded || false)
+
+  useEffect(() => {
+    if (defaultExpanded) setOpenExpand(true)
+  }, [defaultExpanded])
+
   /* @ts-ignore */
   const [_, __, closeModal] = useModal()
   const { t } = useTranslation()
   const onSubmit = (values: any) => {
     const query = toQueryBasic(values)
-    closeModal();
+    closeModal()
     if (query) {
       router.push({
         pathname: '/search',
         query,
       })
     }
-    if (cb) cb();
+    if (cb) cb()
   }
 
   return (

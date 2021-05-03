@@ -136,7 +136,7 @@ ColorPicker.propTypes = {
 
 ColorPicker.defaultProps = {
   visibleColors: 3,
-  allowEmpty: false,
+  allowEmpty: true,
   label: null,
 }
 
