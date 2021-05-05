@@ -1,7 +1,8 @@
 import React, { memo, useState, useRef } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { FcQuestions } from 'react-icons/fc'
+import { FcQuestions, FcCancel } from 'react-icons/fc'
+import { Button } from '~components'
 import useOutsideClick from '~hooks/useOutsideClick'
 import styles from '../Input.module.scss'
 
@@ -13,6 +14,7 @@ const InputLabel = ({
   small,
   tooltip,
   className,
+  onReset,
 }) => {
   const [tooltipActive, setTooltipActive] = useState(false)
   const ref = useRef(null)
@@ -32,8 +34,22 @@ const InputLabel = ({
         <span>{label}</span>
         {isRequired && <span className={styles.required}>&nbsp;*</span>}
       </label>
+      {onReset && (
+        <button
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            onReset()
+          }}
+          type="button"
+          className={styles.cancelButton}
+        >
+          <FcCancel />
+        </button>
+      )}
       {tooltip && (
         <button
+          type="button"
           className={styles.tooltipButton}
           onClick={() => setTooltipActive(!tooltipActive)}
         >
@@ -54,6 +70,7 @@ InputLabel.propTypes = {
   small: PropTypes.bool,
   name: PropTypes.string,
   tooltip: PropTypes.string,
+  onReset: PropTypes.any,
 }
 
 InputLabel.defaultProps = {
@@ -62,6 +79,7 @@ InputLabel.defaultProps = {
   className: null,
   tooltip: null,
   isRequired: false,
+  onReset: null,
 }
 
 export default memo(InputLabel)

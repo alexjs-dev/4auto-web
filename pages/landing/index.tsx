@@ -21,8 +21,6 @@ const LandingPage: React.FunctionComponent = () => {
   const listings = useSelector(listingsSelector)
   const { t } = useTranslation()
 
-  console.log('listings', listings)
-
   return (
     <div className={styles.container}>
       <section className={styles.searchSection}>
@@ -47,6 +45,10 @@ const LandingPage: React.FunctionComponent = () => {
       </Layout>
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  return { paths: [], fallback: true }
 }
 
 export default LandingPage

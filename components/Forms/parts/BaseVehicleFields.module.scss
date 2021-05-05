@@ -15,3 +15,11 @@
   @extend .spacing;
   min-width: 50%;
 }
+
+.buttonReset {
+  display: flex;
+  margin-bottom: spacing(1);
+  @media (min-width: $tablet) {
+    justify-content: flex-end;
+  }
+}

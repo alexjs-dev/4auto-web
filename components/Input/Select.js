@@ -37,6 +37,7 @@ const SelectComponent = ({
   placeholder,
   multiple,
   isCustom,
+  onReset,
 }) => {
   const { value } = input
   const { error, active } = meta
@@ -116,7 +117,12 @@ const SelectComponent = ({
         onClick={handleOpen}
         onKeyPress={handleKeyPress}
       >
-        <InputLabel isRequired={isRequired} label={label} name={name} />
+        <InputLabel
+          isRequired={isRequired}
+          label={label}
+          name={name}
+          onReset={onReset}
+        />
         {isCustom ? (
           <select
             name={name}
@@ -131,7 +137,7 @@ const SelectComponent = ({
             onChange={(e) => handleOptionClick(e.target.value)}
             tabIndex="0"
           >
-          <option value="">---</option>
+            <option value="">---</option>
             {map(options, (option, index) => (
               <option key={index} value={option.value}>
                 {option.label}
@@ -188,6 +194,7 @@ SelectComponent.propTypes = {
   onChange: PropTypes.func,
   fluid: PropTypes.bool,
   label: PropTypes.string,
+  onReset: PropTypes.any,
   multiple: PropTypes.bool,
   loading: PropTypes.bool,
   isRequired: PropTypes.bool,
@@ -223,6 +230,7 @@ SelectComponent.defaultProps = {
   options: [],
   multiple: false,
   isRequired: false,
+  onReset: null,
   onChange: null,
 }
 
@@ -241,6 +249,7 @@ const Select = ({
   multiple,
   loading,
   isCustom,
+  onReset,
   ...dropdownProps
 }) => {
   if (!visible) return null
@@ -263,6 +272,7 @@ const Select = ({
         multiple,
         loading,
         isCustom,
+        onReset,
         ...dropdownProps,
       }}
     />
@@ -283,6 +293,7 @@ Select.propTypes = {
   fluid: PropTypes.bool,
   label: PropTypes.string,
   multiple: PropTypes.bool,
+  onReset: PropTypes.any,
   loading: PropTypes.bool,
   isRequired: PropTypes.bool,
   isCustom: PropTypes.bool, // use HTML5 option select instead
@@ -298,6 +309,7 @@ Select.defaultProps = {
   disabled: false,
   options: [],
   validate: null,
+  onReset: null,
   onChange: null,
   normalize: null,
   multiple: false,

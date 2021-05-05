@@ -3,6 +3,7 @@
 .container {
   padding: spacing(2) spacing(1);
   background: $color-white;
+  transition: $transition;
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -55,6 +55,7 @@
   margin-bottom: spacing(1);
   display: inline-flex;
   align-items: center;
+  position: relative;
   span {
     transition: $transition;
     font-size: $font-size-p;
@@ -134,4 +135,10 @@
     border-right: 5px solid transparent;
     border-bottom: 10px solid $color-complimentary-transparent-heavy;
   }
+}
+
+.cancelButton {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

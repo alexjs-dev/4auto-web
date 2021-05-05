@@ -142,7 +142,11 @@ export const toQueryBasic = (values) => {
     (prev, curr, key) => {
       let object = null
       if (!prev) prev = {}
+      console.log('curr', curr)
+      console.log('prev', prev)
+      console.log('key', key)
       if (isObject(curr) && !isArray(curr)) {
+        // { min: 1000, max: 2000 }
         object = reduce(
           curr,
           (prev, curr, k) => {
@@ -156,7 +160,8 @@ export const toQueryBasic = (values) => {
       }
       return {
         ...prev,
-        ...((object && object) || { [key]: curr }),
+        ...(curr ? { [key]: curr } : {}),
+        ...((object && object) || {}),
       }
     },
     {}

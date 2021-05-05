@@ -138,7 +138,7 @@ export async function getStaticPaths() {
     return { paths, fallback: true }
   } catch (e) {
     console.error(e)
-    return { paths: [], fallback: false }
+    return { paths: [], fallback: true }
   }
 }
 

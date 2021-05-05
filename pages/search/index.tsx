@@ -121,7 +121,7 @@ const SearchPage: React.FunctionComponent = () => {
   )
 
   return (
-    <Layout background="white" fullscreen>
+    <Layout background="white" fullscreen className={styles.layout}>
       <div className={styles.search}>
         <h1>{`${t('titles.foundVehicles')}: ${count}`}</h1>
         <SearchForm
