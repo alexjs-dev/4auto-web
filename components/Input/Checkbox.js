@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react'
 import classNames from 'classnames'
+import omit from 'lodash/omit'
 import { Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import InputLabel from './parts/InputLabel'
@@ -85,7 +86,7 @@ CheckboxComponent.propTypes = {
   isRequired: PropTypes.bool,
   small: PropTypes.bool,
   input: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+    value: PropTypes.any,
     onChange: PropTypes.func,
   }),
   meta: PropTypes.shape({

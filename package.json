@@ -6,10 +6,10 @@
     "node": "12.x"
   },
   "scripts": {
-    "dev": "next dev && npm run open",
+    "dev": "next",
     "rebuild": "node importBuilder",
-    "build": "next build",
-    "start": "next start -p $PORT",
+    "build": "next build && next export",
+    "start": "next build && next start -p $PORT",
     "open": "concurrently \"http-server -a localhost -p 3000\" \"open http://localhost:3000\"",
     "component": "node tools/create/component.js",
     "reboot": "heroku builds:cancel -a forautoweb && heroku restart -a forautoweb",

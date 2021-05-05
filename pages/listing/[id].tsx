@@ -49,11 +49,13 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
   const { t } = useTranslation()
   const currentListing = useSelector(currentListingSelector)
   const loading = useSelector(currentListingLoadingSelector)
+  console.log('prefetchedListing', prefetchedListing)
   const router = useRouter()
   const { id } = router.query
   const listing: ListingType = isEmpty(currentListing)
     ? prefetchedListing
     : currentListing
+
   useFindListing({ id, prefetchedListing })
   useFindFeaturedListingsOnMount()
 
@@ -143,8 +145,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
   try {
     const listingsService = new ListingsService()
-    const listing: ListingType[] = await listingsService.get(params.id)
-    return { props: { prefetchedListing: listing }, revalidate: 6000 }
+    const prefetchedListing: ListingType[] = await listingsService.get(params.id)
+    return { props: { prefetchedListing }, revalidate: 6000 }
   } catch (e) {
     return { props: { prefetchedListing: null }, revalidate: 6000 }
   }
