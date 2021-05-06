@@ -33,7 +33,8 @@ const normalizeSearchQuery = (query: any) => {
     ...(query.pricemax
       ? { 'price[$lte]': toNumber(get(query, 'pricemax', 0)) + 1 }
       : {}),
-    ...(query.model ? { 'vehicle.modelId': query.model } : {}), // create one for make
+    ...(query.model ? { 'vehicle.modelId': query.model } : {}),
+    ...(query.make ? { 'vehicle.makeId': query.make } : {}),
     ...(query.transmission
       ? { 'vehicle.transmission': query.transmission }
       : {}),
