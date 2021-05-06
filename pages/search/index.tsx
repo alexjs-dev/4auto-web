@@ -13,10 +13,12 @@ import {
   ListingsCarousel,
   InfinitePagination,
   Layout,
+  Loader,
 } from '../../components'
 import {
   listingPaginationSelector,
   listingsSelector,
+  listingsLoadingSelector,
 } from '../../store/listing/selectors'
 import Creators from '../../store/listing/creators'
 import styles from './search.module.scss'
@@ -61,6 +63,7 @@ const SearchPage: React.FunctionComponent = () => {
   const pagination = useSelector(listingPaginationSelector)
   const listings = useSelector(listingsSelector)
   const makes = useSelector(makesSelector)
+  const loading = useSelector(listingsLoadingSelector)
   const count = get(pagination, 'total', 0)
 
   const fetch = (resetPagination = false) => {
@@ -124,7 +127,8 @@ const SearchPage: React.FunctionComponent = () => {
   return (
     <Layout background="white" fullscreen className={styles.layout}>
       <div className={styles.search}>
-        <h1>{`${t('titles.foundVehicles')}: ${count}`}</h1>
+        {loading && <Loader loading />}
+        {!loading && <h1>{`${t('titles.foundVehicles')}: ${count}`}</h1>}
         <SearchForm
           cb={() => fetch(true)}
           defaultExpanded={defaultExpanded}

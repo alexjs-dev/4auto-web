@@ -67,8 +67,6 @@ const SearchFormComponent: React.FunctionComponent<Props> = ({
   const { t } = useTranslation()
   const onSubmit = (values: any) => {
     const query = toQueryBasic(values)
-
-    console.log('query', query)
     closeModal()
     if (query) {
       router.push({

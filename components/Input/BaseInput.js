@@ -65,8 +65,8 @@ const BaseInput = forwardRef(
             small && styles.small
           )}
           value={value}
-          autoComplete={autocomplete}
           {...inputProps}
+          autoComplete={autocomplete}
         />
       )
     return (
@@ -77,8 +77,8 @@ const BaseInput = forwardRef(
           small && styles.small
         )}
         value={value}
-        autoComplete={autocomplete}
         {...inputProps}
+        autoComplete={autocomplete}
       />
     )
   }
@@ -112,7 +112,7 @@ BaseInput.defaultProps = {
   min: null,
   hasLabel: false,
   type: '',
-  autocomplete: '',
+  autocomplete: 'off',
 }
 
 export default memo(BaseInput)

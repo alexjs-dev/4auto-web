@@ -57,6 +57,7 @@ const AuthForm = ({ type }) => {
       label={t('label.email')}
       autocomplete={fieldTypes.email}
       name={fieldTypes.email}
+      type="email"
       validate={[emailValidator]}
     />
   )
