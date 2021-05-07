@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { memo, forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import omit from 'lodash/omit'
 import toNumber from 'lodash/toNumber'
 import classNames from 'classnames'
 import styles from './Input.module.scss'
@@ -45,7 +46,7 @@ const BaseInput = forwardRef(
     const isTextAreaInput = type === 'textarea'
 
     const inputProps = {
-      ...rest,
+      ...omit(rest, ['loading']),
       id: hasLabel ? name : null,
       disabled,
       type,

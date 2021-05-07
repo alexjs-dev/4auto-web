@@ -49,7 +49,6 @@ const SelectComponent = ({
     if (input.onChange) input.onChange(val)
     if (onChange) onChange(val)
   }
-
   const Title = () => {
     const title =
       get(
@@ -188,7 +187,7 @@ const SelectComponent = ({
 
 SelectComponent.propTypes = {
   disabled: PropTypes.bool,
-  options: PropTypes.objectOf(PropTypes.any),
+  options: PropTypes.any,
   className: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
@@ -283,7 +282,7 @@ export default Select
 
 Select.propTypes = {
   visible: PropTypes.bool,
-  options: PropTypes.objectOf(PropTypes.any), // { key: { label: string, value: 1 }}
+  options: PropTypes.any, // { key: { label: string, value: 1 }}
   className: PropTypes.string,
   disabled: PropTypes.bool,
   name: PropTypes.string,

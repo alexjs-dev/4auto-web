@@ -226,7 +226,7 @@ const AdvVehicleFields: React.FunctionComponent<FormProps> = ({
       </div>
       {config?.data &&
         config.data.map(({ key, list }) => (
-          <ItemDropDown title={t(`label.${key}`)}>
+          <ItemDropDown title={t(`label.${key}`)} key={key}>
             {map(list, (item) => (
               /* @ts-ignore */
               <Detail key={item.key} item={item} />

@@ -31,6 +31,7 @@ function* handleCreateListing(action) {
   try {
     const { data } = action
     const { month, year } = data
+    const images = get(data, 'images', [])
     const vehicle = yield call(vehiclesService.create, {
       ...data,
       regDate: new Date(toNumber(year), toNumber(month)),
@@ -39,6 +40,11 @@ function* handleCreateListing(action) {
       },
       modelId: get(data, 'model'),
       makeId: get(data, 'make'),
+      images: images.map((image, index) => ({
+        imageId: image._id,
+        order: index,
+        ...image,
+      })),
     })
     const result = yield call(listingsService.create, {
       ...data,
@@ -54,7 +60,7 @@ function* handleCreateListing(action) {
     })
     setTimeout(() => {
       Router.push('/')
-    }, 300)
+    }, 900)
   } catch (error) {
     console.error(error)
     yield put({ type: Types.CREATE_LISTING_FAILURE })
