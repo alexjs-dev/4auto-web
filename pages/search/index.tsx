@@ -59,10 +59,6 @@ const normalizeSearchQuery = (query: any) => {
   }
 }
 
-//     roomId: {
-// $in: [ 2, 5 ]
-// }
-
 const SearchPage: React.FunctionComponent = () => {
   const { query } = useRouter()
   const { t } = useTranslation()
@@ -134,7 +130,7 @@ const SearchPage: React.FunctionComponent = () => {
   return (
     <Layout background="white" fullscreen className={styles.layout}>
       <div className={styles.search}>
-        {loading && <Loader loading />}
+        {loading && <Loader loading isBranded />}
         {!loading && <h1>{`${t('titles.foundVehicles')}: ${count}`}</h1>}
         <SearchForm
           cb={() => fetch(true)}
