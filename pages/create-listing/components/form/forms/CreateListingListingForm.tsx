@@ -5,7 +5,6 @@ import { Button, Input, Checkbox, ImageUpload } from '../../../../../components'
 import {
   fieldTypes,
   validateFormData,
-  findEmptyFields,
 } from '../../../../../utils/formValidators'
 import { FORMS, requiredFields } from '../../../../../utils/util'
 import Creators from '../../../../../store/listing/creators'
@@ -13,7 +12,6 @@ import { listingCreationLoadingSelector } from '../../../../../store/listing/sel
 import styles from './CreateListingListingForm.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFormValues } from 'redux-form'
-import isEmpty from 'lodash/isEmpty'
 import LocationInput from '~/components/Input/LocationInput'
 
 type Props = any
