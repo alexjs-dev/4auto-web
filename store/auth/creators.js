@@ -12,6 +12,8 @@ export const { Types, Creators } = createActions(
     fetchSelfSuccess: ['data'],
     fetchSelfFailure: [],
     logOut: [],
+    logOutSuccess: [],
+    logOutFailure: [],
   },
   {}
 )

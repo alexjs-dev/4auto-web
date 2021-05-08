@@ -1,6 +1,7 @@
 import moment from 'moment'
 import map from 'lodash/map'
 import reduce from 'lodash/reduce'
+import split from 'lodash/split'
 import toNumber from 'lodash/toNumber'
 import isString from 'lodash/isString'
 import isArray from 'lodash/isArray'
@@ -10,9 +11,17 @@ import { bodyType as bodyTypes } from '~consts/vehicle'
 
 export const parseCloudinaryUrl = (url, quality = 'HIGH') => {
   if (!url || url === '') return ''
-  const str = url.split(/upload/)
-  if (quality === 'LOW') return `${str[0]}upload/w_400,q_auto:low${str[1]}`
-  return `${str[0]}upload/q_auto${str[1]}`
+  const str = split(url, /upload/)
+  let result = ''
+  const filter = quality === 'LOW' ? 'w_400,q_auto:low' : 'q_auto'
+  str.map((s, i) => {
+    if (i === 0) {
+      result = `${str[0]}upload/${filter}`
+    } else {
+      result += s
+    }
+  })
+  return result.replace('/s/', '/uploads/') // fix me pls
 }
 
 export const getPriceMin = (price) => {

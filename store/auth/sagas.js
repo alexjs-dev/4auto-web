@@ -101,8 +101,6 @@ function* handleFetchSelf() {
 
 function* handleLogOut() {
   try {
-    yield call(feathersClient.logout)
-    localStorage.removeItem('feathers-jwt')
     yield put({ type: Types.LOG_OUT_SUCCESS, data })
   } catch (e) {
     console.error(e)
