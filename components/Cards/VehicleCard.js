@@ -20,7 +20,7 @@ import {
   formatVehicleMainLabel,
   formatPriceWithDiscount,
   parseCloudinaryUrl,
-  placeholderImageUrl,
+  getPlaceholderImageUrl,
 } from '~utils/helpers'
 import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
 import HeartAnimation from '~public/animations/heart.json'
@@ -99,7 +99,11 @@ const VehicleCard = ({
   }
 
   const finalPrice = formatPriceWithDiscount(price, discountPercentage)
-  const imageUrl = parseCloudinaryUrl(get(image, 'url'))
+  const imageSrc = get(image, 'url')
+  const placeHolderSrc = getPlaceholderImageUrl(imageSrc)
+
+  console.log('placeHolderSrc', placeHolderSrc)
+  const imageUrl = parseCloudinaryUrl(imageSrc)
 
   return (
     <div className={styles.container} ref={ref}>
@@ -131,7 +135,7 @@ const VehicleCard = ({
             alt={vehicleTitle}
             effect="blur"
             src={imageUrl}
-            placeholderSrc={placeholderImageUrl}
+            placeholderSrc={placeHolderSrc}
           />
         </BaseButton>
       </div>

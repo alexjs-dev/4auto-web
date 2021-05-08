@@ -8,10 +8,11 @@ import isObject from 'lodash/isObject'
 import get from 'lodash/get'
 import { bodyType as bodyTypes } from '~consts/vehicle'
 
-export const parseCloudinaryUrl = (url) => {
+export const parseCloudinaryUrl = (url, quality = 'HIGH') => {
   if (!url || url === '') return ''
   const str = url.split(/upload/)
-  return `${str[0]}upload/q_auto,f_auto/${str[1]}`
+  if (quality === 'LOW') return `${str[0]}upload/w_400,q_auto:low${str[1]}`
+  return `${str[0]}upload/q_auto${str[1]}`
 }
 
 export const getPriceMin = (price) => {
@@ -28,6 +29,12 @@ export const getPriceMax = (price) => {
 
 export const placeholderImageUrl =
   'https://res.cloudinary.com/forautocloud/image/upload/q_auto,f_auto/v1620450906/static/car-placeholder_yqvbnh.png'
+
+export const getPlaceholderImageUrl = (baseImageUrl, basePlaceholderUrl) => {
+  if (!baseImageUrl || baseImageUrl === '')
+    return basePlaceholderUrl || placeholderImageUrl
+  return parseCloudinaryUrl(baseImageUrl, 'LOW')
+}
 
 export const mapBaseOptions = (array, key = '_id', label = 'name') =>
   reduce(
