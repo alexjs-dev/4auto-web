@@ -11,10 +11,10 @@
       height: 44px;
       object-fit: cover;
       border-radius: 50%;
-      margin-right: spacing(1);
     }
   }
   a {
+    margin-left: spacing(1);
     color: $color-primary;
     font-size: $font-size-p;
     font-family: $font-family-secondary;

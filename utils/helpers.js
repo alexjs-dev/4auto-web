@@ -1,11 +1,33 @@
 import moment from 'moment'
 import map from 'lodash/map'
 import reduce from 'lodash/reduce'
+import toNumber from 'lodash/toNumber'
 import isString from 'lodash/isString'
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
 import get from 'lodash/get'
 import { bodyType as bodyTypes } from '~consts/vehicle'
+
+export const parseCloudinaryUrl = (url) => {
+  if (!url || url === '') return ''
+  const str = url.split(/upload/)
+  return `${str[0]}upload/q_auto,f_auto/${str[1]}`
+}
+
+export const getPriceMin = (price) => {
+  const parsedPrice = toNumber(price)
+  if (parsedPrice < 0) return 0
+  return parsedPrice
+}
+
+export const getPriceMax = (price) => {
+  const parsedPrice = toNumber(price)
+  if (parsedPrice < 0) return 1
+  return parsedPrice
+}
+
+export const placeholderImageUrl =
+  'https://res.cloudinary.com/forautocloud/image/upload/q_auto,f_auto/v1620450906/static/car-placeholder_yqvbnh.png'
 
 export const mapBaseOptions = (array, key = '_id', label = 'name') =>
   reduce(

@@ -131,7 +131,6 @@ const VehicleOfTheDay: React.FunctionComponent<VehicleOfTheDayProps> = ({
       height: '19vw',
     },
   }
-  console.log('votd', listing)
   useEffect(() => {
     setImageMaximized(isMobile)
   }, [isMobile])

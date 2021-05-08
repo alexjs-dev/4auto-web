@@ -24,17 +24,24 @@ import Creators from '../../store/listing/creators'
 import styles from './search.module.scss'
 import { useRouter } from 'next/router'
 import { fieldTypes } from '~/utils/formValidators'
+import { getPriceMin, getPriceMax } from '../../utils/helpers'
+import { getYearStartMs, getYearEndMs } from '../../utils/dates'
 import { makesSelector } from '~/store/vehicles/selectors'
 
 const form = 'searchForm'
 
 const normalizeSearchQuery = (query: any) => {
-  console.log('query', query)
   return {
-    ...(query.pricemin ? { 'price[$gte]': query.pricemin } : {}),
-    ...(query.pricemax
-      ? { 'price[$lte]': toNumber(get(query, 'pricemax', 0)) + 1 }
+    ...(query.yearmin || query.yearmax
+      ? {
+          'vehicle.regDate': {
+            ...(query.yearmin ? { $gte: getYearStartMs(query.yearmin) } : {}),
+            ...(query.yearmax ? { $lte: getYearEndMs(query.yearmax) } : {}),
+          },
+        }
       : {}),
+    ...(query.pricemax ? { 'price[$lte]': getPriceMax(query.pricemax) } : {}),
+    ...(query.pricemin ? { 'price[$gte]': getPriceMin(query.pricemin) } : {}),
     ...(query.model ? { 'vehicle.modelId': query.model } : {}),
     ...(query.make ? { 'vehicle.makeId': query.make } : {}),
     ...(query.transmission

@@ -1,6 +1,8 @@
 import React from 'react'
+import { parseCloudinaryUrl } from '~/utils/helpers'
 import { BaseButton } from '../'
 import styles from './Avatar.module.scss'
+import UserAvatar from './UserAvatar'
 
 type Props = {
   title?: string
@@ -15,17 +17,14 @@ const Avatar: React.FunctionComponent<Props> = ({
   username,
   userId,
 }) => {
+  const src = parseCloudinaryUrl(avatarSrc)
+  const hasImageSrc = src && src !== ''
   return (
     <div className={styles.container}>
       {title && <p>{title}</p>}
       <div className={styles.user}>
-        <img
-          src={
-            avatarSrc ||
-            'https://res.cloudinary.com/forautocloud/image/upload/v1614110570/static/Screenshot_2021-02-23_at_22.02.19_bssgk8.png'
-          }
-          alt={username}
-        />
+        {hasImageSrc && <img src={src} alt={username} />}
+        {!hasImageSrc && <UserAvatar username={username} />}
         {/* @ts-ignore */}
         <BaseButton
           label={username}

@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react'
 import find from 'lodash/find'
+import head from 'lodash/head'
+import get from 'lodash/get'
 import classNames from 'classnames'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useTranslation } from 'react-i18next'
-import Image from 'next/image'
 import {
   FiMapPin,
   FiMoreVertical,
@@ -17,6 +19,8 @@ import {
   getVehicleTitle,
   formatVehicleMainLabel,
   formatPriceWithDiscount,
+  parseCloudinaryUrl,
+  placeholderImageUrl,
 } from '~utils/helpers'
 import VehicleCardScreen from './VehicleCardScreen/VehicleCardScreen'
 import HeartAnimation from '~public/animations/heart.json'
@@ -59,7 +63,7 @@ const VehicleCard = ({
   const [overlayActive, setOverlayActive] = useState(false)
   const { isMobile } = useViewport()
   useOutsideClick({ ref, isOpen: overlayActive, setOpen: setOverlayActive })
-  const image = find(images, (image) => image.order === 0)
+  const image = find(images, (image) => image.order === 0) || head(images)
   const { t } = useTranslation()
   const vehicleBodyYear = formatVehicleMainLabel(bodyType, regDate, t, isMobile)
   const vehicleMileage = isMobile ? mileage : formatMillage(mileage, t)
@@ -95,6 +99,7 @@ const VehicleCard = ({
   }
 
   const finalPrice = formatPriceWithDiscount(price, discountPercentage)
+  const imageUrl = parseCloudinaryUrl(get(image, 'url'))
 
   return (
     <div className={styles.container} ref={ref}>
@@ -122,10 +127,11 @@ const VehicleCard = ({
           href={`/listing/${listingId}`}
           className={styles.imageLink}
         >
-          <img
-            src={image?.url || ''}
-            draggable="false"
-            alt={t('vehicle.vehicle')}
+          <LazyLoadImage
+            alt={vehicleTitle}
+            effect="blur"
+            src={imageUrl}
+            placeholderSrc={placeholderImageUrl}
           />
         </BaseButton>
       </div>

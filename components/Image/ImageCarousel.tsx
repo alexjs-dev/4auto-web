@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { map, orderBy, get } from 'lodash'
+import { useTranslation } from 'react-i18next'
+/* @ts-ignore */
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { BaseButton } from '../'
 import { useDispatch } from 'react-redux'
 import useViewport from '../../hooks/useViewport'
@@ -12,6 +15,7 @@ import styles from './ImageCarousel.module.scss'
 import modalTypes from '../../consts/modals'
 
 import ImageType from '../../types/image'
+import { parseCloudinaryUrl, placeholderImageUrl } from '~/utils/helpers'
 
 type Props = {
   images: ImageType[]
@@ -21,7 +25,7 @@ const ImageCarousel: React.FunctionComponent<Props> = ({ images }) => {
   const orderedImages = orderBy(images, (image) => image.order)
   const [activeImage, setActiveImage] = useState(0)
   const { isMobile } = useViewport()
-
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const paginate = () => {
@@ -31,11 +35,13 @@ const ImageCarousel: React.FunctionComponent<Props> = ({ images }) => {
   }
   return (
     <div className={styles.container}>
-      <img
-        src={get(orderedImages, `${activeImage}.url`, '')}
-        alt="Image"
-        draggable="false"
+      <LazyLoadImage
+        placeholderSrc={placeholderImageUrl}
+        src={parseCloudinaryUrl(get(orderedImages, `${activeImage}.url`))}
+        effect="blur"
+        alt={t('vehicle.vehicle')}
       />
+
       {/* @ts-ignore */}
       <button
         className={styles.expandButton}
@@ -50,13 +56,14 @@ const ImageCarousel: React.FunctionComponent<Props> = ({ images }) => {
 
       <div className={styles.carousel}>
         {map(orderedImages, ({ url }, key) => (
-          <img
+          <LazyLoadImage
             key={key}
-            src={url}
+            placeholderSrc={placeholderImageUrl}
+            src={parseCloudinaryUrl(url)}
+            effect="blur"
             className={classNames(activeImage === key && styles.active)}
-            alt="Image"
-            draggable="false"
             onClick={() => setActiveImage(key)}
+            alt={t('vehicle.vehicle')}
           />
         ))}
         {isMobile && (
