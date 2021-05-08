@@ -1,6 +1,7 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
 import { get, toNumber, omit } from 'lodash'
 import i18n from '~i18n'
+import moment from 'moment'
 import { reset } from 'redux-form'
 import Router from 'next/router'
 import { FORMS } from '../../utils/util'
@@ -30,16 +31,20 @@ function* handleFetchListingById(action) {
 function* handleCreateListing(action) {
   try {
     const { data } = action
-    const { month, year } = data
+    const { month, year, make, model, capacity, ...rest } = data
     const images = get(data, 'images', [])
+
+    const regDate = new moment(`${year}/${month}`, 'YYYY/MM').utc()
+
     const vehicle = yield call(vehiclesService.create, {
       ...data,
-      regDate: new Date(toNumber(year), toNumber(month)),
+      regDate,
       vehicleExtras: {
-        ...data,
+        ...rest,
       },
-      modelId: get(data, 'model'),
-      makeId: get(data, 'make'),
+      modelId: model,
+      capacity: 1000 * capacity,
+      makeId: make,
       images: images.map((image, index) => ({
         imageId: image._id,
         order: index,
@@ -47,7 +52,7 @@ function* handleCreateListing(action) {
       })),
     })
     const result = yield call(listingsService.create, {
-      ...data,
+      ...rest,
       vehicleId: vehicle._id,
     })
     toast.success(i18n.t('snackbar.listingCreated'))

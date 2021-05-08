@@ -7,6 +7,7 @@ import {
   filter,
   reduce,
   keys,
+  toNumber,
   isNumber,
 } from 'lodash'
 import { SubmissionError } from 'redux-form'
@@ -65,6 +66,16 @@ export const emailValidator = (value) =>
     ? undefined
     : 'errors.invalid_email'
 
+export const powerValidator = (value) =>
+  !value || value === '' || toNumber(value) < 10
+    ? 'errors.invalidVehiclePower'
+    : undefined
+
+export const capacityValidator = (value) =>
+  !value || value === '' || toNumber(value) <= 0.1
+    ? 'errors.invalidVehicleCapacity'
+    : undefined
+
 export const passwordValidator = (value) =>
   isPasswordComplex(value) || size(value) === 0
     ? undefined
@@ -90,6 +101,8 @@ export const validateRequiredFields = (values, requiredFields) => {
 export const validators = {
   [fieldTypes.newPassword]: [passwordValidator],
   [fieldTypes.email]: [emailValidator],
+  [fieldTypes.power]: [powerValidator],
+  [fieldTypes.capacity]: [capacityValidator],
 }
 
 export const findEmptyFields = (values, requiredFields) =>
@@ -127,6 +140,10 @@ export const validateFormData = (values, requiredFields, options) => {
     }
   })
   if (!isEmpty(errors)) {
+    const cb = get(options, 'cb')
+    if (cb) {
+      cb()
+    }
     if (get(options, 'scrollToError')) {
       const key = Object.keys(errors)[0]
       const element = document.getElementById(`field-${key}`)

@@ -5,6 +5,8 @@
     "invalid_email": "📧 Invalid e-mail format",
     "required_field": "😡 Field is required",
     "emailExists": "📧  Email already exist",
+    "invalidVehiclePower": "🔧 Invalid power (kW)",
+    "invalidVehicleCapacity": "🔧 Invalid capacity",
     "nothingFound": "Nothing found",
     "weak_password": "🤖 Weak password",
     "oops": "🐞 Oops! Something happened",

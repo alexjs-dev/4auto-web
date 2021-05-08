@@ -101,8 +101,6 @@ const VehicleCard = ({
   const finalPrice = formatPriceWithDiscount(price, discountPercentage)
   const imageSrc = get(image, 'url')
   const placeHolderSrc = getPlaceholderImageUrl(imageSrc)
-
-  console.log('placeHolderSrc', placeHolderSrc)
   const imageUrl = parseCloudinaryUrl(imageSrc)
 
   return (

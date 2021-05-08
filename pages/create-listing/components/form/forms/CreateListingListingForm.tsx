@@ -30,19 +30,15 @@ const CreateListingListingForm: React.FunctionComponent<Props> = ({
   const form2_values = useSelector(getFormValues(FORMS[2]))
   const form1_values = useSelector(getFormValues(FORMS[1]))
   const onSubmit = async (form3_values: any) => {
+    await validateFormData(form1_values, requiredFields[1], {
+      cb: () => setStep(1),
+    })
+    await validateFormData(form2_values, requiredFields[2], {
+      cb: () => setStep(2),
+    })
     await validateFormData(form3_values, requiredFields[step], {
       scrollToError: true,
     })
-    const form2_errors = findEmptyFields(form2_values, requiredFields[2])
-    if (!isEmpty(form2_errors)) {
-      setStep(2)
-      return
-    }
-    const form1_errors = findEmptyFields(form1_values, requiredFields[1])
-    if (!isEmpty(form1_errors)) {
-      setStep(1)
-      return
-    }
     const data = {
       ...form3_values,
       ...form2_values,
