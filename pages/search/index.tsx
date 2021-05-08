@@ -7,7 +7,6 @@ import includes from 'lodash/includes'
 import some from 'lodash/some'
 import keys from 'lodash/keys'
 import isEmpty from 'lodash/isEmpty'
-import toNumber from 'lodash/toNumber'
 import {
   SearchForm,
   ListingsCarousel,
