@@ -2,32 +2,91 @@
 
 .container {
   background: $color-gray-light;
-  height: calc(100vh - 154px); // 96px
   overflow: auto;
   width: 100%;
   border-top: 1px solid $color-darker-gray;
-  padding-top: spacing(2);
+  padding: spacing(2) spacing(0.25) spacing(4) spacing(0.25);
+  height: calc(100vh - 120px);
+  @media (min-width: $tablet) {
+    height: calc(100vh - 154px); // 96px
+    padding: spacing(2) spacing(0.25) 0 spacing(0.25);
+  }
   ul {
     display: grid;
     grid-auto-rows: minmax(150px, auto);
     grid-gap: spacing(2);
+    a {
+      width: 100%;
+      height: 100%;
+    }
     li {
+      padding: spacing(2) spacing(3);
       transition: $transition;
       background: $color-white;
       width: 100%;
       height: 150px;
+      overflow: auto;
       position: relative;
       border-radius: $border-radius-medium;
       border-left: 4px solid transparent;
       -webkit-box-shadow: 8px 8px 15px -6px rgba(0, 0, 0, 0.22);
       -moz-box-shadow: 8px 8px 15px -6px rgba(0, 0, 0, 0.22);
       box-shadow: 8px 8px 15px -6px rgba(0, 0, 0, 0.22);
-      white-space: pre-wrap;
-      -moz-white-space: pre-wrap;
-      word-break: break-word;
-      &:hover {
+
+      &:hover,
+      &:focus {
         background: $color-dark;
         border-left: 4px solid $color-primary;
+        span,
+        h6 {
+          color: $color-white;
+        }
+        .messageSection {
+          svg {
+            color: $color-white;
+          }
+        }
+      }
+
+      .messageSection {
+        position: relative;
+        svg {
+          position: absolute;
+          color: $color-gray;
+          left: spacing(-2.5);
+        }
+        margin-top: spacing(2);
+        span {
+          color: $color-gray;
+          letter-spacing: 0.02em;
+        }
+      }
+      .generalSection {
+        display: flex;
+        align-items: center;
+        .title {
+          display: flex;
+          flex-direction: column;
+          margin-left: spacing(1);
+          width: 100%;
+          h6 {
+            text-transform: capitalize;
+            margin-bottom: spacing(0.25);
+            font-weight: $font-weight-medium;
+          }
+          span {
+            font-weight: $font-weight-bold;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 70%;
+          }
+        }
+      }
+      .chatUpdatedTitle {
+        position: absolute;
+        right: spacing(3);
+        color: $color-darker-gray;
       }
     }
   }

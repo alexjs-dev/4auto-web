@@ -1,5 +1,10 @@
 import React from 'react'
 import map from 'lodash/map'
+import { FiCornerDownRight } from 'react-icons/fi'
+import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { currentUserSelector } from '../../../store/auth/selectors'
+import { Avatar, BaseButton } from '../../../components'
 import styles from './ChatList.module.scss'
 
 type Props = {}
@@ -989,11 +994,40 @@ const chats = [
 ]
 
 const ChatList: React.FunctionComponent<Props> = () => {
+  const currentUser = useSelector(currentUserSelector)
   return (
     <div className={styles.container}>
       <ul>
-        {map(chats, (chat) => {
-          return <li key={chat._id}></li>
+        {map(chats, (chat, index) => {
+          const username = chat.user.profile.username
+          return (
+            <li key={chat._id} tabIndex={index + 1}>
+              {/* @ts-ignore */}
+              <BaseButton href={`/messages/${chat._id}`} isInternalLink>
+                <section className={styles.generalSection}>
+                  <Avatar
+                    userId={chat.lastMessage.userId.toString()}
+                    username={username}
+                    avatarSrc={chat.user.profile.image.url}
+                    hideUsername
+                  />
+                  <div className={styles.title}>
+                    <h6>{username}</h6>
+                    <span>{chat.topic}</span>
+                  </div>
+                  <span className={styles.chatUpdatedTitle}>
+                    {moment(chat.updatedAt).fromNow()}
+                  </span>
+                </section>
+                <section className={styles.messageSection}>
+                  {chat.lastMessage.userId === currentUser._id && (
+                    <FiCornerDownRight />
+                  )}
+                  <span>{chat.lastMessage.message}</span>
+                </section>
+              </BaseButton>
+            </li>
+          )
         })}
       </ul>
     </div>

@@ -8,6 +8,7 @@ type Props = {
   title?: string
   avatarSrc?: string
   username?: string
+  hideUsername?: boolean
   userId: string
 }
 
@@ -16,6 +17,7 @@ const Avatar: React.FunctionComponent<Props> = ({
   avatarSrc,
   username,
   userId,
+  hideUsername,
 }) => {
   const src = parseCloudinaryUrl(avatarSrc)
   const hasImageSrc = src && src !== ''
@@ -25,15 +27,17 @@ const Avatar: React.FunctionComponent<Props> = ({
       <div className={styles.user}>
         {hasImageSrc && <img src={src} alt={username} />}
         {!hasImageSrc && <UserAvatar username={username} />}
-        {/* @ts-ignore */}
-        <BaseButton
-          label={username}
-          href={`/profile/${userId}`}
-          isInternalLink
-          className={styles.link}
-        >
-          {username || 'Username'}
-        </BaseButton>
+        {!hideUsername && (
+          /* @ts-ignore */
+          <BaseButton
+            label={username}
+            href={`/profile/${userId}`}
+            isInternalLink
+            className={styles.link}
+          >
+            {username || 'Username'}
+          </BaseButton>
+        )}
       </div>
     </div>
   )

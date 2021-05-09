@@ -41,6 +41,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
         {!loading && (
           /* @ts-ignore */
           <BaseButton
+            onClick={() => setText('')}
             className={classNames(
               styles.closeButton,
               isDeleteVisible && styles.closeButtonVisible
