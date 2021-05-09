@@ -1,0 +1,12 @@
+@import 'vars.scss';
+
+.container {
+  padding-top: spacing(1);
+  padding-bottom: spacing(1);
+  @media (min-width: $tablet) {
+    padding-top: spacing(4);
+    padding-left: spacing(1);
+    padding-right: spacing(1);
+    padding-bottom: 0;
+  }
+}

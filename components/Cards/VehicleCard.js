@@ -104,12 +104,6 @@ const VehicleCard = ({
   const placeHolderSrc = getPlaceholderImageUrl(imageSrc)
   const imageUrl = parseCloudinaryUrl(imageSrc)
 
-  if (finalPrice == '22000' || finalPrice === 22000) {
-    console.log('parsed', imageUrl)
-    console.log('original', imageSrc)
-    console.log('---')
-  }
-
   return (
     <div className={styles.container} ref={ref}>
       <VehicleCardRibbons

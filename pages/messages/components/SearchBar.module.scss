@@ -1,0 +1,85 @@
+@import 'vars.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: spacing(1);
+
+  padding-bottom: spacing(1);
+  @media (min-width: $tablet) {
+    padding-bottom: spacing(2);
+  }
+
+  .loader {
+    position: absolute;
+    right: spacing(1);
+    top: 50%;
+    transform: translate(0, -45%) scale(0.6);
+  }
+
+  .closeButton {
+    opacity: 0;
+    pointer-events: none;
+    transition: $transition;
+    &.closeButtonVisible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    svg {
+      position: absolute;
+      right: spacing(1);
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .favorites {
+    display: flex;
+    justify-self: flex-end;
+    align-items: center;
+    svg,
+    span {
+      color: $color-dark-gray;
+      transition: $transition;
+    }
+    span {
+      margin-right: spacing(1);
+    }
+    &.isFilterActive {
+      span,
+      svg {
+        color: $color-dark;
+      }
+    }
+  }
+
+  .input {
+    height: 48px;
+    position: relative;
+    background: $color-gray-medium;
+    border-radius: $border-radius-big;
+    .searchIcon {
+      color: $color-gray;
+      position: absolute;
+      top: spacing(0.25);
+      left: spacing(1);
+      transform: translate(0, 50%);
+      transition: $transition;
+      &.searchIconActive {
+        color: $color-primary;
+      }
+    }
+    input {
+      padding: 0 spacing(5);
+      font-size: $font-size-p;
+      font-family: $font-family-secondary;
+      width: 100%;
+      height: 100%;
+      &::placeholder {
+        font-size: $font-size-p;
+        font-family: $font-family-secondary;
+        color: $color-gray;
+      }
+    }
+  }
+}

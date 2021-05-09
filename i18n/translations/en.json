@@ -7,8 +7,9 @@
     "emailExists": "📧  Email already exist",
     "invalidVehiclePower": "🔧 Invalid power (kW)",
     "invalidVehicleCapacity": "🔧 Invalid capacity",
-    "nothingFound": "Nothing found",
-    "weak_password": "🤖 Weak password",
+    "nothingFound": "🔧 Nothing found",
+    "weakPassword": "🤖 Weak password",
+    "invalidMileage": "🔧 Invalid mileage",
     "oops": "🐞 Oops! Something happened",
     "invalidUsername": "😡 Invalid username"
   },

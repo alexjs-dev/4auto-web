@@ -79,7 +79,10 @@ export const capacityValidator = (value) =>
 export const passwordValidator = (value) =>
   isPasswordComplex(value) || size(value) === 0
     ? undefined
-    : 'errors.weak_password'
+    : 'errors.weakPassword'
+
+export const mileageValidator = (value) =>
+  !value || toNumber(value) < 2 ? 'errors.invalidMileage' : undefined
 
 export const validateRequiredFields = (values, requiredFields) => {
   const errors = reduce(
@@ -103,6 +106,7 @@ export const validators = {
   [fieldTypes.email]: [emailValidator],
   [fieldTypes.power]: [powerValidator],
   [fieldTypes.capacity]: [capacityValidator],
+  [fieldTypes.mileage]: [mileageValidator],
 }
 
 export const findEmptyFields = (values, requiredFields) =>
