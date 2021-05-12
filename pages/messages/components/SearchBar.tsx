@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import useDebounce from '~hooks/useDebounce'
+import useDebounce from '../../../hooks/useDebounce'
 import BaseButton from '../../../components/Button/BaseButton'
 import { Loader } from '../../../components'
 import { FiSearch, FiPocket } from 'react-icons/fi'
