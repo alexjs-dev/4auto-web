@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import useDebounce from '~hooks/useDebounce'
 import BaseButton from '../../../components/Button/BaseButton'
 import { Loader } from '../../../components'
 import { FiSearch, FiPocket } from 'react-icons/fi'
@@ -13,7 +14,8 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const [isInputFocus, setInputFocus] = useState(false)
   const [isFilterActive, setFilterActive] = useState(false)
   const isDeleteVisible = text && !!text.trim()
-  const loading = false
+  const [loading, setLoading] = useState(false)
+  const loadingDebounced = useDebounce(loading, 500, () => setLoading(false))
   return (
     <div className={styles.container}>
       <div className={styles.input}>
@@ -27,18 +29,21 @@ const SearchBar: React.FunctionComponent<Props> = () => {
         <input
           placeholder="Enter for search..."
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            setText(e.target.value)
+            setLoading(true)
+          }}
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
         />
 
-        {loading && (
+        {loadingDebounced && (
           <div className={styles.loader}>
             <Loader loading />
           </div>
         )}
 
-        {!loading && (
+        {!loadingDebounced && (
           /* @ts-ignore */
           <BaseButton
             onClick={() => setText('')}
@@ -47,7 +52,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
               isDeleteVisible && styles.closeButtonVisible
             )}
           >
-            <FcFullTrash fontSize={22} />
+            <FcFullTrash fontSize={19} />
           </BaseButton>
         )}
       </div>

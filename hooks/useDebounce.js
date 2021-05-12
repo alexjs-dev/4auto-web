@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useDebounce = (value, delay) => {
+const useDebounce = (value, delay, cb) => {
   // State and setters for debounced value
   const [debouncedValue, setDebouncedValue] = useState(value)
 
@@ -9,6 +9,7 @@ const useDebounce = (value, delay) => {
       // Update debounced value after delay
       const handler = setTimeout(() => {
         setDebouncedValue(value)
+        if (cb) cb()
       }, delay)
 
       // Cancel the timeout if value changes (also on delay change or unmount)
