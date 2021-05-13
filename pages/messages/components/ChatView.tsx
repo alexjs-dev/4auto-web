@@ -1,14 +1,24 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import classNames from 'classnames'
+import get from 'lodash/get'
+import { getFormValues } from 'redux-form'
+import { useSelector } from 'react-redux'
 import styles from './ChatView.module.scss'
+import { FiPocket } from 'react-icons/fi'
 import { TiArrowBack } from 'react-icons/ti'
 import { BaseButton } from '../../../components'
 import ChatAvatar from './ChatAvatar'
+import ChatInput from './ChatInput'
+import MessagesList from './MessagesList'
+
+const inputForm = 'messageInputForm'
 
 type Props = {}
 
 const chat = {
   _id: '60965eb333d0e6001756489b',
+  listingId: '60965a099597c2049134c1f2',
   lastMessage: {
     _id: '60965eb333d0e6001756489b',
     userId: '60965eb333d0e6001756489b',
@@ -96,19 +106,75 @@ const chat = {
 const ChatView: React.FunctionComponent<Props> = () => {
   const username = chat.user.profile.username
   const router = useRouter()
+
+  const baseFormValues = useSelector(getFormValues('messageInputForm'))
+  const message = get(baseFormValues, 'message', '')
+  const textRowsCount = message.length && message.split('\n').length
+  const rows = textRowsCount && textRowsCount > 2 ? 2 : textRowsCount || 1
+
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, rows > 1 && styles.inputLarge)}
+    >
       <div className={styles.header}>
-        <ChatAvatar
-          userId={chat.lastMessage.userId.toString()}
-          username={username}
-          avatarSrc={chat.user.profile.image.url}
-          topic={chat.topic}
+        <div>
+          {/* @ts-ignore */}
+          <BaseButton
+            className={styles.backButton}
+            onClick={() => router.back()}
+          >
+            <TiArrowBack fontSize={28} />
+          </BaseButton>
+          <ChatAvatar
+            userId={chat.lastMessage.userId.toString()}
+            username={username}
+            avatarSrc={chat.user.profile.image.url}
+            topic={chat.topic}
+            listingId={chat.listingId}
+          />
+        </div>
+        <div>
+          {/* @ts-ignore */}
+          <BaseButton>
+            <FiPocket fontSize={22} />
+          </BaseButton>
+        </div>
+      </div>
+      <div className={styles.messages}>
+        <MessagesList
+          messages={[
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random, isAuthor: true },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+            { _id: Math.random },
+          ]}
         />
-        {/* @ts-ignore */}
-        <BaseButton className={styles.backButton} onClick={() => router.back()}>
-          <TiArrowBack fontSize={28} />
-        </BaseButton>
+      </div>
+      <div className={styles.input}>
+        <ChatInput />
       </div>
     </div>
   )

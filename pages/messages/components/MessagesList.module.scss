@@ -1,0 +1,60 @@
+@import 'vars.scss';
+
+.container {
+  height: 100%;
+  overflow: auto;
+  ul {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 1rem;
+    padding: 0.5rem 1.5rem;
+    > span {
+      margin-bottom: spacing(1.5);
+      color: $color-darker-gray;
+      text-align: right;
+      &.messageOther {
+        text-align: left;
+      }
+    }
+    li {
+      border-radius: 1.15rem;
+      line-height: 1.25;
+      max-width: 75%;
+      padding: 0.5rem 0.875rem;
+      position: relative;
+      word-wrap: break-word;
+      align-self: flex-end;
+      background-color: $color-primary;
+      color: #fff;
+      margin-bottom: spacing(2.5);
+      font-family: $font-family-secondary;
+      font-size: $font-size-span;
+      line-height: $line-height-span;
+      font-weight: $font-weight-normal;
+      box-shadow: $shadow-soft;
+      &.messageOther {
+        background-color: $color-white;
+        align-self: flex-start;
+        color: $color-dark;
+        &::before {
+          display: none;
+        }
+      }
+
+      &::before {
+        content: '';
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 10px solid transparent;
+        border-right: 10px solid $color-primary;
+        border-top: 10px solid $color-primary;
+        border-bottom: 10px solid transparent;
+        right: 19px;
+        bottom: -19px;
+      }
+    }
+  }
+}

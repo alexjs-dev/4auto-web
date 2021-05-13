@@ -99,7 +99,7 @@ const BaseButton = forwardRef(
 
 BaseButton.propTypes = {
   children: PropTypes.any,
-  onClick: PropTypes.func,
+  onClick: PropTypes.any,
   event: PropTypes.string,
   baseType: PropTypes.string,
   eventProps: PropTypes.shape(),

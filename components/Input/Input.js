@@ -145,25 +145,6 @@ const Input = ({
     }
   }, [])
   if (hidden || !name) return null
-  // if (!name)
-  //   return (
-  //     <InputComponent
-  //       disabled={disabled}
-  //       label={label}
-  //       placeholder={placeholder}
-  //       forwardedRef={forwardedRef}
-  //       input={{
-  //         name: '',
-  //         onChange: null,
-  //       }}
-  //       meta={{
-  //         error: false,
-  //         invalid: false,
-  //         active: false,
-  //       }}
-  //       {...rest}
-  //     />
-  //   )
   return (
     <Field
       name={name}

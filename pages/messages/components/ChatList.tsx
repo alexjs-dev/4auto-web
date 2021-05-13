@@ -21,6 +21,7 @@ const chats = [
     },
     userId: 'abc',
     unreadMessageCount: 2,
+    listingId: '60965a099597c2049134c1f2',
     topic: '220TGU BMW 320 xDrive',
     createdAt: '2021-05-08T09:49:39.230Z',
     updatedAt: '2021-05-08T09:49:39.268Z',
@@ -1009,7 +1010,9 @@ const ChatList: React.FunctionComponent<Props> = () => {
                   username={username}
                   avatarSrc={chat.user.profile.image.url}
                   topic={chat.topic}
+                  listingId={chat.listingId}
                   updatedAt={chat.updatedAt}
+                  wrapTopic
                 />
                 <section className={styles.messageSection}>
                   {chat.lastMessage.userId === currentUser._id && (

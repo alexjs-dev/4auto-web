@@ -24,21 +24,18 @@ const Avatar: React.FunctionComponent<Props> = ({
   return (
     <div className={styles.container}>
       {title && <p>{title}</p>}
-      <div className={styles.user}>
+      {/* @ts-ignore */}
+      <BaseButton
+        className={styles.user}
+        href={`/profile/${userId}`}
+        isInternalLink
+      >
         {hasImageSrc && <img src={src} alt={username} />}
         {!hasImageSrc && <UserAvatar username={username} />}
         {!hideUsername && (
-          /* @ts-ignore */
-          <BaseButton
-            label={username}
-            href={`/profile/${userId}`}
-            isInternalLink
-            className={styles.link}
-          >
-            {username || 'Username'}
-          </BaseButton>
+          <span className={styles.link}>{username || 'Username'}</span>
         )}
-      </div>
+      </BaseButton>
     </div>
   )
 }
