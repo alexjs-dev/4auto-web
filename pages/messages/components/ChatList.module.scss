@@ -61,28 +61,6 @@
           letter-spacing: 0.02em;
         }
       }
-      .generalSection {
-        display: flex;
-        align-items: center;
-        .title {
-          display: flex;
-          flex-direction: column;
-          margin-left: spacing(1);
-          width: 100%;
-          h6 {
-            text-transform: capitalize;
-            margin-bottom: spacing(0.25);
-            font-weight: $font-weight-medium;
-          }
-          span {
-            font-weight: $font-weight-bold;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            max-width: 70%;
-          }
-        }
-      }
       .chatUpdatedTitle {
         position: absolute;
         right: spacing(3);
