@@ -107,7 +107,7 @@ const ChatView: React.FunctionComponent<Props> = () => {
   const username = chat.user.profile.username
   const router = useRouter()
 
-  const baseFormValues = useSelector(getFormValues('messageInputForm'))
+  const baseFormValues = useSelector(getFormValues(inputForm))
   const message = get(baseFormValues, 'message', '')
   const textRowsCount = message.length && message.split('\n').length
   const rows = textRowsCount && textRowsCount > 2 ? 2 : textRowsCount || 1
