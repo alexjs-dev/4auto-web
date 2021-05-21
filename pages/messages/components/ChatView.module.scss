@@ -2,9 +2,9 @@
 
 .container {
   display: grid;
-  grid-template-rows: 77px calc(100vh - 190px) 44px; // 136px
+  grid-template-rows: 77px calc(100vh - 190px) 1fr; // 136px, 44px
   &.inputLarge {
-    grid-template-rows: 77px calc(100vh - 220px) 44px; // 136px
+    grid-template-rows: 77px calc(100vh - 220px) 1fr; // 136px, 44px
   }
   .header {
     .backButton {

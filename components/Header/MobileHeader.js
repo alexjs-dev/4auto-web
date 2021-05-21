@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/router'
 import { FiPlusCircle as AddIcon, FiMenu } from 'react-icons/fi'
 import useModal from '~hooks/useModal'
 import Creators from '~store/menu/creators'
@@ -10,55 +11,54 @@ import LogoMiniIcon from '~public/logo-mini.svg'
 import HeaderActionIcon from './HeaderActionIcon'
 import styles from './MobileHeader.module.scss'
 
-const MobileHeader = () => {
-  const { t } = useTranslation()
+const LogoSection = () => {
   const loggedIn = useSelector(isLoggedInSelector)
-  const dispatch = useDispatch()
-  const [modalTypes, openModal] = useModal()
+  const Content = [
+    <BaseButton href="/" isInternalLink key="logo">
+      <LogoMiniIcon />
+    </BaseButton>,
+  ]
+  if (loggedIn) {
+    Content.push(
+      <BaseButton
+        key="create"
+        href="/create-listing?step=1"
+        isInternalLink
+        className={styles.spacing}
+      >
+        <AddIcon style={{ fontSize: 40 }} className={styles.icon} />
+      </BaseButton>
+    )
+  }
+  return <section className={styles.main}>{Content}</section>
+}
+
+const ActionSection = () => {
+  const loggedIn = useSelector(isLoggedInSelector)
   const toggleDrawerMenu = () => dispatch(Creators.toggleDrawerMenu())
 
-  const LogoSection = () => {
-    const Content = [
-      <BaseButton href="/" isInternalLink key="logo">
-        <LogoMiniIcon />
-      </BaseButton>,
-    ]
-    if (loggedIn) {
-      Content.push(
-        <BaseButton
-          key="create"
-          href="/create-listing?step=1"
-          isInternalLink
-          className={styles.spacing}
-        >
-          <AddIcon style={{ fontSize: 40 }} className={styles.icon} />
-        </BaseButton>
-      )
-    }
-    return <section className={styles.main}>{Content}</section>
-  }
-
-  const ActionSection = () => {
-    if (loggedIn) {
-      return (
-        <section>
-          <UserUnreads className={styles.spacing} />
-          <BaseButton onClick={() => toggleDrawerMenu()}>
-            <UserAvatar />
-          </BaseButton>
-        </section>
-      )
-    }
+  if (loggedIn) {
     return (
       <section>
+        <UserUnreads className={styles.spacing} />
         <BaseButton onClick={() => toggleDrawerMenu()}>
-          <FiMenu style={{ fontSize: 36 }} className={styles.icon} />
+          <UserAvatar />
         </BaseButton>
       </section>
     )
   }
+  return (
+    <section>
+      <BaseButton onClick={() => toggleDrawerMenu()}>
+        <FiMenu style={{ fontSize: 36 }} className={styles.icon} />
+      </BaseButton>
+    </section>
+  )
+}
 
-  const SearchSection = () => (
+const SearchSection = () => {
+  const [modalTypes, openModal] = useModal()
+  return (
     <div className={styles.baseSearchWrapper}>
       <BaseButton className={styles.baseSearch}>
         <div className={styles.searchIcon}>
@@ -70,7 +70,9 @@ const MobileHeader = () => {
       </BaseButton>
     </div>
   )
+}
 
+const MobileHeader = () => {
   return (
     <header className={styles.container}>
       <LogoSection />

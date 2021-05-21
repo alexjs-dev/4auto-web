@@ -140,39 +140,38 @@ const ChatView: React.FunctionComponent<Props> = () => {
           </BaseButton>
         </div>
       </div>
-      <div className={styles.messages}>
-        <MessagesList
-          messages={[
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random, isAuthor: true },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-            { _id: Math.random },
-          ]}
-        />
-      </div>
+
+      <MessagesList
+        messages={[
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random, isAuthor: true },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+          { _id: Math.random },
+        ]}
+      />
       <div className={styles.input}>
         <ChatInput />
       </div>

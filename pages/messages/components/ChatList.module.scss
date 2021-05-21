@@ -5,7 +5,7 @@
   overflow: auto;
   width: 100%;
   border-top: 1px solid $color-darker-gray;
-  padding: spacing(2) spacing(0.25) spacing(4) spacing(0.25);
+  padding: spacing(2) spacing(0.25) spacing(10) spacing(0.25);
   height: calc(100vh - 120px);
   @media (min-width: $tablet) {
     height: calc(100vh - 154px); // 96px
