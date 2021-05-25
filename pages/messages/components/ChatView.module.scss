@@ -2,9 +2,15 @@
 
 .container {
   display: grid;
-  grid-template-rows: 77px calc(100vh - 190px) 1fr; // 136px, 44px
+  grid-template-rows: 77px calc(100vh - 250px) 1fr; // 136px
   &.inputLarge {
-    grid-template-rows: 77px calc(100vh - 220px) 1fr; // 136px, 44px
+    grid-template-rows: 77px calc(100vh - 280px) 1fr; // 136px, 44px
+  }
+  @media (min-width: $tablet) {
+    grid-template-rows: 77px calc(100vh - 190px) 1fr;
+    &.inputLarge {
+      grid-template-rows: 77px calc(100vh - 220px) 1fr;
+    }
   }
   .header {
     .backButton {
