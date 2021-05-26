@@ -28,6 +28,9 @@
       line-height: 32px;
       color: $color-darker-gray;
     }
+    @include for-safari-only {
+      font-size: $font-size-p;
+    }
   }
   .submitButton {
     border-radius: 50%;

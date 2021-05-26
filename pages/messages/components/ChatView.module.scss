@@ -6,6 +6,12 @@
   &.inputLarge {
     grid-template-rows: 77px calc(100vh - 280px) 1fr; // 136px, 44px
   }
+  @include for-safari-only {
+    grid-template-rows: 77px calc(100vh - 300px) 1fr; // 136px
+    &.inputLarge {
+      grid-template-rows: 77px calc(100vh - 340px) 1fr; // 136px, 44px
+    }
+  }
   @media (min-width: $tablet) {
     grid-template-rows: 77px calc(100vh - 190px) 1fr;
     &.inputLarge {
