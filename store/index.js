@@ -13,12 +13,14 @@ import vehicles from '~store/vehicles/reducer'
 import listing from '~store/listing/reducer'
 import user from '~store/user/reducer'
 import locations from '~store/locations/reducer'
+import chats from '~store/chats/reducer'
 // import sagas
 import authSaga from '~store/auth/sagas'
 import vehiclesSaga from '~store/vehicles/sagas'
 import listingSaga from '~store/listing/sagas'
 import userSaga from '~store/user/sagas'
 import locationsSaga from '~store/locations/sagas'
+import chatsSaga from '~store/chats/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -29,6 +31,7 @@ const reducer = combineReducers({
   listing,
   user,
   locations,
+  chats,
   form: formReducer,
 })
 
@@ -46,7 +49,14 @@ const store = createStore(
 )
 
 const RootSagas = function* root() {
-  yield all([...authSaga, ...vehiclesSaga, ...listingSaga, ...userSaga, ...locationsSaga])
+  yield all([
+    ...authSaga,
+    ...vehiclesSaga,
+    ...listingSaga,
+    ...userSaga,
+    ...locationsSaga,
+    ...chatsSaga,
+  ])
 }
 
 sagaMiddleware.run(RootSagas)
