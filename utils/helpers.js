@@ -36,6 +36,16 @@ export const getPriceMax = (price) => {
   return parsedPrice
 }
 
+export const getUsername = (user) => {
+  const username = get(user, 'profile.username')
+  const firstName = get(user, 'profile.firstName')
+  const lastName = get(user, 'profile.lastName')
+  if (username && username !== '') return username
+  if (firstName && firstName !== '' && lastName && lastName !== '')
+    return `${firstName} ${lastName}`
+  return 'N/A'
+}
+
 export const placeholderImageUrl =
   'https://res.cloudinary.com/forautocloud/image/upload/q_auto,f_auto/v1620450906/static/car-placeholder_yqvbnh.png'
 

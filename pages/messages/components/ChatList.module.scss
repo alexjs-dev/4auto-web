@@ -1,5 +1,12 @@
 @import 'vars.scss';
 
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: spacing(1) 0;
+}
+
 .container {
   background: $color-gray-light;
   overflow: auto;

@@ -39,7 +39,7 @@ const ChatAvatar: React.FunctionComponent<Props> = ({
         {/* @ts-ignore */}
         <BaseButton
           isInternalLink
-          href={`/profile/${listingId}`}
+          href={`/listing/${listingId}`}
           className={classNames(wrapTopic && styles.wrapText)}
         >
           <span>{topic}</span>

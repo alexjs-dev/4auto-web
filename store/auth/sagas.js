@@ -101,7 +101,7 @@ function* handleFetchSelf() {
 
 function* handleLogOut() {
   try {
-    yield put({ type: Types.LOG_OUT_SUCCESS, data })
+    yield put({ type: Types.LOG_OUT_SUCCESS, data: {} })
   } catch (e) {
     console.error(e)
     yield put({ type: Types.LOG_OUT_FAILURE })
