@@ -37,27 +37,30 @@ const isFavored = (id) =>
 const setFavored = (id) => localStorage.setItem(`favorite-listing-${id}`, true)
 const unsetFavored = (id) => localStorage.removeItem(`favorite-listing-${id}`)
 
-const VehicleCard = ({
-  listingId,
-  model,
-  make,
-  regDate,
-  power,
-  capacity,
-  mileage,
-  bodyType,
-  price,
-  discountPercentage,
-  fuel,
-  transmission,
-  city,
-  countryCode,
-  country,
-  urgent,
-  featured,
-  recommended,
-  images, // handle re-render
-}) => {
+const VehicleCard = (props) => {
+  const {
+    model,
+    make,
+    regDate,
+    capacity,
+    mileage,
+    bodyType,
+    price,
+    discountPercentage,
+    fuel,
+    transmission,
+    city,
+    countryCode,
+    country,
+    urgent,
+    featured,
+    recommended,
+    images, // handle re-render
+  } = props
+
+  const listingId = get(props, 'listingId')
+  const power = get(props, 'power')
+
   const ref = useRef(null)
 
   const [overlayActive, setOverlayActive] = useState(false)

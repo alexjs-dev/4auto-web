@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Header, NavigationDrawer, Modal } from '~components'
 import { Provider } from 'react-redux'
 import { useRouter } from 'next/router'
+import SocketClient from '../lib/SocketClient'
 import store, { persistor } from '~store'
 import '~i18n'
 import '~styles/reset.scss'
@@ -14,8 +15,13 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
+let socketClient
+
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter()
+  useLayoutEffect(() => {
+    if (!socketClient) socketClient = new SocketClient()
+  }, [socketClient])
   return (
     <>
       <Provider store={store}>

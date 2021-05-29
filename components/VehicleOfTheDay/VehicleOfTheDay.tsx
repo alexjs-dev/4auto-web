@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import Lottie from 'lottie-react'
+import get from 'lodash/get'
 import { FiLink2 } from 'react-icons/fi'
 import sample from 'lodash/sample'
 import useViewport from '../../hooks/useViewport'
@@ -146,7 +147,7 @@ const VehicleOfTheDay: React.FunctionComponent<VehicleOfTheDayProps> = ({
           )}
           onClick={() => setImageMaximized(true)}
         >
-          <ImageCarousel images={listing.vehicle.images} />
+          <ImageCarousel images={get(listing, 'vehicle.images', [])} />
         </div>
         <div
           className={classNames(

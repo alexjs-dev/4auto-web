@@ -40,6 +40,26 @@
       -moz-box-shadow: 8px 8px 15px -6px rgba(0, 0, 0, 0.22);
       box-shadow: 8px 8px 15px -6px rgba(0, 0, 0, 0.22);
 
+      .unreadsBubble {
+        padding: spacing(0.5);
+        background: $color-red;
+        color: $color-white;
+        border-radius: 50%;
+        min-width: 22px;
+        width: fit-content;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        font-size: $font-size-m;
+        right: 0;
+        transform: translate(spacing(-3), 0);
+        @include for-safari-only {
+          width: 22px;
+        }
+      }
+
       &:hover,
       &:focus {
         background: $color-dark;

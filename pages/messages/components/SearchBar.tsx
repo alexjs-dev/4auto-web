@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import ChatsCreators from '../../../store/chats/creators'
+import { chatsLoadingSelector } from '../../../store/chats/selectors'
 import useDebounce from '../../../hooks/useDebounce'
 import BaseButton from '../../../components/Button/BaseButton'
 import { Loader } from '../../../components'
@@ -11,11 +15,27 @@ type Props = {}
 
 const SearchBar: React.FunctionComponent<Props> = () => {
   const [text, setText] = useState('')
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [isInputFocus, setInputFocus] = useState(false)
   const [isFilterActive, setFilterActive] = useState(false)
   const isDeleteVisible = text && !!text.trim()
-  const [loading, setLoading] = useState(false)
-  const loadingDebounced = useDebounce(loading, 500, () => setLoading(false))
+  const loading = useSelector(chatsLoadingSelector)
+  const debouncedText = useDebounce(text, 900)
+
+  useEffect(() => {
+    if (!loading) {
+      dispatch(
+        ChatsCreators.fetchChats({
+          resetPagination: true,
+          // fuzzy-search supported on BE for this field
+          ...(debouncedText && debouncedText.trim() !== ''
+            ? { topic: debouncedText }
+            : {}),
+        })
+      )
+    }
+  }, [debouncedText])
   return (
     <div className={styles.container}>
       <div className={styles.input}>
@@ -27,23 +47,22 @@ const SearchBar: React.FunctionComponent<Props> = () => {
           )}
         />
         <input
-          placeholder="Enter for search..."
+          placeholder={t('titles.searchForChatTopic')}
           value={text}
           onChange={(e) => {
             setText(e.target.value)
-            setLoading(true)
           }}
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
         />
 
-        {loadingDebounced && (
+        {loading && (
           <div className={styles.loader}>
             <Loader loading />
           </div>
         )}
 
-        {!loadingDebounced && (
+        {!loading && (
           /* @ts-ignore */
           <BaseButton
             onClick={() => setText('')}

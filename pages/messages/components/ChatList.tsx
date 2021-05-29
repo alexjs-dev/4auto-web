@@ -1,11 +1,14 @@
 import React from 'react'
 import map from 'lodash/map'
+import find from 'lodash/find'
+import get from 'lodash/get'
 import { FiCornerDownRight } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 import { currentUserSelector } from '../../../store/auth/selectors'
 import {
   chatsSelector,
   chatsLoadingSelector,
+  chatStatsSelector,
 } from '../../../store/chats/selectors'
 import { BaseButton, Loader } from '../../../components'
 import { getUsername } from '../../../utils/helpers'
@@ -14,10 +17,20 @@ import ChatAvatar from './ChatAvatar'
 
 type Props = {}
 
+const getUnreadCountByChatId = (chatStats: any, chatId: string) => {
+  const chat =
+    chatStats &&
+    chatStats.unreads &&
+    find(chatStats.unreads, (unread) => unread.chatId === chatId)
+  if (chat) return chat.unreadCount
+  return 0
+}
+
 const ChatList: React.FunctionComponent<Props> = () => {
   const currentUser = useSelector(currentUserSelector)
   const chats = useSelector(chatsSelector)
   const loading = useSelector(chatsLoadingSelector)
+  const chatStats = useSelector(chatStatsSelector)
   return (
     <div className={styles.container}>
       {loading && (
@@ -30,6 +43,7 @@ const ChatList: React.FunctionComponent<Props> = () => {
           const otherChatPerson =
             currentUser._id === chat.author._id ? chat.recipient : chat.author
           const username = getUsername(otherChatPerson)
+          const unreads = getUnreadCountByChatId(chatStats, chat._id)
           return (
             /* @ts-ignore */
             <li key={chat._id} tabIndex={index ? index + 1 : 1}>
@@ -45,11 +59,14 @@ const ChatList: React.FunctionComponent<Props> = () => {
                   wrapTopic
                 />
                 <section className={styles.messageSection}>
-                  {chat.lastMessage.userId === currentUser._id && (
+                  {get(chat, 'lastMessage.userId') === currentUser._id && (
                     <FiCornerDownRight />
                   )}
-                  <span>{chat.lastMessage.text}</span>
+                  <span>{get(chat, 'lastMessage.text', '')}</span>
                 </section>
+                {unreads > 0 && (
+                  <span className={styles.unreadsBubble}>{unreads}</span>
+                )}
               </BaseButton>
             </li>
           )
