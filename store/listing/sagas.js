@@ -1,5 +1,5 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
-import { get, toNumber, omit } from 'lodash'
+import { get, omit } from 'lodash'
 import i18n from '~i18n'
 import moment from 'moment'
 import { reset } from 'redux-form'

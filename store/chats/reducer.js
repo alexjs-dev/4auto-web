@@ -4,9 +4,10 @@ import { keyBy, get } from 'lodash'
 
 const INITIAL_STATE = {
   loadingChatStats: false,
-  chatStats: null,
+  chatStats: {},
   currentChat: {},
   loadingChats: false,
+  loadingChat: false,
   chatsPagination: {},
   chats: {},
 }
@@ -49,6 +50,46 @@ const fetchChatsFailure = (state) => ({
   loadingChats: false,
 })
 
+const pushUnreadMessage = (state, { data }) => ({
+  ...state,
+  chats: {
+    ...state.chats,
+    [data.chatId]: {
+      ...get(state.chats, data.chatId, {}),
+      lastMessage: data,
+    },
+  },
+  chatStats: {
+    ...state.chatStats,
+    ...(data.chatId !== state.currentChat._id
+      ? {
+          unreads: {
+            ...get(state.chatStats, 'unreads', {}),
+            [data.chatId]:
+              get(state.chatStats, `unreads.${data.chatId}`, 0) + 1,
+          },
+        }
+      : {}),
+  },
+})
+
+const fetchChat = (state, { id }) => ({
+  ...state,
+  currentChat: get(state.chats, id, { _id: id }),
+  loadingChat: true,
+})
+
+const fetchChatSuccess = (state, { data }) => ({
+  ...state,
+  currentChat: data,
+  loadingChat: false,
+})
+
+const fetchChatFailure = (state) => ({
+  ...state,
+  loadingChat: false,
+})
+
 export default createReducer(INITIAL_STATE, {
   [Types.FETCH_CHAT_STATS]: fetchChatStats,
   [Types.FETCH_CHAT_STATS_SUCCESS]: fetchChatStatsSuccess,
@@ -56,4 +97,8 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_CHATS]: fetchChats,
   [Types.FETCH_CHATS_SUCCESS]: fetchChatsSuccess,
   [Types.FETCH_CHATS_FAILURE]: fetchChatsFailure,
+  [Types.PUSH_UNREAD_MESSAGE]: pushUnreadMessage,
+  [Types.FETCH_CHAT]: fetchChat,
+  [Types.FETCH_CHAT_SUCCESS]: fetchChatSuccess,
+  [Types.FETCH_CHAT_FAILURE]: fetchChatFailure,
 })

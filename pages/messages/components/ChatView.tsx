@@ -2,115 +2,62 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 import { getFormValues } from 'redux-form'
 import { useSelector } from 'react-redux'
+import {
+  currentChatSelector,
+  currentChatLoader,
+} from '../../../store/chats/selectors'
+import { messageSelector } from '../../../store/messages/selectors'
+
 import styles from './ChatView.module.scss'
 import { FiPocket } from 'react-icons/fi'
 import { TiArrowBack } from 'react-icons/ti'
-import { BaseButton } from '../../../components'
+import { BaseButton, Loader } from '../../../components'
 import ChatAvatar from './ChatAvatar'
 import ChatInput from './ChatInput'
 import MessagesList from './MessagesList'
+import { getUsername } from '~/utils/helpers'
+import { currentUserSelector } from '~/store/auth/selectors'
 
 const inputForm = 'messageInputForm'
 
 type Props = {}
 
-const chat = {
-  _id: '60965eb333d0e6001756489b',
-  listingId: '60965a099597c2049134c1f2',
-  lastMessage: {
-    _id: '60965eb333d0e6001756489b',
-    userId: '60965eb333d0e6001756489b',
-    message: 'I remember everything mate. See you later 🤘',
-    createdAt: '2021-05-08T09:49:39.230Z',
-    updatedAt: '2021-05-08T09:49:39.268Z',
-  },
-  messages: [
-    {
-      _id: Math.random(),
-      userId: '60965eb333d0e6001756489b',
-      message: Math.random().toString(),
-      createdAt: '2021-04-08T09:49:39.230Z',
-      updatedAt: '2021-04-08T09:49:39.268Z',
-    },
-    {
-      _id: Math.random(),
-      userId: '60965eb333d0e6001756489b',
-      message: 'I remember everything mate. See you later 🤘',
-      createdAt: '2021-05-08T09:49:39.230Z',
-      updatedAt: '2021-05-08T09:49:39.268Z',
-    },
-  ],
-  userId: 'abc',
-  unreadMessageCount: 2,
-  topic: '220TGU BMW 320 xDrive',
-  createdAt: '2021-05-08T09:49:39.230Z',
-  updatedAt: '2021-05-08T09:49:39.268Z',
-  user: {
-    _id: '60965eb333d0e6001756489a',
-    role: 0,
-    disabledUntil: null,
-    createdAt: '2021-05-08T09:49:39.230Z',
-    updatedAt: '2021-05-08T09:49:39.268Z',
-    profileId: '60965eb333d0e6001756489a',
-    profile: {
-      _id: '60965eb333d0e6001756489a',
-      firstName: 'Aleksei',
-      lastName: 'Dmitrijev',
-      isVerified: false,
-      personalId: '',
-      description: '',
-      birthDate: null,
-      onlineAt: '2021-05-08T09:31:16.900Z',
-      username: 'aleksei',
-      createdAt: '2021-05-08T09:49:39.189Z',
-      updatedAt: '2021-05-08T09:49:39.189Z',
-      image: {
-        imageId: '60965eb333d0e6001756489a',
-        url:
-          'https://res.cloudinary.com/forautocloud/image/upload/v1614197192/static/person3_wkfsip.jpg',
-        _id: '60965eb333d0e6001756489a',
-      },
-    },
-  },
-  participant: {
-    _id: '60965eb333d0e6001756489b',
-    role: 0,
-    disabledUntil: null,
-    createdAt: '2021-05-08T09:49:39.230Z',
-    updatedAt: '2021-05-08T09:49:39.268Z',
-    profileId: '60965eb333d0e6001756489b',
-    profile: {
-      _id: '60965eb333d0e6001756489b',
-      firstName: 'Jane',
-      lastName: 'Qwerty',
-      isVerified: false,
-      personalId: '',
-      description: '',
-      birthDate: null,
-      onlineAt: '2021-05-08T09:31:16.900Z',
-      username: 'janne',
-      createdAt: '2021-05-08T09:49:39.189Z',
-      updatedAt: '2021-05-08T09:49:39.189Z',
-      image: {
-        imageId: '60965eb333d0e6001756489b',
-        url:
-          'https://res.cloudinary.com/forautocloud/image/upload/v1614197192/static/person2_zxvfou.jpg',
-        _id: '60965eb333d0e6001756489b',
-      },
-    },
-  },
-}
-
 const ChatView: React.FunctionComponent<Props> = () => {
-  const username = chat.user.profile.username
+  const chat = useSelector(currentChatSelector)
+  const currentUser = useSelector(currentUserSelector)
+  const loadingChat = useSelector(currentChatLoader)
+  const otherChatPerson =
+    currentUser._id === get(chat, 'author._id') ? chat.recipient : chat.author
+  const username = getUsername(otherChatPerson)
   const router = useRouter()
-
   const baseFormValues = useSelector(getFormValues(inputForm))
   const message = get(baseFormValues, 'message', '')
   const textRowsCount = message.length && message.split('\n').length
   const rows = textRowsCount && textRowsCount > 2 ? 2 : textRowsCount || 1
+
+  const messages = useSelector(messageSelector)
+  const currentMessages = get(messages, chat._id, [])
+
+  console.log('chat', chat)
+  console.log('messages', messages)
+
+  if (loadingChat || isEmpty(chat) || !otherChatPerson) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '90vh',
+        }}
+      >
+        <Loader loading isBranded />
+      </div>
+    )
+  }
 
   return (
     <div
@@ -126,9 +73,9 @@ const ChatView: React.FunctionComponent<Props> = () => {
             <TiArrowBack fontSize={28} />
           </BaseButton>
           <ChatAvatar
-            userId={chat.lastMessage.userId.toString()}
+            userId={otherChatPerson._id}
             username={username}
-            avatarSrc={chat.user.profile.image.url}
+            avatarSrc={otherChatPerson.profile.image.url}
             topic={chat.topic}
             listingId={chat.listingId}
           />
@@ -141,37 +88,7 @@ const ChatView: React.FunctionComponent<Props> = () => {
         </div>
       </div>
 
-      <MessagesList
-        messages={[
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random, isAuthor: true },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-          { _id: Math.random },
-        ]}
-      />
+      <MessagesList messages={currentMessages} />
       <div className={styles.input}>
         <ChatInput />
       </div>

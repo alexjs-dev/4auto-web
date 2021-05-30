@@ -2,6 +2,7 @@ import React from 'react'
 import { FiMail as MailIcon } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
 import reduce from 'lodash/reduce'
+import values from 'lodash/values'
 import { chatStatsSelector } from '../../store/chats/selectors'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -11,10 +12,10 @@ import styles from './UserUnreads.module.scss'
 const countUnreads = (stats) => {
   const count = stats
     ? reduce(
-        stats.unreads,
-        (prev, curr) => {
-          if (!curr) return 0
-          return prev + curr.unreadCount
+        values(stats.unreads),
+        (prev, count) => {
+          if (!count) return 0
+          return prev + count
         },
         0
       )

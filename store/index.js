@@ -14,6 +14,7 @@ import listing from '~store/listing/reducer'
 import user from '~store/user/reducer'
 import locations from '~store/locations/reducer'
 import chats from '~store/chats/reducer'
+import messages from '~store/messages/reducer'
 // import sagas
 import authSaga from '~store/auth/sagas'
 import vehiclesSaga from '~store/vehicles/sagas'
@@ -21,6 +22,7 @@ import listingSaga from '~store/listing/sagas'
 import userSaga from '~store/user/sagas'
 import locationsSaga from '~store/locations/sagas'
 import chatsSaga from '~store/chats/sagas'
+import messagesSaga from '~store/messages/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -32,6 +34,7 @@ const reducer = combineReducers({
   user,
   locations,
   chats,
+  messages,
   form: formReducer,
 })
 
@@ -56,6 +59,7 @@ const RootSagas = function* root() {
     ...userSaga,
     ...locationsSaga,
     ...chatsSaga,
+    ...messagesSaga,
   ])
 }
 

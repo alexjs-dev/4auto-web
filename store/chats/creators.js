@@ -8,6 +8,10 @@ export const { Types, Creators } = createActions(
     fetchChats: ['params'],
     fetchChatsSuccess: ['data'],
     fetchChatsFailure: [],
+    pushUnreadMessage: ['data'],
+    fetchChat: ['id'],
+    fetchChatSuccess: ['data'],
+    fetchChatFailure: [],
   },
   {}
 )

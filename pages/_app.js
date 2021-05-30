@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Header, NavigationDrawer, Modal } from '~components'
@@ -19,9 +19,13 @@ let socketClient
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter()
-  useLayoutEffect(() => {
-    if (!socketClient) socketClient = new SocketClient()
-  }, [socketClient])
+  const accessToken =
+    process.browser && window && window.localStorage.getItem('feathers-jwt')
+  useEffect(() => {
+    if (!socketClient && process.browser && accessToken) {
+      socketClient = new SocketClient()
+    }
+  }, [socketClient, accessToken])
   return (
     <>
       <Provider store={store}>

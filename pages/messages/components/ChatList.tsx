@@ -17,14 +17,8 @@ import ChatAvatar from './ChatAvatar'
 
 type Props = {}
 
-const getUnreadCountByChatId = (chatStats: any, chatId: string) => {
-  const chat =
-    chatStats &&
-    chatStats.unreads &&
-    find(chatStats.unreads, (unread) => unread.chatId === chatId)
-  if (chat) return chat.unreadCount
-  return 0
-}
+const getUnreadCountByChatId = (chatStats: any, chatId: string) =>
+  get(chatStats, `unreads.${chatId}`, 0)
 
 const ChatList: React.FunctionComponent<Props> = () => {
   const currentUser = useSelector(currentUserSelector)
