@@ -7,7 +7,7 @@ import {
 } from 'body-scroll-lock'
 import classNames from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
-import Creators from '~store/menu/creators'
+import MenuCreators from '~store/menu/creators'
 import useDebounce from '~hooks/useDebounce'
 import { isDrawerOpenSelector } from '~store/menu/selectors'
 import useOutsideClick from '~hooks/useOutsideClick'
@@ -17,7 +17,11 @@ const NavigationDrawer = ({ children, className }) => {
   const ref = useRef(null)
   const dispatch = useDispatch()
   const drawerOpen = useSelector(isDrawerOpenSelector)
-  const toggleDrawerMenu = () => dispatch(Creators.toggleDrawerMenu())
+  const toggleDrawerMenu = () => {
+    if (dispatch) {
+      dispatch(MenuCreators.toggleDrawerMenu())
+    }
+  }
   const drawerOpenDebounced = useDebounce(drawerOpen, 500)
   // useEffect(() => {
   //   if (drawerOpen) {

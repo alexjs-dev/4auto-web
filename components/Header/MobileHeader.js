@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { FiPlusCircle as AddIcon, FiMenu } from 'react-icons/fi'
 import useModal from '~hooks/useModal'
-import Creators from '~store/menu/creators'
+import MenuCreators from '~store/menu/creators'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import { UserAvatar, UserUnreads, BaseButton } from '~components'
 import LogoMiniIcon from '~public/logo-mini.svg'
@@ -34,8 +34,9 @@ const LogoSection = () => {
 }
 
 const ActionSection = () => {
+  const dispatch = useDispatch()
   const loggedIn = useSelector(isLoggedInSelector)
-  const toggleDrawerMenu = () => dispatch(Creators.toggleDrawerMenu())
+  const toggleDrawerMenu = () => dispatch(MenuCreators.toggleDrawerMenu())
 
   if (loggedIn) {
     return (
