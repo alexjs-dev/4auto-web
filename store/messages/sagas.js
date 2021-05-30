@@ -2,6 +2,7 @@ import { takeLatest, put, call, select } from 'redux-saga/effects'
 import MessageService from '~services/messages'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
+import reverse from 'lodash/reverse'
 import { Types } from './creators'
 
 const messagesService = new MessageService()
@@ -14,6 +15,7 @@ function* handleFetchMessages(action) {
     get(state.messagesPagination, id)
   )
 
+  const chatId = id
   const limit = get(prevPagination, 'limit', 10)
   const skip = get(prevPagination, 'skip', 0)
   const total = get(prevPagination, 'total', 0)
@@ -21,18 +23,18 @@ function* handleFetchMessages(action) {
     if (skip + limit < total || total === 0) {
       const response = yield call(messagesService.find, {
         query: {
-          chatId: id,
           $limit: limit,
           $sort: { createdAt: -1 },
           ...(skip > 0 ? { $skip: skip } : {}),
           ...omit(params, ['resetPagination']),
+          chatId,
         },
       })
-
       const { data, ...pagination } = response
       yield put({
         type: successType,
-        data,
+        data: reverse(data),
+        chatId,
         pagination: {
           ...pagination,
           skip: pagination.skip + pagination?.limit || 10,

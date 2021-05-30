@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   currentChat: {},
   loadingChats: false,
   loadingChat: false,
+  creatingChat: false,
   chatsPagination: {},
   chats: {},
 }
@@ -90,6 +91,22 @@ const fetchChatFailure = (state) => ({
   loadingChat: false,
 })
 
+const createChat = (state, { id }) => ({
+  ...state,
+  creatingChat: true,
+})
+
+const createChatSuccess = (state, { data }) => ({
+  ...state,
+  currentChat: { ...state.chats, [data._id]: data },
+  creatingChat: false,
+})
+
+const createChatFailure = (state) => ({
+  ...state,
+  creatingChat: false,
+})
+
 export default createReducer(INITIAL_STATE, {
   [Types.FETCH_CHAT_STATS]: fetchChatStats,
   [Types.FETCH_CHAT_STATS_SUCCESS]: fetchChatStatsSuccess,
@@ -97,6 +114,9 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_CHATS]: fetchChats,
   [Types.FETCH_CHATS_SUCCESS]: fetchChatsSuccess,
   [Types.FETCH_CHATS_FAILURE]: fetchChatsFailure,
+  [Types.CREATE_CHAT]: createChat,
+  [Types.CREATE_CHAT_SUCCESS]: createChatSuccess,
+  [Types.CREATE_CHAT_FAILURE]: createChatFailure,
   [Types.PUSH_UNREAD_MESSAGE]: pushUnreadMessage,
   [Types.FETCH_CHAT]: fetchChat,
   [Types.FETCH_CHAT_SUCCESS]: fetchChatSuccess,

@@ -63,18 +63,19 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
   }, [visible, isMobile])
 
   if (!visible || !listing) return <Loader loading centered isBranded />
+  const title = getVehicleTitle(
+    {
+      make: listing.vehicle.model.make.name,
+      model: listing.vehicle.model.name,
+      power: listing.vehicle.power,
+    },
+    t
+  )
   return (
     <>
       <div className={styles.title}>
         <h3>
-          {getVehicleTitle(
-            {
-              make: listing.vehicle.model.make.name,
-              model: listing.vehicle.model.name,
-              power: listing.vehicle.power,
-            },
-            t
-          )}
+          {title}
           {/* @ts-ignore */}
           <BaseButton
             onClick={() =>
@@ -97,6 +98,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
       />
       <VotdActions
         email={listing.contactEmail}
+        listingId={listing._id}
         phone={listing.contactPhone}
         userId={listing.userId}
       />

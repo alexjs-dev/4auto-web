@@ -15,7 +15,11 @@ const ChatPage: React.FunctionComponent<Props> = () => {
   useEffect(() => {
     if (id && id !== '') {
       dispatch(ChatCreators.fetchChat(id))
-      dispatch(MessagesCreators.fetchMessages(id, { resetPagination: true }))
+      dispatch(
+        MessagesCreators.fetchMessages(id, {
+          resetPagination: true,
+        })
+      )
     }
   }, [id])
   return (

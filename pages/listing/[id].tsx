@@ -102,6 +102,7 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
           userId={listing.userId}
           email={isSold ? null : listing.contactEmail}
           phone={isSold ? null : listing.contactPhone}
+          listingId={listing._id}
         />
         <h6 className={styles.subtitle}>{t('label.baseDetails')}</h6>
         <VehicleDetails listing={listing} fullHeight />

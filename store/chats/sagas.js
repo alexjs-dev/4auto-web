@@ -85,10 +85,26 @@ function* handleFetchChat(action) {
   }
 }
 
+function* handleCreateChat(action) {
+  const successType = Types.CREATE_CHAT_SUCCESS
+  const failureType = Types.CREATE_CHAT_FAILURE
+  try {
+    const { params } = action
+    const data = yield call(chatsService.create, params)
+    yield put({
+      type: successType,
+      data,
+    })
+  } catch (error) {
+    yield put({ type: failureType })
+  }
+}
+
 const sagas = [
   takeLatest(Types.FETCH_CHAT_STATS, fetchChatStats),
   takeLatest(Types.FETCH_CHATS, handleFetchChats),
   takeLatest(Types.FETCH_CHAT, handleFetchChat),
+  takeLatest(Types.CREATE_CHAT, handleCreateChat),
 ]
 
 export default sagas

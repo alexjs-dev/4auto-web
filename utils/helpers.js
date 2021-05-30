@@ -36,6 +36,16 @@ export const getPriceMax = (price) => {
   return parsedPrice
 }
 
+export const scrollToBottom = (element, instant) => {
+  if (!element) return
+  if (instant) {
+    element.scrollTop = element.scrollHeight - element.clientHeight
+    return
+  }
+  element.scroll({ top: element.scrollHeight, behavior: 'smooth' })
+  // element.scrollIntoView({ behavior: 'smooth' })
+}
+
 export const getUsername = (user) => {
   const username = get(user, 'profile.username')
   const firstName = get(user, 'profile.firstName')

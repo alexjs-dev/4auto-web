@@ -18,17 +18,17 @@ const fetchMessages = (state, { params }) => ({
   loadingMessages: true,
 })
 
-const fetchMessagesSuccess = (state, { data, pagination }) => {
-  const chatId = get(data, '[0].chatId')
+const fetchMessagesSuccess = (state, { data, chatId, pagination }) => {
+  const id = chatId || get(data, '[0].chatId')
   return {
     ...state,
     messages: {
       ...state.messages,
-      [chatId]: [...get(state.messages, chatId, []), ...data],
+      [id]: [...get(state.messages, id, []), ...data],
     },
     messagesPagination: {
       ...state.messagesPagination,
-      [chatId]: pagination,
+      [id]: pagination,
     },
     loadingMessages: false,
     pagination,

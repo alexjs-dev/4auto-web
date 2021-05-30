@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import { reduxForm, getFormValues, change } from 'redux-form'
 import { useSelector, useDispatch } from 'react-redux'
 import MessagesCreators from '../../../store/messages/creators'
+import { scrollToBottom } from '../../../utils/helpers'
 import { BaseButton, Input } from '../../../components'
 import { FiSend } from 'react-icons/fi'
 import styles from './ChatInput.module.scss'
@@ -23,19 +24,32 @@ const ChatInputForm: React.FunctionComponent<Props> = ({ handleSubmit }) => {
   const rows = textRowsCount && textRowsCount > 2 ? 2 : textRowsCount || 1
   const chatId = get(chat, '_id')
 
-  console.log('handleSubmit', handleSubmit)
+  const scrollDown = () => {
+    const element = document.getElementById('chat-list')
+    if (element) scrollToBottom(element, false)
+  }
 
-  const onSubmit = (values: any) => {
-    console.log('message submit', values)
-    const message = get(values, 'message', '')
+  const onSendMessage = () => {
     if (message && message.trim() !== '' && chatId) {
       dispatch(
         MessagesCreators.createMessage({
-          text: values.message,
+          text: message,
           chatId,
         })
       )
       dispatch(change(form, 'message', ''))
+      scrollDown()
+    }
+  }
+
+  const onSubmit = (values: any) => {
+    if (values.message) onSendMessage()
+  }
+
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.altKey && !e.shiftKey) {
+      onSendMessage()
+      e.preventDefault()
     }
   }
 
@@ -54,12 +68,13 @@ const ChatInputForm: React.FunctionComponent<Props> = ({ handleSubmit }) => {
         className={styles.input}
         placeholder="Type your message"
         cols={1}
+        onKeyDown={handleKeyDown}
         rows={rows}
       />
       {/* @ts-ignore */}
       <BaseButton
         className={styles.submitButton}
-        onClick={handleSubmit(onSubmit)}
+        onClick={() => handleSubmit(onSubmit)}
       >
         <FiSend />
       </BaseButton>

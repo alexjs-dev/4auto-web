@@ -46,7 +46,6 @@ const BaseInput = forwardRef(
     const isTextAreaInput = type === 'textarea'
 
     const inputProps = {
-      ...omit(rest, ['loading']),
       id: hasLabel ? name : null,
       disabled,
       type,
@@ -55,7 +54,10 @@ const BaseInput = forwardRef(
       onChange: handleChange,
       onBlur: handleBlur,
       ref,
+      ...omit(rest, ['loading']),
     }
+
+    console.log('rest', rest)
 
     if (isTextAreaInput)
       return (
@@ -66,8 +68,8 @@ const BaseInput = forwardRef(
             small && styles.small
           )}
           value={value}
-          {...inputProps}
           autoComplete={autocomplete}
+          {...inputProps}
         />
       )
     return (
@@ -78,8 +80,8 @@ const BaseInput = forwardRef(
           small && styles.small
         )}
         value={value}
-        {...inputProps}
         autoComplete={autocomplete}
+        {...inputProps}
       />
     )
   }

@@ -1,6 +1,5 @@
 import React from 'react'
 import map from 'lodash/map'
-import find from 'lodash/find'
 import get from 'lodash/get'
 import { FiCornerDownRight } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
