@@ -3,9 +3,15 @@
 .container {
   display: flex;
   align-items: center;
+  position: relative;
   > span {
     white-space: nowrap;
     display: block;
+  }
+  .chatUpdatedTitle {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
   a {
     margin: 0;
