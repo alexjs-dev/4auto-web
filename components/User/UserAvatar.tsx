@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import { get } from 'lodash'
 import { useSelector } from 'react-redux'
 import { currentUserSelector } from '../../store/auth/selectors'
 import styles from './UserAvatar.module.scss'
