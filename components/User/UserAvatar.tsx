@@ -22,7 +22,9 @@ const UserAvatar: React.FunctionComponent<Props> = ({
     <div
       className={classNames(styles.container, fullScreen && styles.fullScreen)}
     >
-      <span>{username ? username : currentUsername}</span>
+      <span>
+        {username ? username.substring(0, 2) : currentUsername.substring(0, 2)}
+      </span>
     </div>
   )
 }

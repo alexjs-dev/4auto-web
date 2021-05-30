@@ -50,10 +50,10 @@ const MessagesList: React.FunctionComponent<Props> = ({ messages }) => {
           const isAuthor = get(currentUser, '_id') === message.authorId
           return (
             <li key={message._id}>
-              <div className={classNames(isAuthor && styles.messageOther)}>
+              <div className={classNames(!isAuthor && styles.messageOther)}>
                 {message.text}
               </div>
-              <span className={classNames(isAuthor && styles.messageOther)}>
+              <span className={classNames(!isAuthor && styles.messageOther)}>
                 {moment(message.updatedAt).fromNow()}
               </span>
             </li>
