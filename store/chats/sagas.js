@@ -43,7 +43,7 @@ function* handleFetchChats(action) {
       const response = yield call(chatsService.find, {
         query: {
           $limit: limit,
-          $sort: { createdAt: -1 },
+          $sort: { updatedAt: -1 },
           ...(skip > 0 ? { $skip: skip } : {}),
           ...omit(params, ['resetPagination']),
         },

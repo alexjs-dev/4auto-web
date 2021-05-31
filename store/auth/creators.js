@@ -14,6 +14,9 @@ export const { Types, Creators } = createActions(
     logOut: [],
     logOutSuccess: [],
     logOutFailure: [],
+    updateSelf: ['params'],
+    updateSelfSuccess: ['data'],
+    updateSelfFailure: [],
   },
   {}
 )

@@ -47,7 +47,7 @@ const MessagesList: React.FunctionComponent<Props> = ({ messages }) => {
     <div className={styles.container}>
       <ul ref={messageContainerRef} id="chat-list">
         {map(messages, (message) => {
-          const isAuthor = get(currentUser, '_id') === message.authorId
+          const isAuthor = get(currentUser, '_id') === message.userId
           return (
             <li key={message._id}>
               <div className={classNames(!isAuthor && styles.messageOther)}>

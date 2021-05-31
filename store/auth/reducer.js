@@ -61,7 +61,26 @@ const fetchSelfFailure = (state) => ({
   loading: false,
 })
 
+const updateSelf = (state) => ({
+  ...state,
+  loading: true,
+})
+
+const updateSelfSuccess = (state, { data }) => ({
+  ...state,
+  loading: false,
+  currentUser: (data && data) || state.currentUser,
+})
+
+const updateSelfFailure = (state) => ({
+  ...state,
+  loading: false,
+})
+
 export default createReducer(INITIAL_STATE, {
+  [Types.UPDATE_SELF]: updateSelf,
+  [Types.UPDATE_SELF_SUCCESS]: updateSelfSuccess,
+  [Types.UPDATE_SELF_FAILURE]: updateSelfFailure,
   [Types.LOG_IN]: logIn,
   [Types.LOG_IN_SUCCESS]: logInSuccess,
   [Types.LOG_IN_FAILURE]: logInFailure,

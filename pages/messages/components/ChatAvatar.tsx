@@ -12,6 +12,7 @@ type Props = {
   updatedAt?: string
   listingId?: string
   wrapTopic?: boolean
+  hideLinks?: boolean
 }
 
 const ChatAvatar: React.FunctionComponent<Props> = ({
@@ -22,6 +23,7 @@ const ChatAvatar: React.FunctionComponent<Props> = ({
   updatedAt,
   listingId,
   wrapTopic,
+  hideLinks,
 }) => {
   return (
     <section className={styles.container}>
@@ -32,18 +34,32 @@ const ChatAvatar: React.FunctionComponent<Props> = ({
         hideUsername
       />
       <div className={styles.title}>
-        {/* @ts-ignore */}
-        <BaseButton isInternalLink href={`/profile/${userId}`}>
-          <h6>{username}</h6>
-        </BaseButton>
-        {/* @ts-ignore */}
-        <BaseButton
-          isInternalLink
-          href={`/listing/${listingId}`}
-          className={classNames(wrapTopic && styles.wrapText)}
-        >
-          <span>{topic}</span>
-        </BaseButton>
+        {!hideLinks && (
+          <>
+            {/* @ts-ignore */}
+            <BaseButton isInternalLink href={`/profile/${userId}`}>
+              <h6>{username}</h6>
+            </BaseButton>
+            {/* @ts-ignore */}
+            <BaseButton
+              isInternalLink
+              href={`/listing/${listingId}`}
+              className={classNames(wrapTopic && styles.wrapText)}
+            >
+              <span>{topic}</span>
+            </BaseButton>
+          </>
+        )}
+        {hideLinks && (
+          <>
+            <section>
+              <h6>{username}</h6>
+            </section>
+            <section className={classNames(wrapTopic && styles.wrapText)}>
+              <span>{topic}</span>
+            </section>
+          </>
+        )}
       </div>
       {updatedAt && (
         <span className={styles.chatUpdatedTitle}>

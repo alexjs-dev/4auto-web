@@ -108,11 +108,22 @@ function* handleLogOut() {
   }
 }
 
+function* handleUpdateSelf({ params }) {
+  try {
+    const response = yield call(usersService.patch, params.userId, params)
+    yield put({ type: Types.UPDATE_SELF_SUCCESS, data: response })
+  } catch (e) {
+    console.error(e)
+    yield put({ type: Types.UPDATE_SELF_FAILURE, error: e })
+  }
+}
+
 const sagas = [
   takeLatest(Types.LOG_IN, handleLogIn),
   takeLatest(Types.SIGN_UP, handleSignUp),
   takeLatest(Types.LOG_OUT, handleLogOut),
   takeLatest(Types.FETCH_SELF, handleFetchSelf),
+  takeLatest(Types.UPDATE_SELF, handleUpdateSelf),
 ]
 
 export default sagas

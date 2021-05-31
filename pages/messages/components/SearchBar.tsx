@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import get from 'lodash/get'
 import ChatsCreators from '../../../store/chats/creators'
 import { chatsLoadingSelector } from '../../../store/chats/selectors'
 import useDebounce from '../../../hooks/useDebounce'
@@ -10,6 +11,7 @@ import { Loader } from '../../../components'
 import { FiSearch, FiPocket } from 'react-icons/fi'
 import { FcFullTrash } from 'react-icons/fc'
 import styles from './SearchBar.module.scss'
+import { currentUserSelector } from '~/store/auth/selectors'
 
 type Props = {}
 
@@ -21,7 +23,10 @@ const SearchBar: React.FunctionComponent<Props> = () => {
   const [isFilterActive, setFilterActive] = useState(false)
   const isDeleteVisible = text && !!text.trim()
   const loading = useSelector(chatsLoadingSelector)
+  const currentUser = useSelector(currentUserSelector)
   const debouncedText = useDebounce(text, 900)
+
+  const favoriteChatIds = get(currentUser, 'favoriteChatIds', [])
 
   useEffect(() => {
     if (!loading) {
@@ -32,10 +37,18 @@ const SearchBar: React.FunctionComponent<Props> = () => {
           ...(debouncedText && debouncedText.trim() !== ''
             ? { topic: debouncedText }
             : {}),
+          ...(isFilterActive && favoriteChatIds.length > 0
+            ? {
+                _id: {
+                  $in: favoriteChatIds,
+                },
+              }
+            : {}),
         })
       )
     }
-  }, [debouncedText])
+  }, [debouncedText, isFilterActive])
+
   return (
     <div className={styles.container}>
       <div className={styles.input}>
@@ -83,7 +96,7 @@ const SearchBar: React.FunctionComponent<Props> = () => {
         )}
         onClick={() => setFilterActive(!isFilterActive)}
       >
-        <span>147</span>
+        <span>{favoriteChatIds.length}</span>
         <FiPocket fontSize={22} />
       </BaseButton>
     </div>

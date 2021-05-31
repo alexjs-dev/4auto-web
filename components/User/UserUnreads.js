@@ -15,7 +15,8 @@ const countUnreads = (stats) => {
         values(stats.unreads),
         (prev, count) => {
           if (!count) return 0
-          return prev + count
+          if (count > 0) return prev + 1
+          return prev
         },
         0
       )

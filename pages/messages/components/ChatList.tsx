@@ -50,6 +50,7 @@ const ChatList: React.FunctionComponent<Props> = () => {
                   listingId={chat.listingId}
                   updatedAt={chat.updatedAt}
                   wrapTopic
+                  hideLinks
                 />
                 <section className={styles.messageSection}>
                   {get(chat, 'lastMessage.userId') === currentUser._id && (

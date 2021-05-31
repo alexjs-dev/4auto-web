@@ -18,6 +18,11 @@
       grid-template-rows: 77px calc(100vh - 220px) 1fr;
     }
   }
+  .favoriteActive {
+    svg {
+      color: $color-blue;
+    }
+  }
   .header {
     .backButton {
       svg {

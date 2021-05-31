@@ -42,8 +42,8 @@ const ChatInputForm: React.FunctionComponent<Props> = ({ handleSubmit }) => {
     }
   }
 
-  const onSubmit = (values: any) => {
-    if (values.message) onSendMessage()
+  const onSubmit = () => {
+    onSendMessage()
   }
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -72,10 +72,7 @@ const ChatInputForm: React.FunctionComponent<Props> = ({ handleSubmit }) => {
         rows={rows}
       />
       {/* @ts-ignore */}
-      <BaseButton
-        className={styles.submitButton}
-        onClick={() => handleSubmit(onSubmit)}
-      >
+      <BaseButton className={styles.submitButton} onClick={onSendMessage}>
         <FiSend />
       </BaseButton>
     </form>

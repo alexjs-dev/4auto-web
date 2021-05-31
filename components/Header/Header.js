@@ -19,7 +19,6 @@ const Header = () => {
   const { isMobile } = useViewport()
   const chatStats = useSelector(chatStatsSelector)
 
-  console.log('chatStats', chatStats)
   const dispatch = useDispatch()
   const { isLoggedIn } = useUser()
   useFetchSelf()

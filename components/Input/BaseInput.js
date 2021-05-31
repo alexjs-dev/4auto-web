@@ -57,8 +57,6 @@ const BaseInput = forwardRef(
       ...omit(rest, ['loading']),
     }
 
-    console.log('rest', rest)
-
     if (isTextAreaInput)
       return (
         <textarea
