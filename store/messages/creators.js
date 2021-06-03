@@ -6,6 +6,7 @@ export const { Types, Creators } = createActions(
     fetchMessagesSuccess: ['data', 'pagination', 'chatId'],
     fetchMessagesFailure: [],
     createMessage: ['data'],
+    pushMessage: ['data'],
     createMessageSuccess: ['data'],
     createMessageFailure: [],
   },

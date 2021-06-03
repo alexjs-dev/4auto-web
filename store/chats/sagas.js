@@ -81,6 +81,7 @@ function* handleFetchChat(action) {
       data,
     })
   } catch (error) {
+    console.error(error)
     yield put({ type: failureType })
   }
 }

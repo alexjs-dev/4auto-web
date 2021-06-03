@@ -83,6 +83,10 @@ const fetchChat = (state, { id }) => ({
 const fetchChatSuccess = (state, { data }) => ({
   ...state,
   currentChat: data,
+  chatStats: {
+    ...state.chatStats,
+    unreads: { ...get(state.chatStats, 'unreads', {}), [data._id]: 0 },
+  },
   loadingChat: false,
 })
 
@@ -91,7 +95,7 @@ const fetchChatFailure = (state) => ({
   loadingChat: false,
 })
 
-const createChat = (state, { id }) => ({
+const createChat = (state) => ({
   ...state,
   creatingChat: true,
 })

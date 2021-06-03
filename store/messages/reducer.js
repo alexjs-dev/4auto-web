@@ -18,6 +18,14 @@ const fetchMessages = (state, { params }) => ({
   loadingMessages: true,
 })
 
+const pushMessage = (state, { data }) => ({
+  ...state,
+  messages: {
+    ...state.messages,
+    [data.chatId]: [...get(state.messages, data.chatId, []), data],
+  },
+})
+
 const fetchMessagesSuccess = (state, { data, chatId, pagination }) => {
   const id = chatId || get(data, '[0].chatId')
   return {
@@ -64,7 +72,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_MESSAGES]: fetchMessages,
   [Types.FETCH_MESSAGES_SUCCESS]: fetchMessagesSuccess,
   [Types.FETCH_MESSAGES_FAILURE]: fetchMessagesFailure,
-
+  [Types.PUSH_MESSAGE]: pushMessage,
   [Types.CREATE_MESSAGE]: createMessage,
   [Types.CREATE_MESSAGE_SUCCESS]: createMessageSuccess,
   [Types.CREATE_MESSAGE_FAILURE]: createMessageFailure,
