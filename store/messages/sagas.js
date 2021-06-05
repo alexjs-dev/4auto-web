@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select } from 'redux-saga/effects'
+import { takeLatest, put, call, select, takeEvery } from 'redux-saga/effects'
 import MessageService from '~services/messages'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
@@ -66,9 +66,25 @@ function* handleCreateMessage(action) {
   }
 }
 
+function* handleMessagePush(action) {
+  try {
+    const { data } = action
+    const state = yield select()
+    const currentChatId = get(state, 'chats.currentChat._id')
+    if (currentChatId === data.chatId) {
+      yield call(messagesService.patch, data._id, {
+        isRead: true,
+      })
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const sagas = [
   takeLatest(Types.FETCH_MESSAGES, handleFetchMessages),
   takeLatest(Types.CREATE_MESSAGE, handleCreateMessage),
+  takeEvery(Types.PUSH_MESSAGE, handleMessagePush),
 ]
 
 export default sagas

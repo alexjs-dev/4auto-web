@@ -2,6 +2,7 @@ import React from 'react'
 import map from 'lodash/map'
 import get from 'lodash/get'
 import { FiCornerDownRight } from 'react-icons/fi'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { currentUserSelector } from '../../../store/auth/selectors'
 import {
@@ -9,21 +10,24 @@ import {
   chatsLoadingSelector,
   chatStatsSelector,
 } from '../../../store/chats/selectors'
-import { BaseButton, Loader } from '../../../components'
+import { BaseButton, Loader, Button } from '../../../components'
 import { getUsername } from '../../../utils/helpers'
 import styles from './ChatList.module.scss'
 import ChatAvatar from './ChatAvatar'
 
-type Props = {}
+type Props = {
+  onPaginate: () => void
+}
 
 const getUnreadCountByChatId = (chatStats: any, chatId: string) =>
   get(chatStats, `unreads.${chatId}`, 0)
 
-const ChatList: React.FunctionComponent<Props> = () => {
+const ChatList: React.FunctionComponent<Props> = ({ onPaginate }) => {
   const currentUser = useSelector(currentUserSelector)
   const chats = useSelector(chatsSelector)
   const loading = useSelector(chatsLoadingSelector)
   const chatStats = useSelector(chatStatsSelector)
+  const { t } = useTranslation()
   return (
     <div className={styles.container}>
       {loading && (
@@ -66,6 +70,14 @@ const ChatList: React.FunctionComponent<Props> = () => {
           )
         })}
       </ul>
+      <Button
+        label={t('button.loadMore')}
+        fluid
+        type={Button.types.GHOST}
+        onClick={onPaginate}
+        className={styles.buttonPaginate}
+        loading={loading}
+      />
     </div>
   )
 }

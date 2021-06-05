@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import toNumber from 'lodash/toNumber'
 import { Layout } from '~/components'
 import Steppers from './components/Steppers'
+import withAuth from '../../hocs/withAuth'
 import { useRouter } from 'next/router'
 import useFetchVehicleModels from '../../hooks/useFetchVehicleModels'
 import CreateListingForm from './components/form/CreateListingForm'
@@ -30,4 +31,4 @@ const CreateListingPage: React.FunctionComponent = () => {
   )
 }
 
-export default CreateListingPage
+export default withAuth(CreateListingPage)

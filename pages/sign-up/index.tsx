@@ -1,5 +1,6 @@
 import React from 'react'
 import { AuthForm } from '../../components'
+import withAuth from '../../hocs/withAuth'
 import { types as formTypes } from '../../components/AuthForm/AuthForm'
 
 const SignInPage: React.FunctionComponent = () => {
@@ -10,4 +11,4 @@ const SignInPage: React.FunctionComponent = () => {
   )
 }
 
-export default SignInPage
+export default withAuth(SignInPage)

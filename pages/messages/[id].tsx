@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout } from '../../components'
 import ChatCreators from '../../store/chats/creators'
 import MessagesCreators from '../../store/messages/creators'
+import withAuth from '../../hocs/withAuth'
 import { useDispatch } from 'react-redux'
 import ChatView from './components/ChatView'
 
@@ -29,4 +30,4 @@ const ChatPage: React.FunctionComponent<Props> = () => {
   )
 }
 
-export default ChatPage
+export default withAuth(ChatPage)
