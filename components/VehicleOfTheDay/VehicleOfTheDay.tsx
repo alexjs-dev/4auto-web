@@ -102,6 +102,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
         phone={listing.contactPhone}
         userId={listing.userId}
       />
+      {/* @ts-ignore */}
       <OfferForm listingId={listing._id} />
       <Price
         price={listing.price}
