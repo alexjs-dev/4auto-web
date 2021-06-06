@@ -1,13 +1,28 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
+import get from 'lodash/get'
+import toNumber from 'lodash/toNumber'
+import { useDispatch } from 'react-redux'
 import { Button, Input } from '~components'
+import ChatCreators from '~store/chats/creators'
 import styles from './OfferForm.module.scss'
 
-const OfferForm = ({ handleSubmit, disabled }) => {
+const OfferForm = ({ handleSubmit, listingId, disabled }) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const onSubmit = (val) => {
-    console.log('values', val)
+    const offer = get(val, 'offer', 0)
+    if (listingId && offer && toNumber(offer) > 0) {
+      dispatch(
+        ChatCreators.createChat({
+          listingId,
+          currency: 'EUR',
+          offer: toNumber(offer),
+          redirect: false,
+        })
+      )
+    }
   }
   return (
     <form
@@ -28,7 +43,7 @@ const OfferForm = ({ handleSubmit, disabled }) => {
       />
       <Button
         fluid
-        label="Offer"
+        label={t('button.offer')}
         disabled={disabled}
         onClick={handleSubmit(onSubmit)}
       />

@@ -102,7 +102,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
         phone={listing.contactPhone}
         userId={listing.userId}
       />
-      <OfferForm />
+      <OfferForm listingId={listing._id} />
       <Price
         price={listing.price}
         discountedPrice={

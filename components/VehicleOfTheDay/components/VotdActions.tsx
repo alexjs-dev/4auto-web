@@ -11,7 +11,7 @@ type Props = {
   phone?: string | null
   email?: string | null
   userId: string
-  listingId: string
+  listingId?: string
 }
 
 const VotdActions: React.FunctionComponent<Props> = ({

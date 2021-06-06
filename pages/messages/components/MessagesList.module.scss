@@ -44,6 +44,14 @@
         align-self: flex-start;
         color: $color-dark;
       }
+      &.unstyledMessage {
+        background-color: transparent;
+        box-shadow: unset;
+        color: $color-red;
+        padding: 0;
+        font-weight: $font-weight-medium;
+        font-family: $font-family;
+      }
     }
   }
 }

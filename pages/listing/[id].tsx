@@ -113,7 +113,7 @@ const ListingPage: React.FunctionComponent<Props> = ({ prefetchedListing }) => {
           />
         )}
         {/* @ts-ignore */}
-        {!isSold && <OfferForm disabled={isSold} />}
+        {!isSold && <OfferForm disabled={isSold} listingId={listing._id} />}
         <VehicleAdvDetails vehicle={listing.vehicle} />
         <div className={styles.spacer} />
         <ListingsCarousel

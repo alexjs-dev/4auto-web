@@ -125,7 +125,11 @@ const VehicleCard = (props) => {
         visible={overlayActive}
         onClose={() => setOverlayActive(false)}
       >
-        <VehicleCardScreen price={finalPrice} title={vehicleTitle} />
+        <VehicleCardScreen
+          listingId={listingId}
+          price={finalPrice}
+          title={vehicleTitle}
+        />
       </VehicleCardOverlay>
       <div className={styles.image}>
         <BaseButton

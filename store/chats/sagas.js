@@ -1,5 +1,6 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
-import { omit } from 'lodash'
+import { omit, get } from 'lodash'
+import Router from 'next/router'
 import ChatStatsService from '~services/chatStats'
 import ChatsService from '~services/chats'
 
@@ -91,11 +92,17 @@ function* handleCreateChat(action) {
   const failureType = Types.CREATE_CHAT_FAILURE
   try {
     const { params } = action
-    const data = yield call(chatsService.create, params)
+    const redirect = get(params, 'redirect')
+    const data = yield call(chatsService.create, omit(params, ['redirect']))
     yield put({
       type: successType,
       data,
     })
+    if (redirect) {
+      setTimeout(() => {
+        Router.push('/messages')
+      }, 600)
+    }
   } catch (error) {
     yield put({ type: failureType })
   }

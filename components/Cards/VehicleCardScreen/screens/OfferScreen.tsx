@@ -10,6 +10,7 @@ type Props = {
   visible: boolean
   price?: number
   title: string
+  listingId: string
 }
 
 const OfferScreen: React.FunctionComponent<Props> = ({
@@ -17,6 +18,7 @@ const OfferScreen: React.FunctionComponent<Props> = ({
   visible,
   price,
   title,
+  listingId,
 }) => {
   const { t } = useTranslation()
   if (!visible) return null
@@ -24,7 +26,8 @@ const OfferScreen: React.FunctionComponent<Props> = ({
     <div className={styles.container}>
       <h5>{title}</h5>
       {price && <p>{price}€</p>}
-      <OfferForm />
+      {/* @ts-ignore */}
+      <OfferForm listingId={listingId} />
       <Button
         color={Button.colors.RED}
         onClick={onCancel}

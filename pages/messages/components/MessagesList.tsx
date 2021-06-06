@@ -6,6 +6,7 @@ import map from 'lodash/map'
 import { scrollToBottom } from '../../../utils/helpers'
 import styles from './MessagesList.module.scss'
 import useUser from '../../../hooks/useUser'
+import { getMessage } from './chatUtils'
 
 type Props = {
   messages: any
@@ -50,8 +51,13 @@ const MessagesList: React.FunctionComponent<Props> = ({ messages }) => {
           const isAuthor = get(currentUser, '_id') === message.userId
           return (
             <li key={message._id}>
-              <div className={classNames(!isAuthor && styles.messageOther)}>
-                {message.text}
+              <div
+                className={classNames(
+                  !isAuthor && styles.messageOther,
+                  message.offer && styles.unstyledMessage
+                )}
+              >
+                {getMessage(message)}
               </div>
               <span className={classNames(!isAuthor && styles.messageOther)}>
                 {moment(message.updatedAt).fromNow()}

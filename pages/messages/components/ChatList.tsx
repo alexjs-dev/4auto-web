@@ -14,6 +14,7 @@ import { BaseButton, Loader, Button } from '../../../components'
 import { getUsername } from '../../../utils/helpers'
 import styles from './ChatList.module.scss'
 import ChatAvatar from './ChatAvatar'
+import { getMessage } from './chatUtils'
 
 type Props = {
   onPaginate: () => void
@@ -60,7 +61,9 @@ const ChatList: React.FunctionComponent<Props> = ({ onPaginate }) => {
                   {get(chat, 'lastMessage.userId') === currentUser._id && (
                     <FiCornerDownRight />
                   )}
-                  <span>{get(chat, 'lastMessage.text', '')}</span>
+                  <span>
+                    {get(chat, 'lastMessage') && getMessage(chat.lastMessage)}
+                  </span>
                 </section>
                 {unreads > 0 && (
                   <span className={styles.unreadsBubble}>{unreads}</span>

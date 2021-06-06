@@ -12,11 +12,13 @@ const screens = {
 type Props = {
   price?: number
   title: string
+  listingId: string
 }
 
 const VehicleCardScreen: React.FunctionComponent<Props> = ({
   price,
   title,
+  listingId,
 }) => {
   const [screen, setScreen] = useState(screens.BASE)
 
@@ -35,6 +37,7 @@ const VehicleCardScreen: React.FunctionComponent<Props> = ({
         visible={screen === screens.OFFER}
         price={price}
         title={title}
+        listingId={listingId}
       />
       <BaseScreen
         onOfferScreenOpen={() => setScreen(screens.OFFER)}
