@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import {
@@ -22,6 +22,67 @@ import InputErrorText from './parts/InputErrorText'
 import InputLabel from './parts/InputLabel'
 import styles from './Select.module.scss'
 
+const isEmpty = (val) => isNil(val) || val === '' || val.length === 0
+
+const Content = React.memo(
+  ({
+    options,
+    handleOnChange,
+    searchInputRef,
+    searchValue,
+    setSearchValue,
+    searchable,
+    placeholder,
+    loading,
+    multiple,
+    value,
+  }) => {
+    const Title = () => {
+      const title =
+        get(
+          find(options, (o) => o.value === value),
+          'label'
+        ) || placeholder
+      if (!multiple) return <span>{title}</span>
+      if (!isEmpty(value)) {
+        return map(options, ({ label: l, value: key }) => {
+          if (includes(value, key)) {
+            return (
+              <BaseButton
+                key={key}
+                className={styles.chip}
+                onClick={() => handleOnChange(filter(value, (v) => v !== key))}
+              >
+                <span className={styles.title}>{l}</span>
+                <CloseIcon />
+              </BaseButton>
+            )
+          }
+        })
+      }
+      return <span>{title}</span>
+    }
+
+    if (loading) return <Loader loading className={styles.loading} />
+    if (searchable)
+      return (
+        <input
+          ref={searchInputRef}
+          value={searchValue}
+          placeholder={placeholder}
+          className={styles.searchInput}
+          onChange={(e) => setSearchValue(e.target.value)}
+          onBlur={() => {
+            if (value === '') {
+              setSearchValue('')
+            }
+          }}
+        />
+      )
+    return <Title />
+  }
+)
+
 const SelectComponent = ({
   disabled,
   loading,
@@ -38,45 +99,32 @@ const SelectComponent = ({
   multiple,
   isCustom,
   onReset,
+  searchable,
 }) => {
   const { value } = input
   const { error, active } = meta
   const [open, setOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
   const ref = useRef(null)
-  const isEmpty = (val) => isNil(val) || val === '' || val.length === 0
+  const searchInputRef = useRef(null)
+
   const isActive = (key) => (multiple ? includes(value, key) : value === key)
   const handleOnChange = (val) => {
     if (input.onChange) input.onChange(val)
     if (onChange) onChange(val)
   }
-  const Title = () => {
-    const title =
-      get(
-        find(options, (o) => o.value === value),
-        'label'
-      ) || placeholder
-    if (!multiple) return <span>{title}</span>
-    if (!isEmpty(value)) {
-      return map(options, ({ label: l, value: key }) => {
-        if (includes(value, key)) {
-          return (
-            <BaseButton
-              key={key}
-              className={styles.chip}
-              onClick={() => handleOnChange(filter(value, (v) => v !== key))}
-            >
-              <span className={styles.title}>{l}</span>
-              <CloseIcon />
-            </BaseButton>
-          )
-        }
-      })
+
+  useEffect(() => {
+    if (value === '' && searchable) {
+      setSearchValue('')
     }
-    return <span>{title}</span>
-  }
+    if (searchable && searchValue === '' && value && value !== '') {
+      handleOnChange('')
+    }
+  }, [value, searchable])
 
   useOutsideClick({ ref, isOpen: open, setOpen })
-  const handleOptionClick = (key) => {
+  const handleOptionClick = (key, label) => {
     if (multiple) {
       if (includes(value, key)) {
         handleOnChange(filter(value, (v) => v !== key))
@@ -87,11 +135,22 @@ const SelectComponent = ({
       handleOnChange(key)
     }
     if (!multiple) setOpen(false)
+    if (searchable) {
+      setTimeout(() => {
+        setSearchValue(label)
+        setOpen(false)
+      }, 300)
+    }
   }
 
   const handleOpen = () => {
     if (loading || disabled || lodashEmpty(options)) return
     setOpen(!open)
+    if (searchInputRef.current) {
+      setTimeout(() => {
+        searchInputRef.current.focus()
+      }, 600)
+    }
   }
 
   const handleKeyPress = (e) => {
@@ -100,10 +159,11 @@ const SelectComponent = ({
     }
   }
 
-  const Content = () => {
-    if (loading) return <Loader loading className={styles.loading} />
-    return <Title />
-  }
+  const filteredOptions = !searchable
+    ? options
+    : filter(options, (option) =>
+        option.label.toLowerCase().includes(searchValue.toLowerCase())
+      )
 
   return (
     <div
@@ -154,7 +214,18 @@ const SelectComponent = ({
             )}
             tabIndex="0"
           >
-            <Content />
+            <Content
+              options={options}
+              handleOnChange={handleOnChange}
+              searchInputRef={searchInputRef}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              searchable={searchable}
+              loading={loading}
+              placeholder={placeholder}
+              multiple={multiple}
+              value={value}
+            />
             <ArrowDownIcon
               className={classNames(styles.arrowIcon, open && styles.active)}
             />
@@ -166,18 +237,22 @@ const SelectComponent = ({
       <div className={styles.wrapper}>
         {open && !isCustom && (
           <div className={styles.options}>
-            {map(options, (option, index) => (
-              <BaseButton
-                key={index}
-                className={classNames(
-                  styles.option,
-                  isActive(option.value) && styles.active
-                )}
-                onClick={() => handleOptionClick(option.value)}
-              >
-                <span>{option.label}</span>
-              </BaseButton>
-            ))}
+            {isEmpty(filteredOptions) ? (
+              <span className={styles.option}>😢</span>
+            ) : (
+              map(filteredOptions, (option, index) => (
+                <BaseButton
+                  key={index}
+                  className={classNames(
+                    styles.option,
+                    isActive(option.value) && styles.active
+                  )}
+                  onClick={() => handleOptionClick(option.value, option.label)}
+                >
+                  <span>{option.label}</span>
+                </BaseButton>
+              ))
+            )}
           </div>
         )}
       </div>
@@ -206,6 +281,7 @@ SelectComponent.propTypes = {
     active: PropTypes.bool,
   }),
   isCustom: PropTypes.bool,
+  searchable: PropTypes.bool,
   placeholder: PropTypes.string,
 }
 
@@ -225,6 +301,7 @@ SelectComponent.defaultProps = {
   fluid: false,
   loading: false,
   name: null,
+  searchable: false,
   disabled: false,
   options: [],
   multiple: false,
@@ -290,6 +367,7 @@ Select.propTypes = {
   onChange: PropTypes.func,
   normalize: PropTypes.func,
   fluid: PropTypes.bool,
+  searchable: PropTypes.bool,
   label: PropTypes.string,
   multiple: PropTypes.bool,
   onReset: PropTypes.any,
@@ -302,6 +380,7 @@ Select.defaultProps = {
   label: '',
   className: null,
   visible: true,
+  searchable: false,
   fluid: false,
   loading: false,
   name: null,

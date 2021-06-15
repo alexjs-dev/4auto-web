@@ -6,6 +6,7 @@ import { stopSubmit } from 'redux-form'
 import i18n from '~i18n'
 import UsersService from '~services/users'
 import { feathersClient } from '~services/ApiClient'
+import socketClient from '~lib/SocketClient'
 import { fieldTypes } from '~utils/formValidators'
 import { Types } from './creators'
 
@@ -28,6 +29,8 @@ function* handleLogIn({ params }) {
     if (response.accessToken) {
       const currentUser = get(response, 'user', {})
       const firstName = get(currentUser, 'profile.firstName', '')
+      const SocketClient = new socketClient()
+      SocketClient.socketAuth(response.accessToken)
       yield put({
         type: Types.LOG_IN_SUCCESS,
         data: { currentUser, accessToken: response.accessToken },
