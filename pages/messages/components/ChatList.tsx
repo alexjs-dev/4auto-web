@@ -14,7 +14,7 @@ import { BaseButton, Loader, Button } from '../../../components'
 import { getUsername } from '../../../utils/helpers'
 import styles from './ChatList.module.scss'
 import ChatAvatar from './ChatAvatar'
-import { getMessage } from './chatUtils'
+import { getMessage } from '../../../utils/chatUtils'
 
 type Props = {
   onPaginate: () => void

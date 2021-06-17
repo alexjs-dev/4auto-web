@@ -10,10 +10,12 @@ import {
   filter,
   find,
   isNil,
+  some,
   isEmpty as lodashEmpty,
   includes,
 } from 'lodash'
 import classNames from 'classnames'
+import useDebounce from '~hooks/useDebounce'
 import { FiX as CloseIcon } from 'react-icons/fi'
 import { BaseButton, Loader } from '~components'
 import useOutsideClick from '~hooks/useOutsideClick'
@@ -73,7 +75,13 @@ const Content = React.memo(
           className={styles.searchInput}
           onChange={(e) => setSearchValue(e.target.value)}
           onBlur={() => {
-            if (value === '') {
+            if (
+              value === '' ||
+              some(
+                map(options, (option) => option.label),
+                (label) => label !== searchValue
+              )
+            ) {
               setSearchValue('')
             }
           }}

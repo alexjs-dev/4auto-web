@@ -6,7 +6,7 @@ import map from 'lodash/map'
 import { scrollToBottom } from '../../../utils/helpers'
 import styles from './MessagesList.module.scss'
 import useUser from '../../../hooks/useUser'
-import { getMessage } from './chatUtils'
+import { getMessage } from '../../../utils/chatUtils'
 
 type Props = {
   messages: any

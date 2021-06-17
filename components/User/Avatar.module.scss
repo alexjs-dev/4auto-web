@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   .user {
-    display: flex;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    grid-gap: spacing(1);
     align-items: center;
     img {
       width: 44px;
@@ -14,7 +16,7 @@
     }
   }
   a {
-    margin-left: spacing(1);
+    // margin-left: spacing(1);
     color: $color-primary;
     font-size: $font-size-p;
     font-family: $font-family-secondary;
@@ -26,4 +28,8 @@
     color: $color-dark;
     margin-bottom: spacing(0.5);
   }
+}
+
+.link {
+  color: $color-complimentary;
 }
