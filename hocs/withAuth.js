@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
-// import get from 'lodash/get'
+import get from 'lodash/get'
 
-const withAuth = (WrappedComponent, { loginRequired = true }) => {
+const withAuth = (WrappedComponent, props) => {
   return (props) => {
     // checks whether we are on client / browser or server.
     if (typeof window !== 'undefined') {
       const Router = useRouter()
+      const loginRequired = get(props, 'loginRequired', true)
 
       const accessToken = localStorage.getItem('feathers-jwt')
 
