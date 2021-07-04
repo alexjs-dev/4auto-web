@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 // import get from 'lodash/get'
 
-const withAuth = (WrappedComponent) => {
+const withAuth = (WrappedComponent, { loginRequired = true }) => {
   return (props) => {
     // checks whether we are on client / browser or server.
     if (typeof window !== 'undefined') {
@@ -12,7 +12,11 @@ const withAuth = (WrappedComponent) => {
       //  const isProtected = get(args, 'isProtected', true)
 
       // If there is no access token we redirect to "/" page.
-      if (!accessToken) {
+      if (!accessToken && loginRequired) {
+        Router.replace('/')
+        return null
+      }
+      if (accessToken && !loginRequired) {
         Router.replace('/')
         return null
       }

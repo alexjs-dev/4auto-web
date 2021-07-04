@@ -116,6 +116,8 @@ const SelectComponent = ({
   const ref = useRef(null)
   const searchInputRef = useRef(null)
 
+  const debouncedValue = useDebounce(value, 500)
+
   const isActive = (key) => (multiple ? includes(value, key) : value === key)
   const handleOnChange = (val) => {
     if (input.onChange) input.onChange(val)
@@ -123,13 +125,15 @@ const SelectComponent = ({
   }
 
   useEffect(() => {
-    if (value === '' && searchable) {
-      setSearchValue('')
+    if (searchable) {
+      if (debouncedValue === '') {
+        setSearchValue('')
+      }
+      // if (searchValue === '' && debouncedValue && debouncedValue !== '') {
+      //   handleOnChange('')
+      // }
     }
-    if (searchable && searchValue === '' && value && value !== '') {
-      handleOnChange('')
-    }
-  }, [value, searchable])
+  }, [debouncedValue, searchable])
 
   useOutsideClick({ ref, isOpen: open, setOpen })
   const handleOptionClick = (key, label) => {
@@ -239,7 +243,6 @@ const SelectComponent = ({
             />
           </div>
         )}
-
         <InputErrorText error={active ? null : error} />
       </div>
       <div className={styles.wrapper}>

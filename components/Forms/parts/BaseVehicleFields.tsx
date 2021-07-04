@@ -64,7 +64,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
         <Select
           label={t('label.make')}
           fluid
-          searchable
+          searchable={false}
           loading={loadingMakes}
           placeholder={t('placeholder.make')}
           isRequired={includes(requiredFields, fieldTypes.make)}
@@ -76,7 +76,7 @@ const BaseVehicleFields: React.FunctionComponent<Props> = ({
         <Select
           label={t('label.model')}
           fluid
-          searchable
+          searchable={false}
           loading={loadingModels}
           placeholder={t('placeholder.model')}
           name={fieldTypes.model}

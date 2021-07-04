@@ -89,6 +89,7 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
         </h3>
       </div>
       <VehicleDetails listing={listing} />
+      <div className={styles.restContent}>
       <Avatar
         userId={listing.userId}
         avatarSrc={listing.user.profile?.image?.url}
@@ -112,6 +113,8 @@ const VehicleContent: React.FunctionComponent<VehicleOfTheDayProps> = ({
           0
         }
       />
+      </div>
+
     </>
   )
 }
