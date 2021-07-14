@@ -122,31 +122,23 @@ const AuthForm = ({ type }) => {
     }
   }
 
-  const Content = () => {
-    return (
-      <>
-        <h4>{t(title[type])}</h4>
-        <Fields />
-      </>
-    )
-  }
   switch (type) {
     case types.SIGNIN:
       return (
-        <SignInForm onSubmit={onSubmit}>
-          <Content />
+        <SignInForm onSubmit={onSubmit} title={t(title[type])}>
+          <Fields />
         </SignInForm>
       )
     case types.SIGNUP:
       return (
-        <SignupForm onSubmit={onSubmit}>
-          <Content />
+        <SignupForm onSubmit={onSubmit} title={t(title[type])}>
+          <Fields />
         </SignupForm>
       )
     case types.FORGOT:
       return (
-        <ForgotForm onSubmit={onSubmit}>
-          <Content />
+        <ForgotForm onSubmit={onSubmit} title={t(title[type])}>
+          <Fields />
         </ForgotForm>
       )
     default:

@@ -7,11 +7,12 @@ import { Button, Spacer } from '~components'
 
 const formName = 'forgotPasswordForm'
 
-const Component = ({ children, onSubmit, handleSubmit }) => {
+const Component = ({ children, onSubmit, handleSubmit, title }) => {
   const { t } = useTranslation()
 
   return (
     <form className={styles.container}>
+      {title && <h4>{title}</h4>}
       {children}
       <Button fluid baseType="submit" onClick={handleSubmit(onSubmit)}>
         {t('button.reset')}

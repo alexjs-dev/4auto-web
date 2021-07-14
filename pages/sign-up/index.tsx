@@ -11,4 +11,4 @@ const SignInPage: React.FunctionComponent = () => {
   )
 }
 
-export default withAuth(SignInPage, { loginRequired: false })
+export default withAuth(SignInPage, { isProtected: false })

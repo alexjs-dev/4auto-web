@@ -1,23 +1,30 @@
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
 
-const withAuth = (WrappedComponent, props) => {
+const withAuth = (WrappedComponent, args) => {
   return (props) => {
     // checks whether we are on client / browser or server.
     if (typeof window !== 'undefined') {
       const Router = useRouter()
-      const loginRequired = get(props, 'loginRequired', true)
 
       const accessToken = localStorage.getItem('feathers-jwt')
 
-      //  const isProtected = get(args, 'isProtected', true)
+      console.log('props', props);
+
+      console.log('args', args);
+
+      const isProtected = get(args, 'isProtected', true)
+
+      console.log('isProtected', isProtected)
+
+      console.log('accessToken', accessToken)
 
       // If there is no access token we redirect to "/" page.
-      if (!accessToken && loginRequired) {
+      if (!accessToken && isProtected) {
         Router.replace('/')
         return null
       }
-      if (accessToken && !loginRequired) {
+      if (accessToken && !isProtected) {
         Router.replace('/')
         return null
       }

@@ -1,29 +1,33 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import GoogleButton from 'react-google-button'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import styles from '../AuthForm.module.scss'
-import { Button, Spacer } from '~components'
+import { Button, Spacer, GoogleButton, FacebookButton } from '~components'
 
 const formName = 'signUpForm'
 
-const Component = ({ onSubmit, children, handleSubmit }) => {
+const Component = ({ onSubmit, children, handleSubmit, title }) => {
   const { t } = useTranslation()
 
   return (
     <form className={styles.container}>
-      {children}
+      {title && <h4>{title}</h4>}
+      {/* {children}
       <Button fluid baseType="submit" onClick={handleSubmit(onSubmit)}>
         {t('button.signUp')}
-      </Button>
-      <div className={styles.google}>
+      </Button> */}
+      <div className={styles.social}>
         <GoogleButton
-          type="dark"
-          label="Sign up with Google"
-          onClick={() => {
-            console.log('Google button clicked')
-          }}
+          title="Sign up with Google"
+          href="https://forautobackend.herokuapp.com/oauth/google"
+        />
+      </div>
+
+      <div className={styles.social}>
+        <FacebookButton
+          title="Sign up with Facebook"
+          href="https://forautobackend.herokuapp.com/oauth/facebook"
         />
       </div>
       <Spacer className={styles.spacer} />

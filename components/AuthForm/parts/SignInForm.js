@@ -1,20 +1,33 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import GoogleButton from 'react-google-button'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { authLoadingSelector } from '~store/auth/selectors'
+import { FcGoogle } from 'react-icons/fc'
 import styles from '../AuthForm.module.scss'
-import { BaseButton, Button, Spacer } from '~components'
+import {
+  BaseButton,
+  Button,
+  Spacer,
+  GoogleButton,
+  FacebookButton,
+} from '~components'
 
 const formName = 'signInForm'
 
-const Component = ({ handleSubmit, onSubmit, children }) => {
+const Component = ({ handleSubmit, onSubmit, children, title }) => {
   const { t } = useTranslation()
   const loading = useSelector(authLoadingSelector)
   return (
     <form className={styles.container}>
+      {title && <h4>{title}</h4>}
+      <div className={styles.social}>
+        <GoogleButton title="Sign in with Google" href="google" />
+      </div>
+      <div className={styles.social}>
+        <FacebookButton title="Sign in with Facebook" href="facebook" />
+      </div>
       {children}
       <BaseButton
         className={styles.link}
@@ -31,14 +44,6 @@ const Component = ({ handleSubmit, onSubmit, children }) => {
       >
         {t('button.signIn')}
       </Button>
-      <div className={styles.google}>
-        <GoogleButton
-          type="dark"
-          onClick={() => {
-            console.log('Google button clicked')
-          }}
-        />
-      </div>
       <Spacer className={styles.spacer} />
       <Button
         fluid

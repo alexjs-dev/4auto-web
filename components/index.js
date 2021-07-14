@@ -23,6 +23,7 @@ import {
   InfiniteBullets,
   InfinitePagination,
 } from './Pagination'
+import { GoogleButton, FacebookButton } from './Social'
 import { BaseButton, Button, ExpandButton } from './Button'
 import { VehicleDetail, VehicleAdvDetails } from './Vehicle'
 import {
@@ -40,6 +41,8 @@ export {
   Modal,
   Avatar,
   VehicleCard,
+  GoogleButton,
+  FacebookButton,
   AdBanner,
   ItemDropDown,
   ImageUpload,
