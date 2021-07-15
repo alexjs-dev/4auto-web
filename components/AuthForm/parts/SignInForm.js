@@ -23,10 +23,10 @@ const Component = ({ handleSubmit, onSubmit, children, title }) => {
     <form className={styles.container}>
       {title && <h4>{title}</h4>}
       <div className={styles.social}>
-        <GoogleButton title="Sign in with Google" href="google" />
+        <GoogleButton title="Sign in with Google" href="https://forautobackend.herokuapp.com/oauth/google" />
       </div>
       <div className={styles.social}>
-        <FacebookButton title="Sign in with Facebook" href="facebook" />
+        <FacebookButton title="Sign in with Facebook" href="https://forautobackend.herokuapp.com/oauth/facebook" />
       </div>
       {children}
       <BaseButton
