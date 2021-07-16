@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import styles from '../AuthForm.module.scss'
-import { Button, Spacer } from '~components'
+import { Button, Spacer, LanguageList } from '~components'
 
 const formName = 'forgotPasswordForm'
 
@@ -21,6 +21,9 @@ const Component = ({ children, onSubmit, handleSubmit, title }) => {
       <Button fluid type={Button.types.GHOST} isInternalLink href="/sign-in">
         {t('button.signIn')}
       </Button>
+      <div style={{ marginTop: '2rem' }}>
+        <LanguageList />
+      </div>
     </form>
   )
 }

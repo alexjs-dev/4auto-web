@@ -3,7 +3,13 @@ import { reduxForm } from 'redux-form'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import styles from '../AuthForm.module.scss'
-import { Button, Spacer, GoogleButton, FacebookButton } from '~components'
+import {
+  Button,
+  Spacer,
+  LanguageList,
+  GoogleButton,
+  FacebookButton,
+} from '~components'
 
 const formName = 'signUpForm'
 
@@ -34,6 +40,9 @@ const Component = ({ onSubmit, children, handleSubmit, title }) => {
       <Button fluid type={Button.types.GHOST} isInternalLink href="/sign-in">
         {t('button.signIn')}
       </Button>
+      <div style={{ marginTop: '2rem' }}>
+        <LanguageList />
+      </div>
     </form>
   )
 }

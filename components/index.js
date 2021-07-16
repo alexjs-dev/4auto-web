@@ -4,7 +4,7 @@ import { BaseDrawer } from './Drawer'
 import { VehicleCard } from './Cards'
 import { Loader } from './Loader'
 import { Spacer } from './Spacer'
-import { LanguageSwitch } from './LanguageSwitch'
+import { LanguageSwitch, LanguageList } from './LanguageSwitch'
 import { LogoAbstract } from './Logo'
 import { Layout } from './Layout'
 import { BasicHeader, Header } from './Header'
@@ -55,6 +55,7 @@ export {
   BaseDrawer,
   BaseInput,
   LanguageSwitch,
+  LanguageList,
   Loader,
   LogoAbstract,
   ArrowPagination,

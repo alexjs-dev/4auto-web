@@ -51,17 +51,3 @@
     }
   }
 }
-
-.languages {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.languageOption {
-  padding: spacing(1);
-  border-radius: 50%;
-  &.active {
-    background: $color-primary;
-  }
-}

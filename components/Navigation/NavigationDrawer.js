@@ -9,28 +9,9 @@ import config from '~config'
 import EnglishIcon from '~public/icons/language/us.svg'
 import EstonianIcon from '~public/icons/language/et.svg'
 import RussianIcon from '~public/icons/language/ru.svg'
-import { BaseDrawer, BaseButton } from '~components'
-
-const { langType } = config
-
-const languages = {
-  [langType.en]: {
-    locale: [langType.en],
-    icon: <EnglishIcon />,
-  },
-  [langType.et]: {
-    locale: [langType.et],
-    icon: <EstonianIcon />,
-  },
-  [langType.ru]: {
-    locale: [langType.ru],
-    icon: <RussianIcon />,
-  },
-}
+import { BaseDrawer, BaseButton, LanguageList } from '~components'
 
 const NavigationDrawer = () => {
-  const { i18n } = useTranslation()
-  const { language = 'en' } = i18n
   return (
     <BaseDrawer>
       <div className={styles.drawer}>
@@ -39,23 +20,7 @@ const NavigationDrawer = () => {
         </BaseButton>
         <NavigationContent className={styles.option} fontSize={36} />
       </div>
-      <div className={styles.languages}>
-        {map(languages, (lang, key) => {
-          const active = key === language
-          return (
-            <BaseButton
-              key={key}
-              className={classNames(
-                styles.languageOption,
-                active && styles.active
-              )}
-              onClick={() => i18n.changeLanguage(key)}
-            >
-              {lang.icon}
-            </BaseButton>
-          )
-        })}
-      </div>
+      <LanguageList />
     </BaseDrawer>
   )
 }

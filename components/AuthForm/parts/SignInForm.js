@@ -12,6 +12,7 @@ import {
   Spacer,
   GoogleButton,
   FacebookButton,
+  LanguageList,
 } from '~components'
 
 const formName = 'signInForm'
@@ -23,10 +24,16 @@ const Component = ({ handleSubmit, onSubmit, children, title }) => {
     <form className={styles.container}>
       {title && <h4>{title}</h4>}
       <div className={styles.social}>
-        <GoogleButton title="Sign in with Google" href="https://forautobackend.herokuapp.com/oauth/google" />
+        <GoogleButton
+          title="Sign in with Google"
+          href="https://forautobackend.herokuapp.com/oauth/google"
+        />
       </div>
       <div className={styles.social}>
-        <FacebookButton title="Sign in with Facebook" href="https://forautobackend.herokuapp.com/oauth/facebook" />
+        <FacebookButton
+          title="Sign in with Facebook"
+          href="https://forautobackend.herokuapp.com/oauth/facebook"
+        />
       </div>
       {children}
       <BaseButton
@@ -54,6 +61,9 @@ const Component = ({ handleSubmit, onSubmit, children, title }) => {
       >
         {t('button.signUp')}
       </Button>
+      <div style={{ marginTop: '2rem' }}>
+        <LanguageList />
+      </div>
     </form>
   )
 }
