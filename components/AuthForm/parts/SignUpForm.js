@@ -18,6 +18,9 @@ const Component = ({ onSubmit, children, handleSubmit, title }) => {
 
   return (
     <form className={styles.container}>
+      <div className={styles.disclaimer}>
+        <span>🤞 We do not share any of your personal information with third parties.</span>
+      </div>
       {title && <h4>{title}</h4>}
       {/* {children}
       <Button fluid baseType="submit" onClick={handleSubmit(onSubmit)}>
