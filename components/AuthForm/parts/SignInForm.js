@@ -14,6 +14,7 @@ import {
   FacebookButton,
   LanguageList,
 } from '~components'
+import config from '../../../config'
 
 const formName = 'signInForm'
 
@@ -25,14 +26,14 @@ const Component = ({ handleSubmit, onSubmit, children, title }) => {
       {title && <h4>{title}</h4>}
       <div className={styles.social}>
         <GoogleButton
-          title="Sign in with Google"
-          href="https://forautobackend.herokuapp.com/oauth/google"
+          title={t('button.signInWithGoogle')}
+          href={config.oauthUrls.google}
         />
       </div>
       <div className={styles.social}>
         <FacebookButton
-          title="Sign in with Facebook"
-          href="https://forautobackend.herokuapp.com/oauth/facebook"
+          title={t('button.signInWithFacebook')}
+          href={config.oauthUrls.facebook}
         />
       </div>
       {children}

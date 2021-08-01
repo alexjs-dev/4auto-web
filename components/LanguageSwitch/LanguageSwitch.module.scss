@@ -12,16 +12,31 @@
 	}
 }
 
+@keyframes appear {
+	0% {
+		transform: scale(0) translate(0, 100%);
+		opacity: 0;
+		visibility: visible;
+	}
+	80% {
+		transform: scale(1.2) translate(0, 100%);
+	}
+	100% {
+		transform: scale(1) translate(0, 100%);
+		opacity: 1;
+	}
+}
+
 .container {
 	position: relative;
 	.drawer {
-		animation: slideInDown .3s ease-in-out;
+		animation: appear .6s ease-in-out;
 		animation-fill-mode: forwards;
 		position: absolute;
-		bottom: - spacing(2);
-		transform: translate(0, 100%);
+		bottom: 0;
 		left: -100%;
 		min-height: 44px;
+		transform: translate(0, -100%);
 		padding: spacing(1) 0;
 		min-width: 80px;
 		background-color: $color-dark;

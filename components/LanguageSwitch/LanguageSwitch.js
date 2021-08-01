@@ -28,9 +28,10 @@ const languages = {
   },
 }
 
-const Drawer = React.memo(() => {
+const Drawer = React.memo(({open}) => {
   const { i18n } = useTranslation()
   const { language = 'en' } = i18n
+  if (!open) return null
   return (
     <div className={styles.drawer}>
       {map(languages, (lang, key) => {
@@ -56,13 +57,13 @@ const LanguageSwitch = ({ className }) => {
   const { i18n } = useTranslation()
   const { language = 'en' } = i18n
   useOutsideClick({ ref, isOpen: open, setOpen })
-  if (!open) return null
+  // if (!open) return null
   return (
     <div className={classNames(styles.container, className)} ref={ref}>
       <BaseButton onClick={() => setOpen(!open)}>
         {languages[language].icon}
       </BaseButton>
-      <Drawer />
+      <Drawer open={open} />
     </div>
   )
 }

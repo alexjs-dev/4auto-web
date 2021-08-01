@@ -9,6 +9,7 @@ class Button extends React.PureComponent {
   static types = {
     PRIMARY: 'primary',
     GHOST: 'ghost',
+    TEXT: 'text',
   }
 
   static colors = {
@@ -72,7 +73,7 @@ Button.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   visible: PropTypes.bool,
-  type: PropTypes.oneOf(['primary', 'ghost']),
+  type: PropTypes.oneOf(['primary', 'ghost', 'text']),
   color: PropTypes.oneOf(['green', 'white', 'red']),
   icon: PropTypes.string,
   disabled: PropTypes.bool,

@@ -18,6 +18,7 @@ import {
   Button,
   BaseButton,
   NavigationDropdown,
+  LanguageList,
 } from '~components'
 import LogoIcon from '~public/logo.svg'
 import HeaderActionIcon from './HeaderActionIcon'
@@ -85,15 +86,15 @@ const DesktopHeader = () => {
     }
     return (
       <section>
-        <LanguageSwitch />
         <Button
           isInternalLink
-          href="/sign-in"
-          type={Button.types.PRIMARY}
-          className={classNames(styles.spacingLarge, styles.actionButton)}
+          href="/sign-up"
+          type="text"
+          className={styles.actionButton}
         >
-          {t('button.signIn')}
+          {t('button.signUp')}
         </Button>
+        <LanguageSwitch className={styles.spacingLarge} />
         <NavigationDropdown open={drawerOpen} setOpen={setDrawerOpen}>
           <BaseButton
             onClick={() => setDrawerOpen(!drawerOpen)}

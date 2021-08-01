@@ -61,6 +61,8 @@
   border: 1px solid $color-dark-gray;
 }
 
+
+
 .ghost {
   border: $border-primary;
   color: $color-primary;
@@ -82,6 +84,20 @@
     &.red {
       background: $color-red;
     }
+  }
+}
+
+.text {
+  border: none;
+  background: transparent;
+  color: $color-primary;
+  border-radius: none;
+  font-weight: $font-weight-bold;
+  &:hover {
+    text-decoration: underline;
+  }
+  &.red {
+    color: $color-red;
   }
 }
 

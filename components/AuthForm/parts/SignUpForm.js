@@ -10,6 +10,7 @@ import {
   GoogleButton,
   FacebookButton,
 } from '~components'
+import config from '../../../config'
 
 const formName = 'signUpForm'
 
@@ -19,7 +20,7 @@ const Component = ({ onSubmit, children, handleSubmit, title }) => {
   return (
     <form className={styles.container}>
       <div className={styles.disclaimer}>
-        <span>🤞 We do not share any of your personal information with third parties.</span>
+      <span>{t('titles.registrationDisclaimer')}</span>
       </div>
       {title && <h4>{title}</h4>}
       {/* {children}
@@ -28,15 +29,15 @@ const Component = ({ onSubmit, children, handleSubmit, title }) => {
       </Button> */}
       <div className={styles.social}>
         <GoogleButton
-          title="Sign up with Google"
-          href="https://forautobackend.herokuapp.com/oauth/google"
+          title={t('button.signUpWithGoogle')}
+          href={config.oauthUrls.google}
         />
       </div>
 
       <div className={styles.social}>
         <FacebookButton
-          title="Sign up with Facebook"
-          href="https://forautobackend.herokuapp.com/oauth/facebook"
+          title={t('button.signUpWithFacebook')}
+          href={config.oauthUrls.facebook}
         />
       </div>
       <Spacer className={styles.spacer} />

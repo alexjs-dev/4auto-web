@@ -5,4 +5,8 @@ export default {
     ru: 'ru',
     et: 'et',
   },
+  oauthUrls: {
+    google: 'https://forautobackend.herokuapp.com/oauth/google',
+    facebook: 'https://forautobackend.herokuapp.com/oauth/facebook',
+  },
 }

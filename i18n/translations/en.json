@@ -22,6 +22,7 @@
   "titles": {
     "vehicle_of_the_day": "Vehicle of the day",
     "featuredVehicles": "Featured vehicles",
+    "registrationDisclaimer": "🤞  We do not share any of your personal information with third parties.",
     "recommendedVehicles": "Recommended vehicles",
     "createListing": "Create listing",
     "favorites": "Favorites",
@@ -222,6 +223,10 @@
     "signIn": "Sign in",
     "findMore": "Find more",
     "signUp": "Sign up",
+    "signUpWithGoogle": "Sign up with Google",
+    "signUpWithFacebook": "Sign up with Facebook",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithFacebook": "Sign in with Facebook",
     "reset": "Reset",
     "continue": "Continue",
     "call": "Call",
