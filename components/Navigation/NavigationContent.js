@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fi'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import MenuCreators from '~store/menu/creators'
 import { useDispatch, useSelector } from 'react-redux'
 import { isLoggedInSelector } from '~store/auth/selectors'
 import Creators from '~store/auth/creators'
@@ -84,12 +85,19 @@ const NavigationContent = ({ logoutCallback, className, fontSize }) => {
 
   return map(isLoggedIn ? loggedInOptions : loggedOutOptions, (option, key) => {
     const { href, onClick, label, icon } = option
+
+    const handleClick = () => {
+      if (onClick) {
+        onClick();
+      }
+      dispatch(MenuCreators.toggleDrawerMenu())
+    }
     return (
       <BaseButton
         className={classNames(styles.option, className)}
         key={key}
         {...(href ? { href, isInternalLink: true } : {})}
-        {...(onClick ? { onClick } : {})}
+        onClick={handleClick}
       >
         {icon}
         <span>{t(label)}</span>
