@@ -9,9 +9,9 @@ const Auth = () => {
         const accessToken = asPath.split('access_token=')[1];
         // @ts-ignore
         window.localStorage.setItem('feathers-jwt', accessToken);
-      //  dispatch(AuthCreators.logIn({ strategy: 'jwt', accessToken }));
+        dispatch(AuthCreators.logIn({ strategy: 'jwt', accessToken }));
     } else {
-       // push('/');
+        push('/');
     }
     return null;
 
