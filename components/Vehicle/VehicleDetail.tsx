@@ -9,6 +9,7 @@ type Props = {
   title?: any
   children?: any
   className?: string
+  mobileOnly?: boolean
 }
 
 const VehicleDetail: React.FunctionComponent<Props> = ({
@@ -16,9 +17,10 @@ const VehicleDetail: React.FunctionComponent<Props> = ({
   title,
   children,
   className,
+  mobileOnly,
 }) => {
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={classNames(styles.container, className, mobileOnly && styles.mobile)}>
       {title && <h6>{title}</h6>}
       <div className={styles.detail}>
         {icon ? icon : <FiTag />}

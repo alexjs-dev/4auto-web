@@ -10,6 +10,7 @@ module.exports = withPlugins([withFonts, withSvgr], {
   sassOptions: {
     includePaths: ['./styles'],
   },
+  webpack5: false,
   webpack(config) {
     const tempConfig = config
     return tempConfig

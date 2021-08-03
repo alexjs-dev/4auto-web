@@ -100,11 +100,10 @@ export const formatMillage = (mileage, t) =>
 export const formatCapacity = (capacity, t) =>
   capacity > 0 ? `${(capacity / 1000).toFixed(1)} ${t('label.l')}` : ''
 
-export const formatVehicleMainLabel = (bodyType, regDate, t, shorten) => {
+export const formatVehicleMainLabel = (bodyType, regDate, t, isMobile) => {
   const title = t(`vehicle.${bodyTypes[bodyType]}`)
-  return `${shorten ? title.substring(0, 3) : title}, ${moment(regDate).format(
-    'MM/YY'
-  )}`
+  const date = moment(regDate).format('MM.YY');
+  return isMobile ? date : `${title}, ${date}`;
 }
 
 export const formatPriceWithDiscount = (price, discount) => {

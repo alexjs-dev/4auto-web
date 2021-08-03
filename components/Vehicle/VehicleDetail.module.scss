@@ -15,9 +15,15 @@
   }
 }
 
+.mobile {
+  display: flex;
+  @media (min-width: $tablet) {
+    display: none;
+  }
+}
+
 .detail {
   display: flex;
-  align-items: center;
   span {
     text-align: left;
     white-space: nowrap;

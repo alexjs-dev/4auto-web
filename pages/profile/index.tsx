@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { currentUserSelector } from '../../store/auth/selectors'
+import { Loader } from '~/components'
 
 const ProfilePage: React.FunctionComponent = () => {
   const currentUser = useSelector(currentUserSelector)
@@ -13,7 +14,7 @@ const ProfilePage: React.FunctionComponent = () => {
     push(userId ? `/profile/${userId}` : '/')
   }, [userId])
 
-  return null
+  return  <Loader centered loading isBranded fullscreen />
 }
 
 export default ProfilePage

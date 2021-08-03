@@ -1,5 +1,7 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
 import { omit, get } from 'lodash'
+import { toast } from 'react-toastify'
+import i18n from '~i18n'
 import Router from 'next/router'
 import ChatStatsService from '~services/chatStats'
 import ChatsService from '~services/chats'
@@ -94,6 +96,7 @@ function* handleCreateChat(action) {
     const { params } = action
     const redirect = get(params, 'redirect')
     const data = yield call(chatsService.create, omit(params, ['redirect']))
+    console.log('data', data);
     yield put({
       type: successType,
       data,
@@ -103,7 +106,15 @@ function* handleCreateChat(action) {
         Router.push('/messages')
       }, 600)
     }
+    if (params.offer) {
+      console.log('toast');
+      toast.success(i18n.t('snackbar.offerSent'))
+    }
   } catch (error) {
+    const type = get(error, 'data.error')
+    if (type === 'offerThrottled') {
+      toast.error(i18n.t('errors.tooManyRequestsTryAgain'))
+    }
     yield put({ type: failureType })
   }
 }

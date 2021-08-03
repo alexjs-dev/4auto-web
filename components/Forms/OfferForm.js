@@ -1,12 +1,15 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, change } from 'redux-form'
 import { useTranslation } from 'react-i18next'
 import get from 'lodash/get'
 import toNumber from 'lodash/toNumber'
+import { fieldTypes } from '~/utils/formValidators'
 import { useDispatch } from 'react-redux'
 import { Button, Input } from '~components'
 import ChatCreators from '~store/chats/creators'
 import styles from './OfferForm.module.scss'
+
+const form = 'offerForm';
 
 const OfferForm = ({ handleSubmit, listingId, disabled }) => {
   const { t } = useTranslation()
@@ -22,6 +25,7 @@ const OfferForm = ({ handleSubmit, listingId, disabled }) => {
           redirect: false,
         })
       )
+      dispatch(change(form, fieldTypes.offer, null))
     }
   }
   return (
@@ -52,7 +56,7 @@ const OfferForm = ({ handleSubmit, listingId, disabled }) => {
 }
 
 const Offer = reduxForm({
-  form: 'offerForm',
+  form,
 })(OfferForm)
 
 export default Offer

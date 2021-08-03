@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import classNames from 'classnames'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useTranslation } from 'react-i18next'
+import { bodyType as bodyTypes } from '~consts/vehicle'
 import {
   FiMapPin,
   FiMoreVertical,
@@ -12,6 +13,7 @@ import {
   FiDisc,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
+import { FiCalendar } from 'react-icons/fi'
 import Lottie from 'lottie-react'
 import { BaseButton, VehicleDetail } from '~components'
 import {
@@ -69,6 +71,7 @@ const VehicleCard = (props) => {
   const image = find(images, (image) => image.order === 0) || head(images)
   const { t } = useTranslation()
   const vehicleBodyYear = formatVehicleMainLabel(bodyType, regDate, t, isMobile)
+  const vehicleBody = t(`vehicle.${bodyTypes[bodyType]}`);
   const vehicleMileage = isMobile ? mileage : formatMillage(mileage, t)
   const heartRef = useRef(null)
   const vehicleTitle = getVehicleTitle({ make, model, power, capacity }, t)
@@ -154,7 +157,7 @@ const VehicleCard = (props) => {
           {vehicleTitle}
         </BaseButton>
         <div className={styles.features}>
-          <VehicleDetail icon={<GiCarWheel />}>{vehicleBodyYear}</VehicleDetail>
+          <VehicleDetail icon={<FiCalendar />}>{vehicleBodyYear}</VehicleDetail>
           <VehicleDetail
             icon={fuel === fuelTypes.electric ? <GiElectric /> : <GiGasPump />}
           >
@@ -167,6 +170,7 @@ const VehicleCard = (props) => {
           <VehicleDetail
             icon={<FiMapPin />}
           >{`${city}, ${countryCode}`}</VehicleDetail>
+            <VehicleDetail mobileOnly icon={<GiCarWheel />}>{vehicleBody}</VehicleDetail>
         </div>
       </div>
       <div className={styles.footer}>

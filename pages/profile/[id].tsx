@@ -128,24 +128,23 @@ const ProfilePage: React.FunctionComponent<Props> = ({ prefetchedUser }) => {
             <GiDiamonds />
           </div>
         )}
-        <Button
-          label={t('button.message')}
-          fluid
-          type={Button.types.GHOST}
-          className={styles.messageButton}
-        />
-
         <ListingsCarousel
           type="CUSTOM"
           listings={availableListings}
           loading={availableListingsLoading}
           title={t('titles.availableVehicles')}
+          hideOnEmpty
         />
         <ListingsCarousel
           type="CUSTOM"
           listings={soldListings}
           loading={soldListingsLoading}
           title={t('titles.soldVehicles')}
+          hideOnEmpty
+        />
+        <ListingsCarousel
+          type="FEATURED"
+          title={t('titles.featuredVehicles')}
         />
       </Layout>
     </div>

@@ -45,6 +45,7 @@ export const fieldTypes = {
   consumptionHighway: 'consumptionHighway',
   consumptionUrban: 'consumptionUrban',
   VIN: 'VIN',
+  offer: 'offer'
 }
 
 export const autoCompleteFields = {

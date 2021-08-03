@@ -2,6 +2,8 @@ import { takeLatest, put, call, select, takeEvery } from 'redux-saga/effects'
 import MessageService from '~services/messages'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
+import { toast } from 'react-toastify'
+import i18n from '~i18n'
 import reverse from 'lodash/reverse'
 import { Types } from './creators'
 
@@ -61,7 +63,10 @@ function* handleCreateMessage(action) {
       data: response,
     })
   } catch (error) {
-    console.error(error)
+    const type = get(error, 'data.error')
+    if (type === 'offerThrottled' || type === 'messageThrottled') {
+      toast.error(i18n.t('errors.tooManyRequestsTryAgain'))
+    }
     yield put({ type: Types.CREATE_MESSAGE_FAILURE })
   }
 }

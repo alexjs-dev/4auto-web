@@ -25,6 +25,7 @@ type Props = {
   title: string
   type?: 'FEATURED' | 'RECOMMENDED' | 'DEFAULT' | 'CUSTOM'
   loading?: boolean
+  hideOnEmpty?: boolean
   listings?: ListingType[]
 }
 
@@ -33,6 +34,7 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
   type,
   loading,
   listings,
+  hideOnEmpty,
 }) => {
   const { isMobile } = useViewport()
   const { t } = useTranslation()
@@ -96,6 +98,10 @@ const ListingsCarousel: React.FunctionComponent<Props> = ({
       items: 2,
       slidesToSlide: 2,
     },
+  }
+
+  if (hideOnEmpty && !currentLoading && isEmpty(currentListings)) {
+    return null;
   }
 
   return (
