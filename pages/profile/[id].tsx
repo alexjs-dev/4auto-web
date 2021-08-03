@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty'
 import classNames from 'classnames'
 import moment from 'moment'
 import { GiFemale, GiMale, GiDiamonds } from 'react-icons/gi'
-import { Loader, Layout, ListingsCarousel, Button } from '../../components'
+import { Loader, Layout, ListingsCarousel } from '../../components'
 import UsersService from '../../services/users'
 import {
   userAvailableListingsSelector,
