@@ -1,5 +1,21 @@
 @import 'vars.scss';
 
+@keyframes slideTopFadeIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
 .container {
   width: calc(50vw - 16px);
   height: 330px;
@@ -14,6 +30,8 @@
     min-height: 340px;
     height: auto;
     margin-left: spacing(0.5);
+    animation-fill-mode: forwards;
+    animation: slideTopFadeIn 0.3s ease-in;
   }
   .likeButton {
     position: absolute;
