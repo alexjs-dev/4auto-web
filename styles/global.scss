@@ -282,6 +282,18 @@ textarea {
   }
 }
 
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .guy_svg__paperplane-icon {
   animation: moveAll 6s ease infinite alternate;
 }

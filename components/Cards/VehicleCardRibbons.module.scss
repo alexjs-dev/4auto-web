@@ -1,5 +1,30 @@
 @import 'vars.scss';
 
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateY(-100%);
+  }
+  75% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .ribbons {
   position: absolute;
   top: spacing(0.5);
@@ -14,6 +39,7 @@
     display: flex;
     position: relative;
     justify-content: center;
+    animation-fill-mode: forwards;
     align-items: center;
     font-size: $font-size-s;
     border-radius: 50%;
@@ -24,7 +50,11 @@
     color: $color-white;
     text-transform: uppercase;
     background: var(--color-background);
+    @media (max-width: $tablet - 1) {
+      animation: zoomIn 0.6s ease-in;
+    }
     @media (min-width: $tablet) {
+      animation: slideRight 0.3s ease-in;
       justify-content: flex-start;
       border-radius: unset;
       width: auto;
