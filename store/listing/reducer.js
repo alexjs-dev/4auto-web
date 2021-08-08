@@ -21,7 +21,33 @@ const INITIAL_STATE = {
   userAvailableListings: {},
   userAvailableListingsPagination: {},
   loadingUserAvailableListings: false,
+  myListings: {},
+  myListingsPagination: {},
+  loadingMyListings: false,
 }
+
+const fetchMyListings = (state, { params }) => ({
+  ...state,
+  myListings: get(params, 'resetPagination') ? {} : state.myListings,
+  myListingsPagination: get(params, 'resetPagination') ? {} : state.myListingsPagination,
+  loadingMyListings: true,
+})
+
+
+const fetchMyListingsSuccess = (state, { data, pagination }) => ({
+  ...state,
+  myListings: {
+    ...state.myListings,
+    ...keyBy(data, '_id'),
+  },
+  loadingMyListings: false,
+  myListingsPagination: pagination,
+})
+
+const fetchMyListingsFailure = (state) => ({
+  ...state,
+  loadingMyListings: false,
+})
 
 const fetchListingById = (state) => ({
   ...state,
@@ -212,4 +238,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_USER_SOLD_LISTINGS]: fetchUserSoldListings,
   [Types.FETCH_USER_SOLD_LISTINGS_SUCCESS]: fetchUserSoldListingsSuccess,
   [Types.FETCH_USER_SOLD_LISTINGS_FAILURE]: fetchUserSoldListingsFailure,
+  [Types.FETCH_MY_LISTINGS]: fetchMyListings,
+  [Types.FETCH_MY_LISTINGS_SUCCESS]: fetchMyListingsSuccess,
+  [Types.FETCH_MY_LISTINGS_FAILURE]: fetchMyListingsFailure,
 })

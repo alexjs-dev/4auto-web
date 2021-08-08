@@ -194,9 +194,54 @@ function* handleFetchUserListingsCompose(action, type = 'SOLD') {
   }
 }
 
+function* handleFetchMyListings(action) {
+  const successType = Types.FETCH_MY_LISTINGS_SUCCESS
+  const failureType = Types.FETCH_MY_LISTINGS_FAILURE
+  try {
+    const { params } = action
+    const prevPagination = yield select(
+      (state) => state.listing.myListingsPagination
+    )
+    const currentUser = yield select((state) => state.auth.currentUser)
+    const userId = currentUser && currentUser._id
+    if (!userId) {
+      throw new Error('User is not logged in')
+    }
+    const { limit = 10, skip = 0, total = 0 } = prevPagination
+    if (skip + limit < total || total === 0) {
+      const response = yield call(listingsService.find, {
+        query: {
+          $limit: limit,
+          userId,
+          $sort: { createdAt: -1 },
+          ...(skip > 0 ? { $skip: skip } : {}),
+          // userFilter: type === 'AVAILABLE' ? 'available' : 'sold',
+          ...params,
+        },
+      })
+      const { data, ...pagination } = response
+      yield put({
+        type: successType,
+        data,
+        pagination,
+      })
+    } else {
+      yield put({
+        type: successType,
+        data: {},
+        pagination: prevPagination,
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    yield put({ type: failureType })
+  }
+}
+
 const sagas = [
   takeLatest(Types.FETCH_LISTING_BY_ID, handleFetchListingById),
   takeLatest(Types.FETCH_LISTINGS, handleFetchListingsCompose),
+  takeLatest(Types.FETCH_MY_LISTINGS, handleFetchMyListings),
   takeLatest(Types.FETCH_RECOMMENDED_LISTINGS, (action) =>
     handleFetchListingsCompose(action, 'RECOMMENDED')
   ),

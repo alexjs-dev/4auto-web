@@ -1,5 +1,21 @@
 @import 'vars.scss';
 
+
+@keyframes slideTopFadeIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 .container {
   position: relative;
   margin: spacing(2) 0;
@@ -11,6 +27,10 @@
   }
   @media (min-width: $tablet) {
     min-height: 30vh;
+  }
+  article {
+    animation-fill-mode: forwards;
+    animation: slideTopFadeIn 0.3s ease-in;
   }
 }
 

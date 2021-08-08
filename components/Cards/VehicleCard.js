@@ -111,7 +111,7 @@ const VehicleCard = (props) => {
   const imageUrl = parseCloudinaryUrl(imageSrc)
 
   return (
-    <div className={styles.container} ref={ref}>
+    <article className={styles.container} ref={ref}>
       <VehicleCardRibbons
         urgent={urgent}
         featured={featured}
@@ -194,7 +194,7 @@ const VehicleCard = (props) => {
           <FiMoreVertical />
         </button>
       </div>
-    </div>
+    </article>
   )
 }
 
