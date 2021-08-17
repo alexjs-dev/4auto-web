@@ -5,6 +5,7 @@ import get from 'lodash/get'
 import classNames from 'classnames'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { bodyType as bodyTypes } from '~consts/vehicle'
 import {
   FiMapPin,
@@ -13,9 +14,11 @@ import {
   FiDisc,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
+import ListingsCreator from '../../store/listing/creators'
+import { loadingUpdatingMyListing } from '../../store/listing/selectors'
 import { FiCalendar } from 'react-icons/fi'
 import Lottie from 'lottie-react'
-import { BaseButton, VehicleDetail } from '~components'
+import { BaseButton, VehicleDetail, Button } from '~components'
 import {
   formatMillage,
   getVehicleTitle,
@@ -58,20 +61,24 @@ const VehicleCard = (props) => {
     featured,
     recommended,
     images, // handle re-render
+    isSold,
+    isAdmin,
   } = props
 
   const listingId = get(props, 'listingId')
   const power = get(props, 'power')
 
-  const ref = useRef(null)
+  const isUpdatingListing = useSelector(loadingUpdatingMyListing)
 
+  const ref = useRef(null)
+  const dispatch = useDispatch()
   const [overlayActive, setOverlayActive] = useState(false)
   const { isMobile } = useViewport()
   useOutsideClick({ ref, isOpen: overlayActive, setOpen: setOverlayActive })
   const image = find(images, (image) => image.order === 0) || head(images)
   const { t } = useTranslation()
   const vehicleBodyYear = formatVehicleMainLabel(bodyType, regDate, t, isMobile)
-  const vehicleBody = t(`vehicle.${bodyTypes[bodyType]}`);
+  const vehicleBody = t(`vehicle.${bodyTypes[bodyType]}`)
   const vehicleMileage = isMobile ? mileage : formatMillage(mileage, t)
   const heartRef = useRef(null)
   const vehicleTitle = getVehicleTitle({ make, model, power, capacity }, t)
@@ -118,12 +125,14 @@ const VehicleCard = (props) => {
         recommended={recommended}
         visible={!overlayActive}
       />
-      <button
-        className={styles.likeButton}
-        onClick={() => setVehicleFavorite()}
-      >
-        <Lottie {...lottieAnimation} />
-      </button>
+      {!isAdmin && (
+        <button
+          className={styles.likeButton}
+          onClick={() => setVehicleFavorite()}
+        >
+          <Lottie {...lottieAnimation} />
+        </button>
+      )}
       <VehicleCardOverlay
         visible={overlayActive}
         onClose={() => setOverlayActive(false)}
@@ -132,6 +141,7 @@ const VehicleCard = (props) => {
           listingId={listingId}
           price={finalPrice}
           title={vehicleTitle}
+          isAdmin={isAdmin}
         />
       </VehicleCardOverlay>
       <div className={styles.image}>
@@ -155,6 +165,7 @@ const VehicleCard = (props) => {
           href={`/listing/${listingId}`}
         >
           {vehicleTitle}
+          {isSold && <span className={styles.soldChip}>{t('label.sold')}</span>}
         </BaseButton>
         <div className={styles.features}>
           <VehicleDetail icon={<FiCalendar />}>{vehicleBodyYear}</VehicleDetail>
@@ -170,7 +181,9 @@ const VehicleCard = (props) => {
           <VehicleDetail
             icon={<FiMapPin />}
           >{`${city}, ${countryCode}`}</VehicleDetail>
-            <VehicleDetail mobileOnly icon={<GiCarWheel />}>{vehicleBody}</VehicleDetail>
+          <VehicleDetail mobileOnly icon={<GiCarWheel />}>
+            {vehicleBody}
+          </VehicleDetail>
         </div>
       </div>
       <div className={styles.footer}>
@@ -186,6 +199,25 @@ const VehicleCard = (props) => {
           >
             {`${price}€`}
           </span>
+
+          {isAdmin && (
+            <Button
+              type={Button.types.GHOST}
+              color="red"
+              className={styles.soldButton}
+              disabled={isUpdatingListing}
+              onClick={() => {
+                dispatch(
+                  ListingsCreator.updateMyListing({
+                    _id: listingId,
+                    soldAt: isSold ? null : new Date(),
+                  })
+                )
+              }}
+            >
+              {t(isSold ? 'label.available' : 'label.sold')}
+            </Button>
+          )}
         </div>
         <button
           className={styles.moreButton}

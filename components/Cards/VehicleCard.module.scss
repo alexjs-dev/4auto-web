@@ -67,6 +67,7 @@
       padding: spacing(1);
     }
     .title {
+      position: relative;
       text-align: left;
       font-family: $font-family-secondary;
       color: $color-black;
@@ -115,6 +116,7 @@
     }
     .prices {
       display: flex;
+      align-items: center;
       .price {
         font-size: $font-size-span;
         font-family: $font-family-secondary;
@@ -129,4 +131,27 @@
       }
     }
   }
+}
+
+.soldChip {
+  background: $color-red;
+  border-radius: $border-radius-small;
+  padding: 0 spacing(0.5);
+  color: $color-white;
+  font-family: $font-family;
+  height: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: $font-size-s;
+}
+
+.soldButton {
+  min-height: unset;
+  font-size: $font-size-s;
+  padding: spacing(0.5) spacing(1);
+  margin-left: spacing(0.5);
 }

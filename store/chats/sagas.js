@@ -107,7 +107,6 @@ function* handleCreateChat(action) {
       }, 600)
     }
     if (params.offer) {
-      console.log('toast');
       toast.success(i18n.t('snackbar.offerSent'))
     }
   } catch (error) {

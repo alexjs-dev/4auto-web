@@ -26,6 +26,9 @@ export const { Types, Creators } = createActions(
     fetchUserSoldListings: ['userId', 'params'],
     fetchUserSoldListingsSuccess: ['data'],
     fetchUserSoldListingsFailure: [],
+    updateMyListing: ['params'],
+    updateMyListingSuccess: ['data'],
+    updateMyListingFailure: [],
   },
   {}
 )

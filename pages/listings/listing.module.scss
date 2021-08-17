@@ -11,6 +11,33 @@
   .listings {
     display: grid;
     grid-gap: spacing(1);
-    grid-template-columns: repeat(auto-fill, 142px);
+    grid-template-columns: repeat(auto-fill, 470px);
+  }
+}
+
+
+.listing {
+  width: 470px;
+  border: 1px solid $color-darker-gray;
+  border-radius: $border-radius-medium;
+  background: $color-light-gray;
+  .title {
+    padding: spacing(1);
+    background: $color-white;
+    h4 {
+      margin-bottom: spacing(1);
+    }
+    border-bottom: 1px solid $color-darker-gray;
+    .titleDetails {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .content {
+    padding: spacing(0.5);
+    display: grid;
+    grid-gap: spacing(1);
+    grid-template-columns: 174px 400px;
   }
 }

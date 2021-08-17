@@ -24,15 +24,36 @@ const INITIAL_STATE = {
   myListings: {},
   myListingsPagination: {},
   loadingMyListings: false,
+  loadingUpdatingMyListing: false,
 }
 
 const fetchMyListings = (state, { params }) => ({
   ...state,
   myListings: get(params, 'resetPagination') ? {} : state.myListings,
-  myListingsPagination: get(params, 'resetPagination') ? {} : state.myListingsPagination,
+  myListingsPagination: get(params, 'resetPagination')
+    ? {}
+    : state.myListingsPagination,
   loadingMyListings: true,
 })
 
+const updateMyListing = (state) => ({
+  ...state,
+  loadingUpdatingMyListing: true,
+})
+
+const updateMyListingSuccess = (state, { data }) => ({
+  ...state,
+  loadingUpdatingMyListing: false,
+  myListings: {
+    ...state.myListings,
+    [data._id]: { ...get(state.myListings, data._id, {}), ...data },
+  },
+})
+
+const updateMyListingFailure = (state) => ({
+  ...state,
+  loadingUpdatingMyListing: false,
+})
 
 const fetchMyListingsSuccess = (state, { data, pagination }) => ({
   ...state,
@@ -241,4 +262,7 @@ export default createReducer(INITIAL_STATE, {
   [Types.FETCH_MY_LISTINGS]: fetchMyListings,
   [Types.FETCH_MY_LISTINGS_SUCCESS]: fetchMyListingsSuccess,
   [Types.FETCH_MY_LISTINGS_FAILURE]: fetchMyListingsFailure,
+  [Types.UPDATE_MY_LISTING]: updateMyListing,
+  [Types.UPDATE_MY_LISTING_SUCCESS]: updateMyListingSuccess,
+  [Types.UPDATE_MY_LISTING_FAILURE]: updateMyListingFailure,
 })

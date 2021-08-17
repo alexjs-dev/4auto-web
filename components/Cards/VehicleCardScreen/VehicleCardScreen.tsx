@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import BaseScreen from './screens/BaseScreen'
 import ChatScreen from './screens/ChatScreen'
 import OfferScreen from './screens/OfferScreen'
+import BaseAdminScreen from './screens/BaseAdminScreen'
 
 const screens = {
   BASE: 'BASE',
@@ -13,17 +14,27 @@ type Props = {
   price?: number
   title: string
   listingId: string
+  isAdmin?: boolean
 }
 
 const VehicleCardScreen: React.FunctionComponent<Props> = ({
   price,
   title,
   listingId,
+  isAdmin,
 }) => {
   const [screen, setScreen] = useState(screens.BASE)
 
   const onChatCancel = () => {
     setScreen(screens.BASE)
+  }
+
+  if (isAdmin) {
+    return (
+      <>
+        <BaseAdminScreen listingId={listingId} visible={screen === screens.BASE} />
+      </>
+    )
   }
   return (
     <>

@@ -2,6 +2,7 @@ import React from 'react'
 import { map } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import useViewport from '~hooks/useViewport'
 import styles from './NavigationDrawer.module.scss'
 import LogoWhite from '~public/logo-white.svg'
 import NavigationContent from './NavigationContent'
@@ -12,6 +13,10 @@ import RussianIcon from '~public/icons/language/ru.svg'
 import { BaseDrawer, BaseButton, LanguageList } from '~components'
 
 const NavigationDrawer = () => {
+  const { isMobile } = useViewport()
+  if (!isMobile) {
+    return null;
+  }
   return (
     <BaseDrawer>
       <div className={styles.drawer}>

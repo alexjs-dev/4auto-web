@@ -215,7 +215,7 @@ function* handleFetchMyListings(action) {
           userId,
           $sort: { createdAt: -1 },
           ...(skip > 0 ? { $skip: skip } : {}),
-          // userFilter: type === 'AVAILABLE' ? 'available' : 'sold',
+          userFilter: 'any',
           ...params,
         },
       })
@@ -232,6 +232,20 @@ function* handleFetchMyListings(action) {
         pagination: prevPagination,
       })
     }
+  } catch (error) {
+    console.error(error)
+    yield put({ type: failureType })
+  }
+}
+
+function* handleUpdateListing(action) {
+  const successType = Types.UPDATE_MY_LISTING_SUCCESS
+  const failureType = Types.UPDATE_MY_LISTING_FAILURE
+  try {
+    const { params } = action
+    const response = yield call(listingsService.patch, params._id, params)
+    toast.success(i18n.t('snackbar.listingUpdated'))
+    yield put({ type: successType, data: response })
   } catch (error) {
     console.error(error)
     yield put({ type: failureType })
@@ -255,6 +269,7 @@ const sagas = [
     handleFetchUserListingsCompose(action, 'SOLD')
   ),
   takeLatest(Types.CREATE_LISTING, handleCreateListing),
+  takeLatest(Types.UPDATE_MY_LISTING, handleUpdateListing),
 ]
 
 export default sagas
