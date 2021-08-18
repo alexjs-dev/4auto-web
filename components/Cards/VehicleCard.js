@@ -12,13 +12,15 @@ import {
   FiMoreVertical,
   FiGitPullRequest,
   FiDisc,
+  FiEdit3,
+  FiCheck,
+  FiCalendar,
 } from 'react-icons/fi'
 import { GiCarWheel, GiGasPump, GiElectric } from 'react-icons/gi'
 import ListingsCreator from '../../store/listing/creators'
 import { loadingUpdatingMyListing } from '../../store/listing/selectors'
-import { FiCalendar } from 'react-icons/fi'
 import Lottie from 'lottie-react'
-import { BaseButton, VehicleDetail, Button } from '~components'
+import { BaseButton, VehicleDetail, Button, Input } from '~components'
 import {
   formatMillage,
   getVehicleTitle,
@@ -63,16 +65,16 @@ const VehicleCard = (props) => {
     images, // handle re-render
     isSold,
     isAdmin,
+    formName,
+    onEditCallback
   } = props
 
   const listingId = get(props, 'listingId')
   const power = get(props, 'power')
-
-  const isUpdatingListing = useSelector(loadingUpdatingMyListing)
-
   const ref = useRef(null)
   const dispatch = useDispatch()
   const [overlayActive, setOverlayActive] = useState(false)
+  const [isEditPriceActive, setEditPriceActive] = useState(false)
   const { isMobile } = useViewport()
   useOutsideClick({ ref, isOpen: overlayActive, setOpen: setOverlayActive })
   const image = find(images, (image) => image.order === 0) || head(images)
@@ -116,6 +118,14 @@ const VehicleCard = (props) => {
   const imageSrc = get(image, 'url')
   const placeHolderSrc = getPlaceholderImageUrl(imageSrc)
   const imageUrl = parseCloudinaryUrl(imageSrc)
+
+  const onEditPrice = (e) => {
+    e.preventDefault()
+    setEditPriceActive((prev) => !prev)
+    if (onEditCallback) {
+      onEditCallback();
+    }
+  }
 
   return (
     <article className={styles.container} ref={ref}>
@@ -188,35 +198,31 @@ const VehicleCard = (props) => {
       </div>
       <div className={styles.footer}>
         <div className={styles.prices}>
-          {discountPercentage && (
-            <span className={styles.price}>{`${finalPrice}€`}</span>
-          )}
-          <span
-            className={classNames(
-              styles.price,
-              discountPercentage && styles.hasDiscount
-            )}
-          >
-            {`${price}€`}
-          </span>
 
-          {isAdmin && (
-            <Button
-              type={Button.types.GHOST}
-              color="red"
-              className={styles.soldButton}
-              disabled={isUpdatingListing}
-              onClick={() => {
-                dispatch(
-                  ListingsCreator.updateMyListing({
-                    _id: listingId,
-                    soldAt: isSold ? null : new Date(),
-                  })
-                )
-              }}
+        {isAdmin && formName && (
+            <BaseButton
+              className={styles.editPriceButton}
+              onClick={onEditPrice}
             >
-              {t(isSold ? 'label.available' : 'label.sold')}
-            </Button>
+              {isEditPriceActive ? <FiCheck /> : <FiEdit3 />}
+            </BaseButton>
+          )}
+          {isAdmin && formName && isEditPriceActive ? (
+            <Input name={`${listingId}-price`} className={styles.simpleInput} type="number" />
+          ) : (
+            <>
+              {discountPercentage && (
+                <span className={styles.price}>{`${finalPrice}€`}</span>
+              )}
+              <span
+                className={classNames(
+                  styles.price,
+                  discountPercentage && styles.hasDiscount
+                )}
+              >
+                {`${price}€`}
+              </span>
+            </>
           )}
         </div>
         <button

@@ -4,26 +4,41 @@
   min-height: 100vh;
   h1 {
     text-align: center;
-    margin-bottom: spacing(0.5);
+    margin-bottom: spacing(1);
   }
-  padding-top: spacing(4);
-  padding-bottom: spacing(12);
+  padding: spacing(2) 0 spacing(12) 0;
+
+  @media (min-width: $tablet) {
+    padding: spacing(4) 0 spacing(12) 0;
+  }
   .listings {
     display: grid;
     grid-gap: spacing(1);
-    grid-template-columns: repeat(auto-fill, 470px);
+    grid-template-columns: auto;
+    justify-content: center;
+    @media (min-width: $tablet) {
+      grid-template-columns: repeat(auto-fill, 470px);
+    }
   }
+  
 }
 
 
 .listing {
-  width: 470px;
+  width: 100%;
   border: 1px solid $color-darker-gray;
   border-radius: $border-radius-medium;
-  background: $color-light-gray;
+  background: $color-white;
+  @media (min-width: $tablet) {
+    width: 470px;
+  }
+  article {
+    width: 100%;
+  }
   .title {
     padding: spacing(1);
     background: $color-white;
+    border-bottom: 1px solid $color-light-gray;
     h4 {
       margin-bottom: spacing(1);
     }
@@ -32,12 +47,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      span:nth-child(2) {
+        text-align: right;
+      }
     }
   }
   .content {
     padding: spacing(0.5);
     display: grid;
     grid-gap: spacing(1);
-    grid-template-columns: 174px 400px;
+    grid-template-columns: 100px 1fr;
+    @media (min-width: $tablet) {
+      grid-template-columns: 174px 400px;
+    }
   }
+}
+
+.soldButton {
+  min-height: unset;
+  font-size: $font-size-span;
+  height: 34px;
+  padding: spacing(0.5) spacing(1);
+  margin-left: spacing(0.5);
 }

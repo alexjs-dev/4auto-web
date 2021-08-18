@@ -149,9 +149,26 @@
   font-size: $font-size-s;
 }
 
-.soldButton {
-  min-height: unset;
-  font-size: $font-size-s;
-  padding: spacing(0.5) spacing(1);
-  margin-left: spacing(0.5);
+.editPriceButton {
+  svg {
+    color: $color-red;
+    margin-right: spacing(1);
+    font-size: 18px;
+  }
+}
+
+.simpleInput {
+  padding: 0 !important;
+  margin: 0 !important;
+  input {
+    padding: 0;
+    border: unset;
+    margin: 0;
+    font-size: $font-size-span;
+    font-family: $font-family-secondary;
+    color: $color-red;
+    font-weight: $font-weight-medium;
+    min-height: unset;
+    min-width: unset;
+  }
 }
