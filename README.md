@@ -5,7 +5,7 @@ Tech used:
 NextJs, React, Sass modules, Redux, Redux-Sagas, SocketsIo, FeathersJs (be), i18n translations, Redux Forms, Storybook
 
 
-Most of the components (90%+) were hand made by me.
+Most of the components (90%+) were hand made by me - Selects, Dropdowns, Modals, Inputs, Custom Checkboxes, Upload inputs, Vehicle cards, Chats & Messages with on scroll fetching and more.
 
 
 ![Picture](https://user-images.githubusercontent.com/23519845/146674478-08409969-dce5-4bc2-ab57-1b3f058c4da8.png)
